@@ -20,6 +20,7 @@ Plugin 'git://git.wincent.com/command-t.git'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'airblade/vim-gitgutter'
+Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'shougo/unite.vim'
@@ -40,7 +41,7 @@ filetype plugin indent on    " required
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 "---------------------------------------------------------------------------------------------------
 let mapleader=" "
-
+set t_Co=256
 "gui settings
 if has('gui_running')
 	set guifont=HackNerdFontComplete\-Regular:h14
@@ -171,8 +172,9 @@ vnoremap <F1> :set invfullscreen<CR>
 map <leader>q gqip
 colorscheme dracula
 "colorscheme gruvbox 
-set background=dark
+"set background=dark
 " Visualize tabs and newlines
+
 set listchars=tab:▸\ ,eol:¬
 "
 " -- Normal Mode
