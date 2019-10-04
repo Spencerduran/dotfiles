@@ -19,6 +19,9 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'git://git.wincent.com/command-t.git'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
+
+" My Plugins
+Plugin 'rbgrouleff/bclose.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'terryma/vim-multiple-cursors'
@@ -26,11 +29,13 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'shougo/unite.vim'
 Plugin 'shougo/vimshell.vim'
 Plugin 'shougo/vimfiler.vim'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'rstacruz/sparkup'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mhinz/vim-startify'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'francoiscabrol/ranger.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -42,6 +47,7 @@ filetype plugin indent on    " required
 "---------------------------------------------------------------------------------------------------
 let mapleader=" "
 set t_Co=256
+set shell=bash
 "gui settings
 if has('gui_running')
 	set guifont=HackNerdFontComplete\-Regular:h14
