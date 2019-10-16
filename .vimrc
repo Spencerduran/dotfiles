@@ -22,6 +22,7 @@ Plugin 'git://git.wincent.com/command-t.git'
 
 " My Plugins
 Plugin 'rbgrouleff/bclose.vim'
+Plugin 'elzr/vim-json'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'terryma/vim-multiple-cursors'
@@ -33,7 +34,7 @@ Plugin 'rstacruz/sparkup'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mhinz/vim-startify'
-Plugin 'flazz/vim-colorschemes'
+Plugin 'junegunn/fzf.vim'
 Plugin 'francoiscabrol/ranger.vim'
 
 " All of your Plugins must be added before the following line
@@ -46,8 +47,21 @@ filetype plugin indent on    " required
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 "---------------------------------------------------------------------------------------------------
 let mapleader=" "
+"Use files command for fzf/ripgrep
+nnoremap <C-p> :Files<Cr>
+
 set t_Co=256
 set shell=bash
+
+
+"ranger-vim settings
+let g:ranger_map_keys = 0
+map <leader>r :Ranger<CR>
+
+"enable fzf
+set rtp+=/usr/local/opt/fzf
+
+
 "gui settings
 if has('gui_running')
 	set guifont=HackNerdFontComplete\-Regular:h14
@@ -71,10 +85,8 @@ endif
 		\ }
 	\ )
 
-	" Open explorer buffer silently and find the currently open file.
-	nnoremap <silent> <Leader>f :VimFiler -explorer -no-focus<CR>
-	nnoremap <silent> <Leader>n :VimFiler -explorer -find<CR>
 
+nnoremap vf :VimFilerExplorer<Enter>
 let g:loaded_netrwPlugin = 0
 let g:vimfiler_expand_jump_to_first_child = 1
 let g:webdevicons_enable_vimfiler = 1
@@ -104,7 +116,6 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 set number			" Show current line number
 set relativenumber		" Show relative line numbers
 set clipboard=unnamed,unnamedplus " Use system clipboard.
-nnoremap vf :VimFilerExplorer<Enter>
 nnoremap / /\v
 nnoremap ; :
 " Normal Mode
@@ -148,8 +159,9 @@ nnoremap <PageUp>   :bprevious<CR>
 nnoremap <PageDown> :bnext<CR>
 " Turn on syntax highlighting
 syntax on
-" Show fIile stats
-set ruler
+"au BufRead,BufNewFile,BufReadPost *.json set syntax=json
+"hi! def link jsonKeyword Identifier
+" Show fIile stats set ruler
 " Encoding
 set encoding=UTF-8
 " Allow hidden buffers
@@ -176,7 +188,7 @@ nnoremap <F1> :set invfullscreen<CR>
 vnoremap <F1> :set invfullscreen<CR>
 " Formatting
 map <leader>q gqip
-colorscheme dracula
+"colorscheme dracula
 "colorscheme gruvbox 
 "set background=dark
 " Visualize tabs and newlines
