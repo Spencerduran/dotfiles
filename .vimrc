@@ -22,7 +22,7 @@ Plugin 'git://git.wincent.com/command-t.git'
 
 " My Plugins
 Plugin 'rbgrouleff/bclose.vim'
-Plugin 'elzr/vim-json'
+"Plugin 'elzr/vim-json'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'terryma/vim-multiple-cursors'
@@ -52,7 +52,7 @@ nnoremap <C-p> :Files<Cr>
 
 set t_Co=256
 set shell=bash
-
+let g:indentLine_setConceal = 0
 
 "ranger-vim settings
 let g:ranger_map_keys = 0
