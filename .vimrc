@@ -24,6 +24,7 @@ Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'rbgrouleff/bclose.vim'
 "Plugin 'elzr/vim-json'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'easymotion/vim-easymotion'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'ryanoasis/vim-devicons'
@@ -132,13 +133,14 @@ set cursorline " Highlight the line background of the cursor.
 set fillchars= " Characters to fill the status lines and vertical separators.
 set clipboard=unnamed
 set conceallevel=0
-set hlsearch
 set incsearch
 set ignorecase
 set smartcase
 set showmatch
-set foldmethod=marker 
-set foldlevel=0
+"set foldmarker=[,]
+set foldmethod=syntax
+
+set foldlevel=4
 " Last line
 set showmode
 set showcmd
@@ -158,6 +160,7 @@ map <C-t><right> :tabn<cr>
 nnoremap <PageUp>   :bprevious<CR>
 nnoremap <PageDown> :bnext<CR>
 " Turn on syntax highlighting
+set filetype=json
 syntax on
 "au BufRead,BufNewFile,BufReadPost *.json set syntax=json
 "hi! def link jsonKeyword Identifier
