@@ -1,0 +1,68 @@
+{
+    "workbench.colortheme": "dracula",
+    "window.zoomlevel": 0,
+    "autoalign.enabled": {
+        "csv": true,
+        "bsv": true,
+        "json": false
+    },
+    "autoalign.associations": {
+        "csv": ",",
+        "bsv": "|",
+        "json": ","
+    },
+"explorer.confirmDelete": false,
+"editor.suggestSelection": "first",
+"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+"files.exclude": {
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+}, 
+"explorer.confirmDragAndDrop": false,
+"window.zoomLevel": 1,
+"workbench.colorTheme": "Cyberpunk",
+"vim.useSystemClipboard": true,
+"vim.insertModeKeyBindings": [
+    {
+        "before": ["j", "k"],
+        "after": ["<Esc>"]
+    }
+],
+"vim.normalModeKeyBindingsNonRecursive": [
+    {
+        "before": [":"],
+        "commands": [
+            "workbench.action.showCommands",
+        ]
+    },
+    {
+        "before": ["Z","Z"],
+        "commands": [
+            ":wq",
+        ]
+    },
+    {
+        "before": ["leader","w"],
+        "commands": [
+            "workbench.action.files.save",
+        ]
+    }
+],
+"vim.showmodename": true,
+"vim.autoindent": true,
+"vim.ignorecase": true,
+"vim.incsearch": true,
+"vim.smartcase": true,
+"vim.showcmd": true,
+"vim.cursorStylePerMode.replace": "line",
+"vim.cursorStylePerMode.visual": "line",
+"vim.cursorStylePerMode.visualblock": "line",
+"vim.cursorStylePerMode.visualline": "line",
+"vim.debug.silent": true,
+"vim.leader": "<space>",
+"editor.lineNumbers": "relative",
+"editor.largeFileOptimizations": false,
+"diffEditor.ignoreTrimWhitespace": false
+}
