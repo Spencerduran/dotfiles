@@ -140,7 +140,7 @@ set showmatch
 "set foldmarker=[,]
 set foldmethod=syntax
 
-set foldlevel=4
+set foldlevel=5
 " Last line
 set showmode
 set showcmd
