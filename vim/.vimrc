@@ -20,10 +20,6 @@ Plugin 'tpope/vim-fugitive'
 
 " My Plugins
 Plugin 'rbgrouleff/bclose.vim'
-Plugin 'scrooloose/nerdtree'
-"Plug 'tsony-tsonev/nerdtree-git-plugin'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 "Plugin 'elzr/vim-json'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'prettier/vim-prettier'
@@ -61,46 +57,6 @@ set smarttab
 set cindent
 set tabstop=2
 set shiftwidth=2
-
-"NERDTree settings
-nnoremap <Leader>n :NERDTreeToggle<CR>
-"nmap <C-n> :NERDTreeToggle<CR>
-vmap ++ <plug>NERDCommenterToggle
-nmap ++ <plug>NERDCommenterToggle
-let g:NERDTreeIgnore = ['^node_modules$']
-
-" open NERDTree automatically
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * NERDTree
-
-let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ "Unknown"   : "?"
-    \ }
-" sync open file with NERDTree
-" " Check if NERDTree is open or active
-function! IsNERDTreeOpen()        
-  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
-
-" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
-" file, and we're not in vimdiff
-function! SyncTree()
-  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-    NERDTreeFind
-    wincmd p
-  endif
-endfunction
-
-" Highlight currently open buffer in NERDTree
-autocmd BufEnter * call SyncTree()
 
 " vim-prettier
 let g:prettier#quickfix_enabled = 0
@@ -247,6 +203,39 @@ if has('gui_running')
 	set browsedir=buffer " Use the same directory as current buffer's path when browsing files.
 endif
 
+"vimfiler
+	" Custom options.
+	call vimfiler#custom#profile(
+		\ 'default',
+		\ 'context',
+		\ {
+		\	'explorer': 1,
+		\	'find': 0,
+		\	'safe': 0,
+		\	'split': 0,
+		\	'status': 0,
+		\	'toggle': 1,
+		\	'winwidth': 35
+		\ }
+	\ )
+
+
+nnoremap vf :VimFilerExplorer<Enter>
+let g:loaded_netrwPlugin = 0
+let g:vimfiler_expand_jump_to_first_child = 1
+let g:webdevicons_enable_vimfiler = 1
+let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_safe_mode_by_default = 0
+let g:vimfiler_tree_leaf_icon = " "
+let g:vimfiler_tree_opened_icon = '▾'
+let g:vimfiler_tree_closed_icon = '▸'
+"let g:vimfiler_file_icon = '-'
+let g:vimfiler_marked_file_icon = '✓'
+let g:vimfiler_readonly_file_icon = '✗'
+let g:vimfiler_time_format = '%m-%d-%y %H:%M:%S'
+let g:vimfiler_expand_jump_to_first_child = 0
+let g:vimfiler_ignore_pattern = '\.git\|\.DS_Store\|\.pyc'
+
 "fonts
 let g:airline_powerline_fonts = 1
 let g:webdevicons_enable = 1
@@ -276,6 +265,7 @@ set scrolloff=8 " Minimum number of screen lines to keep above and below the cur
 set cursorline " Highlight the line background of the cursor.
 set fillchars= " Characters to fill the status lines and vertical separators.
 set clipboard=unnamed
+let g:indentLine_setConceal = 0
 set conceallevel=0
 set incsearch
 set ignorecase
