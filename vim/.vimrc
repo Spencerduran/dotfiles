@@ -1,4 +1,4 @@
-" Don't try to be vi compatible
+" Don't try to be vi compatible 
 set nocompatible
 "Helps force plugins to load correctly when it is turned back on below
 filetype off
@@ -15,14 +15,18 @@ Plugin 'VundleVim/Vundle.vim'
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 " plugin from http://vim-scripts.org/vim/scripts.html
-" Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 
 " My Plugins
 Plugin 'rbgrouleff/bclose.vim'
+Plugin 'scrooloose/nerdtree'
+"Plug 'tsony-tsonev/nerdtree-git-plugin'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 "Plugin 'elzr/vim-json'
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+Plugin 'prettier/vim-prettier'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'christoomey/vim-tmux-navigator'
@@ -30,7 +34,7 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'shougo/unite.vim'
 Plugin 'shougo/vimshell.vim'
-Plugin 'shougo/vimfiler.vim'
+"Plugin 'shougo/vimfiler.vim'
 Plugin 'rstacruz/sparkup'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -50,12 +54,185 @@ filetype plugin indent on    " required
 let mapleader=" "
 "Use files command for fzf/ripgrep
 nnoremap <C-p> :Files<Cr>
-
+set backspace=indent,eol,start
 set t_Co=256
 set shell=bash
-let g:indentLine_setConceal = 0
+set smarttab
+set cindent
+set tabstop=2
+set shiftwidth=2
+
+"NERDTree settings
+nnoremap <Leader>n :NERDTreeToggle<CR>
+"nmap <C-n> :NERDTreeToggle<CR>
+vmap ++ <plug>NERDCommenterToggle
+nmap ++ <plug>NERDCommenterToggle
+let g:NERDTreeIgnore = ['^node_modules$']
+
+" open NERDTree automatically
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * NERDTree
+
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
+" sync open file with NERDTree
+" " Check if NERDTree is open or active
+function! IsNERDTreeOpen()        
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+
+" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
+" file, and we're not in vimdiff
+function! SyncTree()
+  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+    NERDTreeFind
+    wincmd p
+  endif
+endfunction
+
+" Highlight currently open buffer in NERDTree
+autocmd BufEnter * call SyncTree()
+
+" vim-prettier
+let g:prettier#quickfix_enabled = 0
+let g:prettier#quickfix_auto_focus = 0
+" prettier command for coc
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+" run prettier on save
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+
+" always uses spaces instead of tab characters
+set expandtab
+
+" coc config
+let g:coc_global_extensions = [
+  \ 'coc-snippets',
+  \ 'coc-pairs',
+  \ 'coc-tsserver',
+  \ 'coc-eslint', 
+  \ 'coc-prettier', 
+  \ 'coc-json', 
+  \ ]
+" from readme
+" if hidden is not set, TextEdit might fail.
+set hidden " Some servers have issues with backup files, see #649 set nobackup set nowritebackup " Better display for messages set cmdheight=2 " You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Remap for rename current word
+nmap <F2> <Plug>(coc-rename)
+
 
 "ranger-vim settings
+" Rudimentary vimscript to use ranger as a file/directory picker
+" Nelson Uhan
+" 2018.9.9
+"
+" Uses Vim 8's terminal to open ranger in a new window
+" Tested on MacVim 8.1.120, GUI and terminal versions
+"
+" Put this in your .vimrc (or equivalent)
+" :RangerFiles opens ranger as a file picker in a new window
+" :RangerDirs opens ranger as a directory picker in a new window
+" Map these commands as you like
+
+" ranger file picker
+function! RangerFilePicker()
+  " Temp file for Ranger selections
+  let tempfile = tempname()
+
+  " Dictionary function
+  let ranger = { 'tempfile' : tempfile }
+
+  function! ranger.OnExit(...)
+    " Is temp file readable?
+    if !filereadable(self.tempfile)
+      return
+    endif
+
+    " Read ranger selections, delete temp file
+    let selections = readfile(self.tempfile)
+    call delete(self.tempfile)
+
+    " Are there any selections?
+    if empty(selections)
+      return
+    endif
+
+    " Close the terminal window, edit the first item
+    close
+    exec 'edit ' . fnameescape(selections[0])
+
+    " Add any remaining items to the arg/buffer list
+    for sel in selections[1:]
+      exec 'argadd '. fnameescape(sel)
+    endfor
+  endfunction
+
+  " Open ranger in a new terminal window
+  let pwd = getcwd()
+  let cmd = 'ranger --choosefiles=' . fnameescape(tempfile) . ' ' . fnameescape(pwd)
+  let buf = term_start(cmd, {'term_finish' : 'close', 'exit_cb' : ranger.OnExit})
+endfunction
+command! RangerFiles call RangerFilePicker()
+
+" ranger directory picker
+function! RangerDirPicker()
+  " Temp file for Ranger selections
+  let tempfile = tempname()
+
+  " Dictionary function
+  let ranger = { 'tempfile' : tempfile }
+
+  function! ranger.OnExit(...)
+    " Is temp file readable?
+    if !filereadable(self.tempfile)
+      return
+    endif
+
+    " Read ranger selections, delete temp file
+    let selections = readfile(self.tempfile)
+    call delete(self.tempfile)
+
+    " Are there any selections?
+    if empty(selections)
+      return
+    endif
+
+    " Close the terminal window, change current directory
+    close
+    exec 'cd ' . fnameescape(selections[0])
+  endfunction
+
+  " Open ranger in a new terminal window
+  let pwd = getcwd()
+  let cmd = 'ranger --show-only-dirs --choosedir=' . fnameescape(tempfile) . ' ' . fnameescape(pwd)
+  let buf = term_start(cmd, {'term_finish' : 'close', 'exit_cb' : ranger.OnExit})
+endfunction
+command! RangerDirs call RangerDirPicker()
 let g:ranger_map_keys = 0
 map <leader>r :Ranger<CR>
 
@@ -69,39 +246,6 @@ if has('gui_running')
   	set transparency=3
 	set browsedir=buffer " Use the same directory as current buffer's path when browsing files.
 endif
-
-"vimfiler
-	" Custom options.
-	call vimfiler#custom#profile(
-		\ 'default',
-		\ 'context',
-		\ {
-		\	'explorer': 1,
-		\	'find': 0,
-		\	'safe': 0,
-		\	'split': 0,
-		\	'status': 0,
-		\	'toggle': 1,
-		\	'winwidth': 35
-		\ }
-	\ )
-
-
-nnoremap vf :VimFilerExplorer<Enter>
-let g:loaded_netrwPlugin = 0
-let g:vimfiler_expand_jump_to_first_child = 1
-let g:webdevicons_enable_vimfiler = 1
-let g:vimfiler_as_default_explorer = 1
-let g:vimfiler_safe_mode_by_default = 0
-let g:vimfiler_tree_leaf_icon = " "
-let g:vimfiler_tree_opened_icon = '▾'
-let g:vimfiler_tree_closed_icon = '▸'
-"let g:vimfiler_file_icon = '-'
-let g:vimfiler_marked_file_icon = '✓'
-let g:vimfiler_readonly_file_icon = '✗'
-let g:vimfiler_time_format = '%m-%d-%y %H:%M:%S'
-let g:vimfiler_expand_jump_to_first_child = 0
-let g:vimfiler_ignore_pattern = '\.git\|\.DS_Store\|\.pyc'
 
 "fonts
 let g:airline_powerline_fonts = 1
@@ -137,10 +281,10 @@ set incsearch
 set ignorecase
 set smartcase
 set showmatch
-"set foldmarker=[,]
+set foldmarker=[,]
 set foldmethod=syntax
+set foldlevel=2
 
-set foldlevel=5
 " Last line
 set showmode
 set showcmd
@@ -157,6 +301,12 @@ map <C-t><down> :tabl<cr>
 map <C-t><left> :tabp<cr>
 map <C-t><right> :tabn<cr>
 " Buffer Switching 
+nnoremap <Leader>bn :bn<CR>
+nnoremap <Leader>bn :bn<CR>
+nnoremap <Leader>bd :bd<CR>
+nnoremap <Leader>ls :ls<CR>
+nnoremap <Leader>bp :bp<CR>
+nnoremap <Leader>g :e#<CR>
 nnoremap <PageUp>   :bprevious<CR>
 nnoremap <PageDown> :bnext<CR>
 " Turn on syntax highlighting
