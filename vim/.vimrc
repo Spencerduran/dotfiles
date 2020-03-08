@@ -6,19 +6,10 @@ filetype off
 "set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-" The following are examples of different formats supported.
-" plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-
 " My Plugins
+Plugin 'tpope/vim-fugitive'
 Plugin 'rbgrouleff/bclose.vim'
 "Plugin 'elzr/vim-json'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
@@ -30,26 +21,25 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'shougo/unite.vim'
 Plugin 'shougo/vimshell.vim'
-"Plugin 'shougo/vimfiler.vim'
+Plugin 'shougo/vimfiler.vim'
 Plugin 'rstacruz/sparkup'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mhinz/vim-startify'
 Plugin 'junegunn/fzf.vim'
 Plugin 'francoiscabrol/ranger.vim'
-
-" All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-" Brief help
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 "---------------------------------------------------------------------------------------------------
+
 let mapleader=" "
 "Use files command for fzf/ripgrep
 nnoremap <C-p> :Files<Cr>
+nnoremap <Leader>w :w<Cr>
 set backspace=indent,eol,start
 set t_Co=256
 set shell=bash
@@ -203,23 +193,6 @@ if has('gui_running')
 	set browsedir=buffer " Use the same directory as current buffer's path when browsing files.
 endif
 
-"vimfiler
-	" Custom options.
-	call vimfiler#custom#profile(
-		\ 'default',
-		\ 'context',
-		\ {
-		\	'explorer': 1,
-		\	'find': 0,
-		\	'safe': 0,
-		\	'split': 0,
-		\	'status': 0,
-		\	'toggle': 1,
-		\	'winwidth': 35
-		\ }
-	\ )
-
-
 nnoremap vf :VimFilerExplorer<Enter>
 let g:loaded_netrwPlugin = 0
 let g:vimfiler_expand_jump_to_first_child = 1
@@ -271,7 +244,7 @@ set incsearch
 set ignorecase
 set smartcase
 set showmatch
-set foldmarker=[,]
+"set foldmarker=[,]
 set foldmethod=syntax
 set foldlevel=2
 
@@ -324,7 +297,6 @@ set incsearch
 set ignorecase
 set smartcase
 set showmatch
-map <leader><space> :let @/=''<cr> " clear search
 " Remap help key.
 inoremap <F1> <ESC>:set invfullscreen<CR>a
 nnoremap <F1> :set invfullscreen<CR>
@@ -369,3 +341,11 @@ function! FoldText() abort
 		\ . '> '
 		\ . matchstr(l:line, '\v\w.+\s\ze\{')
 endfunction
+
+" FUGITIVE SETTINGS
+" Fugitive Conflict Resolution
+nnoremap <leader>gd :Gvdiff<CR>
+nnoremap gdh :diffget //2<CR>
+nnoremap gdl :diffget //3<CR>>
+"close all diff windows, leave active open
+nnoremap <Leader>gD <c-w>h<c-w>c
