@@ -9,10 +9,11 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 " My Plugins
+Plugin 'gioele/vim-autoswap.git'
 Plugin 'tpope/vim-fugitive'
 Plugin 'rbgrouleff/bclose.vim'
 "Plugin 'elzr/vim-json'
-Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+"Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'prettier/vim-prettier'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'easymotion/vim-easymotion'
@@ -64,8 +65,6 @@ set expandtab
 let g:coc_global_extensions = [
   \ 'coc-snippets',
   \ 'coc-pairs',
-  \ 'coc-tsserver',
-  \ 'coc-eslint', 
   \ 'coc-prettier', 
   \ 'coc-json', 
   \ ]
@@ -180,7 +179,7 @@ function! RangerDirPicker()
 endfunction
 command! RangerDirs call RangerDirPicker()
 let g:ranger_map_keys = 0
-map <leader>r :Ranger<CR>
+map <leader>r :RangerFiles<CR>
 
 "enable fzf
 set rtp+=/usr/local/opt/fzf
@@ -202,7 +201,7 @@ let g:vimfiler_safe_mode_by_default = 0
 let g:vimfiler_tree_leaf_icon = " "
 let g:vimfiler_tree_opened_icon = '▾'
 let g:vimfiler_tree_closed_icon = '▸'
-"let g:vimfiler_file_icon = '-'
+let g:vimfiler_file_icon = '-'
 let g:vimfiler_marked_file_icon = '✓'
 let g:vimfiler_readonly_file_icon = '✗'
 let g:vimfiler_time_format = '%m-%d-%y %H:%M:%S'
@@ -344,8 +343,14 @@ endfunction
 
 " FUGITIVE SETTINGS
 " Fugitive Conflict Resolution
-nnoremap <leader>gd :Gvdiff<CR>
+nnoremap <leader>gd :Gvdiffsplit!<CR>
 nnoremap gdh :diffget //2<CR>
 nnoremap gdl :diffget //3<CR>>
 "close all diff windows, leave active open
 nnoremap <Leader>gD <c-w>h<c-w>c
+
+set title           "Show filename in titlebar of window
+set titleold=
+"set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)
+set title titlestring=
+let g:autoswap_detect_tmux = 1
