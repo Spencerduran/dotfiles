@@ -15,8 +15,8 @@ set guioptions+=i
 set guioptions+=a
 
 " colorscheme to use for GUI
-"set background=dark
-colorscheme ron
+set background=dark
+colorscheme gruvbox
 set antialias " Use smooth, antialiased fonts (OS X Specific)
 set guifont=SauceCodeProNerdFontCo-Regular:h13
 

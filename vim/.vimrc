@@ -9,6 +9,7 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 " My Plugins
+Plugin 'morhetz/gruvbox'
 Plugin 'tpope/vim-fugitive'
 Plugin 'rbgrouleff/bclose.vim'
 "Plugin 'elzr/vim-json'
@@ -302,7 +303,7 @@ vnoremap <F1> :set invfullscreen<CR>
 " Formatting
 map <leader>q gqip
 "colorscheme dracula
-"colorscheme gruvbox 
+colorscheme gruvbox 
 "set background=dark
 " Visualize tabs and newlines
 
