@@ -1,3 +1,4 @@
+"Plugin 'christoomey/vim-tmux-navigator'
 " Don't try to be vi compatible 
 set nocompatible
 "Helps force plugins to load correctly when it is turned back on below
@@ -9,6 +10,9 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 " My Plugins
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'dracula/vim', { 'name': 'dracula' }
+Plugin 'sickill/vim-monokai'
 Plugin 'morhetz/gruvbox'
 Plugin 'tpope/vim-fugitive'
 Plugin 'rbgrouleff/bclose.vim'
@@ -17,7 +21,6 @@ Plugin 'rbgrouleff/bclose.vim'
 Plugin 'prettier/vim-prettier'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'shougo/unite.vim'
@@ -181,6 +184,7 @@ command! RangerDirs call RangerDirPicker()
 let g:ranger_map_keys = 0
 map <leader>r :RangerFiles<CR>
 
+
 "enable fzf
 set rtp+=/usr/local/opt/fzf
 
@@ -302,8 +306,8 @@ nnoremap <F1> :set invfullscreen<CR>
 vnoremap <F1> :set invfullscreen<CR>
 " Formatting
 map <leader>q gqip
-"colorscheme dracula
-colorscheme gruvbox 
+colorscheme dracula
+"colorscheme gruvbox 
 "set background=dark
 " Visualize tabs and newlines
 
