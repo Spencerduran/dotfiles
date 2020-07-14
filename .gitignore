@@ -1,1 +1,8 @@
 .DS_Store
+./fish/jbox.fish
+./fish/eftp.fish
+./fish/com.fish
+./fish/dip.fish
+./fish/tool.fish
+./fish/droplet.fish
+./fish/ihr.fish
