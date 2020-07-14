@@ -10,6 +10,7 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 " My Plugins
+Plugin 'dbakker/vim-projectroot'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'dracula/vim', { 'name': 'dracula' }
 Plugin 'sickill/vim-monokai'
@@ -42,7 +43,8 @@ filetype plugin indent on    " required
 
 let mapleader=" "
 "Use files command for fzf/ripgrep
-nnoremap <C-p> :Files<Cr>
+nnoremap <C-g> :ProjectRootExe Rg<Cr>
+nnoremap <C-p> :ProjectRootExe Files<Cr>
 nnoremap <Leader>w :w<Cr>
 set backspace=indent,eol,start
 set t_Co=256
@@ -227,7 +229,6 @@ set number			" Show current line number
 set relativenumber		" Show relative line numbers
 set clipboard=unnamed,unnamedplus " Use system clipboard.
 nnoremap / /\v
-nnoremap ; :
 " Normal Mode
 set wildmenu " Command-line completion operates in an enhanced mode.
 set cmdwinheight=18 " Height of the command window size for commands like `q:` and `q/`.
@@ -322,28 +323,28 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 " Toggle fold at current position.
 
-nnoremap <Tab> za
-" Fold Text
-set foldtext=FoldText() " Use custom fold text function for folds.
-
-function! FoldText() abort
-	let l:fs = v:foldstart
-
-	while getline(l:fs) !~# '\w'
-		let l:fs = nextnonblank(l:fs + 1)
-	endwhile
-
-	if l:fs > v:foldend
-		let l:line = getline(v:foldstart)
-	else
-		let l:line = substitute(getline(l:fs), '\t', repeat(' ', &tabstop), 'g')
-	endif
-
-	return
-		\ repeat(repeat(' ', 4), v:foldlevel - 1)
-		\ . '> '
-		\ . matchstr(l:line, '\v\w.+\s\ze\{')
-endfunction
+"nnoremap <Tab> za
+"" Fold Text
+"set foldtext=FoldText() " Use custom fold text function for folds.
+"
+"function! FoldText() abort
+"	let l:fs = v:foldstart
+"
+"	while getline(l:fs) !~# '\w'
+"		let l:fs = nextnonblank(l:fs + 1)
+"	endwhile
+"
+"	if l:fs > v:foldend
+"		let l:line = getline(v:foldstart)
+"	else
+"		let l:line = substitute(getline(l:fs), '\t', repeat(' ', &tabstop), 'g')
+"	endif
+"
+"	return
+"		\ repeat(repeat(' ', 4), v:foldlevel - 1)
+"		\ . '> '
+"		\ . matchstr(l:line, '\v\w.+\s\ze\{')
+"endfunction
 
 " FUGITIVE SETTINGS
 " Fugitive Conflict Resolution
