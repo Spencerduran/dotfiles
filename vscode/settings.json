@@ -21,8 +21,8 @@
     "**/.factorypath": true
 }, 
 "explorer.confirmDragAndDrop": false,
-"window.zoomLevel": 1,
-"workbench.colorTheme": "Cyberpunk",
+"window.zoomLevel": 0,
+"workbench.colorTheme": "Dracula Soft",
 "vim.useSystemClipboard": true,
 "vim.insertModeKeyBindings": [
     {
@@ -56,13 +56,33 @@
 "vim.incsearch": true,
 "vim.smartcase": true,
 "vim.showcmd": true,
-"vim.cursorStylePerMode.replace": "line",
-"vim.cursorStylePerMode.visual": "line",
-"vim.cursorStylePerMode.visualblock": "line",
-"vim.cursorStylePerMode.visualline": "line",
 "vim.debug.silent": true,
 "vim.leader": "<space>",
 "editor.lineNumbers": "relative",
 "editor.largeFileOptimizations": false,
-"diffEditor.ignoreTrimWhitespace": false
+"diffEditor.ignoreTrimWhitespace": false,
+"editor.multiCursorModifier": "ctrlCmd",
+"workbench.editor.enablePreview": false,
+"python.jediEnabled": false,
+"workbench.editor.enablePreviewFromQuickOpen": false,
+"workbench.editor.highlightModifiedTabs": true,
+"workbench.startupEditor": "none",
+"yaml.schemas": {
+    "file:///Users/sduran/.vscode/extensions/atlassian.atlascode-2.6.6/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+},
+"atlascode.jira.jqlList": [
+    {
+        "id": "4eb476c3-d6e1-4b3c-9b64-54721b5922fb",
+        "enabled": true,
+        "name": "My rockethomes Issues",
+        "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+        "siteId": "d6d799df-496c-4757-8a9c-4ac8a1504935",
+        "monitor": true
+    }
+],
+"git.autofetch": true,
+"java.semanticHighlighting.enabled": false,
+"workbench.iconTheme": "Monokai Pro (Filter Machine) Icons",
+"python.languageServer": "Microsoft",
+"files.trimTrailingWhitespace": true
 }
