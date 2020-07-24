@@ -45,6 +45,7 @@ let mapleader=" "
 "Use files command for fzf/ripgrep
 nnoremap <C-g> :ProjectRootExe Rg<Cr>
 nnoremap <C-p> :ProjectRootExe Files<Cr>
+nnoremap <leader>r :ProjectRootExe RangerFiles<CR>
 nnoremap <Leader>w :w<Cr>
 set backspace=indent,eol,start
 set t_Co=256
@@ -184,7 +185,6 @@ function! RangerDirPicker()
 endfunction
 command! RangerDirs call RangerDirPicker()
 let g:ranger_map_keys = 0
-map <leader>r :RangerFiles<CR>
 
 
 "enable fzf
