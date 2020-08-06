@@ -62,6 +62,10 @@ set conceallevel=0 " Dont hide symbols in MD and JSON
 set showmatch
 set foldmethod=syntax
 set foldlevel=2
+"fonts
+let g:airline_powerline_fonts = 1
+let g:webdevicons_enable = 1
+let g:webdevicons_enable_airline_statusline = 1
 " Remap help key.
 inoremap <F1> <ESC>:set invfullscreen<CR>a
 nnoremap <F1> :set invfullscreen<CR>
@@ -99,19 +103,12 @@ set laststatus=2
 " Last line
 set showmode
 set showcmd
+colorscheme dracula
 "------------------------------------Search settings---------------------------------
-set ignorecase
 set incsearch
-"nnoremap / /\v
-"vnoremap / /\v
 set hlsearch
 set ignorecase
 set showmatch
-"fonts
-let g:airline_powerline_fonts = 1
-let g:webdevicons_enable = 1
-let g:webdevicons_enable_airline_statusline = 1
-colorscheme dracula
 
 "------------------------------------Pane nagivation---------------------------------
 nnoremap <C-j> <C-w>j
