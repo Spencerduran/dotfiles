@@ -1,33 +1,5 @@
-" Don't try to be vi compatible 
-set nocompatible
-"Helps force plugins to load correctly when it is turned back on below
-filetype off
-"---------------------------------VimPlug-------------------------------
-call plug#begin('~/.vim/plugged')
-" My Plugins
-Plug 'dbakker/vim-projectroot'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'dracula/vim', { 'name': 'dracula' }
-Plug 'tpope/vim-fugitive'
-Plug 'rbgrouleff/bclose.vim'
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-Plug 'airblade/vim-gitgutter'
-Plug 'ryanoasis/vim-devicons'
-Plug 'shougo/unite.vim'
-Plug 'shougo/vimshell.vim'
-Plug 'shougo/vimfiler.vim'
-Plug 'rstacruz/sparkup'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'mhinz/vim-startify'
-Plug 'junegunn/fzf.vim'
-Plug 'francoiscabrol/ranger.vim'
-Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'}
-call plug#end()
 "-----------------------------------Vim settings--------------------------------------
 let mapleader=" "
-packloadall
 set expandtab " always uses spaces instead of tab characters
 set noerrorbells
 set backspace=indent,eol,start
@@ -35,6 +7,7 @@ set title " Show filename in titlebar of window
 set noswapfile " Disable .swp files
 set nobackup
 set undodir=~/.vim/undodir
+set undofile
 set t_Co=256
 set shell=bash
 set smarttab
@@ -45,6 +18,8 @@ set number " Show current line number
 set relativenumber " Show relative line numbers
 set clipboard=unnamed,unnamedplus " Use system clipboard.
 set listchars=tab:▸\ ,eol:¬ " Visualize tabs and newlines
+set nocompatible " Don't try to be vi compatible
+set shortmess+=c " don't give ins-completion-menu messages.
 " Normal Mode
 set wildmenu " Command-line completion operates in an enhanced mode.
 set cmdwinheight=18 " Height of the command window size for commands like `q:` and `q/`.
@@ -82,7 +57,7 @@ map <C-t><up> :tabr<cr>
 map <C-t><down> :tabl<cr>
 map <C-t><left> :tabp<cr>
 map <C-t><right> :tabn<cr>
-" Buffer Switching 
+" Buffer Switching
 nnoremap <Leader>bn :bn<CR>
 nnoremap <Leader>bn :bn<CR>
 nnoremap <Leader>bd :bd<CR>
@@ -103,19 +78,42 @@ set laststatus=2
 " Last line
 set showmode
 set showcmd
+autocmd BufWritePre * :%s/\s\+$//e " Remove whitespace on save
 colorscheme dracula
-"------------------------------------Search settings---------------------------------
+"------------------------------------Search settings---------------------
 set incsearch
 set hlsearch
 set ignorecase
 set showmatch
 
-"------------------------------------Pane nagivation---------------------------------
+"------------------------------------Pane nagivation---------------------
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
+"---------------------------------VimPlug--------------------------------
+call plug#begin('~/.vim/plugged')
+Plug 'dbakker/vim-projectroot'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'dracula/vim', { 'name': 'dracula' }
+Plug 'tpope/vim-fugitive'
+Plug 'rbgrouleff/bclose.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+Plug 'airblade/vim-gitgutter'
+Plug 'ryanoasis/vim-devicons'
+Plug 'shougo/unite.vim'
+Plug 'shougo/vimshell.vim'
+Plug 'shougo/vimfiler.vim'
+Plug 'rstacruz/sparkup'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'mhinz/vim-startify'
+Plug 'junegunn/fzf.vim'
+Plug 'francoiscabrol/ranger.vim'
+Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'}
+call plug#end()
 "------------------------------------fzf config---------------------------------
 set rtp+=/usr/local/opt/fzf
 nnoremap <C-g> :ProjectRootExe Rg<Cr>
@@ -137,22 +135,28 @@ let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
 "------------------------------------ cocconfig---------------------------------
+" GoTo code navigation.
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gy <Plug>(coc-type-definition)
+nmap <leader>gi <Plug>(coc-implementation)
+nmap <leader>gr <Plug>(coc-references)
+nmap <leader>rr <Plug>(coc-rename)
+nmap <leader>g[ <Plug>(coc-diagnostic-prev)
+nmap <leader>g] <Plug>(coc-diagnostic-next)
+nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
+nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
+nnoremap <leader>cr :CocRestart
 let g:coc_global_extensions = [
   \ 'coc-snippets',
   \ 'coc-pairs',
-  \ 'coc-prettier', 
-  \ 'coc-json', 
+  \ 'coc-prettier',
+  \ 'coc-json',
   \ ]
 " from readme
 " if hidden is not set, TextEdit might fail.
 set hidden " Some servers have issues with backup files, see #649 set nobackup set nowritebackup " Better display for messages set cmdheight=2 " You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=450 "milliseconds to wait before triggering plugin after stop typing
-
-" don't give |ins-completion-menu| messages.
-set shortmess+=c
-
-" always show signcolumns
-set signcolumn=yes
+set updatetime=450 " milliseconds to wait before triggering plugin after stop typing
+set signcolumn=yes " always show signcolumns
 
 function! s:check_back_space() abort
   let col = col('.') - 1
