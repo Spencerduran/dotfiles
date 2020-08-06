@@ -1,5 +1,33 @@
+"---------------------------------VimPlug--------------------------------
+call plug#begin('~/.vim/plugged')
+Plug 'edkolev/tmuxline.vim'
+Plug 'chrisbra/csv.vim'
+Plug 'mbbill/undotree'
+Plug 'dbakker/vim-projectroot'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'tpope/vim-fugitive'
+Plug 'rbgrouleff/bclose.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'airblade/vim-gitgutter'
+Plug 'ryanoasis/vim-devicons'
+Plug 'shougo/unite.vim'
+Plug 'shougo/vimshell.vim'
+Plug 'shougo/vimfiler.vim'
+Plug 'rstacruz/sparkup'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'mhinz/vim-startify'
+Plug 'junegunn/fzf.vim'
+Plug 'francoiscabrol/ranger.vim'
+Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'}
+call plug#end()
 "-----------------------------------Vim settings--------------------------------------
 let mapleader=" "
+colorscheme dracula
+set hidden
+set laststatus=2
 set expandtab " always uses spaces instead of tab characters
 set noerrorbells
 set backspace=indent,eol,start
@@ -32,13 +60,18 @@ set splitright " Splitting a window will put the new window right of the current
 set scrolloff=8 " Minimum number of screen lines to keep above and below the cursor.
 set cursorline " Highlight the line background of the cursor.
 set fillchars= " Characters to fill the status lines and vertical separators.
-set clipboard=unnamed
 set conceallevel=0 " Dont hide symbols in MD and JSON
 set showmatch
 set foldmethod=syntax
 set foldlevel=2
+: filetype plugin on
 "fonts
+let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'default'
+let g:airline_left_sep = "\ue0c6"
+let g:airline_right_sep = "\ue0c7"
 let g:webdevicons_enable = 1
 let g:webdevicons_enable_airline_statusline = 1
 " Remap help key.
@@ -46,40 +79,21 @@ inoremap <F1> <ESC>:set invfullscreen<CR>a
 nnoremap <F1> :set invfullscreen<CR>
 vnoremap <F1> :set invfullscreen<CR>
 " Last line
-set showmode
-set showcmd
+"set showmode
+"set showcmd
 :imap jk <Esc>
 "autoread and auto save on focus change
 au FocusGained,BufEnter * :silent! !
 au FocusLost,WinLeave * :silent! noautocmd w
-" Tab switching
-map <C-t><up> :tabr<cr>
-map <C-t><down> :tabl<cr>
-map <C-t><left> :tabp<cr>
-map <C-t><right> :tabn<cr>
-" Buffer Switching
-nnoremap <Leader>bn :bn<CR>
-nnoremap <Leader>bn :bn<CR>
-nnoremap <Leader>bd :bd<CR>
-nnoremap <Leader>ls :ls<CR>
-nnoremap <Leader>bp :bp<CR>
-nnoremap <Leader>g :e#<CR>
-nnoremap <PageUp>   :bprevious<CR>
-nnoremap <PageDown> :bnext<CR>
 " Turn on syntax highlighting
 set filetype=json
 syntax on
-" Encoding
 set encoding=UTF-8
 " Rendering
 set ttyfast
 " Status bar
 set laststatus=2
-" Last line
-set showmode
-set showcmd
 autocmd BufWritePre * :%s/\s\+$//e " Remove whitespace on save
-colorscheme dracula
 "------------------------------------Search settings---------------------
 set incsearch
 set hlsearch
@@ -92,30 +106,21 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 nnoremap <leader>u :UndotreeShow<CR>
+" Buffer Switching
+nnoremap <Leader>bn :bn<CR>
+nnoremap <Leader>bn :bn<CR>
+nnoremap <Leader>bd :bd<CR>
+nnoremap <Leader>ls :ls<CR>
+nnoremap <Leader>bp :bp<CR>
+nnoremap <Leader>g :e#<CR>
+nnoremap <PageUp>   :bprevious<CR>
+nnoremap <PageDown> :bnext<CR>
+" Tab switching
+map <C-t><up> :tabr<cr>
+map <C-t><down> :tabl<cr>
+map <C-t><left> :tabp<cr>
+map <C-t><right> :tabn<cr>
 
-"---------------------------------VimPlug--------------------------------
-call plug#begin('~/.vim/plugged')
-Plug 'mbbill/undotree'
-Plug 'dbakker/vim-projectroot'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'dracula/vim', { 'name': 'dracula' }
-Plug 'tpope/vim-fugitive'
-Plug 'rbgrouleff/bclose.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-Plug 'airblade/vim-gitgutter'
-Plug 'ryanoasis/vim-devicons'
-Plug 'shougo/unite.vim'
-Plug 'shougo/vimshell.vim'
-Plug 'shougo/vimfiler.vim'
-Plug 'rstacruz/sparkup'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'mhinz/vim-startify'
-Plug 'junegunn/fzf.vim'
-Plug 'francoiscabrol/ranger.vim'
-Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'}
-call plug#end()
 "------------------------------------fzf config---------------------------------
 set rtp+=/usr/local/opt/fzf
 nnoremap <C-g> :ProjectRootExe Rg<Cr>
