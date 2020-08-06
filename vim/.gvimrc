@@ -7,6 +7,7 @@ set guioptions-=l
 set guioptions-=L
 set guioptions-=R
 
+nnoremap <leader>r :ProjectRootExe RangerFiles<CR>
 " Add Vim icon to window, where it is shown depends on platform, windowing
 " system, X11 server depth, etc etc.
 set guioptions+=i

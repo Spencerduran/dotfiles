@@ -32,7 +32,7 @@ packloadall
 "Use files command for fzf/ripgrep
 nnoremap <C-g> :ProjectRootExe Rg<Cr>
 nnoremap <C-p> :ProjectRootExe Files<Cr>
-nnoremap <leader>r :ProjectRootExe Ranger<CR>
+nnoremap <leader>r :ProjectRootExe RangerWorkingDirectory<CR>
 nnoremap <Leader>w :w<Cr>
 set backspace=indent,eol,start
 set t_Co=256
