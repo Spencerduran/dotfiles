@@ -139,7 +139,7 @@ nnoremap <Leader>gD <c-w>h<c-w>c
 "------------------------------------prettier config----------------------------
 " run prettier on save
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
 "------------------------------------ cocconfig---------------------------------
 " GoTo code navigation.
