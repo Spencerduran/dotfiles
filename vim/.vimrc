@@ -3,49 +3,36 @@
 set nocompatible
 "Helps force plugins to load correctly when it is turned back on below
 filetype off
-"---------------------------------VUNDLE-------------------------------
-"set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+"---------------------------------VimPlug-------------------------------
+call plug#begin('~/.vim/plugged')
 " My Plugins
-Plugin 'dbakker/vim-projectroot'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'dracula/vim', { 'name': 'dracula' }
-Plugin 'sickill/vim-monokai'
-Plugin 'morhetz/gruvbox'
-Plugin 'tpope/vim-fugitive'
-Plugin 'rbgrouleff/bclose.vim'
-"Plugin 'elzr/vim-json'
-"Plugin 'neoclide/coc.nvim', {'branch': 'release'}
-Plugin 'prettier/vim-prettier'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'ryanoasis/vim-devicons'
-Plugin 'shougo/unite.vim'
-Plugin 'shougo/vimshell.vim'
-Plugin 'shougo/vimfiler.vim'
-Plugin 'rstacruz/sparkup'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'mhinz/vim-startify'
-Plugin 'junegunn/fzf.vim'
-Plugin 'francoiscabrol/ranger.vim'
-call vundle#end()            " required
-filetype plugin indent on    " required
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+Plug 'dbakker/vim-projectroot'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'dracula/vim', { 'name': 'dracula' }
+Plug 'tpope/vim-fugitive'
+Plug 'rbgrouleff/bclose.vim'
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+Plug 'airblade/vim-gitgutter'
+Plug 'ryanoasis/vim-devicons'
+Plug 'shougo/unite.vim'
+Plug 'shougo/vimshell.vim'
+Plug 'shougo/vimfiler.vim'
+Plug 'rstacruz/sparkup'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'mhinz/vim-startify'
+Plug 'junegunn/fzf.vim'
+Plug 'francoiscabrol/ranger.vim'
+Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'}
+call plug#end()
 "---------------------------------------------------------------------------------------------------
-
 let mapleader=" "
+packloadall
 "Use files command for fzf/ripgrep
 nnoremap <C-g> :ProjectRootExe Rg<Cr>
 nnoremap <C-p> :ProjectRootExe Files<Cr>
-nnoremap <leader>r :ProjectRootExe RangerFiles<CR>
+nnoremap <leader>r :ProjectRootExe Ranger<CR>
 nnoremap <Leader>w :w<Cr>
 set backspace=indent,eol,start
 set t_Co=256
