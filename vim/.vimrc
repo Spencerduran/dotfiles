@@ -91,16 +91,18 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+nnoremap <leader>u :UndotreeShow<CR>
 
 "---------------------------------VimPlug--------------------------------
 call plug#begin('~/.vim/plugged')
+Plug 'mbbill/undotree'
 Plug 'dbakker/vim-projectroot'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dracula/vim', { 'name': 'dracula' }
 Plug 'tpope/vim-fugitive'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'airblade/vim-gitgutter'
 Plug 'ryanoasis/vim-devicons'
 Plug 'shougo/unite.vim'
