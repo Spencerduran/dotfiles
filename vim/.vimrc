@@ -94,6 +94,7 @@ set ttyfast
 " Status bar
 set laststatus=2
 autocmd BufWritePre * :%s/\s\+$//e " Remove whitespace on save
+autocmd FileType php setlocal noeol binary fileformat=dos " Disable auto new line on save
 "------------------------------------Search settings---------------------
 set incsearch
 set hlsearch
