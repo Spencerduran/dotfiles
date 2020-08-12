@@ -1,5 +1,6 @@
 "---------------------------------VimPlug--------------------------------
 call plug#begin('~/.vim/plugged')
+Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
 Plug 'wincent/command-t'
 Plug 'edkolev/tmuxline.vim'
 Plug 'chrisbra/csv.vim'
@@ -27,10 +28,8 @@ call plug#end()
 "-----------------------------------Vim settings--------------------------------------
 let mapleader=" "
 colorscheme dracula
-"set hidden
-"set laststatus=2
-set nofixeol "disable newline at end of last line
-set noeol "disable newline at end of last line
+"set nofixendofline "disable newline at end of last line
+"set noendofline
 set expandtab " always uses spaces instead of tab characters
 set noerrorbells
 set backspace=indent,eol,start
@@ -133,6 +132,7 @@ nnoremap <C-p> :Files ~<Cr>
 nnoremap <leader>t :CommandTBuffer<CR>
 nnoremap <leader>r :ProjectRootExe RangerWorkingDirectory<CR>
 nnoremap <Leader>w :w<Cr>
+"nnoremap <Leader>w :set binary<Cr> \| :set noeol<Cr> \| :w<Cr>
 
 "------------------------------------fugitive config----------------------------
 " Fugitive Conflict Resolution
@@ -145,7 +145,6 @@ nnoremap <Leader>gD <c-w>h<c-w>c
 "------------------------------------prettier config----------------------------
 " run prettier on save
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
 "------------------------------------ cocconfig---------------------------------
 " GoTo code navigation.
