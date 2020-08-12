@@ -1,5 +1,6 @@
 "---------------------------------VimPlug--------------------------------
 call plug#begin('~/.vim/plugged')
+Plug 'wincent/command-t'
 Plug 'edkolev/tmuxline.vim'
 Plug 'chrisbra/csv.vim'
 Plug 'mbbill/undotree'
@@ -26,8 +27,10 @@ call plug#end()
 "-----------------------------------Vim settings--------------------------------------
 let mapleader=" "
 colorscheme dracula
-set hidden
-set laststatus=2
+"set hidden
+"set laststatus=2
+set nofixeol "disable newline at end of last line
+set noeol "disable newline at end of last line
 set expandtab " always uses spaces instead of tab characters
 set noerrorbells
 set backspace=indent,eol,start
@@ -83,6 +86,7 @@ vnoremap <F1> :set invfullscreen<CR>
 "set showcmd
 :imap jk <Esc>
 "autoread and auto save on focus change
+set autoread
 au FocusGained,BufEnter * :silent! !
 au FocusLost,WinLeave * :silent! noautocmd w
 " Turn on syntax highlighting
@@ -94,7 +98,6 @@ set ttyfast
 " Status bar
 set laststatus=2
 autocmd BufWritePre * :%s/\s\+$//e " Remove whitespace on save
-autocmd FileType php setlocal noeol binary fileformat=dos " Disable auto new line on save
 "------------------------------------Search settings---------------------
 set incsearch
 set hlsearch
@@ -125,7 +128,9 @@ map <C-t><right> :tabn<cr>
 "------------------------------------fzf config---------------------------------
 set rtp+=/usr/local/opt/fzf
 nnoremap <C-g> :ProjectRootExe Rg<Cr>
-nnoremap <C-p> :ProjectRootExe Files<Cr>
+nnoremap <leader>p :ProjectRootExe Files<Cr>
+nnoremap <C-p> :Files ~<Cr>
+nnoremap <leader>t :CommandTBuffer<CR>
 nnoremap <leader>r :ProjectRootExe RangerWorkingDirectory<CR>
 nnoremap <Leader>w :w<Cr>
 
