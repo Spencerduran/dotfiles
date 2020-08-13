@@ -1,6 +1,5 @@
 "---------------------------------VimPlug--------------------------------
 call plug#begin('~/.vim/plugged')
-Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
 Plug 'wincent/command-t'
 Plug 'edkolev/tmuxline.vim'
 Plug 'chrisbra/csv.vim'
