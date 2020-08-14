@@ -10,7 +10,9 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'tpope/vim-fugitive'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'airblade/vim-gitgutter'
 Plug 'ryanoasis/vim-devicons'
 Plug 'shougo/unite.vim'
