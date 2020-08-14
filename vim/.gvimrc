@@ -20,7 +20,7 @@ set guioptions+=a
 colorscheme dracula
 "colorscheme gruvbox
 set antialias " Use smooth, antialiased fonts (OS X Specific)
-set guifont=SauceCodeProNerdFontCo-Regular:h13
+set guifont=SauceCodeProNerdFontCo-Regular:h11
 
 
 " MacVim specific: Set fullscreen options to be as full screen as possible
