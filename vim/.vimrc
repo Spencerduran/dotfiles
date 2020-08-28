@@ -28,6 +28,7 @@ Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'}
 call plug#end()
 "-----------------------------------Vim settings--------------------------------------
 let mapleader=" "
+:imap jk <Esc>
 colorscheme dracula
 "set nofixendofline "disable newline at end of last line
 "set noendofline
@@ -37,6 +38,7 @@ set backspace=indent,eol,start
 set title " Show filename in titlebar of window
 set noswapfile " Disable .swp files
 set nobackup
+set nowritebackup 
 set undodir=~/.vim/undodir
 set undofile
 set t_Co=256
@@ -54,6 +56,10 @@ set shortmess+=c " don't give ins-completion-menu messages.
 " Normal Mode
 set wildmenu " Command-line completion operates in an enhanced mode.
 set cmdwinheight=18 " Height of the command window size for commands like `q:` and `q/`.
+set hidden " if hidden is not set, TextEdit might fail.
+set cmdheight=2 " Better display for messages 
+set updatetime=50 " milliseconds to wait before triggering plugin after stop typing
+set signcolumn=yes " always show signcolumns
 set history=10 " Define maximum command history size.
 set noshowmode " Disable native mode indicator.
 " Buffers
@@ -77,20 +83,10 @@ let g:airline_left_sep = "\ue0c6"
 let g:airline_right_sep = "\ue0c7"
 let g:webdevicons_enable = 1
 let g:webdevicons_enable_airline_statusline = 1
-" Remap help key.
-inoremap <F1> <ESC>:set invfullscreen<CR>a
-nnoremap <F1> :set invfullscreen<CR>
-vnoremap <F1> :set invfullscreen<CR>
 " Last line
 "set showmode
 "set showcmd
-:imap jk <Esc>
-"autoread and auto save on focus change
-"let autoreadargs={'autoread':1}
-"execute WatchForChanges("*",autoreadargs)
-"au FocusGained,BufEnter * :checktime
-"au FocusGained,BufEnter * :silent! !
-"au FocusLost,WinLeave * :silent! noautocmd w
+
 " Turn on syntax highlighting
 set filetype=json
 syntax on
@@ -132,13 +128,12 @@ nnoremap <C-g> :ProjectRootExe Rg<Cr>
 nnoremap <leader>p :ProjectRootExe Files<Cr>
 nnoremap <C-p> :Files ~<Cr>
 nnoremap <leader>t :CommandTBuffer<CR>
-nnoremap <leader>r :ProjectRootExe RangerWorkingDirectory<CR>
 nnoremap <Leader>w :w<Cr>
 "nnoremap <Leader>w :set binary<Cr> \| :set noeol<Cr> \| :w<Cr>
 
 "------------------------------------fugitive config----------------------------
 " Fugitive Conflict Resolution
-nnoremap <leader>gd :Gvdiffsplit!<CR>
+nnoremap <leader>Gd :Gvdiffsplit!<CR>
 nnoremap gdh :diffget //2<CR>
 nnoremap gdl :diffget //3<CR>>
 "close all diff windows, leave active open
@@ -162,11 +157,6 @@ let g:coc_global_extensions = [
   \ 'coc-prettier',
   \ 'coc-json',
   \ ]
-" from readme
-" if hidden is not set, TextEdit might fail.
-set hidden " Some servers have issues with backup files, see #649 set nobackup set nowritebackup " Better display for messages set cmdheight=2 " You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=450 " milliseconds to wait before triggering plugin after stop typing
-set signcolumn=yes " always show signcolumns
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -177,6 +167,9 @@ endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 
 "-------------------------------ranger-vimsettings------------------------------
+"open ranger in current directory
+nnoremap <leader>r :ProjectRootExe RangerWorkingDirectory<CR>
+
 " ranger file picker
 function! RangerFilePicker()
   " Temp file for Ranger selections
@@ -270,87 +263,6 @@ let g:vimfiler_time_format = '%m-%d-%y %H:%M:%S'
 let g:vimfiler_expand_jump_to_first_child = 0
 let g:vimfiler_ignore_pattern = '\.git\|\.DS_Store\|\.pyc'
 
-"--------------------------------fzf/rg popup window--------------------------------
-"fu s:snr() abort
-"    return matchstr(expand('<sfile>'), '.*\zs<SNR>\d\+_')
-"endfu
-"let s:snr = get(s:, 'snr', s:snr())
-"let g:fzf_layout = {'window': 'call '..s:snr..'fzf_window(0.9, 0.6, "Comment")'}
-"
-"fu s:fzf_window(width, height, border_highlight) abort
-"    let width = float2nr(&columns * a:width)
-"    let height = float2nr(&lines * a:height)
-"    let row = float2nr((&lines - height) / 2)
-"    let col = float2nr((&columns - width) / 2)
-"    let top = '┌' . repeat('─', width - 2) . '┐'
-"    let mid = '│' . repeat(' ', width - 2) . '│'
-"    let bot = '└' . repeat('─', width - 2) . '┘'
-"    let border = [top] + repeat([mid], height - 2) + [bot]
-"    if has('nvim')
-"        let frame = s:create_float(a:border_highlight, {
-"            \ 'row': row,
-"            \ 'col': col,
-"            \ 'width': width,
-"            \ 'height': height,
-"            \ })
-"        call nvim_buf_set_lines(frame, 0, -1, v:true, border)
-"        call s:create_float('Normal', {
-"            \ 'row': row + 1,
-"            \ 'col': col + 2,
-"            \ 'width': width - 4,
-"            \ 'height': height - 2,
-"            \ })
-"        exe 'au BufWipeout <buffer> bw '..frame
-"    else
-"        let frame = s:create_popup_window(a:border_highlight, {
-"            \ 'line': row,
-"            \ 'col': col,
-"            \ 'width': width,
-"            \ 'height': height,
-"            \ 'is_frame': 1,
-"            \ })
-"        call setbufline(frame, 1, border)
-"        call s:create_popup_window('Normal', {
-"            \ 'line': row + 1,
-"            \ 'col': col + 2,
-"            \ 'width': width - 4,
-"            \ 'height': height - 2,
-"            \ })
-"    endif
-"endfu
-"
-"fu s:create_float(hl, opts) abort
-"    let buf = nvim_create_buf(v:false, v:true)
-"    let opts = extend({'relative': 'editor', 'style': 'minimal'}, a:opts)
-"    let win = nvim_open_win(buf, v:true, opts)
-"    call setwinvar(win, '&winhighlight', 'NormalFloat:'..a:hl)
-"    return buf
-"endfu
-"
-"fu s:create_popup_window(hl, opts) abort
-"    if has_key(a:opts, 'is_frame')
-"        let id = popup_create('', #{
-"            \ line: a:opts.line,
-"            \ col: a:opts.col,
-"            \ minwidth: a:opts.width,
-"            \ minheight: a:opts.height,
-"            \ zindex: 50,
-"            \ })
-"        call setwinvar(id, '&wincolor', a:hl)
-"        exe 'au BufWipeout * ++once call popup_close('..id..')'
-"        return winbufnr(id)
-"    else
-"        let buf = term_start(&shell, #{hidden: 1})
-"        call popup_create(buf, #{
-"            \ line: a:opts.line,
-"            \ col: a:opts.col,
-"            \ minwidth: a:opts.width,
-"            \ minheight: a:opts.height,
-"            \ zindex: 51,
-"            \ })
-"        exe 'au BufWipeout * ++once bw! '..buf
-"    endif
-"endfu
 "-------------------------------run macro on multiple visual lines---------------
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
@@ -358,3 +270,10 @@ function! ExecuteMacroOverVisualRange()
   echo "@".getcmdline()
   execute ":'<,'>normal @".nr2char(getchar())
 endfunction
+
+"-------------------------------autoload RCz-------------------------------------
+augroup myvimrc
+    au!
+    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
+
