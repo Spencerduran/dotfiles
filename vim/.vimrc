@@ -53,11 +53,11 @@ set clipboard=unnamed,unnamedplus " Use system clipboard.
 set listchars=tab:▸\ ,eol:¬ " Visualize tabs and newlines
 set nocompatible " Don't try to be vi compatible
 set shortmess+=c " don't give ins-completion-menu messages.
+:set mouse=n "set mouse mode for terminal window resizing
 " Normal Mode
 set wildmenu " Command-line completion operates in an enhanced mode.
 set cmdwinheight=18 " Height of the command window size for commands like `q:` and `q/`.
 set hidden " if hidden is not set, TextEdit might fail.
-set cmdheight=2 " Better display for messages 
 set updatetime=50 " milliseconds to wait before triggering plugin after stop typing
 set signcolumn=yes " always show signcolumns
 set history=10 " Define maximum command history size.
@@ -121,6 +121,9 @@ map <C-t><up> :tabr<cr>
 map <C-t><down> :tabl<cr>
 map <C-t><left> :tabp<cr>
 map <C-t><right> :tabn<cr>
+" Window resizing
+nnoremap <Leader>+ :exe "resize " . (winwidth(0) * 3/2)<CR>
+nnoremap <Leader>- :exe "resize " . (winwidth(0) * 2/3)<CR>
 
 "------------------------------------fzf config---------------------------------
 set rtp+=/usr/local/opt/fzf
