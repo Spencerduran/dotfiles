@@ -1,6 +1,6 @@
 set encoding=UTF-8
-set transparency=8
-
+set noerrorbells "no error bells
+set vb t_vb= "no error bells
 " Remove toolbar and scrollbars from gVim,
 set guioptions-=T
 set guioptions-=r
