@@ -1,4 +1,4 @@
-"---------------------------------VimPlug--------------------------------
+"---------------------------------VimPlug---------------------------------------
 call plug#begin('~/.vim/plugged')
 Plug 'wincent/command-t'
 Plug 'edkolev/tmuxline.vim'
@@ -24,34 +24,27 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-startify'
 Plug 'junegunn/fzf.vim'
 Plug 'francoiscabrol/ranger.vim'
-Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'}
 call plug#end()
-"-----------------------------------Vim settings--------------------------------------
+"---------------------------------Vim things------------------------------------
+set nocompatible " Don't try to be vi compatible
+set shell=bash
 let mapleader=" "
 :imap jk <Esc>
 colorscheme dracula
-"set nofixendofline "disable newline at end of last line
-"set noendofline
-set expandtab " always uses spaces instead of tab characters
+set encoding=UTF-8
 set noerrorbells
-set backspace=indent,eol,start
+set belloff=all
+set backspace=indent,eol,start  " allow backspacing over everything in insert mode
 set title " Show filename in titlebar of window
 set noswapfile " Disable .swp files
-set nobackup
-set nowritebackup 
-set undodir=~/.vim/undodir
-set undofile
-set t_Co=256
-set shell=bash
-set smarttab
-set smartindent
-set tabstop=4 softtabstop=4
-set shiftwidth=4
+set nobackup " disable backups before writing file
+set nowritebackup " disable backup before writing file
+set undofile "store undo history to a file
+set undodir=~/.vim/undodir "set vim undo file location
+set list lcs=trail:·,tab:»·,eol:¬ " Visualize tabs and newlines
 set number " Show current line number
 set relativenumber " Show relative line numbers
 set clipboard=unnamed,unnamedplus " Use system clipboard.
-set listchars=tab:▸\ ,eol:¬ " Visualize tabs and newlines
-set nocompatible " Don't try to be vi compatible
 set shortmess+=c " don't give ins-completion-menu messages.
 :set mouse=n "set mouse mode for terminal window resizing
 " Normal Mode
@@ -66,15 +59,30 @@ set noshowmode " Disable native mode indicator.
 set splitbelow " Splitting a window will put the new window below of the current one.
 set splitright " Splitting a window will put the new window right of the current one.
 " Editor
-set scrolloff=8 " Minimum number of screen lines to keep above and below the cursor.
+set scrolloff=4 " Minimum number of screen lines to keep above and below the cursor.
 set cursorline " Highlight the line background of the cursor.
 set fillchars= " Characters to fill the status lines and vertical separators.
 set conceallevel=0 " Dont hide symbols in MD and JSON
 set showmatch
-set foldmethod=syntax
-set foldlevel=2
-: filetype plugin on
-"fonts
+set showcmd " Show commands in statusline
+set ttyfast " Rendering
+
+"----------------------------------Whitespace ----------------------------------
+set smartindent
+set smarttab
+set list
+set listchars=eol:$,tab:.\ ,trail:.,extends:>,precedes:<,nbsp:_
+highlight SpecialKey term=standout ctermfg=red guifg=darkgray                   
+"toggle display white space characters with F1
+nnoremap <F1> :set list! list?<CR>
+
+" no indent on paste
+set pastetoggle=<F2>
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+
+"----------------------------------Airline--------------------------------------
+set laststatus=2 " Status bar
 let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -83,25 +91,14 @@ let g:airline_left_sep = "\ue0c6"
 let g:airline_right_sep = "\ue0c7"
 let g:webdevicons_enable = 1
 let g:webdevicons_enable_airline_statusline = 1
-" Last line
-"set showmode
-"set showcmd
 
-" Turn on syntax highlighting
-set filetype=json
-syntax on
-set encoding=UTF-8
-" Rendering
-set ttyfast
-" Status bar
-set laststatus=2
-"------------------------------------Search settings---------------------
+"------------------------------------Search-------------------------------------
 set incsearch
 set hlsearch
 set ignorecase
 set showmatch
 
-"------------------------------------Pane nagivation---------------------
+"---------------------------------Pane nagivation-------------------------------
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
@@ -143,6 +140,8 @@ nnoremap gdl :diffget //3<CR>>
 nnoremap <Leader>gD <c-w>h<c-w>c
 
 "------------------------------------ cocconfig---------------------------------
+autocmd BufNew,BufEnter *.json,*.vim execute "silent! CocDisable"
+autocmd BufLeave *.json,*.vim, execute "silent! CocDisable"
 " GoTo code navigation.
 nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gy <Plug>(coc-type-definition)
@@ -158,7 +157,6 @@ let g:coc_global_extensions = [
   \ 'coc-snippets',
   \ 'coc-pairs',
   \ 'coc-prettier',
-  \ 'coc-json',
   \ ]
 
 function! s:check_back_space() abort
@@ -249,7 +247,7 @@ endfunction
 command! RangerDirs call RangerDirPicker()
 let g:ranger_map_keys = 0
 
-"-------------------------------vimfiler-settings--------------------------------
+"-------------------------------vimfiler-settings-------------------------------
 nnoremap vf :VimFilerExplorer<Enter>
 let g:loaded_netrwPlugin = 0
 let g:vimfiler_expand_jump_to_first_child = 1
@@ -266,15 +264,7 @@ let g:vimfiler_time_format = '%m-%d-%y %H:%M:%S'
 let g:vimfiler_expand_jump_to_first_child = 0
 let g:vimfiler_ignore_pattern = '\.git\|\.DS_Store\|\.pyc'
 
-"-------------------------------run macro on multiple visual lines---------------
-xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
-
-function! ExecuteMacroOverVisualRange()
-  echo "@".getcmdline()
-  execute ":'<,'>normal @".nr2char(getchar())
-endfunction
-
-"-------------------------------autoload RCz-------------------------------------
+"-------------------------------autoload RCz------------------------------------
 augroup myvimrc
     au!
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
