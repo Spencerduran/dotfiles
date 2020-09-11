@@ -22,12 +22,13 @@ Plug 'rstacruz/sparkup'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-startify'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'francoiscabrol/ranger.vim'
 call plug#end()
 "---------------------------------Vim things------------------------------------
 set nocompatible " Don't try to be vi compatible
-set shell=bash
+"set shell=bash
 let mapleader=" "
 :imap jk <Esc>
 colorscheme dracula
@@ -123,14 +124,18 @@ nnoremap <Leader>+ :exe "resize " . (winwidth(0) * 3/2)<CR>
 nnoremap <Leader>- :exe "resize " . (winwidth(0) * 2/3)<CR>
 
 "------------------------------------fzf config---------------------------------
-set rtp+=/usr/local/opt/fzf
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+
+" Border color
+"let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Todo' } }
+" Border style (rounded / sharp / horizontal)
+"let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Todo', 'border': 'rounded' } }
+"set rtp+=/usr/local/opt/fzf
 nnoremap <C-g> :ProjectRootExe Rg<Cr>
 nnoremap <leader>p :ProjectRootExe Files<Cr>
 nnoremap <C-p> :Files ~<Cr>
 nnoremap <leader>t :CommandTBuffer<CR>
 nnoremap <Leader>w :w<Cr>
-"nnoremap <Leader>w :set binary<Cr> \| :set noeol<Cr> \| :w<Cr>
-
 "------------------------------------fugitive config----------------------------
 " Fugitive Conflict Resolution
 nnoremap <leader>Gd :Gvdiffsplit!<CR>
