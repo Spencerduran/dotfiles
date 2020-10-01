@@ -23,8 +23,10 @@ colorscheme dracula
 "colorscheme gruvbox
 set antialias " Use smooth, antialiased fonts
 "set guifont=DroidSansMonoForPowerlinePlusNerdFileTypesMono:h12
-set guifont=Iosevka\ Nerd\ Font\ Complete\ Mono:h14
+"guifont=VictorMonoNerdFontComplete-Regular:h14 
+"set guifont=Iosevka\ Nerd\ Font\ Complete\ Mono:h14
 
+set guifont=IosevkaNerdFontComplete-Term:h14
 " MacVim specific: Set fullscreen options to be as full screen as possible
 if has("gui_macvim")
     set fuoptions=maxhorz,maxvert

@@ -12,7 +12,7 @@ Plug 'rbgrouleff/bclose.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+  \ 'for': ['javascript', 'typescript', 'json', 'css', 'less', 'scss', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'airblade/vim-gitgutter'
 Plug 'ryanoasis/vim-devicons'
 Plug 'shougo/unite.vim'
@@ -25,6 +25,8 @@ Plug 'mhinz/vim-startify'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'francoiscabrol/ranger.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 call plug#end()
 "---------------------------------Vim things------------------------------------
 set nocompatible " Don't try to be vi compatible
@@ -42,7 +44,6 @@ set nobackup " disable backups before writing file
 set nowritebackup " disable backup before writing file
 set undofile "store undo history to a file
 set undodir=~/.vim/undodir "set vim undo file location
-set list lcs=trail:·,tab:»·,eol:¬ " Visualize tabs and newlines
 set number " Show current line number
 set relativenumber " Show relative line numbers
 set clipboard=unnamed,unnamedplus " Use system clipboard.
@@ -67,21 +68,6 @@ set conceallevel=0 " Dont hide symbols in MD and JSON
 set showmatch
 set showcmd " Show commands in statusline
 set ttyfast " Rendering
-
-"----------------------------------Whitespace ----------------------------------
-set smartindent
-set smarttab
-set list
-set listchars=eol:$,tab:.\ ,trail:.,extends:>,precedes:<,nbsp:_
-highlight SpecialKey term=standout ctermfg=red guifg=darkgray                   
-"toggle display white space characters with F1
-nnoremap <F1> :set list! list?<CR>
-
-" no indent on paste
-set pastetoggle=<F2>
-nnoremap <F2> :set invpaste paste?<CR>
-set pastetoggle=<F2>
-
 "----------------------------------Airline--------------------------------------
 set laststatus=2 " Status bar
 let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
@@ -163,12 +149,12 @@ let g:coc_global_extensions = [
   \ 'coc-pairs',
   \ 'coc-prettier',
   \ ]
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
+"
+"function! s:check_back_space() abort
+"  let col = col('.') - 1
+"  return !col || getline('.')[col - 1]  =~# '\s'
+"endfunction
+"
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
@@ -269,3 +255,29 @@ let g:vimfiler_time_format = '%m-%d-%y %H:%M:%S'
 let g:vimfiler_expand_jump_to_first_child = 0
 let g:vimfiler_ignore_pattern = '\.git\|\.DS_Store\|\.pyc'
 
+"-------------------------------autoload RCz------------------------------------
+augroup myvimrc
+    au!
+    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
+
+"----------------------------------Whitespace ----------------------------------
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set expandtab
+"set smartindent
+
+set list listchars=tab:..,trail:_,extends:>,precedes:<,nbsp:~,eol:$,space:_
+
+"toggle display white space characters with F1
+nnoremap <F1> :set list! list?<CR>
+
+" no indent on paste
+set pastetoggle=<F2>
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+
+autocmd BufWinEnter <buffer> match Error /\s\+$/
+autocmd InsertEnter <buffer> match Error /\s\+\%#\@<!$/
+autocmd InsertLeave <buffer> match Error /\s\+$/
+autocmd BufWinLeave <buffer> call clearmatches()
