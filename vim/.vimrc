@@ -33,7 +33,6 @@ set nocompatible " Don't try to be vi compatible
 "set shell=bash
 let mapleader=" "
 :imap jk <Esc>
-syntax on
 colorscheme dracula
 set encoding=UTF-8
 set noerrorbells
