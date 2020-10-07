@@ -19,8 +19,6 @@ Plug 'shougo/unite.vim'
 Plug 'shougo/vimshell.vim'
 Plug 'shougo/vimfiler.vim'
 Plug 'rstacruz/sparkup'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-startify'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -34,6 +32,7 @@ set nocompatible " Don't try to be vi compatible
 let mapleader=" "
 :imap jk <Esc>
 colorscheme dracula
+set cmdheight=1
 set encoding=UTF-8
 set noerrorbells
 set belloff=all
@@ -66,18 +65,7 @@ set cursorline " Highlight the line background of the cursor.
 set fillchars= " Characters to fill the status lines and vertical separators.
 set conceallevel=0 " Dont hide symbols in MD and JSON
 set showmatch
-set showcmd " Show commands in statusline
 set ttyfast " Rendering
-"----------------------------------Airline--------------------------------------
-set laststatus=2 " Status bar
-let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'default'
-let g:airline_left_sep = "\ue0c6"
-let g:airline_right_sep = "\ue0c7"
-let g:webdevicons_enable = 1
-let g:webdevicons_enable_airline_statusline = 1
 
 "------------------------------------Search-------------------------------------
 set incsearch
