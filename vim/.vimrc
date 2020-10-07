@@ -25,7 +25,6 @@ Plug 'mhinz/vim-startify'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'francoiscabrol/ranger.vim'
-Plug 'sheerun/vim-polyglot'
 call plug#end()
 "---------------------------------Vim things------------------------------------
 set nocompatible " Don't try to be vi compatible
@@ -146,6 +145,9 @@ nnoremap <leader>cr :CocRestart
 let g:coc_global_extensions = [
   \ 'coc-snippets',
   \ 'coc-pairs',
+  \ 'coc-tsserver',
+  \ 'coc-eslint',
+  \ 'coc-python',
   \ 'coc-prettier',
   \ ]
 "
@@ -280,3 +282,20 @@ autocmd BufWinEnter <buffer> match Error /\s\+$/
 autocmd InsertEnter <buffer> match Error /\s\+\%#\@<!$/
 autocmd InsertLeave <buffer> match Error /\s\+$/
 autocmd BufWinLeave <buffer> call clearmatches()
+
+set hidden
+
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+    \ 'python': ['/usr/local/bin/pyls'],
+    \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
+    \ }
+
+" note that if you are using Plug mapping you should not use `noremap` mappings.
+nmap <F5> <Plug>(lcn-menu)
+" Or map each action separately
+nmap <silent>K <Plug>(lcn-hover)
+nmap <silent> gd <Plug>(lcn-definition)
+nmap <silent> <F2> <Plug>(lcn-rename)
