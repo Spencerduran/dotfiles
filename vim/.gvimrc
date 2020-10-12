@@ -19,8 +19,9 @@ set guioptions+=i
 set guioptions+=a
 
 " colorscheme to use for GUI
-colorscheme dracula
-"colorscheme gruvbox
+"colorscheme dracula
+colorscheme gruvbox
+set background=dark
 set antialias " Use smooth, antialiased fonts
 "set guifont=DroidSansMonoForPowerlinePlusNerdFileTypesMono:h12
 "guifont=VictorMonoNerdFontComplete-Regular:h14 
