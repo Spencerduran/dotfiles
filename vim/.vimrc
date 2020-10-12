@@ -1,5 +1,6 @@
 "---------------------------------VimPlug---------------------------------------
 call plug#begin('~/.vim/plugged')
+Plug 'morhetz/gruvbox'
 Plug 'wincent/command-t'
 Plug 'edkolev/tmuxline.vim'
 Plug 'chrisbra/csv.vim'
@@ -31,7 +32,8 @@ set nocompatible " Don't try to be vi compatible
 "set shell=bash
 let mapleader=" "
 :imap jk <Esc>
-colorscheme dracula
+"colorscheme dracula
+colorscheme gruvbox
 set encoding=UTF-8
 set noerrorbells
 set belloff=all
@@ -120,6 +122,7 @@ nnoremap <leader>p :ProjectRootExe Files<Cr>
 nnoremap <C-p> :Files ~<Cr>
 nnoremap <leader>t :CommandTBuffer<CR>
 nnoremap <Leader>w :w<Cr>
+nnoremap <Leader>s :Startify<Cr>
 "------------------------------------fugitive config----------------------------
 " Fugitive Conflict Resolution
 nnoremap <leader>Gd :Gvdiffsplit!<CR>
@@ -268,7 +271,7 @@ set shiftwidth=4
 set expandtab
 "set smartindent
 
-set list listchars=tab:..,trail:_,extends:>,precedes:<,nbsp:~,eol:$,space:_
+set listchars=tab:..,trail:_,extends:>,precedes:<,nbsp:~,eol:$,space:_
 
 "toggle display white space characters with F1
 nnoremap <F1> :set list! list?<CR>
