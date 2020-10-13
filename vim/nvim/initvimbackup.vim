@@ -3,7 +3,6 @@ set background=dark
 set backspace=indent,eol,start "allow backspace over everything in insert mode
 set belloff=all
 set clipboard=unnamed,unnamedplus " Use system clipboard.
-set cmdwinheight=18 " Height of the command window size for commands like `q:` and `q/`.
 set colorcolumn=80
 set completeopt=menuone,noinsert,noselect
 set conceallevel=0 " Dont hide symbols in MD and JSON
@@ -48,7 +47,7 @@ set wildmenu " Command-line completion operates in an enhanced mode.
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 "---------------------------------VimPlug--------------------------------------
 call plug#begin('~/.vim/plugged')
-" Neovim lsp Plugins
+" neovim lsp plugins
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'tjdevries/nlua.nvim'
@@ -69,11 +68,10 @@ Plug 'chrisbra/csv.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dbakker/vim-projectroot'
 Plug 'edkolev/tmuxline.vim'
-"Plug 'francoiscabrol/ranger.vim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'kevinhwang91/rnvimr'
+Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-startify'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -140,6 +138,10 @@ nnoremap <leader>p :ProjectRootExe Files<Cr>
 nnoremap <C-p> :Files ~<Cr>
 nnoremap <Leader>w :w<Cr>
 nnoremap <Leader>s :Startify<Cr>
+nnoremap <Leader>t :TelescopeBuffers<Cr>
+nnoremap <Leader>G :TelescopeColorScheme<Cr>
+nnoremap <Leader>f :ProjectRootExe :TelescopeFindFile<Cr>
+nnoremap <Leader>F :TelescopeFindFile ~<Cr>
 " lsp
 nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>vi :lua vim.lsp.buf.implementation()<CR>
@@ -173,7 +175,7 @@ map <C-t><right> :tabn<cr>
 
 " COC SEARCH
 nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
-
+let g:coc_disable_startup_warning = 1
 " vim TODO
 nmap <Leader>tu <Plug>BujoChecknormal
 nmap <Leader>th <Plug>BujoAddnormal
@@ -192,8 +194,6 @@ lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
 lua require'nvim_lsp'.clangd.setup{ on_attach=require'completion'.on_attach }
 "lua require'nvim_lsp'.pyls.setup{ on_attach=require'completion'.on_attach }
 
-" ranger
-nnoremap <leader>r :ProjectRootExe RangerWorkingDirectory<CR>
 
 "-------------------------------autoload---------------------------------------
 augroup myvimrc
@@ -202,12 +202,6 @@ augroup myvimrc
 augroup END
 au BufNewFile,BufRead *.json,*.txt setlocal colorcolumn=
 au BufRead,BufNewFile *.py,*.ts,*.js setlocal textwidth=79
-
-"----------------------------------Whitespace ---------------------------------
-autocmd BufWinEnter <buffer> match Error /\s\+$/
-autocmd InsertEnter <buffer> match Error /\s\+\%#\@<!$/
-autocmd InsertLeave <buffer> match Error /\s\+$/
-autocmd BufWinLeave <buffer> call clearmatches()
 
 fun! TrimWhitespace()
     let l:save = winsaveview()
