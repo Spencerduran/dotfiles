@@ -1,5 +1,11 @@
 "---------------------------------VimPlug---------------------------------------
 call plug#begin('~/.vim/plugged')
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'ryanolsonx/vim-lsp-typescript'
 Plug 'morhetz/gruvbox'
 Plug 'wincent/command-t'
 Plug 'edkolev/tmuxline.vim'
