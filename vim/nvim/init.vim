@@ -1,70 +1,124 @@
+syntax on
+set background=dark
+set backspace=indent,eol,start "allow backspace over everything in insert mode
+set belloff=all
+set clipboard=unnamed,unnamedplus " Use system clipboard.
+set colorcolumn=80
+set completeopt=menuone,noinsert,noselect
+set conceallevel=0 " Dont hide symbols in MD and JSON
+set cursorline " Highlight the line background of the cursor.
+set encoding=UTF-8
+set expandtab "set the tabs to display as spaces
+set fillchars= " Characters to fill the status lines and vertical separators.
+set guicursor=
+set hidden "opening a new file when the current buffer has unsaved changes causes files to be hidden instead of closed
+set history=10 " Define maximum command history size.
+set hlsearch " highlight search
+set ignorecase
+set incsearch " incremental search
+set laststatus=2 " Status bar
+set listchars=tab:..,trail:_,extends:>,precedes:<,nbsp:~,eol:$,space:_
+set mouse=n "set mouse mode for terminal window resizing
+set nobackup " disable backups before writing file
+set noerrorbells
+set noshowmode " Disable native mode indicator.
+set noswapfile " Disable .swp files
+set nowrap
+set nowritebackup " disable backup before writing file
+set nu "enable line numbers
+set relativenumber " Show relative line numbers
+set scrolloff=8 " Minimum number of screen lines to keep above and below the cursor.
+set shiftwidth=4
+set shortmess+=c " don't give ins-completion-menu messages.
+set showcmd " Show commands in statusline
+set showmatch
+set signcolumn=yes " always show signcolumns
+set smartcase
+set smartindent
+set splitright " Splitting a window will put the new window right of the current one.
+set tabstop=4 softtabstop=4
+set termguicolors
+set title " Show filename in titlebar of window
+set ttyfast " Rendering
+set undodir=~/.vim/undodir "set vim undo file location
+set undofile "store undo history to a file
+set updatetime=50 " milliseconds to wait before triggering plugin after stop typing
+set wildmenu " Command-line completion operates in an enhanced mode.
+highlight ColorColumn ctermbg=0 guibg=lightgrey
 "---------------------------------VimPlug--------------------------------------
 call plug#begin('~/.vim/plugged')
-Plug 'morhetz/gruvbox'
-Plug 'wincent/command-t'
-Plug 'edkolev/tmuxline.vim'
-Plug 'chrisbra/csv.vim'
-Plug 'mbbill/undotree'
-Plug 'dbakker/vim-projectroot'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'tpope/vim-fugitive'
-Plug 'rbgrouleff/bclose.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'json', 'css', 'less', 'scss',
-  \'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-Plug 'airblade/vim-gitgutter'
-Plug 'ryanoasis/vim-devicons'
-Plug 'shougo/unite.vim'
-Plug 'shougo/vimshell.vim'
-Plug 'shougo/vimfiler.vim'
-Plug 'rstacruz/sparkup'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'mhinz/vim-startify'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'francoiscabrol/ranger.vim'
-Plug 'rbgrouleff/bclose.vim'
-Plug 'kevinhwang91/rnvimr'
+" neovim lsp plugins
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
-Plug 'neovim/nvim-lsp'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'tjdevries/nlua.nvim'
+Plug 'tjdevries/lsp_extensions.nvim'
+"Plug 'prabirshrestha/async.vim'
+"Plug 'prabirshrestha/asyncomplete-lsp.vim'
+"Plug 'prabirshrestha/asyncomplete.vim'
+"Plug 'prabirshrestha/vim-lsp'
+
+" telescope requirements
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/telescope.nvim'
+
 Plug 'TaDaa/vimade'
+Plug 'airblade/vim-gitgutter'
+Plug 'chrisbra/csv.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'dbakker/vim-projectroot'
+Plug 'edkolev/tmuxline.vim'
+Plug 'gruvbox-community/gruvbox'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
+Plug 'mbbill/undotree'
+Plug 'mhinz/vim-startify'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'rbgrouleff/bclose.vim'
+Plug 'rstacruz/sparkup'
+Plug 'ryanoasis/vim-devicons'
+Plug 'sheerun/vim-polyglot'
+Plug 'stsewd/fzf-checkout.vim'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vuciv/vim-bujo'
+
+"colorschemes
+Plug 'colepeters/spacemacs-theme.vim'
+Plug 'sainnhe/gruvbox-material'
+Plug 'phanviet/vim-monokai-pro'
+Plug 'flazz/vim-colorschemes'
+Plug 'chriskempson/base16-vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
+
 call plug#end()
 "---------------------------------Vim things-----------------------------------
-set nocompatible " Don't try to be vi compatible
-"set shell=bash
-let mapleader=" "
-:imap jk <Esc>
 colorscheme gruvbox
-set background=dark
+let mapleader=" "
+let g:gruvbox_contrast_dark = 'hard'
 if exists('+termguicolors')
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 let g:gruvbox_invert_selection='0'
-set colorcolumn=80
-au BufNewFile,BufRead *.json,*.txt setlocal colorcolumn=
-"au BufRead,BufNewFile *.py,*.ts,*.js setlocal textwidth=79
-highlight ColorColumn ctermbg=0 guibg=lightgrey
-let g:gruvbox_contrast_dark = 'hard'
-let g:gruvbox_invert_selection='0'
-" Vim with me
-nnoremap <leader>vwm :colorscheme gruvbox<bar>:set background=dark<CR>
-nmap <leader>vtm :highlight Pmenu ctermbg=gray guibg=gray
-nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
+
+" telescope
+let g:telescope_cache_results = 1
+let g:telescope_prime_fuzzy_find  = 1
+
+" netrw
+let g:netrw_browse_split = 2
+let g:netrw_banner = 0
+let g:netrw_winsize = 25
+let g:netrw_localrmdir='rm -r'
+"
 "
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-"----------------------------------Airline-------------------------------------
-set laststatus=2 " Status bar
+
+" airline
 let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -73,57 +127,22 @@ let g:airline_left_sep = "\ue0c6"
 let g:airline_right_sep = "\ue0c7"
 let g:webdevicons_enable = 1
 let g:webdevicons_enable_airline_statusline = 1
-
-"------------------------------------Search------------------------------------
-
-
-"------------------------------------fzf config--------------------------------
+" fzf
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
-" Border color
-"let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Todo' } }
-" Border style (rounded / sharp / horizontal)
-"let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Todo', 'border': 'rounded' } }
-"set rtp+=/usr/local/opt/fzf
-"
-"------------------------------------fugitive config---------------------------
-" Fugitive Conflict Resolution
-nnoremap <leader>Gd :Gvdiffsplit!<CR>
-nnoremap gdh :diffget //2<CR>
-nnoremap gdl :diffget //3<CR>>
-"close all diff windows, leave active open
-nnoremap <Leader>gD <c-w>h<c-w>c
-"
-"-------------------------------nvmim-lsp settings-----------------------------
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
-"lua require'nvim_lsp'.pyls.setup{ on_attach=require'completion'.on_attach }
-"lua require'nvim_lsp'.clangd.setup{ on_attach=require'completion'.on_attach }
-"lua require'nvim_lsp'.gopls.setup{ on_attach=require'completion'.on_attach }
-"
-
-"lua << EOF
-"local configs = require 'nvim_lsp/configs'
-"
-"configs.pyls = {
-"  default_config = {
-"    cmd = {"pyls"};
-"    filetypes = {"python"};
-"    root_dir = function(fname)
-"      return vim.fn.getcwd()
-"    end;
-"  };
-"    description = [[
-"https://github.com/palantir/python-language-server
-"`python-language-server`, a language server for Python.
-"    ]];
-"    default_config = {
-"    };
-"  };
-"};
-"
-"EOF
-
+inoremap jk <Esc>
+nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
+nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+nnoremap <C-g> :ProjectRootExe Rg<Cr>
+nnoremap <leader>p :ProjectRootExe Files<Cr>
+nnoremap <C-p> :Files ~<Cr>
+nnoremap <Leader>w :w<Cr>
+nnoremap <Leader>s :Startify<Cr>
+nnoremap <Leader>t :TelescopeBuffers<Cr>
+nnoremap <Leader>G :TelescopeColorScheme<Cr>
+nnoremap <Leader>f :ProjectRootExe :TelescopeFindFile<Cr>
+nnoremap <Leader>F :TelescopeFindFile ~<Cr>
+" lsp
 nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>vi :lua vim.lsp.buf.implementation()<CR>
 nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
@@ -131,142 +150,61 @@ nnoremap <leader>vrr :lua vim.lsp.buf.references()<CR>
 nnoremap <leader>vrn :lua vim.lsp.buf.rename()<CR>
 nnoremap <leader>vh :lua vim.lsp.buf.hover()<CR>
 nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
-nnoremap <silent> <leader>ld    <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> <leader>lh    <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> <leader>ld    <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
-nnoremap <silent> <leader>lk    <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> <leader>lr    <cmd>lua vim.lsp.buf.references()<CR>
-"
-"-------------------------------ranger-vimsettings-----------------------------
-"open ranger in current directory
-nnoremap <leader>r :ProjectRootExe RangerWorkingDirectory<CR>
-
-" ranger file picker
-function! RangerFilePicker()
-  " Temp file for Ranger selections
-  let tempfile = tempname()
-
-  " Dictionary function
-  let ranger = { 'tempfile' : tempfile }
-
-  function! ranger.OnExit(...)
-    " Is temp file readable?
-    if !filereadable(self.tempfile)
-      return
-    endif
-
-    " Read ranger selections, delete temp file
-    let selections = readfile(self.tempfile)
-    call delete(self.tempfile)
-
-    " Are there any selections?
-    if empty(selections)
-      return
-    endif
-
-    " Close the terminal window, edit the first item
-    close
-    exec 'edit ' . fnameescape(selections[0])
-
-    " Add any remaining items to the arg/buffer list
-    for sel in selections[1:]
-      exec 'argadd '. fnameescape(sel)
-    endfor
-  endfunction
-
-  " Open ranger in a new terminal window
-  let pwd = getcwd()
-  let cmd = 'ranger --choosefiles=' . fnameescape(tempfile) . ' ' . fnameescape(pwd)
-  let buf = term_start(cmd, {'term_finish' : 'close', 'exit_cb' : ranger.OnExit})
-endfunction
-command! RangerFiles call RangerFilePicker()
-
-" ranger directory picker
-function! RangerDirPicker()
-  " Temp file for Ranger selections
-  let tempfile = tempname()
-
-  " Dictionary function
-  let ranger = { 'tempfile' : tempfile }
-
-  function! ranger.OnExit(...)
-    " Is temp file readable?
-    if !filereadable(self.tempfile)
-      return
-    endif
-
-    " Read ranger selections, delete temp file
-    let selections = readfile(self.tempfile)
-    call delete(self.tempfile)
-
-    " Are there any selections?
-    if empty(selections)
-      return
-    endif
-
-    " Close the terminal window, change current directory
-    close
-    exec 'cd ' . fnameescape(selections[0])
-  endfunction
-
-  " Open ranger in a new terminal window
-  let pwd = getcwd()
-  let cmd = 'ranger --show-only-dirs --choosedir=' . fnameescape(tempfile) . ' ' . fnameescape(pwd)
-  let buf = term_start(cmd, {'term_finish' : 'close', 'exit_cb' : ranger.OnExit})
-endfunction
-command! RangerDirs call RangerDirPicker()
-let g:ranger_map_keys = 0
-
-"-------------------------------vimfiler-settings------------------------------
-nnoremap vf :VimFilerExplorer<Enter>
-let g:loaded_netrwPlugin = 0
-let g:vimfiler_expand_jump_to_first_child = 1
-let g:webdevicons_enable_vimfiler = 1
-let g:vimfiler_as_default_explorer = 1
-let g:vimfiler_safe_mode_by_default = 0
-let g:vimfiler_tree_leaf_icon = " "
-let g:vimfiler_tree_opened_icon = '▾'
-let g:vimfiler_tree_closed_icon = '▸'
-let g:vimfiler_file_icon = '-'
-let g:vimfiler_marked_file_icon = '✓'
-let g:vimfiler_readonly_file_icon = '✗'
-let g:vimfiler_time_format = '%m-%d-%y %H:%M:%S'
-let g:vimfiler_expand_jump_to_first_child = 0
-let g:vimfiler_ignore_pattern = '\.git\|\.DS_Store\|\.pyc'
-
-
-"----------------------------------Whitespace ---------------------------------
-set tabstop=4 softtabstop=4
-set shiftwidth=4
-set expandtab
-"set smartindent
-
-set listchars=tab:..,trail:_,extends:>,precedes:<,nbsp:~,eol:$,space:_
-
-"toggle display white space characters with F1
+" whitespace chars toggle
 nnoremap <F1> :set list! list?<CR>
+" pane nagivation
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <leader>u :UndotreeShow<CR>
+" buffer Switching
+nnoremap <Leader>bn :bn<CR>
+nnoremap <Leader>bn :bn<CR>
+nnoremap <Leader>bd :bd<CR>
+nnoremap <Leader>ls :ls<CR>
+nnoremap <Leader>bp :bp<CR>
+nnoremap <Leader>g :e#<CR>
+nnoremap <PageUp>   :bprevious<CR>
+nnoremap <PageDown> :bnext<CR>
+" tab switching
+map <C-t><up> :tabr<cr>
+map <C-t><down> :tabl<cr>
+map <C-t><left> :tabp<cr>
+map <C-t><right> :tabn<cr>
 
-" no indent on paste
-set pastetoggle=<F2>
-nnoremap <F2> :set invpaste paste?<CR>
-set pastetoggle=<F2>
+" COC SEARCH
+nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
+let g:coc_disable_startup_warning = 1
+" vim TODO
+nmap <Leader>tu <Plug>BujoChecknormal
+nmap <Leader>th <Plug>BujoAddnormal
+let g:bujo#todo_file_path = $HOME . "/.cache/bujo"
 
-autocmd BufWinEnter <buffer> match Error /\s\+$/
-autocmd InsertEnter <buffer> match Error /\s\+\%#\@<!$/
-autocmd InsertLeave <buffer> match Error /\s\+$/
-autocmd BufWinLeave <buffer> call clearmatches()
+" fugitive
+nnoremap <leader>Gd :Gvdiffsplit!<CR>
+nnoremap gdh :diffget //2<CR>
+nnoremap gdl :diffget //3<CR>>
+"close all diff windows, leave active open
+nnoremap <Leader>gD <c-w>h<c-w>c
 
-"let g:LanguageClient_serverCommands = {
-"    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-"    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-"    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
-"    \ 'python': ['/usr/local/bin/pyls'],
-"    \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
-"    \ }
-"
-" note that if you are using Plug mapping you should not use `noremap` mappings.
-nmap <F5> <Plug>(lcn-menu)
-" Or map each action separately
-nmap <silent>K <Plug>(lcn-hover)
-nmap <silent> gd <Plug>(lcn-definition)
-nmap <silent> <F2> <Plug>(lcn-rename)
+" nvim lsp reqs
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
+lua require'nvim_lsp'.clangd.setup{ on_attach=require'completion'.on_attach }
+"lua require'nvim_lsp'.pyls.setup{ on_attach=require'completion'.on_attach }
+
+
+"-------------------------------autoload---------------------------------------
+augroup myvimrc
+    au!
+    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
+au BufNewFile,BufRead *.json,*.txt setlocal colorcolumn=
+au BufRead,BufNewFile *.py,*.ts,*.js setlocal textwidth=79
+
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
