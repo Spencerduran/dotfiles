@@ -10,6 +10,7 @@ set cursorline " Highlight the line background of the cursor.
 set encoding=UTF-8
 set expandtab "set the tabs to display as spaces
 set fillchars= " Characters to fill the status lines and vertical separators.
+set foldmethod=manual
 set guicursor=
 set hidden "opening a new file when the current buffer has unsaved changes causes files to be hidden instead of closed
 set history=10 " Define maximum command history size.
@@ -61,8 +62,9 @@ Plug 'tjdevries/lsp_extensions.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
-
+Plug 'Konfekt/FastFold'
 Plug 'TaDaa/vimade'
+Plug 'tpope/vim-vinegar'
 Plug 'airblade/vim-gitgutter'
 Plug 'chrisbra/csv.vim'
 Plug 'christoomey/vim-tmux-navigator'
@@ -71,7 +73,7 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
+Plug 'justinmk/vim-dirvish'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-startify'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -110,13 +112,13 @@ let g:telescope_cache_results = 1
 let g:telescope_prime_fuzzy_find  = 1
 
 " netrw
-let g:netrw_browse_split = 2
-let g:netrw_banner = 0
-let g:netrw_winsize = 25
-let g:netrw_localrmdir='rm -r'
+"let g:netrw_browse_split = 1 "open files in the previous window
+let g:netrw_banner = 0 "disable usesless netrw banner
+let g:netrw_winsize = 15 "netrw window size
+let g:netrw_localrmdir='rm -r' "allow netrw to remove non-empty directories
 "
 "
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+"let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
 " airline
 let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
