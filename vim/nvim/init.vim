@@ -62,6 +62,7 @@ Plug 'tjdevries/lsp_extensions.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
+
 Plug 'Konfekt/FastFold'
 Plug 'TaDaa/vimade'
 Plug 'tpope/vim-vinegar'
@@ -131,42 +132,42 @@ let g:webdevicons_enable = 1
 let g:webdevicons_enable_airline_statusline = 1
 " fzf
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+let $FZF_DEFAULT_OPS='--reverse'
 
 inoremap jk <Esc>
-nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
-nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
-nnoremap <C-g> :ProjectRootExe Rg<Cr>
-nnoremap <leader>p :ProjectRootExe Files<Cr>
 nnoremap <C-p> :Files ~<Cr>
-nnoremap <Leader>w :w<Cr>
+nnoremap <C-g> :ProjectRootExe Rg<Cr>
+nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
+nnoremap <Leader>c :TelescopeColorscheme<Cr>
+nnoremap <Leader>f :Ex<Cr>
 nnoremap <Leader>s :Startify<Cr>
 nnoremap <Leader>t :TelescopeBuffers<Cr>
-nnoremap <Leader>G :TelescopeColorScheme<Cr>
-nnoremap <Leader>f :ProjectRootExe :TelescopeFindFile<Cr>
-nnoremap <Leader>F :TelescopeFindFile ~<Cr>
+nnoremap <Leader>w :w<Cr>
+nnoremap <leader>p :ProjectRootExe Files<Cr>
+nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
 " lsp
-nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
-nnoremap <leader>vi :lua vim.lsp.buf.implementation()<CR>
-nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
-nnoremap <leader>vrr :lua vim.lsp.buf.references()<CR>
-nnoremap <leader>vrn :lua vim.lsp.buf.rename()<CR>
-nnoremap <leader>vh :lua vim.lsp.buf.hover()<CR>
 nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
+nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
+nnoremap <leader>vh :lua vim.lsp.buf.hover()<CR>
+nnoremap <leader>vi :lua vim.lsp.buf.implementation()<CR>
+nnoremap <leader>vrn :lua vim.lsp.buf.rename()<CR>
+nnoremap <leader>vrr :lua vim.lsp.buf.references()<CR>
+nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
 " whitespace chars toggle
 nnoremap <F1> :set list! list?<CR>
 " pane nagivation
+nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 nnoremap <leader>u :UndotreeShow<CR>
 " buffer Switching
-nnoremap <Leader>bn :bn<CR>
-nnoremap <Leader>bn :bn<CR>
 nnoremap <Leader>bd :bd<CR>
-nnoremap <Leader>ls :ls<CR>
+nnoremap <Leader>bn :bn<CR>
+nnoremap <Leader>bn :bn<CR>
 nnoremap <Leader>bp :bp<CR>
-nnoremap <Leader>g :e#<CR>
+nnoremap <Leader>ls :ls<CR>
 nnoremap <PageUp>   :bprevious<CR>
 nnoremap <PageDown> :bnext<CR>
 " tab switching
@@ -178,17 +179,20 @@ map <C-t><right> :tabn<cr>
 " COC SEARCH
 nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 let g:coc_disable_startup_warning = 1
+
 " vim TODO
 nmap <Leader>tu <Plug>BujoChecknormal
 nmap <Leader>th <Plug>BujoAddnormal
 let g:bujo#todo_file_path = $HOME . "/.cache/bujo"
 
 " fugitive
-nnoremap <leader>Gd :Gvdiffsplit!<CR>
-nnoremap gdh :diffget //2<CR>
-nnoremap gdl :diffget //3<CR>>
+nnoremap <Leader>gc :GBranches<CR>
+nnoremap <Leader>gp :GPush<CR>
+nnoremap <leader>g :G<CR>
+nnoremap gf :diffget //2<CR>
+nnoremap gj :diffget //3<CR>>
 "close all diff windows, leave active open
-nnoremap <Leader>gD <c-w>h<c-w>c
+nnoremap <Leader>gq <c-w><c-O>
 
 " nvim lsp reqs
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
@@ -210,3 +214,35 @@ fun! TrimWhitespace()
     keeppatterns %s/\s\+$//e
     call winrestview(l:save)
 endfun
+
+" returns all modified files of the current git repo
+" `2>/dev/null` makes the command fail quietly, so that when we are not
+" in a git repo, the list will be empty
+function! s:gitModified()
+    let files = systemlist('git ls-files -m 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+"-------------------------------startify---------------------------------------
+
+let g:startify_change_to_dir = 1 "When opening a file or bookmark, change to its directory
+
+" same as above, but show untracked files, honouring .gitignore
+function! s:gitUntracked()
+    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+let g:startify_lists = [
+        \ { 'type': 'files',     'header': ['   MRU']            },
+        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+        \ { 'type': 'sessions',  'header': ['   Sessions']       },
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+        \ { 'type': function('s:gitModified'),  'header': ['   git modified']},
+        \ { 'type': function('s:gitUntracked'), 'header': ['   git untracked']},
+        \ { 'type': 'commands',  'header': ['   Commands']       },
+        \ ]
+let g:startify_bookmarks = [
+        \ { 'c': '~/repos/spencerduran/dotfiles/vim/nvim/init.vim' },
+        \ '~/.alacritty.yml',
+        \ ]
