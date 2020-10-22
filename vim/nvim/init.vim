@@ -64,7 +64,6 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
 
 Plug 'Konfekt/FastFold'
-Plug 'TaDaa/vimade'
 Plug 'tpope/vim-vinegar'
 Plug 'airblade/vim-gitgutter'
 Plug 'chrisbra/csv.vim'
@@ -100,6 +99,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 "---------------------------------Vim things-----------------------------------
 colorscheme gruvbox
+set background=dark
 let mapleader=" "
 let g:gruvbox_contrast_dark = 'hard'
 if exists('+termguicolors')
@@ -130,6 +130,10 @@ let g:airline_left_sep = "\ue0c6"
 let g:airline_right_sep = "\ue0c7"
 let g:webdevicons_enable = 1
 let g:webdevicons_enable_airline_statusline = 1
+let airline#extensions#coc#error_symbol = 'Error:'
+let airline#extensions#coc#warning_symbol = 'Warning:'
+let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
+let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
 " fzf
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 let $FZF_DEFAULT_OPS='--reverse'
@@ -138,12 +142,13 @@ inoremap jk <Esc>
 nnoremap <C-p> :Files ~<Cr>
 nnoremap <C-g> :ProjectRootExe Rg<Cr>
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
+nnoremap <leader>b :Buffers<Cr>
 nnoremap <Leader>c :TelescopeColorscheme<Cr>
 nnoremap <Leader>f :Ex<Cr>
 nnoremap <Leader>s :Startify<Cr>
 nnoremap <Leader>t :TelescopeBuffers<Cr>
 nnoremap <Leader>w :w<Cr>
-nnoremap <leader>p :ProjectRootExe Files<Cr>
+nnoremap <leader>p :ProjectRootExe :Files<Cr>
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
 " lsp
@@ -207,7 +212,6 @@ augroup myvimrc
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 augroup END
 au BufNewFile,BufRead *.json,*.txt setlocal colorcolumn=
-au BufRead,BufNewFile *.py,*.ts,*.js setlocal textwidth=79
 
 fun! TrimWhitespace()
     let l:save = winsaveview()
