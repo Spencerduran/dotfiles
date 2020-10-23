@@ -49,10 +49,10 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 "---------------------------------VimPlug--------------------------------------
 call plug#begin('~/.vim/plugged')
 " neovim lsp plugins
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
-Plug 'tjdevries/nlua.nvim'
-Plug 'tjdevries/lsp_extensions.nvim'
+"Plug 'neovim/nvim-lspconfig'
+"Plug 'nvim-lua/completion-nvim'
+"Plug 'tjdevries/nlua.nvim'
+"Plug 'tjdevries/lsp_extensions.nvim'
 "Plug 'prabirshrestha/async.vim'
 "Plug 'prabirshrestha/asyncomplete-lsp.vim'
 "Plug 'prabirshrestha/asyncomplete.vim'
@@ -76,7 +76,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-dirvish'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-startify'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'rbgrouleff/bclose.vim'
 Plug 'rstacruz/sparkup'
 Plug 'ryanoasis/vim-devicons'
@@ -107,90 +107,143 @@ if exists('+termguicolors')
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 let g:gruvbox_invert_selection='0'
+inoremap jk <Esc>
+nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
+nnoremap <leader>u :UndotreeShow<CR>
+nnoremap <Leader>w :w<Cr>
+"open :h windows in current window
+command! -nargs=1 -complete=help H :enew | :set buftype=help | :h <args>
+" whitespace chars toggle
+nnoremap <F1> :set list! list?<CR>
+let g:python3_host_prog = '/Users/sduran/.pyenv/versions/3.6.8/bin/python'
 
-" telescope
+"-------------------------------telescope--------------------------------------
+nnoremap <Leader>c :TelescopeColorscheme<Cr>
+nnoremap <Leader>t :TelescopeBuffers<Cr>
+nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
 let g:telescope_cache_results = 1
 let g:telescope_prime_fuzzy_find  = 1
 
-" netrw
-"let g:netrw_browse_split = 1 "open files in the previous window
+"--------------------------------Netrw-----------------------------------------
+nnoremap <Leader>f :Ex<Cr>
+nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 let g:netrw_banner = 0 "disable usesless netrw banner
 let g:netrw_winsize = 15 "netrw window size
 let g:netrw_localrmdir='rm -r' "allow netrw to remove non-empty directories
-"
-"
-"let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+"let g:netrw_browse_split = 1 "open files in the previous window
 
-" airline
-let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'default'
-let g:airline_left_sep = "\ue0c6"
-let g:airline_right_sep = "\ue0c7"
-let g:webdevicons_enable = 1
-let g:webdevicons_enable_airline_statusline = 1
-let airline#extensions#coc#error_symbol = 'Error:'
-let airline#extensions#coc#warning_symbol = 'Warning:'
-let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
-let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
-" fzf
+"--------------------------------FZF-------------------------------------------
+nnoremap <C-p> :Files ~<Cr>
+nnoremap <leader>b :Buffers<Cr>
+nnoremap <leader>p :ProjectRootExe :Files<Cr>
+nnoremap <C-g> :ProjectRootExe Rg<Cr>
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 let $FZF_DEFAULT_OPS='--reverse'
 
-inoremap jk <Esc>
-nnoremap <C-p> :Files ~<Cr>
-nnoremap <C-g> :ProjectRootExe Rg<Cr>
-nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
-nnoremap <leader>b :Buffers<Cr>
-nnoremap <Leader>c :TelescopeColorscheme<Cr>
-nnoremap <Leader>f :Ex<Cr>
-nnoremap <Leader>s :Startify<Cr>
-nnoremap <Leader>t :TelescopeBuffers<Cr>
-nnoremap <Leader>w :w<Cr>
-nnoremap <leader>p :ProjectRootExe :Files<Cr>
-nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
-nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
-" lsp
-nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
-nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
-nnoremap <leader>vh :lua vim.lsp.buf.hover()<CR>
-nnoremap <leader>vi :lua vim.lsp.buf.implementation()<CR>
-nnoremap <leader>vrn :lua vim.lsp.buf.rename()<CR>
-nnoremap <leader>vrr :lua vim.lsp.buf.references()<CR>
-nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
-" whitespace chars toggle
-nnoremap <F1> :set list! list?<CR>
-" pane nagivation
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-nnoremap <leader>u :UndotreeShow<CR>
-" buffer Switching
+"----------------------------nvim lsp------------------------------------------
+"let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+"lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
+"lua require'nvim_lsp'.clangd.setup{ on_attach=require'completion'.on_attach }
+"lua require'nvim_lsp'.pyls.setup{ on_attach=require'completion'.on_attach }
+"nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
+"nnoremap <leader>vd  :lua vim.lsp.buf.definition()<CR>
+"nnoremap <leader>vh  :lua vim.lsp.buf.hover()<CR>
+"nnoremap <leader>vi  :lua vim.lsp.buf.implementation()<CR>
+"nnoremap <leader>vrn :lua vim.lsp.buf.rename()<CR>
+"nnoremap <leader>vrr :lua vim.lsp.buf.references()<CR>
+"nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
+
+"-------------------------tabs/buffers/panes-----------------------------------
+map <C-t><up>       :tabr<cr>
+map <C-t><down>     :tabl<cr>
+map <C-t><left>     :tabp<cr>
+map <C-t><right>    :tabn<cr>
+nnoremap <PageUp>   :bprevious<CR>
+nnoremap <PageDown> :bnext<CR>
 nnoremap <Leader>bd :bd<CR>
 nnoremap <Leader>bn :bn<CR>
 nnoremap <Leader>bn :bn<CR>
 nnoremap <Leader>bp :bp<CR>
 nnoremap <Leader>ls :ls<CR>
-nnoremap <PageUp>   :bprevious<CR>
-nnoremap <PageDown> :bnext<CR>
-" tab switching
-map <C-t><up> :tabr<cr>
-map <C-t><down> :tabl<cr>
-map <C-t><left> :tabp<cr>
-map <C-t><right> :tabn<cr>
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
-" COC SEARCH
-nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
+"--------------------------------COC-------------------------------------------
 let g:coc_disable_startup_warning = 1
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+inoremap <silent><expr> <c-space> coc#refresh()
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 
-" vim TODO
+"set tab for completion
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ coc#refresh()
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+" Formatting selected code.
+xmap <leader>F  <Plug>(coc-format-selected)
+nmap <leader>F  <Plug>(coc-format-selected)
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current line.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+"--------------------------------airline---------------------------------------
+let g:webdevicons_enable = 1
+let g:airline_powerline_fonts = 1
+let g:webdevicons_enable_airline_statusline = 1
+let g:airline_left_sep = "\ue0c6"
+let g:airline_right_sep = "\ue0c7"
+let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#coc#error_symbol = 'Error:'
+let g:airline#extensions#coc#warning_symbol = 'Warning:'
+let g:airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
+let g:airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
+
+"-------------------------------ToDo-------------------------------------------
 nmap <Leader>tu <Plug>BujoChecknormal
 nmap <Leader>th <Plug>BujoAddnormal
 let g:bujo#todo_file_path = $HOME . "/.cache/bujo"
 
-" fugitive
+"----------------------------Fugitive------------------------------------------
 nnoremap <Leader>gc :GBranches<CR>
 nnoremap <Leader>gp :GPush<CR>
 nnoremap <leader>g :G<CR>
@@ -199,12 +252,29 @@ nnoremap gj :diffget //3<CR>>
 "close all diff windows, leave active open
 nnoremap <Leader>gq <c-w><c-O>
 
-" nvim lsp reqs
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
-lua require'nvim_lsp'.clangd.setup{ on_attach=require'completion'.on_attach }
-"lua require'nvim_lsp'.pyls.setup{ on_attach=require'completion'.on_attach }
 
+"-------------------------------startify---------------------------------------
+nnoremap <Leader>s :Startify<Cr>
+let g:startify_change_to_dir = 1 "When opening a file or bookmark, change to its directory
+
+" same as above, but show untracked files, honouring .gitignore
+function! s:gitUntracked()
+    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+let g:startify_lists = [
+        \ { 'type': 'files',     'header': ['   MRU']            },
+        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+        \ { 'type': 'sessions',  'header': ['   Sessions']       },
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+        \ { 'type': 'commands',  'header': ['   Commands']       },
+        \ ]
+
+let g:startify_bookmarks = [
+        \ { 'c': '~/repos/spencerduran/dotfiles/vim/nvim/init.vim' },
+        \ '~/.alacritty.yml',
+        \ ]
 
 "-------------------------------autoload---------------------------------------
 augroup myvimrc
@@ -226,27 +296,3 @@ function! s:gitModified()
     let files = systemlist('git ls-files -m 2>/dev/null')
     return map(files, "{'line': v:val, 'path': v:val}")
 endfunction
-
-"-------------------------------startify---------------------------------------
-
-let g:startify_change_to_dir = 1 "When opening a file or bookmark, change to its directory
-
-" same as above, but show untracked files, honouring .gitignore
-function! s:gitUntracked()
-    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
-    return map(files, "{'line': v:val, 'path': v:val}")
-endfunction
-
-let g:startify_lists = [
-        \ { 'type': 'files',     'header': ['   MRU']            },
-        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
-        \ { 'type': 'sessions',  'header': ['   Sessions']       },
-        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-        \ { 'type': function('s:gitModified'),  'header': ['   git modified']},
-        \ { 'type': function('s:gitUntracked'), 'header': ['   git untracked']},
-        \ { 'type': 'commands',  'header': ['   Commands']       },
-        \ ]
-let g:startify_bookmarks = [
-        \ { 'c': '~/repos/spencerduran/dotfiles/vim/nvim/init.vim' },
-        \ '~/.alacritty.yml',
-        \ ]
