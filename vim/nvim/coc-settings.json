@@ -10,7 +10,6 @@
   "codeLens.enable": true,
   "signature.enable": true,
 
-
   "python.autoUpdateLanguageServer": true,
   "python.pythonPath": "/Users/sduran/.pyenv/versions/3.6.8/bin/python",
 

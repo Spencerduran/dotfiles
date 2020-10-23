@@ -62,8 +62,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
-
-Plug 'Konfekt/FastFold'
+Plug 'neoclide/vim-easygit'
 Plug 'tpope/vim-vinegar'
 Plug 'airblade/vim-gitgutter'
 Plug 'chrisbra/csv.vim'
@@ -118,7 +117,6 @@ nnoremap <F1> :set list! list?<CR>
 let g:python3_host_prog = '/Users/sduran/.pyenv/versions/3.6.8/bin/python'
 
 "-------------------------------telescope--------------------------------------
-nnoremap <Leader>c :TelescopeColorscheme<Cr>
 nnoremap <Leader>t :TelescopeBuffers<Cr>
 nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
 let g:telescope_cache_results = 1
@@ -178,6 +176,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 inoremap <silent><expr> <c-space> coc#refresh()
 nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> gh :call <SID>show_documentation()<CR>
 nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 
 "set tab for completion
@@ -192,11 +191,6 @@ endfunction
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -224,6 +218,7 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
+
 "--------------------------------airline---------------------------------------
 let g:webdevicons_enable = 1
 let g:airline_powerline_fonts = 1
@@ -245,13 +240,9 @@ let g:bujo#todo_file_path = $HOME . "/.cache/bujo"
 
 "----------------------------Fugitive------------------------------------------
 nnoremap <Leader>gc :GBranches<CR>
-nnoremap <Leader>gp :GPush<CR>
 nnoremap <leader>g :G<CR>
 nnoremap gf :diffget //2<CR>
 nnoremap gj :diffget //3<CR>>
-"close all diff windows, leave active open
-nnoremap <Leader>gq <c-w><c-O>
-
 
 "-------------------------------startify---------------------------------------
 nnoremap <Leader>s :Startify<Cr>
