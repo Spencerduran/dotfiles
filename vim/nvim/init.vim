@@ -97,10 +97,11 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 
 call plug#end()
 "---------------------------------Vim things-----------------------------------
-colorscheme gruvbox
-set background=dark
 let mapleader=" "
+set background=dark
+colorscheme base16-dracula
 let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_invert_selection='0'
 if exists('+termguicolors')
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -174,6 +175,8 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gp <Plug>(coc-diagnostic-prev)
+nmap <silent> gn <Plug>(coc-diagnostic-next)
 inoremap <silent><expr> <c-space> coc#refresh()
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 nnoremap <silent> gh :call <SID>show_documentation()<CR>
@@ -192,9 +195,6 @@ endfunction
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
 
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
@@ -219,6 +219,8 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
+autocmd BufNew,BufEnter *.sql,*.vim,*.ts,*.js,*.py execute "silent! CocEnable"
+autocmd BufLeave *.json execute "silent! CocDisable"
 "--------------------------------airline---------------------------------------
 let g:webdevicons_enable = 1
 let g:airline_powerline_fonts = 1
@@ -273,12 +275,6 @@ augroup myvimrc
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 augroup END
 au BufNewFile,BufRead *.json,*.txt setlocal colorcolumn=
-
-fun! TrimWhitespace()
-    let l:save = winsaveview()
-    keeppatterns %s/\s\+$//e
-    call winrestview(l:save)
-endfun
 
 " returns all modified files of the current git repo
 " `2>/dev/null` makes the command fail quietly, so that when we are not
