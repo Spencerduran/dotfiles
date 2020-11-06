@@ -218,9 +218,6 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
-
-autocmd BufNew,BufEnter *.sql,*.vim,*.ts,*.js,*.py execute "silent! CocEnable"
-autocmd BufLeave *.json execute "silent! CocDisable"
 "--------------------------------airline---------------------------------------
 let g:webdevicons_enable = 1
 let g:airline_powerline_fonts = 1
