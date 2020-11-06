@@ -59,6 +59,7 @@ call plug#begin('~/.vim/plugged')
 "Plug 'prabirshrestha/vim-lsp'
 
 " telescope requirements
+Plug 'file://'.expand('~/.local/share/nvim/plugin/CopyMatches.vim') 
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
