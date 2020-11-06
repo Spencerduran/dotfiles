@@ -1,13 +1,20 @@
 " Plugin to copy matches (search hits which may be multiline).
 " Version 2012-05-03 from http://vim.wikia.com/wiki/VimTip478
 "
+"link to /Users/sduran/.local/share/nvim/site/plugin
+"
 " :CopyMatches      copy matches to clipboard (each match has newline added)
 " :CopyMatches x    copy matches to register x
 " :CopyMatches X    append matches to register x
 " :CopyMatches -    display matches in a scratch buffer (does not copy)
 " :CopyMatches pat  (after any of above options) use 'pat' as search pattern
 " :CopyMatches!     (with any of above options) insert line numbers
-" Same options work with the :CopyLines command (which copies whole lines).
+" :CopyLines      copy matches to clipboard (each match has newline added)
+" :CopyLines x    copy matches to register x
+" :CopyLines X    append matches to register x
+" :CopyLines -    display matches in a scratch buffer (does not copy)
+" :CopyLines pat  (after any of above options) use 'pat' as search pattern
+" :CopyLines!     (with any of above options) insert line numbers
 
 " Jump to first scratch window visible in current tab, or create it.
 " This is useful to accumulate results from successive operations.
