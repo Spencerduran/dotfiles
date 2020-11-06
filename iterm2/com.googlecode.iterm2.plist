@@ -2709,7 +2709,7 @@
 	<key>HideFromDockAndAppSwitcher</key>
 	<true/>
 	<key>HideMenuBarInFullscreen</key>
-	<false/>
+	<true/>
 	<key>HideScrollbar</key>
 	<false/>
 	<key>HideTab</key>
@@ -3866,7 +3866,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>6EB1C318-2C0A-4814-A109-516108A10830</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>84</integer>
+	<integer>87</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>

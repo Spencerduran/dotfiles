@@ -1,5 +1,5 @@
 {
-
+  "http.proxyStrictSSL": false,
   "coc.preferences.rootPatterns": [".git", ".vscode"],
   "coc.preferences.formatOnType":true,
   "coc.preferences.formatOnTypeFiletypes":["python"],
