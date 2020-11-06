@@ -1,3 +1,5 @@
+key_bindings:
+  - {key: Return, mods: Command, action: ToggleSimpleFullscreen}
 # Font
 font:
   normal:
@@ -126,4 +128,3 @@ colors:
   indexed_colors: []
 
 # Visual Bell
-# ...
