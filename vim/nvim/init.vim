@@ -60,6 +60,7 @@ call plug#begin('~/.vim/plugged')
 
 " telescope requirements
 Plug 'file://'.expand('~/.local/share/nvim/plugin/CopyMatches.vim') 
+Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
@@ -116,10 +117,13 @@ nnoremap <Leader>w :w<Cr>
 command! -nargs=1 -complete=help H :enew | :set buftype=help | :h <args>
 " whitespace chars toggle
 nnoremap <F1> :set list! list?<CR>
+let vim_markdown_preview_github=1
+let vim_markdown_preview_hotkey='<C-m>'
+let vim_markdown_preview_browser='Google Chrome'
 let g:python3_host_prog = '/Users/sduran/.pyenv/versions/3.6.8/bin/python'
 
 "-------------------------------telescope--------------------------------------
-nnoremap <Leader>t :TelescopeBuffers<Cr>
+nnoremap <Leader>t :Buffers<Cr>
 nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
 let g:telescope_cache_results = 1
 let g:telescope_prime_fuzzy_find  = 1
@@ -272,6 +276,7 @@ augroup myvimrc
     au!
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 augroup END
+
 au BufNewFile,BufRead *.json,*.txt setlocal colorcolumn=
 
 " returns all modified files of the current git repo
