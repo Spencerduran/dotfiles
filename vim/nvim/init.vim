@@ -87,7 +87,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'vuciv/vim-bujo'
+"Plug 'vuciv/vim-bujo'
 
 "colorschemes
 Plug 'colepeters/spacemacs-theme.vim'
@@ -267,8 +267,10 @@ let g:startify_lists = [
         \ ]
 
 let g:startify_bookmarks = [
-        \ { 'c': '~/repos/spencerduran/dotfiles/vim/nvim/init.vim' },
-        \ '~/.alacritty.yml',
+        \ { 'i': '~/repos/spence/dotfiles/vim/nvim/init.vim' },
+        \ { 'c': '~/repos/spence/dotfiles/vim/nvim/coc-settings.json' },
+        \ { 'a': '~/.alacritty.yml' },
+        \ { 'h': '~/.hammerspoon/init.lua' },
         \ ]
 
 "-------------------------------autoload---------------------------------------
