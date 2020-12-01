@@ -1,5 +1,26 @@
 --enable spotlight for app searching
-hs.application.enableSpotlightForNameSearches(true)
+--hs.application.enableSpotlightForNameSearches(true)
+
+-- A global variable for the Hyper Mode
+hyper = hs.hotkey.modal.new({}, 'F17')
+
+-- Enter Hyper Mode when F18 (Hyper/Capslock) is pressed
+function enterHyperMode()
+  hyper.triggered = false
+  hyper:enter()
+end
+
+-- Leave Hyper Mode when F18 (Hyper/Capslock) is pressed,
+-- send ESCAPE if no other keys are pressed.
+function exitHyperMode()
+  hyper:exit()
+  if not hyper.triggered then
+    hs.eventtap.keyStroke({}, 'ESCAPE')
+  end
+end
+
+-- Bind the Hyper key
+f18 = hs.hotkey.bind({}, 'F18', enterHyperMode, exitHyperMode)
 
 -- Show/hide alacritty with 2x ctrl press
 ctrlDoublePress = require("ctrlDoublePress")
@@ -13,7 +34,7 @@ ctrlDoublePress.action = function()
   end
 end
 -- Show/hide slack
-hs.hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "S", function()
+hyper:bind({}, 's', function()
   local slack = hs.application.find('slack')
   if slack:isFrontmost() then
     slack:hide()
@@ -22,7 +43,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "S", function()
   end
 end)
 -- Show/hide chrome
-hs.hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "C", function()
+hyper:bind({}, 'c', function()
   local chrome = hs.application.find('google chrome')
   if chrome:isFrontmost() then
     chrome:hide()
@@ -31,7 +52,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "C", function()
   end
 end)
 -- Show/hide firefox
-hs.hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "F", function()
+hyper:bind({}, 'x', function()
   local firefox = hs.application.find('firefox')
   if firefox:isFrontmost() then
     firefox:hide()
@@ -40,16 +61,16 @@ hs.hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "F", function()
   end
 end)
 -- Show/hide outlook
-hs.hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "O", function()
+hyper:bind({}, 'o', function()
   local outlook = hs.application.find('outlook')
   if outlook:isFrontmost() then
     outlook:hide()
   else
-    hs.application.launchOrFocus("/Applications/outlook.app")
+    hs.application.launchOrFocus("/Applications/Microsoft Outlook.app")
   end
 end)
 -- Show/hide jira
-hs.hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "J", function()
+hyper:bind({}, 'j', function()
   local jira = hs.application.find('jira')
   if jira:isFrontmost() then
     jira:hide()
@@ -58,7 +79,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "J", function()
   end
 end)
 -- Show/hide zoom
-hs.hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "Z", function()
+hyper:bind({}, 'z', function()
   local zoom = hs.application.find('zoom')
   if zoom:isFrontmost() then
     zoom:hide()
@@ -67,16 +88,16 @@ hs.hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "Z", function()
   end
 end)
 -- Show/hide spotify
-hs.hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "A", function()
+hyper:bind({}, 'q', function()
   local spotify = hs.application.find('spotify')
   if spotify:isFrontmost() then
     spotify:hide()
   else
-    hs.application.launchOrFocus("/Applications/spotify.app")
+    hs.application.launchOrFocus("/Applications/Spotify.app")
   end
 end)
 -- Show/hide postman
-hs.hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "P", function()
+hyper:bind({}, 'p', function()
   local postman = hs.application.find('postman')
   if postman:isFrontmost() then
     postman:hide()
@@ -86,16 +107,16 @@ hs.hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "P", function()
 end)
 
 -- Show/hide teams
-hs.hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "T", function()
-  local microsoft_teams= hs.application.find('microsoft teams')
+hyper:bind({}, 't', function()
+  local microsoft_teams= hs.application.find('teams')
   if microsoft_teams:isFrontmost() then
     microsoft_teams:hide()
   else
-    hs.application.launchOrFocus("/Applications/microsoft teams.app")
+    hs.application.launchOrFocus("/Applications/Microsoft Teams.app")
   end
 end)
 -- Show/hide Visual Studio Code
-hs.hotkey.bind({"cmd", "alt", "ctrl", "shift"}, "V", function()
+hyper:bind({}, 'v', function()
   local visual_studio_code= hs.application.find('code')
   if visual_studio_code:isFrontmost() then
     visual_studio_code:hide()
