@@ -33,6 +33,15 @@ ctrlDoublePress.action = function()
     hs.application.launchOrFocus("/Applications/Alacritty.app")
   end
 end
+-- Show/hide alacritty
+hyper:bind({}, 'a', function()
+  local alacritty = hs.application.find('alacritty')
+  if alacritty:isFrontmost() then
+    alacritty:hide()
+  else
+    hs.application.launchOrFocus("/Applications/Alacritty.app")
+  end
+end)
 -- Show/hide slack
 hyper:bind({}, 's', function()
   local slack = hs.application.find('slack')

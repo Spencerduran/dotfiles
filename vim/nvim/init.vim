@@ -1,4 +1,5 @@
-syntax on
+set nocompatible
+"set linebreak
 set background=dark
 set backspace=indent,eol,start "allow backspace over everything in insert mode
 set belloff=all
@@ -18,7 +19,7 @@ set hlsearch " highlight search
 set ignorecase
 set incsearch " incremental search
 set laststatus=2 " Status bar
-set listchars=tab:..,trail:_,extends:>,precedes:<,nbsp:~,eol:$,space:_
+"set listchars=tab:..,trail:_,extends:>,precedes:<,nbsp:~,eol:$,space:_
 set mouse=n "set mouse mode for terminal window resizing
 set nobackup " disable backups before writing file
 set noerrorbells
@@ -45,6 +46,8 @@ set undodir=~/.vim/undodir "set vim undo file location
 set undofile "store undo history to a file
 set updatetime=50 " milliseconds to wait before triggering plugin after stop typing
 set wildmenu " Command-line completion operates in an enhanced mode.
+syntax on
+filetype plugin on
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 "---------------------------------VimPlug--------------------------------------
 call plug#begin('~/.vim/plugged')
@@ -58,12 +61,14 @@ call plug#begin('~/.vim/plugged')
 "Plug 'prabirshrestha/asyncomplete.vim'
 "Plug 'prabirshrestha/vim-lsp'
 
-" telescope requirements
-Plug 'file://'.expand('~/.local/share/nvim/plugin/CopyMatches.vim') 
+Plug 'reedes/vim-pencil'
+Plug 'panozzaj/vim-autocorrect'
+Plug 'vimwiki/vimwiki'
+Plug 'file://'.expand('~/.local/share/nvim/site/plugin/CopyMatches') 
+Plug 'file://'.expand('~/.local/share/nvim/site/plugin/Rename') 
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-lua/telescope.nvim'
 Plug 'neoclide/vim-easygit'
 Plug 'tpope/vim-vinegar'
 Plug 'airblade/vim-gitgutter'
@@ -116,17 +121,59 @@ nnoremap <Leader>w :w<Cr>
 "open :h windows in current window
 command! -nargs=1 -complete=help H :enew | :set buftype=help | :h <args>
 " whitespace chars toggle
-nnoremap <F1> :set list! list?<CR>
+"nnoremap <F1> :set list! list?<CR>
 let vim_markdown_preview_github=1
 let vim_markdown_preview_hotkey='<C-m>'
 let vim_markdown_preview_browser='Google Chrome'
 let g:python3_host_prog = '/Users/sduran/.pyenv/versions/3.6.8/bin/python'
+let b:csv_arrange_align = 'l*'
+let g:calendar_options = 'nornu'
+nnoremap <Leader>rn :e ++ff=dos<Cr>
+"--------------------------------VimWiki---------------------------------------
+cabbr wp call Wp()
+fun! Wp()
+  set lbr
+  source /Users/sduran/.vim/plugged/vim-autocorrect/plugin/autocorrect.vim
+  execute ":Pencil"
+  nnoremap j gj
+  nnoremap k gk
+  nnoremap 0 g0
+  nnoremap $ g$
+  set nonumber
+  set spell spelllang=en_us
+endfu
+au BufNewFile,BufRead *.wiki,*.txt,*.md :call Wp()
 
-"-------------------------------telescope--------------------------------------
-nnoremap <Leader>t :Buffers<Cr>
-nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
-let g:telescope_cache_results = 1
-let g:telescope_prime_fuzzy_find  = 1
+let g:vimwiki_list = [
+                        \{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes'},
+                        \{'path': '~/OneDrive - Knex/Documents/VimWiki/Wiki2'}
+                \]
+au BufRead,BufNewFile *.wiki set filetype=vimwiki
+function! ToggleCalendar()
+  execute ":Calendar"
+  if exists("g:calendar_open")
+    if g:calendar_open == 1
+      execute "q"
+      unlet g:calendar_open
+    else
+      g:calendar_open = 1
+    end
+  else
+    let g:calendar_open = 1
+  end
+endfunction
+autocmd FileType vimwiki map <leader>c :call ToggleCalendar()<CR>
+command! Diary VimwikiDiaryIndex
+augroup vimwikigroup
+    autocmd!
+    " automatically update links on read diary
+    autocmd BufRead,BufNewFile diary.wiki VimwikiDiaryGenerateLinks
+augroup end
+let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_diary_index': 1}]
+let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_generate_links': 1}]
+let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_tags': 1}]
+let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_generate_tags': 1}]
+let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_toc': 1}]
 
 "--------------------------------Netrw-----------------------------------------
 nnoremap <Leader>f :Ex<Cr>
@@ -288,3 +335,8 @@ function! s:gitModified()
     let files = systemlist('git ls-files -m 2>/dev/null')
     return map(files, "{'line': v:val, 'path': v:val}")
 endfunction
+
+augroup vimrc_help
+  autocmd!
+  autocmd BufEnter *.txt if &buftype == 'help' | wincmd L | endif
+augroup END
