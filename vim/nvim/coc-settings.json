@@ -15,15 +15,19 @@
 
   "python.linting.enabled": true,
 
-  "python.linting.pylintEnabled":true,
+  "python.linting.black": true,
+  "python.linting.blackPath":"/Users/sduran/.pyenv/shims/black",
+
+  "python.linting.pylintEnabled": true,
   "python.linting.pylintPath":"/Users/sduran/.pyenv/shims/pylint",
 
-  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Enabled": false,
   "python.linting.flake8Path":"/Users/sduran/.pyenv/shims/flake8",
 
   "python.formatting.autopep8Path": "/Users/sduran/.pyenv/shims/autopep8",
   "python.formatting.blackPath": "/Users/sduran/.pyenv/shims/black",
   "python.formatting.provider": "autopep8",
 
-  "coc.preferences.colorSupport": true
+  "coc.preferences.colorSupport": true,
+  "yaml.format.enable": true
 }
