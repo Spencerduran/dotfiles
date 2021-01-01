@@ -18,7 +18,27 @@ font:
     family: Iosevka Nerd Font
     style: Bold Italic
 
-  size: 14
+  heavy:
+    family: Iosevka Nerd Font
+    style: Heavy
+
+  light:
+    family: Iosevka Nerd Font
+    style: Light
+
+  extra_light:
+    family: Iosevka Nerd Font
+    style: Extra Light
+
+  medium:
+    family: Iosevka Nerd Font
+    style: Medium
+
+  oblique:
+    family: Iosevka Nerd Font
+    style: Oblique
+
+  size: 17
 # Colors (Gruvbox dark)
 #colors:
 #  # Default colors
