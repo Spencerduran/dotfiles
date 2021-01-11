@@ -295,8 +295,10 @@ nnoremap <leader>g :G<CR>
 nnoremap gf :diffget //2<CR>
 nnoremap gj :diffget //3<CR>>
 
+"-------------------------------dirvish----------------------------------------
+nnoremap <leader>f :Dirvish<CR>
 "-------------------------------ranger-----------------------------------------
-nnoremap <leader>f :Ranger<CR>
+nnoremap <leader>r :Ranger<CR>
 
 "-------------------------------startify---------------------------------------
 nnoremap <Leader>s :Startify<Cr>
