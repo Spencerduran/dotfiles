@@ -21,7 +21,7 @@
     "**/.factorypath": true
 },
 "explorer.confirmDragAndDrop": false,
-"window.zoomLevel": -1,
+"window.zoomLevel": 1,
 "workbench.colorTheme": "Dark-Dracula",
 "vim.useSystemClipboard": true,
 "vim.insertModeKeyBindings": [
@@ -97,5 +97,9 @@
 "python.languageServer": "Microsoft",
 "files.trimTrailingWhitespace": true,
 "workbench.iconTheme": "material-icon-theme",
-"workbench.activityBar.visible": true
+"workbench.activityBar.visible": true,
+"[java]": {
+    "editor.defaultFormatter": "mwpb.java-prettier-formatter",
+    "editor.suggest.snippetsPreventQuickSuggestions": false
+}
 }
