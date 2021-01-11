@@ -1,5 +1,4 @@
 set nocompatible
-"set linebreak
 set background=dark
 set backspace=indent,eol,start "allow backspace over everything in insert mode
 set belloff=all
@@ -19,7 +18,7 @@ set hlsearch " highlight search
 set ignorecase
 set incsearch " incremental search
 set laststatus=2 " Status bar
-"set listchars=tab:..,trail:_,extends:>,precedes:<,nbsp:~,eol:$,space:_
+set listchars=tab:..,trail:_,extends:>,precedes:<,nbsp:~,eol:$,space:_
 set mouse=n "set mouse mode for terminal window resizing
 set nobackup " disable backups before writing file
 set noerrorbells
@@ -30,6 +29,7 @@ set nowritebackup " disable backup before writing file
 set nu "enable line numbers
 set relativenumber " Show relative line numbers
 set scrolloff=8 " Minimum number of screen lines to keep above and below the cursor.
+set shell=bash
 set shiftwidth=4
 set shortmess+=c " don't give ins-completion-menu messages.
 set showcmd " Show commands in statusline
@@ -60,38 +60,36 @@ call plug#begin('~/.vim/plugged')
 "Plug 'prabirshrestha/asyncomplete-lsp.vim'
 "Plug 'prabirshrestha/asyncomplete.vim'
 "Plug 'prabirshrestha/vim-lsp'
-
-Plug 'reedes/vim-pencil'
-Plug 'panozzaj/vim-autocorrect'
-Plug 'vimwiki/vimwiki'
-Plug 'file://'.expand('~/.local/share/nvim/site/plugin/CopyMatches') 
-Plug 'file://'.expand('~/.local/share/nvim/site/plugin/Rename') 
-Plug 'JamshedVesuna/vim-markdown-preview'
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'neoclide/vim-easygit'
-Plug 'tpope/vim-vinegar'
 Plug 'airblade/vim-gitgutter'
 Plug 'chrisbra/csv.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dbakker/vim-projectroot'
 Plug 'edkolev/tmuxline.vim'
+Plug 'file://'.expand('~/.local/share/nvim/site/plugin/CopyMatches') 
+Plug 'file://'.expand('~/.local/share/nvim/site/plugin/Rename') 
+Plug 'francoiscabrol/ranger.vim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-dirvish'
+Plug 'kristijanhusak/vim-dirvish-git'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-startify'
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/vim-easygit'
+Plug 'panozzaj/vim-autocorrect'
 Plug 'rbgrouleff/bclose.vim'
+Plug 'reedes/vim-pencil'
 Plug 'rstacruz/sparkup'
 Plug 'ryanoasis/vim-devicons'
 Plug 'sheerun/vim-polyglot'
 Plug 'stsewd/fzf-checkout.vim'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-vinegar'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'vimwiki/vimwiki'
 "Plug 'vuciv/vim-bujo'
 
 "colorschemes
@@ -128,13 +126,16 @@ let vim_markdown_preview_browser='Google Chrome'
 let g:python3_host_prog = '/Users/sduran/.pyenv/versions/3.6.8/bin/python'
 let b:csv_arrange_align = 'l*'
 let g:calendar_options = 'nornu'
-nnoremap <Leader>rn :e ++ff=dos<Cr>
+" remove ^M carraige return symbols
+nnoremap <Leader>cr :e ++ff=dos<Cr>
+" remove all buffers EXCEPT current
+command BufOnly silent! execute "%bd|e#|bd#"
 "--------------------------------VimWiki---------------------------------------
 cabbr wp call Wp()
 fun! Wp()
   set lbr
   source /Users/sduran/.vim/plugged/vim-autocorrect/plugin/autocorrect.vim
-  execute ":Pencil"
+  execute ":SoftPencil"
   nnoremap j gj
   nnoremap k gk
   nnoremap 0 g0
@@ -176,7 +177,6 @@ let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'aut
 let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_toc': 1}]
 
 "--------------------------------Netrw-----------------------------------------
-nnoremap <Leader>f :Ex<Cr>
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 let g:netrw_banner = 0 "disable usesless netrw banner
 let g:netrw_winsize = 15 "netrw window size
@@ -294,6 +294,9 @@ nnoremap <Leader>gc :GBranches<CR>
 nnoremap <leader>g :G<CR>
 nnoremap gf :diffget //2<CR>
 nnoremap gj :diffget //3<CR>>
+
+"-------------------------------ranger-----------------------------------------
+nnoremap <leader>f :Ranger<CR>
 
 "-------------------------------startify---------------------------------------
 nnoremap <Leader>s :Startify<Cr>
