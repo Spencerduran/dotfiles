@@ -1,29 +1,5 @@
 local This = {}
 
------------------------------------------------------------------------------------
--- File: hyper.lua
--- Author: J.H. Kuperus
--- Source: https://github.com/jhkuperus/dotfiles/blob/master/hammerspoon/hyper.lua
--- 'License': Feel free to use this file any way you like. Issues or improvements
---            are welcome on the GitHub repository. No warranties whatsoever.
------------------------------------------------------------------------------------
-
--- To use Hyper in your init.lua script, import it and adapt this example to
--- your needs:
--- 
--- local hyper = require('hyper')
--- hyper.install('F18') 
--- hyper.bindkey('r', hs.reload)
---
--- The above three lines initialize Hyper to respond to F18 key-events and binds
--- Hyper+r to Hammerspoon Reload (easy way to refresh Hammerspoon's config)
-
--- Hyper mode needs to be bound to a key. Here we are binding
--- it to F17, because this is yet another key that's unused.
--- Why not F18? We will use key-events from F18 to turn hyper
--- mode on and off. Using F17 as the modal and source of key
--- events, will result in a very jittery Hyper mode.
-
 This.hyperMode = hs.hotkey.modal.new({}, 'F17')
 
 -- Enter Hyper Mode when F18 (Hyper) is pressed

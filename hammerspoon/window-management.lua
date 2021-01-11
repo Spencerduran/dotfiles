@@ -1,11 +1,11 @@
 local This = {}
--- To easily layout windows on the screen, we use hs.grid to create
--- a 4x4 grid. If you want to use a more detailed grid, simply 
--- change its dimension here
+-- To easily layout windows on the screen, use hs.grid to create
+-- a 4x4 grid. To use a more detailed grid, change its dimension here
 local GRID_SIZE = 4
 local HALF_GRID_SIZE = GRID_SIZE / 2
+
 -- Set the grid size and add a few pixels of margin
--- Also, don't animate window changes... That's too slow
+-- Also, don't animate window changes.
 hs.grid.setGrid(GRID_SIZE .. 'x' .. GRID_SIZE)
 hs.grid.setMargins({5, 5})
 hs.window.animationDuration = 0
