@@ -1,6 +1,6 @@
-local alert    = require("hs.alert")
-local timer    = require("hs.timer")
-local eventtap = require("hs.eventtap")
+local alert    = require('hs.alert')
+local timer    = require('hs.timer')
+local eventtap = require('hs.eventtap')
 
 local events   = eventtap.event.types
 
@@ -9,7 +9,7 @@ local module   = {}
 -- Save this in your Hammerspoon configuration directiorn (~/.hammerspoon/) 
 -- You either override timeFrame and action here or after including this file from another, e.g.
 --
--- ctrlDoublePress = require("ctrlDoublePress")
+-- ctrlDoublePress = require('ctrlDoublePress')
 -- ctrlDoublePress.timeFrame = 2
 -- ctrlDoublePress.action = function()
 --    do something special
@@ -49,7 +49,7 @@ end
 local onlyCtrl = function(ev)
     local result = ev:getFlags().ctrl
     for k,v in pairs(ev:getFlags()) do
-        if k ~= "ctrl" and v then
+        if k ~= 'ctrl' and v then
             result = false
             break
         end
