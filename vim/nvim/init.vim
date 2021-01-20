@@ -103,7 +103,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 "---------------------------------Vim things-----------------------------------
 let mapleader=" "
-colorscheme dracula 
+colorscheme dracula
 "let g:gruvbox_contrast_dark = 'hard'
 "let g:gruvbox_invert_selection='0'
 set background=dark
