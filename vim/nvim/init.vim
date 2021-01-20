@@ -94,7 +94,7 @@ Plug 'vimwiki/vimwiki'
 
 "colorschemes
 Plug 'colepeters/spacemacs-theme.vim'
-Plug 'sainnhe/gruvbox-material'
+"Plug 'sainnhe/gruvbox-material'
 Plug 'phanviet/vim-monokai-pro'
 Plug 'flazz/vim-colorschemes'
 Plug 'chriskempson/base16-vim'
@@ -103,10 +103,11 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 "---------------------------------Vim things-----------------------------------
 let mapleader=" "
+colorscheme dracula 
+"let g:gruvbox_contrast_dark = 'hard'
+"let g:gruvbox_invert_selection='0'
 set background=dark
-colorscheme base16-dracula
-let g:gruvbox_contrast_dark = 'hard'
-let g:gruvbox_invert_selection='0'
+
 if exists('+termguicolors')
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -143,7 +144,8 @@ fun! Wp()
   set nonumber
   set spell spelllang=en_us
 endfu
-au BufNewFile,BufRead *.wiki,*.txt,*.md :call Wp()
+"au BufNewFile,BufRead *.wiki,*.txt,*.md :call Wp()
+autocmd FileType vimwiki map <leader>wp :call Wp()<CR>
 
 let g:vimwiki_list = [
                         \{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes'},
@@ -176,6 +178,25 @@ let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'aut
 let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_generate_tags': 1}]
 let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_toc': 1}]
 
+function! VimwikiLinkHandler(link)
+  " Use Vim to open external files with the 'vfile:' scheme.  E.g.:
+  "   1) [[vfile:~/Code/PythonProject/abc123.py]]
+  "   2) [[vfile:./|Wiki Home]]
+  let link = a:link
+  if link =~# '^vfile:'
+    let link = link[1:]
+  else
+    return 0
+  endif
+  let link_infos = vimwiki#base#resolve_link(link)
+  if link_infos.filename == ''
+    echomsg 'Vimwiki Error: Unable to resolve link!'
+    return 0
+  else
+    exe 'e ' . fnameescape(link_infos.filename)
+    return 1
+  endif
+endfunction
 "--------------------------------Netrw-----------------------------------------
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 let g:netrw_banner = 0 "disable usesless netrw banner
@@ -188,8 +209,11 @@ nnoremap <C-p> :Files ~<Cr>
 nnoremap <leader>b :Buffers<Cr>
 nnoremap <leader>p :ProjectRootExe :Files<Cr>
 nnoremap <C-g> :ProjectRootExe Rg<Cr>
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
-let $FZF_DEFAULT_OPS='--reverse'
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
+let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --margin=1,4 --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
+let $FZF_DEFAULT_COMMAND = 'rg --files --ignore-case --hidden -g "!{.git,node_modules,vendor}/*"'
+command! -bang -nargs=? -complete=dir Files
+     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 "----------------------------nvim lsp------------------------------------------
 "let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
@@ -298,6 +322,7 @@ nnoremap gj :diffget //3<CR>>
 "-------------------------------dirvish----------------------------------------
 nnoremap <leader>f :Dirvish<CR>
 "-------------------------------ranger-----------------------------------------
+let g:ranger_map_keys = 0
 nnoremap <leader>r :Ranger<CR>
 
 "-------------------------------startify---------------------------------------
