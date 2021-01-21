@@ -98,41 +98,56 @@ Plug 'colepeters/spacemacs-theme.vim'
 Plug 'phanviet/vim-monokai-pro'
 Plug 'flazz/vim-colorschemes'
 Plug 'chriskempson/base16-vim'
-Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'dracula/vim'
 
 call plug#end()
 "---------------------------------Vim things-----------------------------------
 let mapleader=" "
-colorscheme dracula
-"let g:gruvbox_contrast_dark = 'hard'
-"let g:gruvbox_invert_selection='0'
-set background=dark
+" set python path
+let g:python3_host_prog = '/Users/sduran/.pyenv/versions/3.6.8/bin/python'
+" arrange csv files left
+let g:csv_arrange_align = 'l*'
 
+
+
+inoremap jk <Esc>
+" quicksave
+nnoremap <Leader>w :w<Cr>
+"open :h windows in current window
+command! -nargs=1 -complete=help H :enew | :set buftype=help | :h <args>
+" toggle whitespace characters
+nnoremap <F1> :set list! list?<CR>
+" copy current buffer file path to clipboard
+nnoremap <Leader>cp :let @+=expand('%:p')<CR>
+" remove ^M carraige return symbols
+nnoremap <Leader>cr :e ++ff=dos<Cr>
+" remove all buffers EXCEPT current
+command! BufOnly silent! execute "%bd|e#|bd#"
+" reload init.vim
+nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
+
+"-----------------------------Colorscheme things-------------------------------
+" required for tmux colorschemes
 if exists('+termguicolors')
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
-let g:gruvbox_invert_selection='0'
-inoremap jk <Esc>
-nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
-nnoremap <leader>u :UndotreeShow<CR>
-nnoremap <Leader>w :w<Cr>
-"open :h windows in current window
-command! -nargs=1 -complete=help H :enew | :set buftype=help | :h <args>
-" whitespace chars toggle
-"nnoremap <F1> :set list! list?<CR>
-let vim_markdown_preview_github=1
-let vim_markdown_preview_hotkey='<C-m>'
-let vim_markdown_preview_browser='Google Chrome'
-let g:python3_host_prog = '/Users/sduran/.pyenv/versions/3.6.8/bin/python'
-let b:csv_arrange_align = 'l*'
-let g:calendar_options = 'nornu'
-" remove ^M carraige return symbols
-nnoremap <Leader>cr :e ++ff=dos<Cr>
-" remove all buffers EXCEPT current
-command BufOnly silent! execute "%bd|e#|bd#"
+"colorschemes
+"colorscheme base16-darktooth
+"colorscheme base16-seti
+colorscheme base16-unikitty-dark
+set background=dark
+"autocmd BufEnter *.txt,*.wiki colorscheme seti
 "--------------------------------VimWiki---------------------------------------
-cabbr wp call Wp()
+let g:vimwiki_conceal_pre =1
+let g:vimwiki_autowriteall =1
+let g:vimwiki_use_calendar =1
+let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_diary_index': 1}]
+let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_generate_links': 1}]
+let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_tags': 1}]
+let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_generate_tags': 1}]
+let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_toc': 1}]
+" function to enable text editing features
 fun! Wp()
   set lbr
   source /Users/sduran/.vim/plugged/vim-autocorrect/plugin/autocorrect.vim
@@ -144,13 +159,9 @@ fun! Wp()
   set nonumber
   set spell spelllang=en_us
 endfu
-"au BufNewFile,BufRead *.wiki,*.txt,*.md :call Wp()
 autocmd FileType vimwiki map <leader>wp :call Wp()<CR>
+"au BufNewFile,BufRead *.wiki,*.txt,*.md :call Wp()
 
-let g:vimwiki_list = [
-                        \{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes'},
-                        \{'path': '~/OneDrive - Knex/Documents/VimWiki/Wiki2'}
-                \]
 au BufRead,BufNewFile *.wiki set filetype=vimwiki
 function! ToggleCalendar()
   execute ":Calendar"
@@ -166,17 +177,12 @@ function! ToggleCalendar()
   end
 endfunction
 autocmd FileType vimwiki map <leader>c :call ToggleCalendar()<CR>
-command! Diary VimwikiDiaryIndex
+
+" automatically update links on read diary
 augroup vimwikigroup
     autocmd!
-    " automatically update links on read diary
     autocmd BufRead,BufNewFile diary.wiki VimwikiDiaryGenerateLinks
 augroup end
-let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_diary_index': 1}]
-let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_generate_links': 1}]
-let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_tags': 1}]
-let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_generate_tags': 1}]
-let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_toc': 1}]
 
 function! VimwikiLinkHandler(link)
   " Use Vim to open external files with the 'vfile:' scheme.  E.g.:

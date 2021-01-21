@@ -22,7 +22,7 @@
 },
 "explorer.confirmDragAndDrop": false,
 "window.zoomLevel": 0,
-"workbench.colorTheme": "Gruvbox Dark Hard",
+"workbench.colorTheme": "Dark-Dracula",
 "vim.useSystemClipboard": true,
 "vim.insertModeKeyBindings": [
     {
