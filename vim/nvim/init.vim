@@ -63,6 +63,8 @@ call plug#begin('~/.vim/plugged')
 "Plug 'prabirshrestha/vim-lsp'
 Plug 'airblade/vim-gitgutter'
 "Plug 'chrisbra/csv.vim'
+Plug 'beeender/Comrade'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dbakker/vim-projectroot'
 Plug 'edkolev/tmuxline.vim'
@@ -76,7 +78,7 @@ Plug 'justinmk/vim-dirvish'
 Plug 'kristijanhusak/vim-dirvish-git'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-startify'
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+"Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'neoclide/vim-easygit'
 Plug 'panozzaj/vim-autocorrect'
 Plug 'rbgrouleff/bclose.vim'
@@ -260,54 +262,54 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 "--------------------------------COC-------------------------------------------
-let g:coc_disable_startup_warning = 1
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gp <Plug>(coc-diagnostic-prev)
-nmap <silent> gn <Plug>(coc-diagnostic-next)
-inoremap <silent><expr> <c-space> coc#refresh()
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-nnoremap <silent> gh :call <SID>show_documentation()<CR>
-nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
-
-"set tab for completion
-inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ coc#refresh()
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-" Formatting selected code.
-xmap <leader>F  <Plug>(coc-format-selected)
-nmap <leader>F  <Plug>(coc-format-selected)
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap keys for applying codeAction to the current line.
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
+"let g:coc_disable_startup_warning = 1
+"nmap <silent> gd <Plug>(coc-definition)
+"nmap <silent> gy <Plug>(coc-type-definition)
+"nmap <silent> gi <Plug>(coc-implementation)
+"nmap <silent> gr <Plug>(coc-references)
+"nmap <silent> gp <Plug>(coc-diagnostic-prev)
+"nmap <silent> gn <Plug>(coc-diagnostic-next)
+"inoremap <silent><expr> <c-space> coc#refresh()
+"nnoremap <silent> K :call <SID>show_documentation()<CR>
+"nnoremap <silent> gh :call <SID>show_documentation()<CR>
+"nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
+"
+""set tab for completion
+"inoremap <silent><expr> <TAB>
+"  \ pumvisible() ? "\<C-n>" :
+"  \ <SID>check_back_space() ? "\<TAB>" :
+"  \ coc#refresh()
+"function! s:check_back_space() abort
+"  let col = col('.') - 1
+"  return !col || getline('.')[col - 1]  =~ '\s'
+"endfunction
+"
+"" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+"" position. Coc only does snippet and additional edit on confirm.
+"
+"
+"" Add `:Format` command to format current buffer.
+"command! -nargs=0 Format :call CocAction('format')
+"" Add `:Fold` command to fold current buffer.
+"command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+"" Add `:OR` command for organize imports of the current buffer.
+"command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+"" Highlight the symbol and its references when holding the cursor.
+"autocmd CursorHold * silent call CocActionAsync('highlight')
+"" Symbol renaming.
+"nmap <leader>rn <Plug>(coc-rename)
+"" Formatting selected code.
+"xmap <leader>F  <Plug>(coc-format-selected)
+"nmap <leader>F  <Plug>(coc-format-selected)
+"" Applying codeAction to the selected region.
+"" Example: `<leader>aap` for current paragraph
+"xmap <leader>a  <Plug>(coc-codeaction-selected)
+"nmap <leader>a  <Plug>(coc-codeaction-selected)
+"
+"" Remap keys for applying codeAction to the current line.
+"nmap <leader>ac  <Plug>(coc-codeaction)
+"" Apply AutoFix to problem on the current line.
+"nmap <leader>qf  <Plug>(coc-fix-current)
 "--------------------------------airline---------------------------------------
 let g:webdevicons_enable = 1
 let g:airline_powerline_fonts = 1

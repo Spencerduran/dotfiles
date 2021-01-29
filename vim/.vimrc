@@ -1,310 +1,284 @@
-"---------------------------------VimPlug---------------------------------------
+set nocompatible
+set background=dark
+set backspace=indent,eol,start "allow backspace over everything in insert mode
+set belloff=all
+set clipboard=unnamed,unnamedplus " Use system clipboard.
+set colorcolumn=80
+set completeopt=menuone,noinsert,noselect
+set conceallevel=0 " Dont hide symbols in MD and JSON
+set cursorline " Highlight the line background of the cursor.
+set encoding=UTF-8
+set expandtab "set the tabs to display as spaces
+set fillchars= " Characters to fill the status lines and vertical separators.
+set foldmethod=manual
+set guicursor=
+set hidden "opening a new file when the current buffer has unsaved changes causes files to be hidden instead of closed
+set history=10 " Define maximum command history size.
+set hlsearch " highlight search
+set ignorecase
+set incsearch " incremental search
+set laststatus=2 " Status bar
+set listchars=tab:..,trail:_,extends:>,precedes:<,nbsp:~,eol:$,space:_
+set mouse=n "set mouse mode for terminal window resizing
+set nobackup " disable backups before writing file
+set noerrorbells
+set noshowmode " Disable native mode indicator.
+set noswapfile " Disable .swp files
+set nowrap
+set nowritebackup " disable backup before writing file
+set nu "enable line numbers
+set relativenumber " Show relative line numbers
+set scrolloff=8 " Minimum number of screen lines to keep above and below the cursor.
+set shell=bash
+set shiftwidth=4
+set shortmess+=c " don't give ins-completion-menu messages.
+set showcmd " Show commands in statusline
+set showmatch
+set signcolumn=yes " always show signcolumns
+set smartcase
+set smartindent
+set splitright " Splitting a window will put the new window right of the current one.
+set tabstop=4 softtabstop=4
+set termguicolors
+set title " Show filename in titlebar of window
+set ttyfast " Rendering
+set undodir=~/.vim/undodir "set vim undo file location
+set undofile "store undo history to a file
+set updatetime=50 " milliseconds to wait before triggering plugin after stop typing
+set wildmenu " Command-line completion operates in an enhanced mode.
+syntax on
+filetype plugin on
+highlight ColorColumn ctermbg=0 guibg=lightgrey
+au BufNewFile,BufRead *.json,*.txt setlocal colorcolumn=
+"---------------------------------VimPlug--------------------------------------
 call plug#begin('~/.vim/plugged')
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'ryanolsonx/vim-lsp-typescript'
-Plug 'morhetz/gruvbox'
-Plug 'wincent/command-t'
-Plug 'edkolev/tmuxline.vim'
-Plug 'chrisbra/csv.vim'
-Plug 'mbbill/undotree'
-Plug 'dbakker/vim-projectroot'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'tpope/vim-fugitive'
-Plug 'rbgrouleff/bclose.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'json', 'css', 'less', 'scss', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'airblade/vim-gitgutter'
-Plug 'ryanoasis/vim-devicons'
-Plug 'shougo/unite.vim'
-Plug 'shougo/vimshell.vim'
-Plug 'shougo/vimfiler.vim'
-Plug 'rstacruz/sparkup'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'mhinz/vim-startify'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'dbakker/vim-projectroot'
+Plug 'edkolev/tmuxline.vim'
+Plug 'file://'.expand('~/.local/share/nvim/site/plugin/CopyMatches') 
+Plug 'file://'.expand('~/.local/share/nvim/site/plugin/Rename') 
+Plug 'francoiscabrol/ranger.vim'
+Plug 'gruvbox-community/gruvbox'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'francoiscabrol/ranger.vim'
+Plug 'justinmk/vim-dirvish'
+Plug 'kristijanhusak/vim-dirvish-git'
+Plug 'mbbill/undotree'
+Plug 'mhinz/vim-startify'
+Plug 'neoclide/vim-easygit'
+Plug 'panozzaj/vim-autocorrect'
+Plug 'rbgrouleff/bclose.vim'
+Plug 'reedes/vim-pencil'
+Plug 'rstacruz/sparkup'
+Plug 'ryanoasis/vim-devicons'
+Plug 'sheerun/vim-polyglot'
+Plug 'stsewd/fzf-checkout.vim'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-vinegar'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vimwiki/vimwiki'
+"colorschemes
+Plug 'flazz/vim-colorschemes'
+Plug 'chriskempson/base16-vim'
+Plug 'dracula/vim'
 call plug#end()
-"---------------------------------Vim things------------------------------------
-set nocompatible " Don't try to be vi compatible
-"set shell=bash
+"---------------------------------Vim things-----------------------------------
 let mapleader=" "
-:imap jk <Esc>
-"colorscheme dracula
-colorscheme gruvbox
-set encoding=UTF-8
-set noerrorbells
-set belloff=all
-set backspace=indent,eol,start  " allow backspacing over everything in insert mode
-set title " Show filename in titlebar of window
-set noswapfile " Disable .swp files
-set nobackup " disable backups before writing file
-set nowritebackup " disable backup before writing file
-set undofile "store undo history to a file
-set undodir=~/.vim/undodir "set vim undo file location
-set number " Show current line number
-set relativenumber " Show relative line numbers
-set clipboard=unnamed,unnamedplus " Use system clipboard.
-set shortmess+=c " don't give ins-completion-menu messages.
-:set mouse=n "set mouse mode for terminal window resizing
-" Normal Mode
-set wildmenu " Command-line completion operates in an enhanced mode.
-set cmdwinheight=18 " Height of the command window size for commands like `q:` and `q/`.
-set hidden " if hidden is not set, TextEdit might fail.
-set updatetime=50 " milliseconds to wait before triggering plugin after stop typing
-set signcolumn=yes " always show signcolumns
-set history=10 " Define maximum command history size.
-set noshowmode " Disable native mode indicator.
-" Buffers
-set splitbelow " Splitting a window will put the new window below of the current one.
-set splitright " Splitting a window will put the new window right of the current one.
-" Editor
-set scrolloff=4 " Minimum number of screen lines to keep above and below the cursor.
-set cursorline " Highlight the line background of the cursor.
-set fillchars= " Characters to fill the status lines and vertical separators.
-set conceallevel=0 " Dont hide symbols in MD and JSON
-set showmatch
-set showcmd " Show commands in statusline
-set ttyfast " Rendering
-"----------------------------------Airline--------------------------------------
-set laststatus=2 " Status bar
-let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'default'
-let g:airline_left_sep = "\ue0c6"
-let g:airline_right_sep = "\ue0c7"
-let g:webdevicons_enable = 1
-let g:webdevicons_enable_airline_statusline = 1
+" set python path
+let g:python3_host_prog = '/Users/sduran/.pyenv/versions/3.6.8/bin/python'
+" arrange csv files left
+"let g:csv_arrange_align = 'l*'
 
-"------------------------------------Search-------------------------------------
-set incsearch
-set hlsearch
-set ignorecase
-set showmatch
+inoremap jk <Esc>
+" quicksave
+nnoremap <Leader>w :w<Cr>
+" :H opens help in current window
+command! -nargs=1 -complete=help H :enew | :set buftype=help | :h <args>
+" default help opens verical split
+augroup vimrc_help
+  autocmd!
+  autocmd BufEnter *.txt if &buftype == 'help' | wincmd L | endif
+augroup END
+" set current directory to the directory of the file in the current window
+autocmd BufEnter * silent! lcd %:p:h
+" toggle whitespace characters
+nnoremap <F1> :set list! list?<CR>
+" copy current buffer file path to clipboard
+nnoremap <Leader>cp :let @+=expand('%:p')<CR>
+" remove ^M carraige return symbols
+nnoremap <Leader>cr :e ++ff=dos<Cr>
+" remove all buffers EXCEPT current
+command! BufOnly silent! execute "%bd|e#|bd#"
+" reload init.vim
+nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
+" close all buffers except current 
+nnoremap <Leader>bo :BufOnly<CR>
+" delete trailing whitespace 
+nnoremap <Leader>dw :%s/\s\+$//e<CR>
 
-"---------------------------------Pane nagivation-------------------------------
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
-nnoremap <leader>u :UndotreeShow<CR>
-" Buffer Switching
-nnoremap <Leader>bn :bn<CR>
-nnoremap <Leader>bn :bn<CR>
-nnoremap <Leader>bd :bd<CR>
-nnoremap <Leader>ls :ls<CR>
-nnoremap <Leader>bp :bp<CR>
-nnoremap <Leader>g :e#<CR>
+"-----------------------------Colorscheme things-------------------------------
+" required for tmux colorschemes
+if exists('+termguicolors')
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+"colorschemes
+"colorscheme base16-darktooth
+colorscheme base16-seti
+"colorscheme base16-unikitty-dark
+set background=dark
+"autocmd BufEnter *.txt,*.wiki colorscheme seti
+"--------------------------------VimWiki---------------------------------------
+let g:vimwiki_conceal_pre =1
+let g:vimwiki_autowriteall =1
+let g:vimwiki_use_calendar =1
+let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_diary_index': 1}]
+let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_generate_links': 1}]
+let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_tags': 1}]
+let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_generate_tags': 1}]
+let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_toc': 1}]
+" function to enable text editing features
+fun! Wp()
+  set lbr
+  source /Users/sduran/.vim/plugged/vim-autocorrect/plugin/autocorrect.vim
+  execute ":SoftPencil"
+  nnoremap j gj
+  nnoremap k gk
+  nnoremap 0 g0
+  nnoremap $ g$
+  set nonumber
+  set spell spelllang=en_us
+endfu
+autocmd FileType vimwiki map <leader>wp :call Wp()<CR>
+"au BufNewFile,BufRead *.wiki,*.txt,*.md :call Wp()
+
+au BufRead,BufNewFile *.wiki set filetype=vimwiki
+function! ToggleCalendar()
+  execute ":Calendar"
+  if exists("g:calendar_open")
+    if g:calendar_open == 1
+      execute "q"
+      unlet g:calendar_open
+    else
+      g:calendar_open = 1
+    end
+  else
+    let g:calendar_open = 1
+  end
+endfunction
+autocmd FileType vimwiki map <leader>c :call ToggleCalendar()<CR>
+
+" automatically update links on read diary
+augroup vimwikigroup
+    autocmd!
+    autocmd BufRead,BufNewFile diary.wiki VimwikiDiaryGenerateLinks
+augroup end
+
+function! VimwikiLinkHandler(link)
+  " Use Vim to open external files with the 'vfile:' scheme.  E.g.:
+  "   1) [[vfile:~/Code/PythonProject/abc123.py]]
+  "   2) [[vfile:./|Wiki Home]]
+  let link = a:link
+  if link =~# '^vfile:'
+    let link = link[1:]
+  else
+    return 0
+  endif
+  let link_infos = vimwiki#base#resolve_link(link)
+  if link_infos.filename == ''
+    echomsg 'Vimwiki Error: Unable to resolve link!'
+    return 0
+  else
+    exe 'e ' . fnameescape(link_infos.filename)
+    return 1
+  endif
+endfunction
+"--------------------------------Netrw-----------------------------------------
+nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+let g:netrw_banner = 0 "disable usesless netrw banner
+let g:netrw_winsize = 15 "netrw window size
+let g:netrw_localrmdir='rm -r' "allow netrw to remove non-empty directories
+"let g:netrw_browse_split = 1 "open files in the previous window
+
+"--------------------------------FZF-------------------------------------------
+nnoremap <C-p> :Files ~<Cr>
+nnoremap <leader>b :Buffers<Cr>
+nnoremap <leader>p :ProjectRootExe :Files<Cr>
+nnoremap <C-g> :ProjectRootExe Rg<Cr>
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
+let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --margin=1,4 --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
+let $FZF_DEFAULT_COMMAND = 'rg --files --ignore-case --hidden -g "!{.git,node_modules,vendor}/*"'
+command! -bang -nargs=? -complete=dir Files
+     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+"-------------------------tabs/buffers/panes-----------------------------------
+map <C-t><up>       :tabr<cr>
+map <C-t><down>     :tabl<cr>
+map <C-t><left>     :tabp<cr>
+map <C-t><right>    :tabn<cr>
 nnoremap <PageUp>   :bprevious<CR>
 nnoremap <PageDown> :bnext<CR>
-" Tab switching
-map <C-t><up> :tabr<cr>
-map <C-t><down> :tabl<cr>
-map <C-t><left> :tabp<cr>
-map <C-t><right> :tabn<cr>
-" Window resizing
-nnoremap <Leader>+ :exe "resize " . (winwidth(0) * 3/2)<CR>
-nnoremap <Leader>- :exe "resize " . (winwidth(0) * 2/3)<CR>
+nnoremap <Leader>bd :bd<CR>
+nnoremap <Leader>bn :bn<CR>
+nnoremap <Leader>bn :bn<CR>
+nnoremap <Leader>bp :bp<CR>
+nnoremap <Leader>ls :ls<CR>
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
-"------------------------------------fzf config---------------------------------
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+"--------------------------------airline---------------------------------------
+let g:webdevicons_enable = 1
+let g:airline_powerline_fonts = 1
+let g:webdevicons_enable_airline_statusline = 1
+let g:airline_left_sep = "\ue0c6"
+let g:airline_right_sep = "\ue0c7"
+let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#coc#error_symbol = 'Error:'
+let g:airline#extensions#coc#warning_symbol = 'Warning:'
+let g:airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
+let g:airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
 
-" Border color
-"let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Todo' } }
-" Border style (rounded / sharp / horizontal)
-"let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Todo', 'border': 'rounded' } }
-"set rtp+=/usr/local/opt/fzf
-nnoremap <C-g> :ProjectRootExe Rg<Cr>
-nnoremap <leader>p :ProjectRootExe Files<Cr>
-nnoremap <C-p> :Files ~<Cr>
-nnoremap <leader>t :CommandTBuffer<CR>
-nnoremap <Leader>w :w<Cr>
-nnoremap <Leader>s :Startify<Cr>
-"------------------------------------fugitive config----------------------------
-" Fugitive Conflict Resolution
-nnoremap <leader>Gd :Gvdiffsplit!<CR>
-nnoremap gdh :diffget //2<CR>
-nnoremap gdl :diffget //3<CR>>
-"close all diff windows, leave active open
-nnoremap <Leader>gD <c-w>h<c-w>c
-
-"------------------------------------ cocconfig---------------------------------
-autocmd BufNew,BufEnter *.json,*.vim execute "silent! CocDisable"
-autocmd BufLeave *.json,*.vim, execute "silent! CocDisable"
-" GoTo code navigation.
-nmap <leader>gd <Plug>(coc-definition)
-nmap <leader>gy <Plug>(coc-type-definition)
-nmap <leader>gi <Plug>(coc-implementation)
-nmap <leader>gr <Plug>(coc-references)
-nmap <leader>rr <Plug>(coc-rename)
-nmap <leader>g[ <Plug>(coc-diagnostic-prev)
-nmap <leader>g] <Plug>(coc-diagnostic-next)
-nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
-nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
-nnoremap <leader>cr :CocRestart
-let g:coc_global_extensions = [
-  \ 'coc-snippets',
-  \ 'coc-pairs',
-  \ 'coc-tsserver',
-  \ 'coc-eslint',
-  \ 'coc-python',
-  \ 'coc-prettier',
-  \ ]
-"
-"function! s:check_back_space() abort
-"  let col = col('.') - 1
-"  return !col || getline('.')[col - 1]  =~# '\s'
-"endfunction
-"
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-"-------------------------------ranger-vimsettings------------------------------
-"open ranger in current directory
-nnoremap <leader>r :ProjectRootExe RangerWorkingDirectory<CR>
-
-" ranger file picker
-function! RangerFilePicker()
-  " Temp file for Ranger selections
-  let tempfile = tempname()
-
-  " Dictionary function
-  let ranger = { 'tempfile' : tempfile }
-
-  function! ranger.OnExit(...)
-    " Is temp file readable?
-    if !filereadable(self.tempfile)
-      return
-    endif
-
-    " Read ranger selections, delete temp file
-    let selections = readfile(self.tempfile)
-    call delete(self.tempfile)
-
-    " Are there any selections?
-    if empty(selections)
-      return
-    endif
-
-    " Close the terminal window, edit the first item
-    close
-    exec 'edit ' . fnameescape(selections[0])
-
-    " Add any remaining items to the arg/buffer list
-    for sel in selections[1:]
-      exec 'argadd '. fnameescape(sel)
-    endfor
-  endfunction
-
-  " Open ranger in a new terminal window
-  let pwd = getcwd()
-  let cmd = 'ranger --choosefiles=' . fnameescape(tempfile) . ' ' . fnameescape(pwd)
-  let buf = term_start(cmd, {'term_finish' : 'close', 'exit_cb' : ranger.OnExit})
-endfunction
-command! RangerFiles call RangerFilePicker()
-
-" ranger directory picker
-function! RangerDirPicker()
-  " Temp file for Ranger selections
-  let tempfile = tempname()
-
-  " Dictionary function
-  let ranger = { 'tempfile' : tempfile }
-
-  function! ranger.OnExit(...)
-    " Is temp file readable?
-    if !filereadable(self.tempfile)
-      return
-    endif
-
-    " Read ranger selections, delete temp file
-    let selections = readfile(self.tempfile)
-    call delete(self.tempfile)
-
-    " Are there any selections?
-    if empty(selections)
-      return
-    endif
-
-    " Close the terminal window, change current directory
-    close
-    exec 'cd ' . fnameescape(selections[0])
-  endfunction
-
-  " Open ranger in a new terminal window
-  let pwd = getcwd()
-  let cmd = 'ranger --show-only-dirs --choosedir=' . fnameescape(tempfile) . ' ' . fnameescape(pwd)
-  let buf = term_start(cmd, {'term_finish' : 'close', 'exit_cb' : ranger.OnExit})
-endfunction
-command! RangerDirs call RangerDirPicker()
+"-------------------------------dirvish----------------------------------------
+nnoremap <leader>f :Dirvish<CR>
+"-------------------------------ranger-----------------------------------------
 let g:ranger_map_keys = 0
+nnoremap <leader>r :Ranger<CR>
 
-"-------------------------------vimfiler-settings-------------------------------
-nnoremap vf :VimFilerExplorer<Enter>
-let g:loaded_netrwPlugin = 0
-let g:vimfiler_expand_jump_to_first_child = 1
-let g:webdevicons_enable_vimfiler = 1
-let g:vimfiler_as_default_explorer = 1
-let g:vimfiler_safe_mode_by_default = 0
-let g:vimfiler_tree_leaf_icon = " "
-let g:vimfiler_tree_opened_icon = '▾'
-let g:vimfiler_tree_closed_icon = '▸'
-let g:vimfiler_file_icon = '-'
-let g:vimfiler_marked_file_icon = '✓'
-let g:vimfiler_readonly_file_icon = '✗'
-let g:vimfiler_time_format = '%m-%d-%y %H:%M:%S'
-let g:vimfiler_expand_jump_to_first_child = 0
-let g:vimfiler_ignore_pattern = '\.git\|\.DS_Store\|\.pyc'
+"-------------------------------startify---------------------------------------
+nnoremap <Leader>s :Startify<Cr>
+let g:startify_change_to_dir = 1 "When opening a file or bookmark, change to its directory
 
-"-------------------------------autoload RCz------------------------------------
+" same as above, but show untracked files, honouring .gitignore
+function! s:gitUntracked()
+    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+let g:startify_lists = [
+        \ { 'type': 'files',     'header': ['   MRU']            },
+        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+        \ { 'type': 'sessions',  'header': ['   Sessions']       },
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+        \ { 'type': 'commands',  'header': ['   Commands']       },
+        \ ]
+
+let g:startify_bookmarks = [
+        \ { 'i': '~/repos/spence/dotfiles/vim/nvim/init.vim' },
+        \ { 'c': '~/repos/spence/dotfiles/vim/nvim/coc-settings.json' },
+        \ { 'a': '~/.alacritty.yml' },
+        \ { 'h': '~/.hammerspoon/init.lua' },
+        \ ]
+
+"-------------------------------autoload---------------------------------------
 augroup myvimrc
     au!
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 augroup END
-
-"----------------------------------Whitespace ----------------------------------
-set tabstop=4 softtabstop=4
-set shiftwidth=4
-set expandtab
-"set smartindent
-
-set listchars=tab:..,trail:_,extends:>,precedes:<,nbsp:~,eol:$,space:_
-
-"toggle display white space characters with F1
-nnoremap <F1> :set list! list?<CR>
-
-" no indent on paste
-set pastetoggle=<F2>
-nnoremap <F2> :set invpaste paste?<CR>
-set pastetoggle=<F2>
-
-autocmd BufWinEnter <buffer> match Error /\s\+$/
-autocmd InsertEnter <buffer> match Error /\s\+\%#\@<!$/
-autocmd InsertLeave <buffer> match Error /\s\+$/
-autocmd BufWinLeave <buffer> call clearmatches()
-
-set hidden
-
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
-    \ 'python': ['/usr/local/bin/pyls'],
-    \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
-    \ }
-
-" note that if you are using Plug mapping you should not use `noremap` mappings.
-nmap <F5> <Plug>(lcn-menu)
-" Or map each action separately
-nmap <silent>K <Plug>(lcn-hover)
-nmap <silent> gd <Plug>(lcn-definition)
-nmap <silent> <F2> <Plug>(lcn-rename)
+"
