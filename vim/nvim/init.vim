@@ -49,6 +49,7 @@ set wildmenu " Command-line completion operates in an enhanced mode.
 syntax on
 filetype plugin on
 highlight ColorColumn ctermbg=0 guibg=lightgrey
+au BufNewFile,BufRead *.json,*.txt setlocal colorcolumn=
 "---------------------------------VimPlug--------------------------------------
 call plug#begin('~/.vim/plugged')
 " neovim lsp plugins
@@ -61,7 +62,7 @@ call plug#begin('~/.vim/plugged')
 "Plug 'prabirshrestha/asyncomplete.vim'
 "Plug 'prabirshrestha/vim-lsp'
 Plug 'airblade/vim-gitgutter'
-Plug 'chrisbra/csv.vim'
+"Plug 'chrisbra/csv.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dbakker/vim-projectroot'
 Plug 'edkolev/tmuxline.vim'
@@ -106,15 +107,18 @@ let mapleader=" "
 " set python path
 let g:python3_host_prog = '/Users/sduran/.pyenv/versions/3.6.8/bin/python'
 " arrange csv files left
-let g:csv_arrange_align = 'l*'
-
-
+"let g:csv_arrange_align = 'l*'
 
 inoremap jk <Esc>
 " quicksave
 nnoremap <Leader>w :w<Cr>
-"open :h windows in current window
+" :H opens help in current window
 command! -nargs=1 -complete=help H :enew | :set buftype=help | :h <args>
+" default help opens verical split
+augroup vimrc_help
+  autocmd!
+  autocmd BufEnter *.txt if &buftype == 'help' | wincmd L | endif
+augroup END
 " toggle whitespace characters
 nnoremap <F1> :set list! list?<CR>
 " copy current buffer file path to clipboard
@@ -125,6 +129,10 @@ nnoremap <Leader>cr :e ++ff=dos<Cr>
 command! BufOnly silent! execute "%bd|e#|bd#"
 " reload init.vim
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
+" close all buffers except current 
+nnoremap <Leader>bo :BufOnly<CR>
+" delete trailing whitespace 
+nnoremap <Leader>dw :%s/\s\+$//e<CR>
 
 "-----------------------------Colorscheme things-------------------------------
 " required for tmux colorschemes
@@ -134,8 +142,8 @@ if exists('+termguicolors')
 endif
 "colorschemes
 "colorscheme base16-darktooth
-"colorscheme base16-seti
-colorscheme base16-unikitty-dark
+colorscheme base16-seti
+"colorscheme base16-unikitty-dark
 set background=dark
 "autocmd BufEnter *.txt,*.wiki colorscheme seti
 "--------------------------------VimWiki---------------------------------------
@@ -362,7 +370,6 @@ augroup myvimrc
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 augroup END
 
-au BufNewFile,BufRead *.json,*.txt setlocal colorcolumn=
 
 " returns all modified files of the current git repo
 " `2>/dev/null` makes the command fail quietly, so that when we are not
@@ -372,7 +379,5 @@ function! s:gitModified()
     return map(files, "{'line': v:val, 'path': v:val}")
 endfunction
 
-augroup vimrc_help
-  autocmd!
-  autocmd BufEnter *.txt if &buftype == 'help' | wincmd L | endif
-augroup END
+
+autocmd BufEnter * silent! lcd %:p:h
