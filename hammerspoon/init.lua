@@ -45,15 +45,6 @@ hyper.bindKey('e', function()
     hs.application.launchOrFocus('/Applications/Microsoft Excel.app')
   end
 end)
--- Show/hide jira
-hyper.bindKey('j', function()
-  local chrome = hs.application.find('jira')
-  if chrome:isFrontmost() then
-    chrome:hide()
-  else
-    hs.application.launchOrFocus('/Applications/jira.app')
-  end
-end)
 -- Show/hide outlook
 hyper.bindKey('o', function()
   local outlook = hs.application.find('outlook')
@@ -74,11 +65,11 @@ hyper.bindKey('s', function()
 end)
 -- Show/hide postman
 hyper.bindKey('p', function()
-  local postman = hs.application.find('postman')
-  if postman:isFrontmost() then
-    postman:hide()
+  local PyCharm = hs.application.find('PyCharm')
+  if PyCharm:isFrontmost() then
+    PyCharm:hide()
   else
-    hs.application.launchOrFocus('/Applications/postman.app')
+    hs.application.launchOrFocus('/Applications/PyCharm.app')
   end
 end)
 -- Show/hide spotify
@@ -88,15 +79,6 @@ hyper.bindKey('q', function()
     spotify:hide()
   else
     hs.application.launchOrFocus('/Applications/Spotify.app')
-  end
-end)
--- Show/hide raindrop.io
-hyper.bindKey('r', function()
-  local alacritty = hs.application.find('raindrop.io')
-  if alacritty:isFrontmost() then
-    alacritty:hide()
-  else
-    hs.application.launchOrFocus('/Applications/raindrop.io.app')
   end
 end)
 -- Show/hide firefox
