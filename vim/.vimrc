@@ -57,8 +57,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dbakker/vim-projectroot'
 Plug 'edkolev/tmuxline.vim'
-Plug 'file://'.expand('~/.local/share/nvim/site/plugin/CopyMatches') 
-Plug 'file://'.expand('~/.local/share/nvim/site/plugin/Rename') 
+Plug 'file://'.expand('~/.local/share/nvim/site/plugin/CopyMatches')
+Plug 'file://'.expand('~/.local/share/nvim/site/plugin/Rename')
 Plug 'francoiscabrol/ranger.vim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -114,9 +114,9 @@ nnoremap <Leader>cr :e ++ff=dos<Cr>
 command! BufOnly silent! execute "%bd|e#|bd#"
 " reload init.vim
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
-" close all buffers except current 
+" close all buffers except current
 nnoremap <Leader>bo :BufOnly<CR>
-" delete trailing whitespace 
+" delete trailing whitespace
 nnoremap <Leader>dw :%s/\s\+$//e<CR>
 
 "-----------------------------Colorscheme things-------------------------------
@@ -281,4 +281,3 @@ augroup myvimrc
     au!
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 augroup END
-"

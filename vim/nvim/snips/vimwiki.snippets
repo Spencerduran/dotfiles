@@ -1,0 +1,23 @@
+{
+  "Code block": {
+    "prefix": ["code"],
+    "body": ["{{{${1:language}",
+        "${2:code}",
+        "}}}"
+    ],
+    "description": "Adds a code block"
+  },
+  "For Loop": {
+    "prefix": ["for"],
+    "body": ["for ${2:element} in ${1:array}:", "\n\t$0"],
+    "description": "A for loop."
+  },
+  "Math block": {
+    "prefix": ["math"],
+    "body": ["{{",
+        "${2:formula}",
+        "}}"
+    ],
+    "description": "Adds a math block"
+  }
+}
