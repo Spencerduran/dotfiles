@@ -4,7 +4,6 @@ set backspace=indent,eol,start "allow backspace over everything in insert mode
 set belloff=all
 set clipboard=unnamed,unnamedplus " Use system clipboard.
 set colorcolumn=80
-set completeopt=menuone,noinsert,noselect
 set conceallevel=0 " Dont hide symbols in MD and JSON
 set cursorline " Highlight the line background of the cursor.
 set encoding=UTF-8
@@ -52,19 +51,10 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 au BufNewFile,BufRead *.json,*.txt setlocal colorcolumn=
 "---------------------------------VimPlug--------------------------------------
 call plug#begin('~/.vim/plugged')
-" neovim lsp plugins
-"Plug 'neovim/nvim-lspconfig'
-"Plug 'nvim-lua/completion-nvim'
-"Plug 'tjdevries/nlua.nvim'
-"Plug 'tjdevries/lsp_extensions.nvim'
-"Plug 'prabirshrestha/async.vim'
-"Plug 'prabirshrestha/asyncomplete-lsp.vim'
-"Plug 'prabirshrestha/asyncomplete.vim'
-"Plug 'prabirshrestha/vim-lsp'
+Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'airblade/vim-gitgutter'
-"Plug 'chrisbra/csv.vim'
+Plug 'kosayoda/nvim-lightbulb'
 Plug 'beeender/Comrade'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dbakker/vim-projectroot'
 Plug 'edkolev/tmuxline.vim'
@@ -72,45 +62,42 @@ Plug 'file://'.expand('~/.local/share/nvim/site/plugin/CopyMatches')
 Plug 'file://'.expand('~/.local/share/nvim/site/plugin/Rename') 
 Plug 'francoiscabrol/ranger.vim'
 Plug 'gruvbox-community/gruvbox'
+"Plug 'hrsh7th/vim-vsnip'
+"Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'justinmk/vim-dirvish'
-Plug 'kristijanhusak/vim-dirvish-git'
+Plug 'kristijanhusak/defx-git'
+Plug 'kristijanhusak/defx-icons'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-startify'
-"Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'neoclide/vim-easygit'
 Plug 'panozzaj/vim-autocorrect'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'reedes/vim-pencil'
 Plug 'rstacruz/sparkup'
 Plug 'ryanoasis/vim-devicons'
+Plug 'sbdchd/neoformat'
 Plug 'sheerun/vim-polyglot'
-Plug 'stsewd/fzf-checkout.vim'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-vinegar'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-syntastic/syntastic'
 Plug 'vimwiki/vimwiki'
-"Plug 'vuciv/vim-bujo'
-
+Plug 'nvim-lua/completion-nvim'
+Plug 'steelsojka/completion-buffers'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'nvim-treesitter/completion-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter-refactor'
+Plug 'romgrk/nvim-treesitter-context'
 "colorschemes
-Plug 'colepeters/spacemacs-theme.vim'
-"Plug 'sainnhe/gruvbox-material'
-Plug 'phanviet/vim-monokai-pro'
 Plug 'flazz/vim-colorschemes'
 Plug 'chriskempson/base16-vim'
 Plug 'dracula/vim'
-
+Plug 'neovim/nvim-lspconfig'
 call plug#end()
 "---------------------------------Vim things-----------------------------------
 let mapleader=" "
-" set python path
-let g:python3_host_prog = '/Users/sduran/.pyenv/versions/3.6.8/bin/python'
-" arrange csv files left
-"let g:csv_arrange_align = 'l*'
-
 inoremap jk <Esc>
 " quicksave
 nnoremap <Leader>w :w<Cr>
@@ -136,27 +123,113 @@ nnoremap <Leader>bo :BufOnly<CR>
 " delete trailing whitespace 
 nnoremap <Leader>dw :%s/\s\+$//e<CR>
 
+"-----------------------------vsnip--------------------------------------------
+" You can use other key to expand snippet.
+"imap <expr> <C-j>   vsnip#available(1)  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+"imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+"smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+"imap <expr> <C-j>   vsnip#available(1)  ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+"smap <expr> <C-j>   vsnip#available(1)  ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+"imap <expr> <C-k> vsnip#available(-1) ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+"smap <expr> <C-k> vsnip#available(-1) ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+"let g:vsnip_snippet_dir = expand('~/.config/nvim/snippet')
+"-----------------------------nvim lsp-----------------------------------------
+lua require'lspconfig'.jedi_language_server.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.pyls.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.pyright.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.yamlls.setup{ on_attach=require'completion'.on_attach }
+nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
+nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
+nnoremap <leader>vi :lua vim.lsp.buf.implementation()<CR>
+nnoremap <leader>vrn :lua vim.lsp.buf.rename()<CR>
+nnoremap <leader>vrr :lua vim.lsp.buf.references()<CR>
+nnoremap <leader>vsd :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
+nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> ff    <cmd>lua vim.lsp.buf.formatting()<CR>
+autocmd BufEnter * lua require'completion'.on_attach()
+set omnifunc=v:lua.vim.lsp.omnifunc
+"-----------------------------Completion---------------------------------------
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" Avoid showing message extra message when using completion
+set shortmess+=c
+
+let g:completion_enable_snippet = 'UltiSnips'
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "snips"]
+"let g:UltiSnipsSnippetDirectories=["UltiSnips", "/Users/sduran/.config/nvim/snippet"]
+let g:completion_chain_complete_list = [
+    \{'complete_items': ['lsp', 'snippet', 'buffers', 'path']},
+    \{'mode': '<c-p>'},
+    \{'mode': '<c-n>'}
+\]
+set completeopt=longest,menuone,noinsert,noselect
+let g:completion_enable_auto_hover = 1
+let g:UltiSnipsExpandTrigger = '<f5>'
+
+
+"-----------------------------Syntastic----------------------------------------
+set statusline+=%#warningmsg#
+set statusline+=%*
+set statusline+=%{SyntasticStatuslineFlag()}
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 2
+let g:syntastic_enable_balloons = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = {"mode": "passive", "passive_filetypes": []}
+let g:syntastic_quiet_messages = {"regex": ['E501', 'module docstring']}
+let g:syntastic_shell = "/bin/sh"
+"let g:syntastic_python_checkers = ["mypy"]
+let g:syntastic_python_checkers = ["flake8", "pep8", "pycodestyle", "pyflakes", "pylint", "python"]
+nnoremap gn :lnext<CR>
+nnoremap gp :lprevious<CR>
+let g:syntastic_error_symbol = '✗✗'
+let g:syntastic_style_error_symbol = '✠✠'
+let g:syntastic_warning_symbol = '∆∆'
+let g:syntastic_style_warning_symbol = '≈≈'
+"-----------------------------Easygit things-----------------------------------
+let easygit_enable_command = 1
+nnoremap <Leader>gd :GdiffThis<CR>
+nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>ga :Gadd<CR>
+nnoremap <Leader>gc :Gcommit
+
 "-----------------------------Colorscheme things-------------------------------
 " required for tmux colorschemes
 if exists('+termguicolors')
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
-"colorschemes
-"colorscheme base16-darktooth
-colorscheme base16-seti
+colorscheme base16-darktooth
+"colorscheme base16-seti
+"colorscheme dracula
 "colorscheme base16-unikitty-dark
 set background=dark
-"autocmd BufEnter *.txt,*.wiki colorscheme seti
+"
+
 "--------------------------------VimWiki---------------------------------------
 let g:vimwiki_conceal_pre =1
 let g:vimwiki_autowriteall =1
 let g:vimwiki_use_calendar =1
-let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_diary_index': 1}]
-let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_generate_links': 1}]
-let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_tags': 1}]
-let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_generate_tags': 1}]
-let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_toc': 1}]
+let g:vimwiki_list = [
+    \{'path': '~/Documents/vimwiki', 
+    \ 'auto_diary_index': 1,
+    \ 'auto_generate_links': 1,
+    \ 'auto_tags': 1,
+    \ 'auto_generate_tags': 1,
+    \ 'auto_toc': 1}]
+"let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_generate_links': 1}]
+"let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_tags': 1}]
+"let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_generate_tags': 1}]
+"let g:vimwiki_list = [{'path': '~/OneDrive - Knex/Documents/VimWiki/Notes', 'auto_toc': 1}]
 " function to enable text editing features
 fun! Wp()
   set lbr
@@ -169,8 +242,6 @@ fun! Wp()
   set nonumber
   set spell spelllang=en_us
 endfu
-autocmd FileType vimwiki map <leader>wp :call Wp()<CR>
-"au BufNewFile,BufRead *.wiki,*.txt,*.md :call Wp()
 
 au BufRead,BufNewFile *.wiki set filetype=vimwiki
 function! ToggleCalendar()
@@ -187,6 +258,8 @@ function! ToggleCalendar()
   end
 endfunction
 autocmd FileType vimwiki map <leader>c :call ToggleCalendar()<CR>
+autocmd FileType vimwiki map <leader>wp :call Wp()<CR>
+"au BufNewFile,BufRead *.wiki,*.txt,*.md :call Wp()
 
 " automatically update links on read diary
 augroup vimwikigroup
@@ -213,16 +286,10 @@ function! VimwikiLinkHandler(link)
     return 1
   endif
 endfunction
-"--------------------------------Netrw-----------------------------------------
-nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
-let g:netrw_banner = 0 "disable usesless netrw banner
-let g:netrw_winsize = 15 "netrw window size
-let g:netrw_localrmdir='rm -r' "allow netrw to remove non-empty directories
-"let g:netrw_browse_split = 1 "open files in the previous window
 
 "--------------------------------FZF-------------------------------------------
 nnoremap <C-p> :Files ~<Cr>
-nnoremap <leader>b :Buffers<Cr>
+nnoremap <leader>B :Buffers<Cr>
 nnoremap <leader>p :ProjectRootExe :Files<Cr>
 nnoremap <C-g> :ProjectRootExe Rg<Cr>
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
@@ -231,24 +298,11 @@ let $FZF_DEFAULT_COMMAND = 'rg --files --ignore-case --hidden -g "!{.git,node_mo
 command! -bang -nargs=? -complete=dir Files
      \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
-"----------------------------nvim lsp------------------------------------------
-"let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-"lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
-"lua require'nvim_lsp'.clangd.setup{ on_attach=require'completion'.on_attach }
-"lua require'nvim_lsp'.pyls.setup{ on_attach=require'completion'.on_attach }
-"nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
-"nnoremap <leader>vd  :lua vim.lsp.buf.definition()<CR>
-"nnoremap <leader>vh  :lua vim.lsp.buf.hover()<CR>
-"nnoremap <leader>vi  :lua vim.lsp.buf.implementation()<CR>
-"nnoremap <leader>vrn :lua vim.lsp.buf.rename()<CR>
-"nnoremap <leader>vrr :lua vim.lsp.buf.references()<CR>
-"nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
+-"-------------------------------ranger-----------------------------------------
+let g:ranger_map_keys = 0
+nnoremap <leader>- :Ranger<CR>
 
 "-------------------------tabs/buffers/panes-----------------------------------
-map <C-t><up>       :tabr<cr>
-map <C-t><down>     :tabl<cr>
-map <C-t><left>     :tabp<cr>
-map <C-t><right>    :tabn<cr>
 nnoremap <PageUp>   :bprevious<CR>
 nnoremap <PageDown> :bnext<CR>
 nnoremap <Leader>bd :bd<CR>
@@ -261,85 +315,112 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-"--------------------------------COC-------------------------------------------
-"let g:coc_disable_startup_warning = 1
-"nmap <silent> gd <Plug>(coc-definition)
-"nmap <silent> gy <Plug>(coc-type-definition)
-"nmap <silent> gi <Plug>(coc-implementation)
-"nmap <silent> gr <Plug>(coc-references)
-"nmap <silent> gp <Plug>(coc-diagnostic-prev)
-"nmap <silent> gn <Plug>(coc-diagnostic-next)
-"inoremap <silent><expr> <c-space> coc#refresh()
-"nnoremap <silent> K :call <SID>show_documentation()<CR>
-"nnoremap <silent> gh :call <SID>show_documentation()<CR>
-"nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
-"
-""set tab for completion
-"inoremap <silent><expr> <TAB>
-"  \ pumvisible() ? "\<C-n>" :
-"  \ <SID>check_back_space() ? "\<TAB>" :
-"  \ coc#refresh()
-"function! s:check_back_space() abort
-"  let col = col('.') - 1
-"  return !col || getline('.')[col - 1]  =~ '\s'
-"endfunction
-"
-"" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-"" position. Coc only does snippet and additional edit on confirm.
-"
-"
-"" Add `:Format` command to format current buffer.
-"command! -nargs=0 Format :call CocAction('format')
-"" Add `:Fold` command to fold current buffer.
-"command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-"" Add `:OR` command for organize imports of the current buffer.
-"command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-"" Highlight the symbol and its references when holding the cursor.
-"autocmd CursorHold * silent call CocActionAsync('highlight')
-"" Symbol renaming.
-"nmap <leader>rn <Plug>(coc-rename)
-"" Formatting selected code.
-"xmap <leader>F  <Plug>(coc-format-selected)
-"nmap <leader>F  <Plug>(coc-format-selected)
-"" Applying codeAction to the selected region.
-"" Example: `<leader>aap` for current paragraph
-"xmap <leader>a  <Plug>(coc-codeaction-selected)
-"nmap <leader>a  <Plug>(coc-codeaction-selected)
-"
-"" Remap keys for applying codeAction to the current line.
-"nmap <leader>ac  <Plug>(coc-codeaction)
-"" Apply AutoFix to problem on the current line.
-"nmap <leader>qf  <Plug>(coc-fix-current)
 "--------------------------------airline---------------------------------------
 let g:webdevicons_enable = 1
 let g:airline_powerline_fonts = 1
 let g:webdevicons_enable_airline_statusline = 1
 let g:airline_left_sep = "\ue0c6"
 let g:airline_right_sep = "\ue0c7"
-let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
+let g:airline_section_z = airline#section#create([ "\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'default'
-let g:airline#extensions#coc#error_symbol = 'Error:'
-let g:airline#extensions#coc#warning_symbol = 'Warning:'
-let g:airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
-let g:airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
 
-"-------------------------------ToDo-------------------------------------------
-nmap <Leader>tu <Plug>BujoChecknormal
-nmap <Leader>th <Plug>BujoAddnormal
-let g:bujo#todo_file_path = $HOME . "/.cache/bujo"
+"-------------------------------defx-------------------------------------------
+call defx#custom#column('mark', {
+      \ 'readonly_icon': '',
+      \ 'selected_icon': '✓',
+      \ })
 
-"----------------------------Fugitive------------------------------------------
-nnoremap <Leader>gc :GBranches<CR>
-nnoremap <leader>g :G<CR>
-nnoremap gf :diffget //2<CR>
-nnoremap gj :diffget //3<CR>>
+call defx#custom#column('filename', {
+      \ 'min_width': 40,
+      \ 'max_width': 50,
+      \ })
 
-"-------------------------------dirvish----------------------------------------
-nnoremap <leader>f :Dirvish<CR>
-"-------------------------------ranger-----------------------------------------
-let g:ranger_map_keys = 0
-nnoremap <leader>r :Ranger<CR>
+call defx#custom#column('time', {
+      \ 'format': '%Y %b %e %H:%M:%S',
+      \ })
+
+" let g:vimfiler_as_default_explorer = 1
+
+function! s:defx_toggle_tree_or_open_file() abort
+  if defx#is_directory()
+    return defx#do_action('open_or_close_tree')
+  else
+    return defx#do_action('open')
+  endif
+endfunction
+
+function! s:defx_cd_or_open_file() abort
+  if defx#is_directory()
+    return defx#do_action('open_directory')
+  else
+    return defx#do_action('open')
+  endif
+endfunction
+
+function! s:defx_keymaps() abort
+  " double click/Enter/l to open file
+  nnoremap <silent><buffer><expr> <2-LeftMouse> <sid>defx_toggle_tree_or_open_file()
+  nnoremap <silent><buffer><expr> <CR> <sid>defx_toggle_tree_or_open_file()
+  nnoremap <silent><buffer><expr> l    <sid>defx_cd_or_open_file()
+
+  nnoremap <silent><buffer><expr> q     defx#do_action('quit')
+  nnoremap <silent><buffer><expr> .     defx#do_action('toggle_ignored_files')
+  nnoremap <silent><buffer><expr> yy    defx#do_action('yank_path')
+  nnoremap <silent><buffer><expr> ~     defx#do_action('cd')
+  nnoremap <silent><buffer><expr><nowait> \  defx#do_action('cd', getcwd())
+  nnoremap <silent><buffer><expr> h     defx#do_action('cd', ['..'])
+
+  nnoremap <silent><buffer><expr><nowait> <Space> defx#do_action('toggle_select') . 'j'
+  nnoremap <silent><buffer><expr> *      defx#do_action('toggle_select_all')
+  nnoremap <silent><buffer><expr> <C-c>  defx#do_action('clear_select_all')
+  nnoremap <silent><buffer><expr> <C-r>  defx#do_action('redraw')
+  nnoremap <silent><buffer><expr> <C-g>  defx#do_action('print')
+
+  nnoremap <silent><buffer><expr> K     defx#do_action('new_directory')
+  nnoremap <silent><buffer><expr> N     defx#do_action('new_multiple_files')
+  nnoremap <silent><buffer><expr> dd    defx#do_action('remove')
+  nnoremap <silent><buffer><expr> r     defx#do_action('rename')
+  nnoremap <silent><buffer><expr> !     defx#do_action('execute_command')
+  nnoremap <silent><buffer><expr><nowait> c  defx#do_action('copy')
+  nnoremap <silent><buffer><expr><nowait> m  defx#do_action('move')
+  nnoremap <silent><buffer><expr><nowait> p  defx#do_action('paste')
+
+  nnoremap <silent><buffer><expr> S  defx#do_action('toggle_sort', 'time')
+endfunction
+
+" Ref:
+" https://github.com/Shougo/vimfiler.vim/blob/edbb2f2e6baa66c51f73a82afa2bb740415a64ea/plugin/vimfiler.vim#L72
+" https://github.com/Shougo/defx.nvim/issues/121
+function! s:browse() abort
+  let l:path = expand('<amatch>')
+  if l:path ==# '' || bufnr('%') != expand('<abuf>')
+    return
+  endif
+  if &filetype ==# 'defx' && line('$') != 1
+    return
+  endif
+  if !isdirectory(l:path)
+    return
+  endif
+  bd
+  exe ':Defx -show-ignored-files -split=no -columns=mark:indent:icons:filename:type:size:time ' . l:path
+endfunction
+" disable netrw.
+augroup FileExplorer
+  autocmd!
+augroup END
+augroup defx_group
+  autocmd!
+  " Move focus to the next window if current buffer is defx
+  autocmd TabLeave * if &ft ==# 'defx' | wincmd w | endif
+  " keymap
+  autocmd FileType defx do WinEnter | call s:defx_keymaps()
+  " replace netrw to defx
+  autocmd BufEnter * call s:browse()
+augroup END
+
+map <C-e> :Defx -split=no -columns=mark:indent:icons:filename:type:size:time<CR>
 
 "-------------------------------startify---------------------------------------
 nnoremap <Leader>s :Startify<Cr>
@@ -361,25 +442,9 @@ let g:startify_lists = [
 
 let g:startify_bookmarks = [
         \ { 'i': '~/repos/spence/dotfiles/vim/nvim/init.vim' },
-        \ { 'c': '~/repos/spence/dotfiles/vim/nvim/coc-settings.json' },
         \ { 'a': '~/.alacritty.yml' },
         \ { 'h': '~/.hammerspoon/init.lua' },
         \ ]
 
 "-------------------------------autoload---------------------------------------
-augroup myvimrc
-    au!
-    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
-augroup END
-
-
-" returns all modified files of the current git repo
-" `2>/dev/null` makes the command fail quietly, so that when we are not
-" in a git repo, the list will be empty
-function! s:gitModified()
-    let files = systemlist('git ls-files -m 2>/dev/null')
-    return map(files, "{'line': v:val, 'path': v:val}")
-endfunction
-
-
 autocmd BufEnter * silent! lcd %:p:h
