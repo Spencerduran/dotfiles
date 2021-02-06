@@ -171,8 +171,12 @@ let g:completion_chain_complete_list = [
 \]
 set completeopt=longest,menuone,noinsert,noselect
 let g:completion_enable_auto_hover = 1
+"Defaults
+"g:UltiSnipsExpandTrigger               <tab>
+"g:UltiSnipsListSnippets                <c-tab>
+"g:UltiSnipsJumpForwardTrigger          <c-j>
+"g:UltiSnipsJumpBackwardTrigger         <c-k>
 let g:UltiSnipsExpandTrigger = '<f5>'
-
 
 "-----------------------------Syntastic----------------------------------------
 set statusline+=%#warningmsg#
@@ -216,6 +220,7 @@ set background=dark
 "
 
 "--------------------------------VimWiki---------------------------------------
+let g:vimwiki_table_mappings = 0 "avoid conflict with auto complete
 let g:vimwiki_conceal_pre =1
 let g:vimwiki_autowriteall =1
 let g:vimwiki_use_calendar =1
@@ -286,7 +291,6 @@ function! VimwikiLinkHandler(link)
     return 1
   endif
 endfunction
-
 "--------------------------------FZF-------------------------------------------
 nnoremap <C-p> :Files ~<Cr>
 nnoremap <leader>B :Buffers<Cr>
