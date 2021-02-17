@@ -4,8 +4,8 @@ column_numbers() {
         head -1 ~/scrap.csv | tr '\t' '\012' | nl
 }
 
-parse_csv() {
-        cut -d \t -f $1 ~/scrap.csv | uniq -c | sort -r
+backup() {
+        cp -rvf ~/Documents ~/OneDrive\ -\ Knex/Documents/testfolder
 }
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
