@@ -21,7 +21,7 @@
     "**/.factorypath": true
 },
 "explorer.confirmDragAndDrop": false,
-"window.zoomLevel": 0,
+"window.zoomLevel": 1,
 "workbench.colorTheme": "Dark-Dracula",
 "vim.useSystemClipboard": true,
 "vim.insertModeKeyBindings": [
