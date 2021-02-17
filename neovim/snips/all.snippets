@@ -1,5 +1,10 @@
-snippet bean "beanbean"
-if ${2:[[ ${1:condition} ]]}; then
-	${0:#statements}
-fi
+snippet sql "sql code block"
+\{\{\{sql
+$1
+\}\}\}
+endsnippet
+
+snippet codeblock "Add code block to wiki"
+\{\{\{$1
+\}\}\}
 endsnippet

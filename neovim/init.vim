@@ -51,10 +51,11 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 au BufNewFile,BufRead *.json,*.txt setlocal colorcolumn=
 "---------------------------------VimPlug--------------------------------------
 call plug#begin('~/.vim/plugged')
+"Plug 'neoclide/coc.nvim'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'airblade/vim-gitgutter'
 Plug 'kosayoda/nvim-lightbulb'
-Plug 'beeender/Comrade'
+"Plug 'beeender/Comrade'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dbakker/vim-projectroot'
 Plug 'edkolev/tmuxline.vim'
@@ -138,6 +139,7 @@ lua require'lspconfig'.jedi_language_server.setup{ on_attach=require'completion'
 lua require'lspconfig'.pyls.setup{ on_attach=require'completion'.on_attach }
 lua require'lspconfig'.pyright.setup{ on_attach=require'completion'.on_attach }
 lua require'lspconfig'.yamlls.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.jsonls.setup{ on_attach=require'completion'.on_attach }
 nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
 nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>vi :lua vim.lsp.buf.implementation()<CR>
@@ -145,6 +147,8 @@ nnoremap <leader>vrn :lua vim.lsp.buf.rename()<CR>
 nnoremap <leader>vrr :lua vim.lsp.buf.references()<CR>
 nnoremap <leader>vsd :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
 nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
+nnoremap gn :lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap gp :lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
@@ -178,6 +182,11 @@ let g:completion_enable_auto_hover = 1
 "g:UltiSnipsJumpBackwardTrigger         <c-k>
 let g:UltiSnipsExpandTrigger = '<f5>'
 
+"-----------------------------Neoformat----------------------------------------
+"
+nnoremap <Leader>ff :Neoformat<CR>
+let g:neoformat_enabled_json = ['prettier']
+"
 "-----------------------------Syntastic----------------------------------------
 set statusline+=%#warningmsg#
 set statusline+=%*
@@ -193,8 +202,6 @@ let g:syntastic_quiet_messages = {"regex": ['E501', 'module docstring']}
 let g:syntastic_shell = "/bin/sh"
 "let g:syntastic_python_checkers = ["mypy"]
 let g:syntastic_python_checkers = ["flake8", "pep8", "pycodestyle", "pyflakes", "pylint", "python"]
-nnoremap gn :lnext<CR>
-nnoremap gp :lprevious<CR>
 let g:syntastic_error_symbol = '✗✗'
 let g:syntastic_style_error_symbol = '✠✠'
 let g:syntastic_warning_symbol = '∆∆'
@@ -212,10 +219,11 @@ if exists('+termguicolors')
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
-colorscheme base16-darktooth
+"colorscheme base16-darktooth
 "colorscheme base16-seti
-"colorscheme dracula
+colorscheme dracula
 "colorscheme base16-unikitty-dark
+"colorscheme base16-dracula
 set background=dark
 "
 
@@ -327,7 +335,7 @@ let g:airline_left_sep = "\ue0c6"
 let g:airline_right_sep = "\ue0c7"
 let g:airline_section_z = airline#section#create([ "\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'default'
+"let g:airline#extensions#tabline#formatter = 'default'
 
 "-------------------------------defx-------------------------------------------
 call defx#custom#column('mark', {
@@ -393,9 +401,6 @@ function! s:defx_keymaps() abort
   nnoremap <silent><buffer><expr> S  defx#do_action('toggle_sort', 'time')
 endfunction
 
-" Ref:
-" https://github.com/Shougo/vimfiler.vim/blob/edbb2f2e6baa66c51f73a82afa2bb740415a64ea/plugin/vimfiler.vim#L72
-" https://github.com/Shougo/defx.nvim/issues/121
 function! s:browse() abort
   let l:path = expand('<amatch>')
   if l:path ==# '' || bufnr('%') != expand('<abuf>')
@@ -426,6 +431,16 @@ augroup END
 
 map <C-e> :Defx -split=no -columns=mark:indent:icons:filename:type:size:time<CR>
 
+augroup defx
+    au!
+    au VimEnter * sil! au! FileExplorer *
+    au BufEnter * if s:isdir(expand('%')) | bd | exe 'Defx' | endif
+augroup END
+
+fu! s:isdir(dir) abort
+    return !empty(a:dir) && (isdirectory(a:dir) ||
+       \ (!empty($SYSTEMDRIVE) && isdirectory('/'.tolower($SYSTEMDRIVE[0]).a:dir)))
+endfu
 "-------------------------------startify---------------------------------------
 nnoremap <Leader>s :Startify<Cr>
 let g:startify_change_to_dir = 1 "When opening a file or bookmark, change to its directory
@@ -445,7 +460,7 @@ let g:startify_lists = [
         \ ]
 
 let g:startify_bookmarks = [
-        \ { 'i': '~/repos/spence/dotfiles/vim/nvim/init.vim' },
+        \ { 'i': '~/repos/spence/dotfiles/neovim/init.vim' },
         \ { 'a': '~/.alacritty.yml' },
         \ { 'h': '~/.hammerspoon/init.lua' },
         \ ]
