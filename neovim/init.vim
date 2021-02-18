@@ -91,6 +91,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend upda
 Plug 'nvim-treesitter/completion-treesitter'
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
 Plug 'romgrk/nvim-treesitter-context'
+Plug 'editorconfig/editorconfig-vim'
 "colorschemes
 Plug 'flazz/vim-colorschemes'
 Plug 'chriskempson/base16-vim'
@@ -151,11 +152,11 @@ nnoremap gn :lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap gp :lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> ff    <cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <silent>K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent>g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent>gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent>gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+"nnoremap <silent>ff    <cmd>lua vim.lsp.buf.formatting()<CR>
 autocmd BufEnter * lua require'completion'.on_attach()
 set omnifunc=v:lua.vim.lsp.omnifunc
 "-----------------------------Completion---------------------------------------
@@ -301,7 +302,7 @@ function! VimwikiLinkHandler(link)
 endfunction
 "--------------------------------FZF-------------------------------------------
 nnoremap <C-p> :Files ~<Cr>
-nnoremap <leader>B :Buffers<Cr>
+nnoremap <leader>b :Buffers<Cr>
 nnoremap <leader>p :ProjectRootExe :Files<Cr>
 nnoremap <C-g> :ProjectRootExe Rg<Cr>
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
