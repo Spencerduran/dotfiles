@@ -36,6 +36,15 @@ hyper.bindKey('c', function()
     hs.application.launchOrFocus('/Applications/google chrome.app')
   end
 end)
+-- Show/hide Discord
+hyper.bindKey('d', function()
+  local discord = hs.application.find('discord')
+  if discord:isFrontmost() then
+    discord:hide()
+  else
+    hs.application.launchOrFocus('/Applications/discord.app')
+  end
+end)
 -- Show/hide Excel
 hyper.bindKey('e', function()
   local outlook = hs.application.find('excel')
@@ -65,11 +74,11 @@ hyper.bindKey('s', function()
 end)
 -- Show/hide postman
 hyper.bindKey('p', function()
-  local PyCharm = hs.application.find('PyCharm')
-  if PyCharm:isFrontmost() then
-    PyCharm:hide()
+  local postman = hs.application.find('postman')
+  if postman:isFrontmost() then
+    postman:hide()
   else
-    hs.application.launchOrFocus('/Applications/PyCharm.app')
+    hs.application.launchOrFocus('/Applications/postman.app')
   end
 end)
 -- Show/hide spotify
