@@ -3,13 +3,6 @@
 SETUVAR --export AWS_CA_BUNDLE:\x7e/\x2essh/qlca\x2epem
 SETUVAR --export AWS_SDK_LOAD_CONFIG:\x1d
 SETUVAR --export AWS_SHARED_CREDENTIALS_FILE:/Users/sduran/Downloads/credentials
-SETUVAR FZF_DEFAULT_COMMAND:rg\x20\x2d\x2dfiles
-SETUVAR FZF_DEFAULT_OPTS:\x2d\x2dheight\x3d70\x25\x20\x2d\x2dpreview\x3d\x22bat\x20\x7b\x7d\x22\x20\x2d\x2dpreview\x2dwindow\x3dright\x3a60\x25\x3awrap
-SETUVAR FZF_DISABLE_KEYBINDINGS:0
-SETUVAR FZF_LEGACY_KEYBINDINGS:0
-SETUVAR FZF_PREVIEW_DIR_CMD:ls
-SETUVAR FZF_PREVIEW_FILE_CMD:head\x20\x2dn\x2010
-SETUVAR FZF_TMUX_HEIGHT:40\x25
 SETUVAR --export --path NODE_PATH:/usr/local/lib/node_modules
 SETUVAR ZO_CMD:zo
 SETUVAR Z_CMD:z
@@ -50,5 +43,4 @@ SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_user_paths:/Users/sduran/\x2epyenv/shims/ranger
-SETUVAR fzf_fish_custom_keybindings:\x1d
 SETUVAR x:NODE_PATH\x3d/usr/local/lib/node_modules/
