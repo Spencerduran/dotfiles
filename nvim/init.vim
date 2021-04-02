@@ -52,13 +52,15 @@ au BufNewFile,BufRead *.json,*.txt setlocal colorcolumn=
 "---------------------------------VimPlug--------------------------------------
 call plug#begin('~/.vim/plugged')
 "Plug 'neoclide/coc.nvim'
+Plug 'yegappan/greplace'
+Plug 'aadhav-n1/punchy.vim'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'airblade/vim-gitgutter'
 Plug 'kosayoda/nvim-lightbulb'
 "Plug 'beeender/Comrade'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dbakker/vim-projectroot'
-Plug 'edkolev/tmuxline.vim'
+"Plug 'edkolev/tmuxline.vim'
 Plug 'file://'.expand('~/.local/share/nvim/site/plugin/CopyMatches') 
 Plug 'file://'.expand('~/.local/share/nvim/site/plugin/Rename') 
 Plug 'francoiscabrol/ranger.vim'
@@ -93,6 +95,8 @@ Plug 'nvim-treesitter/nvim-treesitter-refactor'
 Plug 'romgrk/nvim-treesitter-context'
 Plug 'editorconfig/editorconfig-vim'
 "colorschemes
+Plug 'kyoz/purify', { 'rtp': 'vim' }
+Plug 'relastle/bluewery.vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'chriskempson/base16-vim'
 Plug 'dracula/vim'
@@ -125,6 +129,18 @@ nnoremap <Leader>bo :BufOnly<CR>
 " delete trailing whitespace 
 nnoremap <Leader>dw :%s/\s\+$//e<CR>
 
+"----------------------windows/buffers/panes-----------------------------------
+nnoremap <PageUp>   :bprevious<CR>
+nnoremap <PageDown> :bnext<CR>
+nnoremap <Leader>bd :bd<CR>
+nnoremap <Leader>bn :bn<CR>
+nnoremap <Leader>bn :bn<CR>
+nnoremap <Leader>bp :bp<CR>
+nnoremap <Leader>ls :ls<CR>
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 "-----------------------------vsnip--------------------------------------------
 " You can use other key to expand snippet.
 "imap <expr> <C-j>   vsnip#available(1)  ? '<Plug>(vsnip-expand)'         : '<C-j>'
@@ -222,9 +238,10 @@ if exists('+termguicolors')
 endif
 "colorscheme base16-darktooth
 "colorscheme base16-seti
-colorscheme dracula
+"colorscheme turtles
 "colorscheme base16-unikitty-dark
 "colorscheme base16-dracula
+colorscheme Purify
 set background=dark
 "
 
@@ -306,27 +323,15 @@ nnoremap <leader>b :Buffers<Cr>
 nnoremap <leader>p :ProjectRootExe :Files<Cr>
 nnoremap <C-g> :ProjectRootExe Rg<Cr>
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
-let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --margin=1,4 --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
-let $FZF_DEFAULT_COMMAND = 'rg --files --ignore-case --hidden -g "!{.git,node_modules,vendor}/*"'
+"let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --margin=1,4 --preview 'bat --color=always --style=header,grid --line-range :300 {} --hidden -g '!{.git,node_modules,vendor,~/.vim}/*'"
+"let $FZF_DEFAULT_COMMAND = 'rg --files --ignore-case --hidden -g !{.git,node_modules,vendor}/*"'
 command! -bang -nargs=? -complete=dir Files
      \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
--"-------------------------------ranger-----------------------------------------
+"-------------------------------ranger-----------------------------------------
 let g:ranger_map_keys = 0
 nnoremap <leader>- :Ranger<CR>
 
-"-------------------------tabs/buffers/panes-----------------------------------
-nnoremap <PageUp>   :bprevious<CR>
-nnoremap <PageDown> :bnext<CR>
-nnoremap <Leader>bd :bd<CR>
-nnoremap <Leader>bn :bn<CR>
-nnoremap <Leader>bn :bn<CR>
-nnoremap <Leader>bp :bp<CR>
-nnoremap <Leader>ls :ls<CR>
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
 
 "--------------------------------airline---------------------------------------
 let g:webdevicons_enable = 1
@@ -337,6 +342,7 @@ let g:airline_right_sep = "\ue0c7"
 let g:airline_section_z = airline#section#create([ "\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
 let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#formatter = 'default'
+"let g:airline_theme='biogoo'
 
 "-------------------------------defx-------------------------------------------
 call defx#custom#column('mark', {
