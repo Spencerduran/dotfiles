@@ -324,7 +324,7 @@ nnoremap <leader>p :ProjectRootExe :Files<Cr>
 nnoremap <C-g> :ProjectRootExe Rg<Cr>
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
 "let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --margin=1,4 --preview 'bat --color=always --style=header,grid --line-range :300 {} --hidden -g '!{~/Library,.git,node_modules,vendor,.vim}/*'"
-let $FZF_DEFAULT_COMMAND = 'rg --files --ignore-case --hidden -g "!{.pyenv,.local,.idea,.vscode,tmp,Library,.vim,.git,node_modules,vendor}/*"'
+let $FZF_DEFAULT_COMMAND = 'rg --files --ignore-case --hidden -g "!{.pyenv,.local,.idea,.vscode,tmp,Library,.vim,.git,node_modules,vendor,OneDrive\ -\ Knex}/*"'
 command! -bang -nargs=? -complete=dir Files
      \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
