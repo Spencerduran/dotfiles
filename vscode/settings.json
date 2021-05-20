@@ -103,5 +103,6 @@
 },
 "[json]": {
     "editor.defaultFormatter": "HookyQR.beautify"
-}
+},
+"window.zoomLevel": -1
 }
