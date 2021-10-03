@@ -72,15 +72,24 @@ hyper.bindKey('s', function()
     hs.application.launchOrFocus('/Applications/Slack.app')
   end
 end)
--- Show/hide postman
+-- Show/hide pycharm
 hyper.bindKey('p', function()
-  local postman = hs.application.find('postman')
+  local postman = hs.application.find('pycharm')
   if postman:isFrontmost() then
     postman:hide()
   else
-    hs.application.launchOrFocus('/Applications/postman.app')
+    hs.application.launchOrFocus('/Applications/pycharm.app')
   end
 end)
+-- Show/hide postman
+--hyper.bindKey('p', function()
+--  local postman = hs.application.find('postman')
+--  if postman:isFrontmost() then
+--    postman:hide()
+--  else
+--    hs.application.launchOrFocus('/Applications/postman.app')
+--  end
+--end)
 -- Show/hide spotify
 hyper.bindKey('q', function()
   local spotify = hs.application.find('spotify')
@@ -130,6 +139,11 @@ end)
 
 local wm = require('window-management')
 -- Window Management
+--
+hyper.bindShiftKey('f', function()
+  hs.window.focusedWindow():setSize(3600,1920)
+end)
+
 hyper.bindKey('f', function()
   wm.windowMaximize(0)
 end)
