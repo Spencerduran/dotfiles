@@ -17,7 +17,7 @@ set hlsearch " highlight search
 set ignorecase
 set incsearch " incremental search
 set laststatus=2 " Status bar
-set listchars=tab:..,trail:_,extends:>,precedes:<,nbsp:~,eol:$,space:_
+set listchars=tab:..,trail:_,nbsp:~,eol:$,space:_
 set mouse=n "set mouse mode for terminal window resizing
 set nobackup " disable backups before writing file
 set noerrorbells
@@ -60,7 +60,7 @@ Plug 'kosayoda/nvim-lightbulb'
 "Plug 'beeender/Comrade'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dbakker/vim-projectroot'
-"Plug 'edkolev/tmuxline.vim'
+Plug 'edkolev/tmuxline.vim'
 Plug 'file://'.expand('~/.local/share/nvim/site/plugin/CopyMatches') 
 Plug 'file://'.expand('~/.local/share/nvim/site/plugin/Rename') 
 Plug 'francoiscabrol/ranger.vim'
@@ -91,9 +91,11 @@ Plug 'nvim-lua/completion-nvim'
 Plug 'steelsojka/completion-buffers'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'nvim-treesitter/completion-treesitter'
-Plug 'nvim-treesitter/nvim-treesitter-refactor'
+"Plug 'nvim-treesitter/nvim-treesitter-refactor'
+Plug 'nvim-treesitter/playground'
 Plug 'romgrk/nvim-treesitter-context'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'hrsh7th/nvim-compe'
 "colorschemes
 Plug 'kyoz/purify', { 'rtp': 'vim' }
 Plug 'relastle/bluewery.vim'
@@ -128,7 +130,8 @@ nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 nnoremap <Leader>bo :BufOnly<CR>
 " delete trailing whitespace 
 nnoremap <Leader>dw :%s/\s\+$//e<CR>
-
+" fold za using space
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 "----------------------windows/buffers/panes-----------------------------------
 nnoremap <PageUp>   :bprevious<CR>
 nnoremap <PageDown> :bnext<CR>
@@ -156,7 +159,7 @@ lua require'lspconfig'.jedi_language_server.setup{ on_attach=require'completion'
 lua require'lspconfig'.pyls.setup{ on_attach=require'completion'.on_attach }
 lua require'lspconfig'.pyright.setup{ on_attach=require'completion'.on_attach }
 lua require'lspconfig'.yamlls.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.jsonls.setup{ on_attach=require'completion'.on_attach }
+"lua require'lspconfig'.jsonls.setup{ on_attach=require'completion'.on_attach }
 nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
 nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>vi :lua vim.lsp.buf.implementation()<CR>
@@ -271,8 +274,8 @@ fun! Wp()
   nnoremap 0 g0
   nnoremap $ g$
   set nonumber
-  set spell spelllang=en_us
 endfu
+
 
 au BufRead,BufNewFile *.wiki set filetype=vimwiki
 function! ToggleCalendar()
@@ -467,7 +470,7 @@ let g:startify_lists = [
         \ ]
 
 let g:startify_bookmarks = [
-        \ { 'i': '~/repos/spence/dotfiles/neovim/init.vim' },
+        \ { 'i': '~/repos/spence/dotfiles/nvim/init.vim' },
         \ { 'a': '~/.alacritty.yml' },
         \ { 'h': '~/.hammerspoon/init.lua' },
         \ ]

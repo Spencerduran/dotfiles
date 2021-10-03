@@ -1,4 +1,5 @@
 alt_send_esc: false
+#background_opacity: 
 key_bindings:
   - { key: Return, mods: Command, action: ToggleSimpleFullscreen }
   - { key: A, mods: Alt, chars: "\x1ba" }
