@@ -3,6 +3,7 @@ local This = {}
 -- a 4x4 grid. To use a more detailed grid, change its dimension here
 local GRID_SIZE = 4
 local HALF_GRID_SIZE = GRID_SIZE / 2
+local THIRD_GRID_SIZE = GRID_SIZE / 3
 
 -- Set the grid size and add a few pixels of margin
 -- Also, don't animate window changes.
@@ -14,6 +15,22 @@ local screenPositions       = {}
 screenPositions.left        = {
   x = 0, y = 0,
   w = HALF_GRID_SIZE, h = GRID_SIZE
+}
+screenPositions.halfleft        = {
+  x = 0, y = 0,
+  w = HALF_GRID_SIZE, h = GRID_SIZE
+}
+screenPositions.thirdleft        = {
+  x = 0, y = 0,
+  w = THIRD_GRID_SIZE, h = GRID_SIZE
+}
+screenPositions.mid        = {
+  x = THIRD_GRID_SIZE, y = 0,
+  w = THIRD_GRID_SIZE, h = GRID_SIZE
+}
+screenPositions.thirdright        = {
+  x = THIRD_GRID_SIZE+THIRD_GRID_SIZE, y = 0,
+  w = THIRD_GRID_SIZE, h = GRID_SIZE
 }
 screenPositions.right       = {
   x = HALF_GRID_SIZE, y = 0,
