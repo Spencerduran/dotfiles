@@ -48,6 +48,14 @@ screenPositions.topLeft     = {
   x = 0, y = 0,
   w = HALF_GRID_SIZE, h = HALF_GRID_SIZE
 }
+screenPositions.topLeftthird     = {
+  x = 0, y = 0,
+  w = THIRD_GRID_SIZE, h = HALF_GRID_SIZE
+}
+screenPositions.bottomLeftthird     = {
+  x = 0, y = HALF_GRID_SIZE,
+  w = THIRD_GRID_SIZE, h = HALF_GRID_SIZE
+}
 screenPositions.topRight    = {
   x = HALF_GRID_SIZE, y = 0,
   w = HALF_GRID_SIZE, h = HALF_GRID_SIZE

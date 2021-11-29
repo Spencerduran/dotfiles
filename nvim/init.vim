@@ -7,7 +7,7 @@ set colorcolumn=80
 set conceallevel=0 " Dont hide symbols in MD and JSON
 set cursorline " Highlight the line background of the cursor.
 set encoding=UTF-8
-set expandtab "set the tabs to display as spaces
+"set expandtab "set the tabs to display as spaces
 set fillchars= " Characters to fill the status lines and vertical separators.
 set foldmethod=manual
 set guicursor=
