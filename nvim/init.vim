@@ -64,7 +64,8 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'file://'.expand('~/.local/share/nvim/site/plugin/CopyMatches') 
 Plug 'file://'.expand('~/.local/share/nvim/site/plugin/Rename') 
 Plug 'francoiscabrol/ranger.vim'
-Plug 'gruvbox-community/gruvbox'
+"Plug 'gruvbox-community/gruvbox'
+Plug 'morhetz/gruvbox'
 "Plug 'hrsh7th/vim-vsnip'
 "Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'SirVer/ultisnips'
@@ -159,7 +160,7 @@ lua require'lspconfig'.jedi_language_server.setup{ on_attach=require'completion'
 lua require'lspconfig'.pyls.setup{ on_attach=require'completion'.on_attach }
 lua require'lspconfig'.pyright.setup{ on_attach=require'completion'.on_attach }
 lua require'lspconfig'.yamlls.setup{ on_attach=require'completion'.on_attach }
-"lua require'lspconfig'.jsonls.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.jsonls.setup{ on_attach=require'completion'.on_attach }
 nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
 nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>vi :lua vim.lsp.buf.implementation()<CR>
@@ -240,12 +241,12 @@ if exists('+termguicolors')
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 "colorscheme base16-darktooth
+"colorscheme gruvbox
 "colorscheme base16-seti
 "colorscheme turtles
-"colorscheme base16-unikitty-dark
+"colorscheme base16-unikitty-light
 "colorscheme base16-dracula
 colorscheme Purify
-set background=dark
 "
 
 "--------------------------------VimWiki---------------------------------------
