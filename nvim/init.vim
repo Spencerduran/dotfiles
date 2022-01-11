@@ -50,7 +50,7 @@ filetype plugin on
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 au BufNewFile,BufRead *.json,*.txt setlocal colorcolumn=
 "---------------------------------VimPlug--------------------------------------
-call plug#begin('~/.vim/plugged')
+call plug#begin()
 "Plug 'neoclide/coc.nvim'
 Plug 'yegappan/greplace'
 Plug 'aadhav-n1/punchy.vim'
@@ -156,11 +156,11 @@ nnoremap <C-l> <C-w>l
 "smap <expr> <C-k> vsnip#available(-1) ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 "let g:vsnip_snippet_dir = expand('~/.config/nvim/snippet')
 "-----------------------------nvim lsp-----------------------------------------
-lua require'lspconfig'.jedi_language_server.setup{ on_attach=require'completion'.on_attach }
+"lua require'lspconfig'.jedi_language_server.setup{ on_attach=require'completion'.on_attach }
 lua require'lspconfig'.pyls.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.pyright.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.yamlls.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.jsonls.setup{ on_attach=require'completion'.on_attach }
+"lua require'lspconfig'.pyright.setup{ on_attach=require'completion'.on_attach }
+"lua require'lspconfig'.yamlls.setup{ on_attach=require'completion'.on_attach }
+"lua require'lspconfig'.jsonls.setup{ on_attach=require'completion'.on_attach }
 nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
 nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>vi :lua vim.lsp.buf.implementation()<CR>
@@ -188,7 +188,7 @@ set shortmess+=c
 
 let g:completion_enable_snippet = 'UltiSnips'
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "snips"]
-"let g:UltiSnipsSnippetDirectories=["UltiSnips", "/Users/sduran/.config/nvim/snippet"]
+""let g:UltiSnipsSnippetDirectories=["UltiSnips", /Users/sduran/.config/nvim/snippet"]
 let g:completion_chain_complete_list = [
     \{'complete_items': ['lsp', 'snippet', 'buffers', 'path']},
     \{'mode': '<c-p>'},
@@ -245,8 +245,9 @@ endif
 "colorscheme base16-seti
 "colorscheme turtles
 "colorscheme base16-unikitty-light
+colorscheme dracula
 "colorscheme base16-dracula
-colorscheme Purify
+"colorscheme Purify
 "
 
 "--------------------------------VimWiki---------------------------------------
@@ -255,7 +256,7 @@ let g:vimwiki_conceal_pre =1
 let g:vimwiki_autowriteall =1
 let g:vimwiki_use_calendar =1
 let g:vimwiki_list = [
-    \{'path': '~/Documents/vimwiki', 
+    \{'path': '/Users/SDuran/OneDrive - Knex/Documents/Documents/vimwiki', 
     \ 'auto_diary_index': 1,
     \ 'auto_generate_links': 1,
     \ 'auto_tags': 1,
@@ -424,7 +425,7 @@ function! s:browse() abort
     return
   endif
   bd
-  exe ':Defx -show-ignored-files -split=no -columns=mark:indent:icons:filename:type:size:time ' . l:path
+  exe ':Defx -show-ignored-files -split=no -columns=mark:icons:indent:filename:type:size:time ' . l:path
 endfunction
 " disable netrw.
 augroup FileExplorer
@@ -440,7 +441,7 @@ augroup defx_group
   autocmd BufEnter * call s:browse()
 augroup END
 
-map <C-e> :Defx -split=no -columns=mark:indent:icons:filename:type:size:time<CR>
+map <C-e> :Defx -split=no -columns=mark:indent:icons:indent:filename:type:size:time<CR>
 
 augroup defx
     au!
