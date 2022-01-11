@@ -7,16 +7,16 @@ hyper.install('F18')
 hyper.bindShiftKey('r', hs.reload)
 
 -- Show/hide alacritty with 2x ctrl press
-ctrlDoublePress = require('ctrlDoublePress')
-ctrlDoublePress.timeFrame = 2
-ctrlDoublePress.action = function()
-  local alacritty = hs.application.find('alacritty')
-  if alacritty:isFrontmost() then
-    alacritty:hide()
-  else
-    hs.application.launchOrFocus('/Applications/Alacritty.app')
-  end
-end
+--ctrlDoublePress = require('ctrlDoublePress')
+--ctrlDoublePress.timeFrame = 2
+--ctrlDoublePress.action = function()
+--  local alacritty = hs.application.find('alacritty')
+--  if alacritty:isFrontmost() then
+--    alacritty:hide()
+--  else
+--    hs.application.launchOrFocus('/Applications/Alacritty.app')
+--  end
+--end
 
 -- Show/hide alacritty
 hyper.bindKey('a', function()
@@ -185,12 +185,6 @@ end)
 hyper.bindKey('1', function()
   wm.moveWindowToPosition(wm.screenPositions.topLeft)
 end)
-hyper.bindShiftKey('6', function()
-  wm.moveWindowToPosition(wm.screenPositions.topLeftthird)
-end)
-hyper.bindShiftKey('7', function()
-  wm.moveWindowToPosition(wm.screenPositions.bottomLeftthird)
-end)
 hyper.bindKey('2', function()
   wm.moveWindowToPosition(wm.screenPositions.topRight)
 end)
@@ -199,4 +193,11 @@ hyper.bindKey('3', function()
 end)
 hyper.bindKey('4', function()
   wm.moveWindowToPosition(wm.screenPositions.bottomRight)
+end)
+
+hyper.bindShiftKey('6', function()
+  wm.moveWindowToPosition(wm.screenPositions.topLeftthird)
+end)
+hyper.bindShiftKey('7', function()
+  wm.moveWindowToPosition(wm.screenPositions.bottomLeftthird)
 end)
