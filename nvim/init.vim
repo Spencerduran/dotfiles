@@ -7,7 +7,6 @@ set colorcolumn=80
 set conceallevel=0 " Dont hide symbols in MD and JSON
 set cursorline " Highlight the line background of the cursor.
 set encoding=UTF-8
-"set expandtab "set the tabs to display as spaces
 set fillchars= " Characters to fill the status lines and vertical separators.
 set foldmethod=manual
 set guicursor=
@@ -30,7 +29,6 @@ set relativenumber " Show relative line numbers
 set scrolloff=8 " Minimum number of screen lines to keep above and below the cursor.
 set shell=bash
 set shiftwidth=4
-set shortmess+=c " don't give ins-completion-menu messages.
 set showcmd " Show commands in statusline
 set showmatch
 set signcolumn=yes " always show signcolumns
@@ -49,33 +47,51 @@ syntax on
 filetype plugin on
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 au BufNewFile,BufRead *.json,*.txt setlocal colorcolumn=
+let g:python3_host_prog = '/Users/SDuran/.pyenv/shims/python'
 "---------------------------------VimPlug--------------------------------------
 call plug#begin()
-"Plug 'neoclide/coc.nvim'
-Plug 'yegappan/greplace'
-Plug 'aadhav-n1/punchy.vim'
+"------------- Custom Plugins ------------------
+Plug 'file://'.expand('/Users/SDuran/repos/spence/dotfiles/nvim/plugin/CopyMatches') 
+Plug 'file://'.expand('/Users/SDuran/repos/spence/dotfiles/nvim/plugin/Rename') 
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'aadhav-n1/punchy.vim'
 Plug 'airblade/vim-gitgutter'
-Plug 'kosayoda/nvim-lightbulb'
-"Plug 'beeender/Comrade'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dbakker/vim-projectroot'
 Plug 'edkolev/tmuxline.vim'
-Plug 'file://'.expand('~/.local/share/nvim/site/plugin/CopyMatches') 
-Plug 'file://'.expand('~/.local/share/nvim/site/plugin/Rename') 
 Plug 'francoiscabrol/ranger.vim'
-"Plug 'gruvbox-community/gruvbox'
-Plug 'morhetz/gruvbox'
+"------------- Completion/LSP Plugins ------------------
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'dcampos/nvim-snippy'
+Plug 'honza/vim-snippets'
+Plug 'dcampos/cmp-snippy'
+"------------- vsnip  ------------------
 "Plug 'hrsh7th/vim-vsnip'
 "Plug 'hrsh7th/vim-vsnip-integ'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+"
+"------------- Ultisnips  ------------------
+"Plug 'SirVer/ultisnips'
+"Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+"Plug 'honza/vim-snippets'
+"
+"------------- Ultisnips  ------------------
+"Plug 'steelsojka/completion-buffers'
+"Plug 'L3MON4D3/LuaSnip'
+"Plug 'saadparwaiz1/cmp_luasnip'
+
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'kosayoda/nvim-lightbulb'
 Plug 'kristijanhusak/defx-git'
 Plug 'kristijanhusak/defx-icons'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-startify'
+Plug 'morhetz/gruvbox'
 Plug 'neoclide/vim-easygit'
 Plug 'panozzaj/vim-autocorrect'
 Plug 'rbgrouleff/bclose.vim'
@@ -84,27 +100,29 @@ Plug 'rstacruz/sparkup'
 Plug 'ryanoasis/vim-devicons'
 Plug 'sbdchd/neoformat'
 Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-commentary'
+"-------------Airline Plugins ------------------
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-syntastic/syntastic'
 Plug 'vimwiki/vimwiki'
-Plug 'nvim-lua/completion-nvim'
-Plug 'steelsojka/completion-buffers'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
-Plug 'nvim-treesitter/completion-treesitter'
-"Plug 'nvim-treesitter/nvim-treesitter-refactor'
-Plug 'nvim-treesitter/playground'
-Plug 'romgrk/nvim-treesitter-context'
+Plug 'yegappan/greplace'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'hrsh7th/nvim-compe'
-"colorschemes
-Plug 'kyoz/purify', { 'rtp': 'vim' }
-Plug 'relastle/bluewery.vim'
-Plug 'flazz/vim-colorschemes'
+"-------------Colorscheme Plugins ------------------
+"Plug 'gruvbox-community/gruvbox'
 Plug 'chriskempson/base16-vim'
 Plug 'dracula/vim'
-Plug 'neovim/nvim-lspconfig'
+Plug 'flazz/vim-colorschemes'
+Plug 'kyoz/purify', { 'rtp': 'vim' }
+Plug 'relastle/bluewery.vim'
+"------------- Treesitter Plugins ------------------
+"Plug 'nvim-treesitter/completion-treesitter'
+"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+"Plug 'nvim-treesitter/playground'
+"Plug 'romgrk/nvim-treesitter-context'
+"Plug 'nvim-treesitter/nvim-treesitter-refactor'
 call plug#end()
+"
 "---------------------------------Vim things-----------------------------------
 let mapleader=" "
 inoremap jk <Esc>
@@ -132,7 +150,8 @@ nnoremap <Leader>bo :BufOnly<CR>
 " delete trailing whitespace 
 nnoremap <Leader>dw :%s/\s\+$//e<CR>
 " fold za using space
-nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+nnoremap <silent> <space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+nnoremap <C-@> VG:normal @q<CR>
 "----------------------windows/buffers/panes-----------------------------------
 nnoremap <PageUp>   :bprevious<CR>
 nnoremap <PageDown> :bnext<CR>
@@ -156,53 +175,223 @@ nnoremap <C-l> <C-w>l
 "smap <expr> <C-k> vsnip#available(-1) ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 "let g:vsnip_snippet_dir = expand('~/.config/nvim/snippet')
 "-----------------------------nvim lsp-----------------------------------------
-"lua require'lspconfig'.jedi_language_server.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.pyls.setup{ on_attach=require'completion'.on_attach }
-"lua require'lspconfig'.pyright.setup{ on_attach=require'completion'.on_attach }
-"lua require'lspconfig'.yamlls.setup{ on_attach=require'completion'.on_attach }
-"lua require'lspconfig'.jsonls.setup{ on_attach=require'completion'.on_attach }
-nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
-nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
-nnoremap <leader>vi :lua vim.lsp.buf.implementation()<CR>
-nnoremap <leader>vrn :lua vim.lsp.buf.rename()<CR>
-nnoremap <leader>vrr :lua vim.lsp.buf.references()<CR>
-nnoremap <leader>vsd :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
-nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
-nnoremap gn :lua vim.lsp.diagnostic.goto_next()<CR>
-nnoremap gp :lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent>K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent>g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent>gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-nnoremap <silent>gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+lua require'lspconfig'.pyright.setup{}
+lua require'lspconfig'.jsonls.setup{}
+lua require'lspconfig'.yamlls.setup{}
+lua <<EOF
+local lsp_flags = {
+  -- This is the default in Nvim 0.7+
+  debounce_text_changes = 150,
+}
+require('lspconfig')['pyright'].setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
+}
+require('lspconfig')['jsonls'].setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
+}
+require('lspconfig')['yamlls'].setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
+}
+EOF
+"lua require'lspconfig'.jedi_language_server.setup{}
+"lua require'lspconfig'.pylsp.setup{}
+"nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
+"nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
+"nnoremap <leader>vi :lua vim.lsp.buf.implementation()<CR>
+"nnoremap <leader>vrn :lua vim.lsp.buf.rename()<CR>
+"nnoremap <leader>vrr :lua vim.lsp.buf.references()<CR>
+"nnoremap <leader>vsd :lua vim.lsp.util.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
+"nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
+"nnoremap gn :lua vim.lsp.diagnostic.goto_next()<CR>
+"nnoremap gp :lua vim.lsp.diagnostic.goto_prev()<CR>
+"nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+"nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+"nnoremap <silent>K     <cmd>lua vim.lsp.buf.hover()<CR>
+"nnoremap <silent>g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+"nnoremap <silent>gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+"nnoremap <silent>gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 "nnoremap <silent>ff    <cmd>lua vim.lsp.buf.formatting()<CR>
-autocmd BufEnter * lua require'completion'.on_attach()
-set omnifunc=v:lua.vim.lsp.omnifunc
+"autocmd BufEnter * lua require'completion'.on_attach()
+"" Disable this when using nvim-cmp
+"set omnifunc=v:lua.vim.lsp.omnifunc
+"function! _blockcomment()
 "-----------------------------Completion---------------------------------------
-" Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" Avoid showing message extra message when using completion
-set shortmess+=c
+lua <<EOF
+-- Setup nvim-cmp.
+  local cmp = require'cmp'
 
-let g:completion_enable_snippet = 'UltiSnips'
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "snips"]
-""let g:UltiSnipsSnippetDirectories=["UltiSnips", /Users/sduran/.config/nvim/snippet"]
-let g:completion_chain_complete_list = [
-    \{'complete_items': ['lsp', 'snippet', 'buffers', 'path']},
-    \{'mode': '<c-p>'},
-    \{'mode': '<c-n>'}
-\]
-set completeopt=longest,menuone,noinsert,noselect
-let g:completion_enable_auto_hover = 1
-"Defaults
-"g:UltiSnipsExpandTrigger               <tab>
-"g:UltiSnipsListSnippets                <c-tab>
-"g:UltiSnipsJumpForwardTrigger          <c-j>
-"g:UltiSnipsJumpBackwardTrigger         <c-k>
-let g:UltiSnipsExpandTrigger = '<f5>'
+  cmp.setup({
+    snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        require('snippy').expand_snippet(args.body) -- For `snippy` users.
+        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      end,
+    },
+    window = {
+      -- completion = cmp.config.window.bordered(),
+      -- documentation = cmp.config.window.bordered(),
+    },
+    mapping = {
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ["<Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        elseif snippy.can_expand_or_advance() then
+          snippy.expand_or_advance()
+        elseif has_words_before() then
+          cmp.complete()
+        else
+          fallback()
+        end
+      end, { "i", "s" }),
 
+      ["<S-Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        elseif snippy.can_jump(-1) then
+          snippy.previous()
+        else
+          fallback()
+        end
+      end, { "i", "s" }),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    },
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      -- { name = 'luasnip' }, -- For luasnip users.
+      -- { name = 'vsnip' }, -- For vsnip users.
+      -- { name = 'ultisnips' }, -- For ultisnips users.
+      { name = 'snippy' }, -- For snippy users.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+--  -- Set configuration for specific filetype.
+--  cmp.setup.filetype('gitcommit', {
+--    sources = cmp.config.sources({
+--      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+--    }, {
+--      { name = 'buffer' },
+--    })
+--  })
+
+------ Uses cmdline & path content for ':' completions -- 
+  cmp.setup.cmdline(':', {
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
+
+  -- Setup lspconfig.
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+  require('lspconfig')['jsonls'].setup {
+    capabilities = capabilities
+  }
+  require('lspconfig')['pylsp'].setup {
+    capabilities = capabilities
+  }
+EOF
+lua <<EOF
+
+-- Add additional capabilities supported by nvim-cmp
+--local capabilities = vim.lsp.protocol.make_client_capabilities()
+--capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+--local lspconfig = require('lspconfig')
+--
+---- Enable some language servers with the additional completion capabilities offered by nvim-cmp
+--local servers = { 'jsonls', 'yamlls' }
+--for _, lsp in ipairs(servers) do
+--  lspconfig[lsp].setup {
+--    -- on_attach = my_custom_on_attach,
+--    capabilities = capabilities,
+--  }
+--end
+--
+---- luasnip setup
+--local luasnip = require 'luasnip'
+--local has_words_before = function()
+--  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+--  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+--end
+--
+--local luasnip = require("luasnip")
+--local cmp = require("cmp")
+---- nvim-cmp setup
+--local cmp = require 'cmp'
+--cmp.setup {
+--  snippet = {
+--    expand = function(args)
+--      require('luasnip').lsp_expand(args.body)
+----     vim.fn["UltiSnips#Anon"](args.body)
+--    end,
+--  },
+--  mapping = {
+--    ['<C-p>'] = cmp.mapping.select_prev_item(),
+--    ['<C-n>'] = cmp.mapping.select_next_item(),
+--    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+--    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+--    ['<C-Space>'] = cmp.mapping.complete(),
+--    ['<C-e>'] = cmp.mapping.close(),
+--    ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+--    ["<Tab>"] = cmp.mapping(function(fallback)
+--      if cmp.visible() then
+--        cmp.select_next_item()
+--      elseif luasnip.expand_or_jumpable() then
+--        luasnip.expand_or_jump()
+--      elseif has_words_before() then
+--        cmp.complete()
+--      else
+--        fallback()
+--      end
+--    end, { "i", "s" }),
+--
+--    ["<S-Tab>"] = cmp.mapping(function(fallback)
+--      if cmp.visible() then
+--        cmp.select_prev_item()
+--      elseif luasnip.jumpable(-1) then
+--        luasnip.jump(-1)
+--      else
+--        fallback()
+--      end
+--    end, { "i", "s" }),
+--  },
+--  sources = {
+----    { name = 'ultisnips' },
+--    { name = 'nvim_lsp' },
+--    { name = 'luasnip' },
+--    { name = 'path' },
+--  }
+--}
+--
+------ Uses buffer content for `/` completion ----
+----cmp.setup.cmdline('/', {
+----  sources = {
+----    { name = 'buffer' }
+----  }
+----})
+------ Uses cmdline & path content for ':' completions -- 
+--cmp.setup.cmdline(':', {
+--  sources = cmp.config.sources({
+--    { name = 'path' }
+--  }, {
+--    { name = 'cmdline' }
+--  })
+--})
+EOF
+"
 "-----------------------------Neoformat----------------------------------------
 "
 nnoremap <Leader>ff :Neoformat<CR>
@@ -244,7 +433,7 @@ endif
 "colorscheme gruvbox
 "colorscheme base16-seti
 "colorscheme turtles
-"colorscheme base16-unikitty-light
+"colorscheme base16-unikitty-dark
 colorscheme dracula
 "colorscheme base16-dracula
 "colorscheme Purify
@@ -350,6 +539,7 @@ let g:airline#extensions#tabline#enabled = 1
 "let g:airline_theme='biogoo'
 
 "-------------------------------defx-------------------------------------------
+let g:defx_icons_column_length = 2
 call defx#custom#column('mark', {
       \ 'readonly_icon': '',
       \ 'selected_icon': '✓',

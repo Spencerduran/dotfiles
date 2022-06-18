@@ -4,6 +4,7 @@ local This = {}
 local GRID_SIZE = 4
 local HALF_GRID_SIZE = GRID_SIZE / 2
 local THIRD_GRID_SIZE = GRID_SIZE / 3
+local QUARTER_GRID_SIZE = GRID_SIZE / 4
 
 -- Set the grid size and add a few pixels of margin
 -- Also, don't animate window changes.
@@ -12,14 +13,25 @@ hs.grid.setMargins({5, 5})
 hs.window.animationDuration = 0
 
 local screenPositions       = {}
-screenPositions.left        = {
+-- Quarter Windows
+screenPositions.quarterleft        = {
   x = 0, y = 0,
-  w = HALF_GRID_SIZE, h = GRID_SIZE
+  w = QUARTER_GRID_SIZE, h = GRID_SIZE
 }
-screenPositions.halfleft        = {
-  x = 0, y = 0,
-  w = HALF_GRID_SIZE, h = GRID_SIZE
+screenPositions.midleft        = {
+  x = QUARTER_GRID_SIZE, y = 0,
+  w = QUARTER_GRID_SIZE, h = GRID_SIZE
 }
+screenPositions.midright        = {
+  x = QUARTER_GRID_SIZE+QUARTER_GRID_SIZE, y = 0,
+  w = QUARTER_GRID_SIZE, h = GRID_SIZE
+}
+screenPositions.quarterright        = {
+  x = QUARTER_GRID_SIZE+QUARTER_GRID_SIZE+QUARTER_GRID_SIZE, y = 0,
+  w = QUARTER_GRID_SIZE, h = GRID_SIZE
+}
+
+-- Third Windows
 screenPositions.thirdleft        = {
   x = 0, y = 0,
   w = THIRD_GRID_SIZE, h = GRID_SIZE
@@ -31,6 +43,15 @@ screenPositions.mid        = {
 screenPositions.thirdright        = {
   x = THIRD_GRID_SIZE+THIRD_GRID_SIZE, y = 0,
   w = THIRD_GRID_SIZE, h = GRID_SIZE
+}
+-- Half Windows
+screenPositions.left        = {
+  x = 0, y = 0,
+  w = HALF_GRID_SIZE, h = GRID_SIZE
+}
+screenPositions.halfleft        = {
+  x = 0, y = 0,
+  w = HALF_GRID_SIZE, h = GRID_SIZE
 }
 screenPositions.right       = {
   x = HALF_GRID_SIZE, y = 0,
