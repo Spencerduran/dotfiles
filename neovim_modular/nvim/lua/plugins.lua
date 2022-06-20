@@ -26,12 +26,14 @@ packer.init({
 packer.startup(function(use)
   -- Packer self init
   use ({ 'wbthomason/packer.nvim' })
+
   -- Alpha-NVIM
 	use({
 		"goolord/alpha-nvim",
 		requires = { "kyazdani42/nvim-web-devicons" },
 		config = get_config("alpha-nvim"),
 	})
+
   -- Buffer Line
 	use({
 		"akinsho/nvim-bufferline.lua",
@@ -39,6 +41,8 @@ packer.startup(function(use)
 		event = "BufReadPre",
 		config = get_config("bufferline"),
 	})
+	use("famiu/bufdelete.nvim")
+
   -- Colorschemes
 	if settings.theme == "nightfox" then
 		use({ "EdenEast/nightfox.nvim", config = get_config("nightfox") })
@@ -50,11 +54,27 @@ packer.startup(function(use)
 		use({ "catppuccin/nvim", as = "catppuccin", config = get_config("catppuccin") })
 	end
   -- Comment Boxes
-  --use("LudoPinelli/comment-box.nvim")
+  use("LudoPinelli/comment-box.nvim")
+
+  -- Conflict Marker
+	use({ "rhysd/conflict-marker.vim" })
   -- Defx
   use({ 'Shougo/defx.nvim' })
   use({ 'kristijanhusak/defx-git' })
   use({ 'kristijanhusak/defx-icons' })
+  -- Easy Align
+	use("junegunn/vim-easy-align") -- no lua alternative, https://github.com/Vonr/align.nvim not working for me
+  -- Git Things
+  -- Grammarous
+	use({ "rhysd/vim-grammarous", cmd = "GrammarousCheck" })
+  -- Illuminate
+	use({ "RRethy/vim-illuminate" })
+  -- LF (ranger)
+	use({
+		"ptzz/lf.vim",
+		requires = "voldikss/vim-floaterm",
+		config = get_config("lf"),
+	})
   -- Lightspeed
 	use({ "ggandor/lightspeed.nvim" })
   -- LuaLine
@@ -66,10 +86,14 @@ packer.startup(function(use)
   })
   -- Notify
   use({ "rcarriga/nvim-notify", config = get_config("notify") })
-
-  -- Notify
-	use({ "kyazdani42/nvim-tree.lua", config = get_config("nvim-tree") })
-
+  -- Snippets
+	use({ "rafamadriz/friendly-snippets" })
+  -- Specs
+	use({ "edluffy/specs.nvim", config = get_config("specs") })
+  -- Startup Time
+	use({ "tweekmonster/startuptime.vim" })
+  -- Starlite
+  use({ "ironhouzi/starlite-nvim"})
   -- Telescope
 	use({
 		"nvim-telescope/telescope.nvim",
@@ -82,9 +106,39 @@ packer.startup(function(use)
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 	use({ "nvim-telescope/telescope-packer.nvim" })
 	use({ "nvim-telescope/telescope-ui-select.nvim" })
-	use({ "nvim-telescope/telescope-project.nvim" })
+	use({ "ahmedkhalf/project.nvim", config = get_config("project") })
   -- Tmux Navigation
   use({ "aserowy/tmux.nvim", config = get_config("tmux") })
+
+  -- To do
+	use({
+		"folke/todo-comments.nvim",
+		requires = "nvim-lua/plenary.nvim",
+		config = get_config("todo"),
+	})
+  -- Twilight
+	use({ "folke/twilight.nvim", config = get_config("twilight") })
+	use({
+		"j-hui/fidget.nvim",
+		config = function()
+			require("fidget").setup({})
+		end,
+  }) 
+  -- Window
+	use({
+		"https://gitlab.com/yorickpeterse/nvim-window.git",
+		config = get_config("nvim-window"),
+	})
+  -- Vimwiki
+  use({ "vimwiki/vimwiki", config = get_config("vimwiki") })
   -- Which-Key
   use({ "folke/which-key.nvim", config = get_config("which-key") })
+
+  -- Telegraph
+	--use({
+	--	"waylonwalker/Telegraph.nvim",
+	--	config = function()
+	--		require("telegraph").setup({})
+	--	end,
+	--})
 end)

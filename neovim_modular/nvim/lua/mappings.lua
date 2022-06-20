@@ -19,7 +19,7 @@ vim.g.maplocalleader = " "
 
 ------------ Normal ------------
 -- Quicksave
-map("n", "<leader>w", ":w<CR>", default_options)
+--map("n", "<leader>w", ":w<CR>", default_options)
 
 -- Toggle whitespace characters
 map("n", "<F1>", "set list!<CR>", default_options)
@@ -110,5 +110,3 @@ end, default_options)
 map("n", "g#", function()
 	return require("starlite").g_hash()
 end, default_options)
-
-

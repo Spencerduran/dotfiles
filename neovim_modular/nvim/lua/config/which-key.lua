@@ -18,7 +18,7 @@ require("which-key").setup({
 			windows = true, -- default bindings on <c-w>
 			nav = true, -- misc bindings to work with windows
 			z = true, -- bindings for folds, spelling and others prefixed with z
-			g = true, -- bindings for prefixed with g
+			g = false, -- bindings for prefixed with g
 		},
 	},
 	-- add operators that will trigger motion and text object completion
@@ -108,7 +108,7 @@ wk.register({
 			"<cmd>BufferLineCloseLeft<cr><cmd>BufferLineCloseRight<cr>",
 			"Close all but the current buffer",
 		},
-		d = { "<cmd>bd!<CR>", "Close buffer" },
+		d = { "<cmd>Bdelete<CR>", "Close buffer" },
 		f = { "<cmd>BufferLinePick<cr>", "Pick buffer" },
 		l = { "<cmd>BufferLineCloseLeft<cr>", "Close all buffers to the left" },
 		p = { "<cmd>BufferLineCyclePrev<cr>", "Move buffer prev" },
@@ -128,11 +128,8 @@ wk.register({
 	},
 	f = {
 		name = "Files",
-		b = { "<cmd>Telescope file_browser<cr>", "File browser" },
-		f = {
-			"<cmd>lua require'telescope.builtin'.find_files()<cr>",
-			"Find File",
-		},
+		b = { "<cmd>:cd %:h|Telescope file_browser<cr>", "File browser" },
+		f = { "<cmd>lua require'telescope.builtin'.find_files()<cr>", "Find File", },
 		l = { "<cmd>Lf<cr>", "Open LF" },
 		p = { "<cmd>NvimTreeToggle<cr>", "Toggle Tree" },
 		r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
@@ -191,14 +188,15 @@ wk.register({
 	m = {
 		name = "Misc",
 		a = {
-			"<cmd>lua require'telegraph'.telegraph({cmd='gitui', how='tmux_popup'})<cr>",
+			"<cmd>lua require'telegraph'.telegraph({cmd='man ', how='tmux_popup'})<cr>",
 			"Test Telegraph",
 		},
 		d = { "<cmd>lua require('functions').toggle_diagnostics()<cr>", "Toggle Diagnostics" },
 		l = { "<cmd>source ~/.config/nvim/snippets/*<cr>", "Reload snippets" },
 		p = { "<cmd>PackerSync<cr>", "PackerSync" },
 		s = { "<cmd>SymbolsOutline<cr>", "Toggle SymbolsOutline" },
-		t = { "<cmd>FloatermNew --autoclose=2<cr>", "New Floaterm" },
+		t = { "<cmd>FloatermNew", "New Floaterm" },
+		--t = { "<cmd>FloatermNew --autoclose=2<cr>", "New Floaterm" },
 		z = { "<cmd>ZenMode<cr>", "Toggle ZenMode" },
 	},
 	q = {
@@ -220,7 +218,7 @@ wk.register({
 		S = { "<cmd>Telescope symbols<cr>", "Search symbols" },
 		k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
 		c = { "<cmd>Telescope commands<cr>", "Commands" },
-		p = { "<cmd>Telescope project<cr>", "Projects" },
+		p = { "<cmd>Telescope projects<cr>", "Projects" },
 		P = { "<cmd>Telescope builtin<cr>", "Builtin pickers" },
 		z = { "<cmd>Telescope packer<cr>", "Plugins" },
 	},
@@ -233,8 +231,8 @@ wk.register({
 		["="] = { "<c-w>=", "Equally size" },
 		v = { "<cmd>:vsplit<cr>", "Verstical Split" },
 		w = {
-			"<cmd>lua require('nvim-window').pick()<cr>",
-			"Choose window to jump",
+			"<cmd>:VimwikiIndex<cr>|cd /Users/SDuran/OneDrive - Knex/Documents/Documents/vimwiki/",
+			"Open Vimwiki Index",
 		},
 	},
 	x = {
