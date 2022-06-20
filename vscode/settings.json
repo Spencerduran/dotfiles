@@ -21,7 +21,6 @@
     "**/.factorypath": true
 },
 "explorer.confirmDragAndDrop": false,
-"window.zoomLevel": 1,
 "workbench.colorTheme": "Dark-Dracula",
 "vim.useSystemClipboard": true,
 "vim.insertModeKeyBindings": [
@@ -101,5 +100,11 @@
 "[java]": {
     "editor.defaultFormatter": "mwpb.java-prettier-formatter",
     "editor.suggest.snippetsPreventQuickSuggestions": false
+},
+"[json]": {
+    "editor.defaultFormatter": "HookyQR.beautify"
+},
+"workbench.editorAssociations": {
+    "*.ipynb": "jupyter.notebook.ipynb"
 }
 }

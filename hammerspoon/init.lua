@@ -7,16 +7,16 @@ hyper.install('F18')
 hyper.bindShiftKey('r', hs.reload)
 
 -- Show/hide alacritty with 2x ctrl press
-ctrlDoublePress = require('ctrlDoublePress')
-ctrlDoublePress.timeFrame = 2
-ctrlDoublePress.action = function()
-  local alacritty = hs.application.find('alacritty')
-  if alacritty:isFrontmost() then
-    alacritty:hide()
-  else
-    hs.application.launchOrFocus('/Applications/Alacritty.app')
-  end
-end
+--ctrlDoublePress = require('ctrlDoublePress')
+--ctrlDoublePress.timeFrame = 2
+--ctrlDoublePress.action = function()
+--  local alacritty = hs.application.find('alacritty')
+--  if alacritty:isFrontmost() then
+--    alacritty:hide()
+--  else
+--    hs.application.launchOrFocus('/Applications/Alacritty.app')
+--  end
+--end
 
 -- Show/hide alacritty
 hyper.bindKey('a', function()
@@ -72,15 +72,24 @@ hyper.bindKey('s', function()
     hs.application.launchOrFocus('/Applications/Slack.app')
   end
 end)
--- Show/hide postman
+-- Show/hide pycharm
 hyper.bindKey('p', function()
-  local postman = hs.application.find('postman')
+  local postman = hs.application.find('pycharm')
   if postman:isFrontmost() then
     postman:hide()
   else
-    hs.application.launchOrFocus('/Applications/postman.app')
+    hs.application.launchOrFocus('/Applications/pycharm.app')
   end
 end)
+-- Show/hide postman
+--hyper.bindKey('p', function()
+--  local postman = hs.application.find('postman')
+--  if postman:isFrontmost() then
+--    postman:hide()
+--  else
+--    hs.application.launchOrFocus('/Applications/postman.app')
+--  end
+--end)
 -- Show/hide spotify
 hyper.bindKey('q', function()
   local spotify = hs.application.find('spotify')
@@ -130,9 +139,23 @@ end)
 
 local wm = require('window-management')
 -- Window Management
+--
+hyper.bindShiftKey('f', function()
+  hs.window.focusedWindow():setSize(3600,1920)
+end)
+
 hyper.bindKey('f', function()
   wm.windowMaximize(0)
 end)
+
+---------------- MOVEMENT
+hyper.bindShiftKey('h', function()
+  hs.window.focusedWindow():moveOneScreenWest()
+end)
+hyper.bindShiftKey('l', function()
+  hs.window.focusedWindow():moveOneScreenEast()
+end)
+---------------- HALFS
 hyper.bindKey('h', function()
   wm.moveWindowToPosition(wm.screenPositions.left)
 end)
@@ -145,27 +168,52 @@ end)
 hyper.bindKey('l', function()
   wm.moveWindowToPosition(wm.screenPositions.right)
 end)
-hyper.bindShiftKey('h', function()
-  hs.window.focusedWindow():moveOneScreenWest()
+hyper.bindKey('l', function()
+  wm.moveWindowToPosition(wm.screenPositions.right)
 end)
-hyper.bindShiftKey('l', function()
-  hs.window.focusedWindow():moveOneScreenEast()
-end)
+---------------- THIRDS
 hyper.bindShiftKey('1', function()
-  wm.moveWindowToPosition(wm.screenPositions.topLeft)
+  wm.moveWindowToPosition(wm.screenPositions.thirdleft)
 end)
 hyper.bindShiftKey('2', function()
-  wm.moveWindowToPosition(wm.screenPositions.topRight)
+  wm.moveWindowToPosition(wm.screenPositions.mid)
 end)
 hyper.bindShiftKey('3', function()
-  wm.moveWindowToPosition(wm.screenPositions.bottomLeft)
+  wm.moveWindowToPosition(wm.screenPositions.thirdright)
 end)
 hyper.bindShiftKey('4', function()
-  wm.moveWindowToPosition(wm.screenPositions.bottomRight)
+  wm.moveWindowToPosition(wm.screenPositions.topLeftthird)
 end)
 hyper.bindShiftKey('5', function()
-  wm.moveWindowToPosition(wm.screenPositions.top)
+  wm.moveWindowToPosition(wm.screenPositions.bottomLeftthird)
 end)
+---------------- QUARTERS
 hyper.bindShiftKey('6', function()
-  wm.moveWindowToPosition(wm.screenPositions.bottom)
+  wm.moveWindowToPosition(wm.screenPositions.quarterleft)
 end)
+hyper.bindShiftKey('7', function()
+  wm.moveWindowToPosition(wm.screenPositions.midleft)
+end)
+hyper.bindShiftKey('8', function()
+  wm.moveWindowToPosition(wm.screenPositions.midright)
+end)
+hyper.bindShiftKey('9', function()
+  wm.moveWindowToPosition(wm.screenPositions.quarterright)
+end)
+hyper.bindShiftKey('0', function()
+  wm.moveWindowToPosition(wm.screenPositions.midmid)
+end)
+---------------- CORNERS
+hyper.bindKey('1', function()
+  wm.moveWindowToPosition(wm.screenPositions.topLeft)
+end)
+hyper.bindKey('2', function()
+  wm.moveWindowToPosition(wm.screenPositions.topRight)
+end)
+hyper.bindKey('3', function()
+  wm.moveWindowToPosition(wm.screenPositions.bottomLeft)
+end)
+hyper.bindKey('4', function()
+  wm.moveWindowToPosition(wm.screenPositions.bottomRight)
+end)
+

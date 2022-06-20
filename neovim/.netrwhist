@@ -1,7 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =5
-let g:netrw_dirhist_5='/Users/sduran/repos/dip'
-let g:netrw_dirhist_4='/Users/sduran/repos/dip/elastic_script'
-let g:netrw_dirhist_3='/Users/sduran/repos/dip/rh-dip-toolbox/metadatas'
-let g:netrw_dirhist_2='/private/var/folders/5j/frnhf2yd3clc5ttmcz_8p2l00000gp/T/pipenv-mo_i_nsu-src/rh-dip-common-etl-config'
-let g:netrw_dirhist_1='/Users/sduran/repos/dip/DataQualityTestingQueries'
