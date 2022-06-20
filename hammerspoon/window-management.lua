@@ -30,6 +30,10 @@ screenPositions.quarterright        = {
   x = QUARTER_GRID_SIZE+QUARTER_GRID_SIZE+QUARTER_GRID_SIZE, y = 0,
   w = QUARTER_GRID_SIZE, h = GRID_SIZE
 }
+screenPositions.midmid        = {
+  x = QUARTER_GRID_SIZE, y = 0,
+  w = QUARTER_GRID_SIZE+QUARTER_GRID_SIZE, h = GRID_SIZE
+}
 
 -- Third Windows
 screenPositions.thirdleft        = {
