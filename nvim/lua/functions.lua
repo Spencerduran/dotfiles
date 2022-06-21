@@ -3,6 +3,18 @@ local fn = vim.fn
 
 local M = {}
 
+function M.get_listed_buffers()
+  local buffers = {}
+  local len = 0
+  for buffer = 1, vim.fn.bufnr('$') do
+    if vim.fn.buflisted(buffer) == 1 then
+      len = len + 1
+      buffers[len] = buffer
+    end
+  end
+
+  return buffers
+end
 
 -- move to a closing element in insert mode
 M.escapePair = function()
