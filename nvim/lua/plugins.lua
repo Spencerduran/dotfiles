@@ -46,6 +46,8 @@ packer.startup(function(use)
   -- Colorschemes
 	if settings.theme == "nightfox" then
 		use({ "EdenEast/nightfox.nvim", config = get_config("nightfox") })
+	elseif settings.theme == "nightmare" then
+    use({ "CantoroMC/nvim-nightmare", config = get_config("nightmare") })
 	elseif settings.theme == "zephyr" then
     use({ "glepnir/zephyr-nvim", config = get_config("zephyr") })
 	elseif settings.theme == "tokyo" then
