@@ -4,7 +4,7 @@ local o = vim.opt -- For :setglobal
 local wo = vim.wo -- For :setlocal
 local fn = vim.fn	-- To call autoload functions - ie: vim.fn['some#function']({...})
 
-o.background     = dark
+o.background = dark
 o.backspace      = "indent,eol,start" -- Allow backspace over everything in insert mode
 o.clipboard      = "unnamed" -- Allows neovim to access the system clipboard
 o.cmdheight      = 1 -- Space for displaying messages/commands

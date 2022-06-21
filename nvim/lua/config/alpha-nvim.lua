@@ -62,7 +62,7 @@ dashboard.section.header.val = {
 "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢁⠎⠀⠀⣸⠿⠟⠛⠛⢣⠀⢀⣴⡟⠁⠀⢀⣀⡠⢤⣀⣀⠀⠀⠀⠀⠀⠀⠀",
 "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣏⠎⠀⡀⣠⡿⠒⠢⡀⣠⠎⠀⢸⡏⠀⢀⠴⣯⣅⢀⢀⡉⣀⠀⣀⣨⣿⣿⣿⣿",
 "                                                  ",
-"                  ｎ ｅ ｏ ｖ ｉ ｍ               ",
+--"                  ｎ ｅ ｏ ｖ ｉ ｍ               ",
 --"                  几 乇 ㄖ ᐯ 丨 爪                ",
 
 --⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⡿⣟⢟⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
@@ -139,10 +139,10 @@ dashboard.section.buttons.val = {
 		--{ type = "text", val = "Quick links", opts = { hl = "SpecialComment", position = "center" } },
 		--{ type = "padding", val = 1 },
 		--dashboard.button("z", "  Search Zoxide", ":Telescope zoxide list<CR>"),
-		dashboard.button("F", "  Find text", ":Telescope live_grep <CR>"),
+		dashboard.button("F", "  RipGrep", ":Telescope live_grep <CR>"),
 		dashboard.button("b", "  File Browser", ":Telescope file_browser <CR>"),
-		dashboard.button("c", "  Configuration", ":e ~/.config/nvim/ <CR>"),
-		dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
+		dashboard.button("c", "  Configuration", ":e ~/.config/nvim/ <CR>"),
+		dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
 		dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),
 		--dashboard.button("g", "  NeoGit", ":Neogit <CR>"),
 		dashboard.button("p", "  Search projects", ":Telescope projects<CR>"),
@@ -153,7 +153,8 @@ dashboard.section.buttons.val = {
 
 dashboard.section.footer.val = {
   "                       ",
-  "        ⚡️ ⚡️ ⚡️       ",
+  "                       ",
+  "  ｎ ｅ ｏ ｖ ｉ ｍ    ",
   "                       ",
 }
 
