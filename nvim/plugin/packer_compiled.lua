@@ -135,12 +135,6 @@ _G.packer_plugins = {
     path = "/Users/SDuran/.local/share/nvim/site/pack/packer/opt/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
-  ["moonlight.nvim"] = {
-    config = { 'require("config/moonlight")' },
-    loaded = true,
-    path = "/Users/SDuran/.local/share/nvim/site/pack/packer/start/moonlight.nvim",
-    url = "https://github.com/shaunsingh/moonlight.nvim"
-  },
   ["nvim-bufferline.lua"] = {
     config = { 'require("config/bufferline")' },
     loaded = false,
@@ -251,6 +245,12 @@ _G.packer_plugins = {
     path = "/Users/SDuran/.local/share/nvim/site/pack/packer/start/todo-comments.nvim",
     url = "https://github.com/folke/todo-comments.nvim"
   },
+  ["tokyonight.nvim"] = {
+    config = { 'require("config/tokyo")' },
+    loaded = true,
+    path = "/Users/SDuran/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
+    url = "https://github.com/folke/tokyonight.nvim"
+  },
   ["twilight.nvim"] = {
     config = { 'require("config/twilight")' },
     loaded = true,
@@ -295,62 +295,62 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: vimwiki
-time([[Config for vimwiki]], true)
-require("config/vimwiki")
-time([[Config for vimwiki]], false)
--- Config for: nvim-window.git
-time([[Config for nvim-window.git]], true)
-require("config/nvim-window")
-time([[Config for nvim-window.git]], false)
--- Config for: fidget.nvim
-time([[Config for fidget.nvim]], true)
-try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\vfidget\frequire\0", "config", "fidget.nvim")
-time([[Config for fidget.nvim]], false)
--- Config for: moonlight.nvim
-time([[Config for moonlight.nvim]], true)
-require("config/moonlight")
-time([[Config for moonlight.nvim]], false)
--- Config for: nvim-notify
-time([[Config for nvim-notify]], true)
-require("config/notify")
-time([[Config for nvim-notify]], false)
--- Config for: telescope.nvim
-time([[Config for telescope.nvim]], true)
-require("config/telescope")
-time([[Config for telescope.nvim]], false)
--- Config for: todo-comments.nvim
-time([[Config for todo-comments.nvim]], true)
-require("config/todo")
-time([[Config for todo-comments.nvim]], false)
--- Config for: twilight.nvim
-time([[Config for twilight.nvim]], true)
-require("config/twilight")
-time([[Config for twilight.nvim]], false)
--- Config for: lf.vim
-time([[Config for lf.vim]], true)
-require("config/lf")
-time([[Config for lf.vim]], false)
 -- Config for: alpha-nvim
 time([[Config for alpha-nvim]], true)
 require("config/alpha-nvim")
 time([[Config for alpha-nvim]], false)
--- Config for: project.nvim
-time([[Config for project.nvim]], true)
-require("config/project")
-time([[Config for project.nvim]], false)
--- Config for: tmux.nvim
-time([[Config for tmux.nvim]], true)
-require("config/tmux")
-time([[Config for tmux.nvim]], false)
 -- Config for: which-key.nvim
 time([[Config for which-key.nvim]], true)
 require("config/which-key")
 time([[Config for which-key.nvim]], false)
+-- Config for: tokyonight.nvim
+time([[Config for tokyonight.nvim]], true)
+require("config/tokyo")
+time([[Config for tokyonight.nvim]], false)
+-- Config for: tmux.nvim
+time([[Config for tmux.nvim]], true)
+require("config/tmux")
+time([[Config for tmux.nvim]], false)
+-- Config for: telescope.nvim
+time([[Config for telescope.nvim]], true)
+require("config/telescope")
+time([[Config for telescope.nvim]], false)
+-- Config for: nvim-notify
+time([[Config for nvim-notify]], true)
+require("config/notify")
+time([[Config for nvim-notify]], false)
+-- Config for: project.nvim
+time([[Config for project.nvim]], true)
+require("config/project")
+time([[Config for project.nvim]], false)
+-- Config for: lf.vim
+time([[Config for lf.vim]], true)
+require("config/lf")
+time([[Config for lf.vim]], false)
+-- Config for: fidget.nvim
+time([[Config for fidget.nvim]], true)
+try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\vfidget\frequire\0", "config", "fidget.nvim")
+time([[Config for fidget.nvim]], false)
 -- Config for: specs.nvim
 time([[Config for specs.nvim]], true)
 require("config/specs")
 time([[Config for specs.nvim]], false)
+-- Config for: todo-comments.nvim
+time([[Config for todo-comments.nvim]], true)
+require("config/todo")
+time([[Config for todo-comments.nvim]], false)
+-- Config for: nvim-window.git
+time([[Config for nvim-window.git]], true)
+require("config/nvim-window")
+time([[Config for nvim-window.git]], false)
+-- Config for: twilight.nvim
+time([[Config for twilight.nvim]], true)
+require("config/twilight")
+time([[Config for twilight.nvim]], false)
+-- Config for: vimwiki
+time([[Config for vimwiki]], true)
+require("config/vimwiki")
+time([[Config for vimwiki]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)

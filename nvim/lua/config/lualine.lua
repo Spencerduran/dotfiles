@@ -12,7 +12,7 @@ end
 
 require("lualine").setup({
 	options = {
-		theme = "moonlight",
+		theme = "tokyonight",
 		icons_enabled = true,
 		disabled_filetypes = {},
 		always_divide_middle = false,
