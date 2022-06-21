@@ -139,16 +139,16 @@ dashboard.section.buttons.val = {
 		--{ type = "text", val = "Quick links", opts = { hl = "SpecialComment", position = "center" } },
 		--{ type = "padding", val = 1 },
 		--dashboard.button("z", "  Search Zoxide", ":Telescope zoxide list<CR>"),
-		dashboard.button("F", "  RipGrep", ":Telescope live_grep <CR>"),
-		dashboard.button("b", "  File Browser", ":Telescope file_browser <CR>"),
-		dashboard.button("c", "  Configuration", ":e ~/.config/nvim/ <CR>"),
 		dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
-		dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),
-		--dashboard.button("g", "  NeoGit", ":Neogit <CR>"),
-		dashboard.button("p", "  Search projects", ":Telescope projects<CR>"),
-		--dashboard.button("q", "  Quit", ":qa<CR>"),
 		dashboard.button("r", "  Recent files", ":Telescope oldfiles <CR>"),
+		dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),
+		dashboard.button("F", "  RipGrep", ":Telescope live_grep <CR>"),
+		dashboard.button("p", "  Search projects", ":Telescope projects<CR>"),
+		dashboard.button("b", "  File Browser", ":Telescope file_browser <CR>"),
+		--dashboard.button("g", "  NeoGit", ":Neogit <CR>"),
 		dashboard.button("u", "  Update plugins", ":PackerSync<CR>"),
+		dashboard.button("c", "  Configuration", ":e ~/.config/nvim/ <CR>"),
+		dashboard.button("q", "  Quit", ":qa<CR>"),
 }
 
 dashboard.section.footer.val = {
