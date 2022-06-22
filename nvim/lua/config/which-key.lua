@@ -233,7 +233,7 @@ wk.register({
 	},
 	w = {
 		name = "Window",
-		p = { "<c-w>x", "Swap" },
+		p = { ":Wp", "Word process mode" },
 		q = { "<cmd>:q<cr>", "Close" },
 		s = { "<cmd>:split<cr>", "Horizontal Split" },
 		t = { "<c-w>t", "Move to new tab" },
