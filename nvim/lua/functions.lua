@@ -3,6 +3,18 @@ local fn = vim.fn
 
 local M = {}
 
+-- Word Processor
+function M.Wp()
+  vim.wo.formatoptions = 1
+  vim.wo.expandtab = false
+  vim.wo.wrap = true
+  vim.wo.linebreak = true
+  -- spelling and thesaurus
+  vim.wo.spell = true
+  --set thesaurus+=/home/test/.vim/thesaurus/mthesaur.txt
+  --set complete+=s
+end
+
 function M.get_listed_buffers()
   local buffers = {}
   local len = 0
