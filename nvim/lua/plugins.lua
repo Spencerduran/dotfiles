@@ -122,6 +122,8 @@ packer.startup(function(use)
 		requires = "nvim-lua/plenary.nvim",
 		config = get_config("todo"),
 	})
+  -- Tree
+	use({ "kyazdani42/nvim-tree.lua", config = get_config("nvim-tree")  })
   -- Twilight
 	use({ "folke/twilight.nvim", config = get_config("twilight") })
 	use({

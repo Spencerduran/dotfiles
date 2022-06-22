@@ -1,5 +1,9 @@
 local tree_cb = require("nvim-tree.config").nvim_tree_callback
 require("nvim-tree").setup({
+  hijack_directories = {
+    enable = true,
+    auto_open = true,
+  },
 	respect_buf_cwd = true, -- 0 by default, will change cwd of nvim-tree to that of new buffer's when opening nvim-tree.
 	-- disables netrw completely
 	disable_netrw = true,
@@ -50,16 +54,14 @@ require("nvim-tree").setup({
 	actions = {
 		change_dir = { enable = true, global = false },
 		open_file = {
-			quit_on_open = false,
+			quit_on_open = true,
 			resize_window = false,
 			window_picker = {
 				enable = true,
 				chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
 				exclude = {
 					filetype = {
-						"notify",
 						"packer",
-						"qf",
 						"diff",
 						"fugitive",
 						"fugitiveblame",
@@ -129,9 +131,6 @@ require("nvim-tree").setup({
 			list = {
 				{ key = { "<CR>", "o", "<2-LeftMouse>" }, cb = tree_cb("edit") },
 				{ key = { "<2-RightMouse>", "<C-]>" }, cb = tree_cb("cd") },
-				{ key = "<C-v>", cb = tree_cb("vsplit") },
-				{ key = "<C-x>", cb = tree_cb("split") },
-				{ key = "<C-t>", cb = tree_cb("tabnew") },
 				{ key = "<", cb = tree_cb("prev_sibling") },
 				{ key = ">", cb = tree_cb("next_sibling") },
 				{ key = "<BS>", cb = tree_cb("close_node") },
@@ -142,7 +141,7 @@ require("nvim-tree").setup({
 				{ key = "I", cb = tree_cb("toggle_ignored") },
 				{ key = "H", cb = tree_cb("toggle_dotfiles") },
 				{ key = "R", cb = tree_cb("refresh") },
-				{ key = "a", cb = tree_cb("create") },
+				{ key = "n", cb = tree_cb("create") },
 				{ key = "d", cb = tree_cb("remove") },
 				{ key = "r", cb = tree_cb("rename") },
 				{ key = "<C-r>", cb = tree_cb("full_rename") },

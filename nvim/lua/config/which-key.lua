@@ -98,6 +98,14 @@ wk.register({
 		name = "Leader",
 		a = { "<cmd>lua print('fasfAS')<cr>", "test" },
 	},
+  ["-"] = {
+	  function()
+	    local previous_buf = vim.api.nvim_get_current_buf()
+	    require("nvim-tree").open_replacing_current_buffer()
+	    require("nvim-tree").find_file(false, previous_buf)
+	  end,
+	  "NvimTree in place",
+  },
 	b = {
 		name = "Buffers",
 		b = {
