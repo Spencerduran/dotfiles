@@ -42,6 +42,34 @@ packer.startup(function(use)
 		config = get_config("bufferline"),
 	})
 	use("famiu/bufdelete.nvim")
+  -- Completion
+  use({
+      "hrsh7th/nvim-cmp",
+      requires = {
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-cmdline",
+        "f3fora/cmp-spell",
+        "hrsh7th/cmp-calc",
+        "hrsh7th/cmp-nvim-lsp-signature-help",
+        --"lukas-reineke/cmp-rg",
+        -- Not working:
+        --      Error executing vim.schedule lua callback: Vim:E903: Process failed to start: no such file or directory: "-c"
+        --stack traceback:
+        --        [C]: in function 'jobstart'
+        --        ...e/nvim/site/pack/packer/start/cmp-rg/lua/cmp-rg/init.lua:103: in function ''
+        --        vim/_editor.lua: in function <vim/_editor.lua:0>
+      },
+      config = get_config("cmp"),
+    })
+  
+    use({ "rafamadriz/friendly-snippets" })
+    use({
+      "L3MON4D3/LuaSnip",
+      requires = "saadparwaiz1/cmp_luasnip",
+      config = get_config("luasnip"),
+    })
 
   -- Colorschemes
 	if settings.theme == "nightfox" then
@@ -83,6 +111,9 @@ packer.startup(function(use)
 	})
   -- Lightspeed
 	use({ "ggandor/lightspeed.nvim" })
+  -- LSP
+  use({ "neovim/nvim-lspconfig", config = get_config("lsp") })
+  use({ "onsails/lspkind-nvim", requires = { "famiu/bufdelete.nvim" } })
   -- LuaLine
   use ({
         'nvim-lualine/lualine.nvim',
@@ -115,7 +146,15 @@ packer.startup(function(use)
 	use({ "ahmedkhalf/project.nvim", config = get_config("project") })
   -- Tmux Navigation
   use({ "aserowy/tmux.nvim", config = get_config("tmux") })
-
+  -- Treesitter
+  use({ "windwp/nvim-autopairs", config = get_config("nvim-autopairs") })
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    config = get_config("treesitter"),
+    run = ":TSUpdate",
+  })
+  use("nvim-treesitter/nvim-treesitter-textobjects")
+  use("RRethy/nvim-treesitter-endwise")
   -- To do
 	use({
 		"folke/todo-comments.nvim",
