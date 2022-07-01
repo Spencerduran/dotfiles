@@ -134,6 +134,11 @@ wk.register({
 			"Sort BufferLines automatically by extension",
 		},
 	},
+	c = {
+		name = "Copy [lines, matches]",
+		l = { "<cmd>CopyLines! -<CR>", "Copy lines with match" },
+		m = { "<cmd>CopyMatches! -<CR>", "Copy matches" },
+	},
 	f = {
 		name = "Files",
 		b = { "<cmd>:cd %:h|Telescope file_browser<cr>", "File browser" },
@@ -233,7 +238,7 @@ wk.register({
 	},
 	w = {
 		name = "Window",
-		p = { ":Wp", "Word process mode" },
+		p = { "<cmd>lua require('functions').Wp()<cr>", "Word Processor Mode" },
 		q = { "<cmd>:q<cr>", "Close" },
 		s = { "<cmd>:split<cr>", "Horizontal Split" },
 		t = { "<c-w>t", "Move to new tab" },
