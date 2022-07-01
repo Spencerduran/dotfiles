@@ -3,10 +3,28 @@ local fn = vim.fn
 
 local M = {}
 
--- Word Processor
+vim.api.nvim_exec([[
+source ~/repos/spence/dotfiles/nvim/lua/config/copy_things.vim 
+]], false)
+
+---- Sample user command example ----
+---- :h nvim_create_user_command ----
+vim.api.nvim_create_user_command('SayHello', 'echo "Hello world!"', {})
+
+---- Sample lua function ----
+function M.samplefunction()
+  -- Input keystrokes
+  vim.api.nvim_feedkeys("yy", "n", true)
+  -- Execute ex command
+  vim.api.nvim_parse_command("SayHello")
+  -- Pring feedback
+  print("Copied all lines with match")
+end
+
+-- Word Processor mode
 function M.Wp()
-  vim.wo.formatoptions = 1
-  vim.wo.expandtab = false
+  vim.b.formatoptions = 1
+  vim.b.expandtab = false
   vim.wo.wrap = true
   vim.wo.linebreak = true
   -- spelling and thesaurus
