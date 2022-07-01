@@ -129,4 +129,11 @@ function M.custom_lsp_attach(client)
   }, { prefix = "<leader>", mode = "n", default_options })
 end
 
+-- Create scratch buffer
+vim.cmd[[
+function! GoScratch()
+  ene
+  setlocal buftype=nofile bufhidden=hide noswapfile
+endfunction
+]]
 return M

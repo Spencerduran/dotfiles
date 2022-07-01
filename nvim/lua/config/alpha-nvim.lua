@@ -145,7 +145,8 @@ local buttons = {
   type = "group",
   val = {
     { type = "padding", val = 1 },
-		dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
+		dashboard.button("s", "  Scratch buffer", ":call GoScratch()<CR>"),
+		dashboard.button("e", "﯂  New file", ":ene <CR>"),
 		dashboard.button("r", "  Recent files", ":Telescope oldfiles <CR>"),
 		dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),
 		dashboard.button("F", "  RipGrep", ":Telescope live_grep <CR>"),
