@@ -101,6 +101,7 @@ packer.startup(function(use)
   -- Lightspeed
 	use({ "ggandor/lightspeed.nvim" })
   -- LSP
+  use({ "Djancyp/cheat-sheet" })
   use({ "neovim/nvim-lspconfig", config = get_config("lsp") })
   use({ "onsails/lspkind-nvim", requires = { "famiu/bufdelete.nvim" } })
   -- LuaLine
@@ -112,8 +113,6 @@ packer.startup(function(use)
   })
   -- Notify
   use({ "rcarriga/nvim-notify", config = get_config("notify") })
-  -- Snippets
-	use({ "rafamadriz/friendly-snippets" })
   -- Specs
 	use({ "edluffy/specs.nvim", config = get_config("specs") })
   -- Startup Time
