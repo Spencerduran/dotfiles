@@ -18,13 +18,10 @@ vim.g.maplocalleader = " "
 
 
 ------------ Normal ------------
--- Quicksave
---map("n", "<leader>w", ":w<CR>", default_options)
-
 -- Toggle whitespace characters
 map("n", "<F1>", "set list!<CR>", default_options)
 
--- Delete trailing whitespace 
+-- Delete trailing whitespace
 map("n", "<Leader>dw", ":%s/\\s\\+$//e<CR>", default_options)
 --
 -- Cancel search highlighting with ESC
