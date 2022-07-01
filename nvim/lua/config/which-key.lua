@@ -159,7 +159,6 @@ wk.register({
 		R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
 		s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
 		S = { "<cmd>lua require 'gitsigns'.stage_buffer()<cr>", "Stage Buffer" },
-		t = "Open Gitui", -- command in toggleterm.lua
 		n = { "<cmd>Neogit<cr>", "Open Neogit" },
 		u = {
 			"<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
@@ -174,30 +173,6 @@ wk.register({
 			"Checkout commit(current file)",
 		},
 	},
---	h = {
---		name = "Harpoon",
---		a = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "Add file" },
---		u = {
---			"<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>",
---			"Open Menu",
---		},
---		["1"] = {
---			"<cmd>lua require('harpoon.ui').nav_file(1)<cr>",
---			"Open File 1",
---		},
---		["2"] = {
---			"<cmd>lua require('harpoon.ui').nav_file(1)<cr>",
---			"Open File 2",
---		},
---		["3"] = {
---			"<cmd>lua require('harpoon.ui').nav_file(1)<cr>",
---			"Open File 3",
---		},
---		["4"] = {
---			"<cmd>lua require('harpoon.ui').nav_file(1)<cr>",
---			"Open File 4",
---		},
---	},
 	m = {
 		name = "Misc",
 		a = {
@@ -221,7 +196,6 @@ wk.register({
 	},
 	s = {
 		name = "Search",
-		C = { "<cmd>CheatSH<cr>", "Cht.sh" },
 		h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
 		H = { "<cmd>Telescope heading<cr>", "Find Header" },
 		M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
