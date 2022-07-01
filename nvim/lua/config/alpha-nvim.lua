@@ -36,6 +36,12 @@ dashboard.section.header.val = {
 --"⢀⣾⣽⣿⣿⣿⣿⠛⢲⣶⣾⢉⡷⣿⣿⠵⣿⠀⠀⠀⠀⠀⠀",
 --"⣼⣿⠍⠉⣿⡭⠉⠙⢺⣇⣼⡏⠀⠀⠀⣄⢸⠀⠀⠀⠀⠀⠀",
 --"⣿⣿⣧⣀⣿………⣀⣰⣏⣘⣆⣀⠀⠀",
+"                                                  ",
+"                                                  ",
+"                                                  ",
+"                                                  ",
+"                                                  ",
+"                                                  ",
 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⡀⠑⠒⠀⠠⠆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⣘⠖⠀⠀⠀⠀⠀⠀⠀",
 "⠀⠀⠀⠀⠀⠀⠀⠴⡖⠒⠒⠈⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠊⠁⠀⠀⠀⠀⠀⠀⠀⠀",
@@ -135,10 +141,10 @@ dashboard.section.header.val = {
 --"                               几 乇 ㄖ ᐯ 丨 爪                       ",
 }
 
-dashboard.section.buttons.val = {
-		--{ type = "text", val = "Quick links", opts = { hl = "SpecialComment", position = "center" } },
-		--{ type = "padding", val = 1 },
-		--dashboard.button("z", "  Search Zoxide", ":Telescope zoxide list<CR>"),
+local buttons = {
+  type = "group",
+  val = {
+    { type = "padding", val = 1 },
 		dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
 		dashboard.button("r", "  Recent files", ":Telescope oldfiles <CR>"),
 		dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),
@@ -149,13 +155,16 @@ dashboard.section.buttons.val = {
 		dashboard.button("u", "  Update plugins", ":PackerSync<CR>"),
 		dashboard.button("c", "  Configuration", ":e ~/.config/nvim/ <CR>"),
 		dashboard.button("q", "  Quit", ":qa<CR>"),
+  },
+  position = "center",
+}
+dashboard.section.buttons.val = {
+  buttons
 }
 
-dashboard.section.footer.val = {
-  "                       ",
-  "                       ",
---  "  ｎ ｅ ｏ ｖ ｉ ｍ    ",
-  "                       ",
-}
+--dashboard.section.footer.val = {
+--}
 
 alpha.setup(dashboard.opts)
+
+--require'alpha'.setup(require'alpha.themes.theta'.config)
