@@ -92,12 +92,12 @@ packer.startup(function(use)
 	use({ "rhysd/vim-grammarous", cmd = "GrammarousCheck" })
   -- Illuminate
 	use({ "RRethy/vim-illuminate" })
-  -- LF (ranger)
-	use({
-		"ptzz/lf.vim",
-		requires = "voldikss/vim-floaterm",
-		config = get_config("lf"),
-	})
+  -- LF (ranger clone written in go) currently broken, auto exits on launch
+	--use({
+	--	"ptzz/lf.vim",
+	--	requires = "voldikss/vim-floaterm",
+	--	config = get_config("lf"),
+	--})
   -- Lightspeed
 	use({ "ggandor/lightspeed.nvim" })
   -- LSP
@@ -135,8 +135,13 @@ packer.startup(function(use)
 	use({ "ahmedkhalf/project.nvim", config = get_config("project") })
   -- Tmux Navigation
   use({ "aserowy/tmux.nvim", config = get_config("tmux") })
+  use({
+    "akinsho/nvim-toggleterm.lua",
+    keys = { "<C-n>", "<leader>fl" },
+    config = get_config("toggleterm"),
+  })
   -- Treesitter
-  use({ "windwp/nvim-autopairs", config = get_config("nvim-autopairs") })
+  -- use({ "windwp/nvim-autopairs", config = get_config("nvim-autopairs") })
   use({
     "nvim-treesitter/nvim-treesitter",
     config = get_config("treesitter"),
