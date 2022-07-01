@@ -174,12 +174,6 @@ _G.packer_plugins = {
     path = "/Users/SDuran/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
-  ["lf.vim"] = {
-    config = { 'require("config/lf")' },
-    loaded = true,
-    path = "/Users/SDuran/.local/share/nvim/site/pack/packer/start/lf.vim",
-    url = "https://github.com/ptzz/lf.vim"
-  },
   ["lightspeed.nvim"] = {
     loaded = true,
     path = "/Users/SDuran/.local/share/nvim/site/pack/packer/start/lightspeed.nvim",
@@ -197,12 +191,6 @@ _G.packer_plugins = {
     only_cond = false,
     path = "/Users/SDuran/.local/share/nvim/site/pack/packer/opt/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
-  },
-  ["nvim-autopairs"] = {
-    config = { 'require("config/nvim-autopairs")' },
-    loaded = true,
-    path = "/Users/SDuran/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
-    url = "https://github.com/windwp/nvim-autopairs"
   },
   ["nvim-bufferline.lua"] = {
     config = { 'require("config/bufferline")' },
@@ -229,6 +217,15 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/SDuran/.local/share/nvim/site/pack/packer/start/nvim-notify",
     url = "https://github.com/rcarriga/nvim-notify"
+  },
+  ["nvim-toggleterm.lua"] = {
+    config = { 'require("config/toggleterm")' },
+    keys = { { "", "<C-n>" }, { "", "<leader>fl" } },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/Users/SDuran/.local/share/nvim/site/pack/packer/opt/nvim-toggleterm.lua",
+    url = "https://github.com/akinsho/nvim-toggleterm.lua"
   },
   ["nvim-tree.lua"] = {
     config = { 'require("config/nvim-tree")' },
@@ -359,11 +356,6 @@ _G.packer_plugins = {
     path = "/Users/SDuran/.local/share/nvim/site/pack/packer/start/vim-easy-align",
     url = "https://github.com/junegunn/vim-easy-align"
   },
-  ["vim-floaterm"] = {
-    loaded = true,
-    path = "/Users/SDuran/.local/share/nvim/site/pack/packer/start/vim-floaterm",
-    url = "https://github.com/voldikss/vim-floaterm"
-  },
   ["vim-grammarous"] = {
     commands = { "GrammarousCheck" },
     loaded = false,
@@ -392,18 +384,30 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: nvim-cmp
+time([[Config for nvim-cmp]], true)
+require("config/cmp")
+time([[Config for nvim-cmp]], false)
+-- Config for: nvim-lspconfig
+time([[Config for nvim-lspconfig]], true)
+require("config/lsp")
+time([[Config for nvim-lspconfig]], false)
 -- Config for: telescope.nvim
 time([[Config for telescope.nvim]], true)
 require("config/telescope")
 time([[Config for telescope.nvim]], false)
--- Config for: project.nvim
-time([[Config for project.nvim]], true)
-require("config/project")
-time([[Config for project.nvim]], false)
--- Config for: alpha-nvim
-time([[Config for alpha-nvim]], true)
-require("config/alpha-nvim")
-time([[Config for alpha-nvim]], false)
+-- Config for: fidget.nvim
+time([[Config for fidget.nvim]], true)
+try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\vfidget\frequire\0", "config", "fidget.nvim")
+time([[Config for fidget.nvim]], false)
+-- Config for: nvim-notify
+time([[Config for nvim-notify]], true)
+require("config/notify")
+time([[Config for nvim-notify]], false)
+-- Config for: tmux.nvim
+time([[Config for tmux.nvim]], true)
+require("config/tmux")
+time([[Config for tmux.nvim]], false)
 -- Config for: specs.nvim
 time([[Config for specs.nvim]], true)
 require("config/specs")
@@ -412,82 +416,68 @@ time([[Config for specs.nvim]], false)
 time([[Config for todo-comments.nvim]], true)
 require("config/todo")
 time([[Config for todo-comments.nvim]], false)
--- Config for: nvim-window.git
-time([[Config for nvim-window.git]], true)
-require("config/nvim-window")
-time([[Config for nvim-window.git]], false)
--- Config for: twilight.nvim
-time([[Config for twilight.nvim]], true)
-require("config/twilight")
-time([[Config for twilight.nvim]], false)
--- Config for: nvim-autopairs
-time([[Config for nvim-autopairs]], true)
-require("config/nvim-autopairs")
-time([[Config for nvim-autopairs]], false)
--- Config for: nvim-cmp
-time([[Config for nvim-cmp]], true)
-require("config/cmp")
-time([[Config for nvim-cmp]], false)
--- Config for: catppuccin
-time([[Config for catppuccin]], true)
-require("config/catppuccin")
-time([[Config for catppuccin]], false)
--- Config for: nvim-lspconfig
-time([[Config for nvim-lspconfig]], true)
-require("config/lsp")
-time([[Config for nvim-lspconfig]], false)
--- Config for: which-key.nvim
-time([[Config for which-key.nvim]], true)
-require("config/which-key")
-time([[Config for which-key.nvim]], false)
--- Config for: tmux.nvim
-time([[Config for tmux.nvim]], true)
-require("config/tmux")
-time([[Config for tmux.nvim]], false)
--- Config for: nvim-notify
-time([[Config for nvim-notify]], true)
-require("config/notify")
-time([[Config for nvim-notify]], false)
--- Config for: vimwiki
-time([[Config for vimwiki]], true)
-require("config/vimwiki")
-time([[Config for vimwiki]], false)
--- Config for: fidget.nvim
-time([[Config for fidget.nvim]], true)
-try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\vfidget\frequire\0", "config", "fidget.nvim")
-time([[Config for fidget.nvim]], false)
--- Config for: gitsigns.nvim
-time([[Config for gitsigns.nvim]], true)
-require("config/gitsigns")
-time([[Config for gitsigns.nvim]], false)
--- Config for: lf.vim
-time([[Config for lf.vim]], true)
-require("config/lf")
-time([[Config for lf.vim]], false)
 -- Config for: nvim-tree.lua
 time([[Config for nvim-tree.lua]], true)
 require("config/nvim-tree")
 time([[Config for nvim-tree.lua]], false)
+-- Config for: twilight.nvim
+time([[Config for twilight.nvim]], true)
+require("config/twilight")
+time([[Config for twilight.nvim]], false)
 -- Config for: nvim-treesitter
 time([[Config for nvim-treesitter]], true)
 require("config/treesitter")
 time([[Config for nvim-treesitter]], false)
+-- Config for: catppuccin
+time([[Config for catppuccin]], true)
+require("config/catppuccin")
+time([[Config for catppuccin]], false)
 -- Config for: LuaSnip
 time([[Config for LuaSnip]], true)
 require("config/luasnip")
 time([[Config for LuaSnip]], false)
+-- Config for: alpha-nvim
+time([[Config for alpha-nvim]], true)
+require("config/alpha-nvim")
+time([[Config for alpha-nvim]], false)
+-- Config for: which-key.nvim
+time([[Config for which-key.nvim]], true)
+require("config/which-key")
+time([[Config for which-key.nvim]], false)
+-- Config for: nvim-window.git
+time([[Config for nvim-window.git]], true)
+require("config/nvim-window")
+time([[Config for nvim-window.git]], false)
+-- Config for: project.nvim
+time([[Config for project.nvim]], true)
+require("config/project")
+time([[Config for project.nvim]], false)
+-- Config for: vimwiki
+time([[Config for vimwiki]], true)
+require("config/vimwiki")
+time([[Config for vimwiki]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+require("config/gitsigns")
+time([[Config for gitsigns.nvim]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file GrammarousCheck lua require("packer.load")({'vim-grammarous'}, { cmd = "GrammarousCheck", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 time([[Defining lazy-load commands]], false)
 
+-- Keymap lazy-loads
+time([[Defining lazy-load keymaps]], true)
+vim.cmd [[noremap <silent> <leader>fl <cmd>lua require("packer.load")({'nvim-toggleterm.lua'}, { keys = "<lt>leader>fl", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> <C-n> <cmd>lua require("packer.load")({'nvim-toggleterm.lua'}, { keys = "<lt>C-n>", prefix = "" }, _G.packer_plugins)<cr>]]
+time([[Defining lazy-load keymaps]], false)
+
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au VimEnter * ++once lua require("packer.load")({'lualine.nvim'}, { event = "VimEnter *" }, _G.packer_plugins)]]
 vim.cmd [[au BufReadPre * ++once lua require("packer.load")({'nvim-bufferline.lua'}, { event = "BufReadPre *" }, _G.packer_plugins)]]
+vim.cmd [[au VimEnter * ++once lua require("packer.load")({'lualine.nvim'}, { event = "VimEnter *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 if should_profile then save_profiles() end
