@@ -3,7 +3,7 @@ local M = {}
 -- Toggle global status line
 M.global_statusline = true
 -- Theme
-M.theme = "tokyo"
+M.theme = "nightfox"
 -- Set numbered lines
 M.number = true
 -- Set relative numbered lines

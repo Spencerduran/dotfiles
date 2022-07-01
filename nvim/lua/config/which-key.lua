@@ -144,10 +144,10 @@ wk.register({
 		b = { "<cmd>:cd %:h|Telescope file_browser<cr>", "File browser" },
 		f = { "<cmd>lua require'telescope.builtin'.find_files()<cr>", "Find File", },
 		l = { "<cmd>Lf<cr>", "Open LF" },
-		p = { "<cmd>NvimTreeToggle<cr>", "Toggle Tree" },
+		t = { "<cmd>NvimTreeToggle<cr>", "Toggle Tree" },
 		r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
 		s = { "<cmd>w<cr>", "Save Buffer" },
-		T = { "<cmd>NvimTreeFindFile<CR>", "Find in Tree" },
+		p = { "<cmd>Telescope projects<cr>", "Projects" },
 	},
 	g = {
 		name = "Git",
@@ -166,8 +166,8 @@ wk.register({
 			"Undo Stage Hunk",
 		},
 		g = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-		B = { "<cmd>GitBlameToggle<cr>", "Toggle Blame" },
+		B = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+		b = { "<cmd>GitBlameToggle<cr>", "Toggle Blame" },
 		c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
 		C = {
 			"<cmd>Telescope git_bcommits<cr>",

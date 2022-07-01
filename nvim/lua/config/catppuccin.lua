@@ -1,7 +1,7 @@
 local catppuccin = require("catppuccin")
 
 catppuccin.setup({
-	transparent_background = false,
+	transparent_background = true,
 	term_colors = false,
 	styles = {
 		comments = "italic",
@@ -63,4 +63,5 @@ catppuccin.setup({
 		symbols_outline = true,
 	},
 })
+vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
 vim.cmd([[colorscheme catppuccin]])

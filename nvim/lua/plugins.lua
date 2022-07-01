@@ -1,9 +1,7 @@
 local settings = require("user-conf")
 local fn = vim.fn
-
 -- initialize and configure packer
 local packer = require("packer")
-
 -- returns the require for use in `config` parameter of packer's use
 -- expects the name of the config file
 local function get_config(name)
@@ -22,18 +20,15 @@ packer.init({
 	},
 })
 
-
 packer.startup(function(use)
   -- Packer self init
   use ({ 'wbthomason/packer.nvim' })
-
   -- Alpha-NVIM
 	use({
 		"goolord/alpha-nvim",
 		requires = { "kyazdani42/nvim-web-devicons" },
 		config = get_config("alpha-nvim"),
 	})
-
   -- Buffer Line
 	use({
 		"akinsho/nvim-bufferline.lua",
@@ -63,33 +58,22 @@ packer.startup(function(use)
       },
       config = get_config("cmp"),
     })
-  
     use({ "rafamadriz/friendly-snippets" })
     use({
       "L3MON4D3/LuaSnip",
       requires = "saadparwaiz1/cmp_luasnip",
       config = get_config("luasnip"),
     })
-
   -- Colorschemes
-	if settings.theme == "nightfox" then
-		use({ "EdenEast/nightfox.nvim", config = get_config("nightfox") })
-	elseif settings.theme == "nightmare" then
-    use({ "CantoroMC/nvim-nightmare", config = get_config("nightmare") })
-	elseif settings.theme == "zephyr" then
-    use({ "glepnir/zephyr-nvim", config = get_config("zephyr") })
-	elseif settings.theme == "tokyo" then
+	if settings.theme == "tokyo" then
 		use({ "folke/tokyonight.nvim", config = get_config("tokyo") })
 	elseif settings.theme == "catppuccino" then
 		use({ "catppuccin/nvim", as = "catppuccin", config = get_config("catppuccin") })
-	elseif settings.theme == "moonlight" then
-		use({ "shaunsingh/moonlight.nvim", config = get_config("moonlight") })
 	else
 		use({ "catppuccin/nvim", as = "catppuccin", config = get_config("catppuccin") })
 	end
   -- Comment Boxes
   use("LudoPinelli/comment-box.nvim")
-
   -- Conflict Marker
 	use({ "rhysd/conflict-marker.vim" })
   -- Defx
@@ -99,6 +83,11 @@ packer.startup(function(use)
   -- Easy Align
 	use("junegunn/vim-easy-align") -- no lua alternative, https://github.com/Vonr/align.nvim not working for me
   -- Git Things
+  use({
+    "lewis6991/gitsigns.nvim",
+    requires = { "nvim-lua/plenary.nvim" },
+    config = get_config("gitsigns"),
+  })
   -- Grammarous
 	use({ "rhysd/vim-grammarous", cmd = "GrammarousCheck" })
   -- Illuminate
@@ -180,7 +169,6 @@ packer.startup(function(use)
   use({ "vimwiki/vimwiki", config = get_config("vimwiki") })
   -- Which-Key
   use({ "folke/which-key.nvim", config = get_config("which-key") })
-
   -- Telegraph
 	--use({
 	--	"waylonwalker/Telegraph.nvim",
