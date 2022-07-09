@@ -21,6 +21,11 @@ function M.samplefunction()
   print("Copied all lines with match")
 end
 
+-- :H opens help in current window
+--vim.api.nvim_create_user_command('H', '', {})
+--vim.fn['command! -nargs=1 -complete=help H :enew | :set buftype=help | :h arrgs']({...})
+
+
 -- Word Processor mode
 function M.Wp()
   vim.b.formatoptions = 1
