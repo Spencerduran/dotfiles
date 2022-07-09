@@ -67,6 +67,8 @@ packer.startup(function(use)
   -- Colorschemes
 	if settings.theme == "tokyo" then
 		use({ "folke/tokyonight.nvim", config = get_config("tokyo") })
+	elseif settings.theme == "rosepine" then
+    use({ 'rose-pine/neovim', as = 'rose-pine', tag = 'v1.*', config = get_config("rosepine") })
 	elseif settings.theme == "catppuccino" then
 		use({ "catppuccin/nvim", as = "catppuccin", config = get_config("catppuccin") })
 	else
@@ -82,7 +84,8 @@ packer.startup(function(use)
   use({ 'kristijanhusak/defx-icons' })
   -- Easy Align
 	use("junegunn/vim-easy-align") -- no lua alternative, https://github.com/Vonr/align.nvim not working for me
-  -- Git Things
+  -- Git Thingsuse { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+  use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
   use({
     "lewis6991/gitsigns.nvim",
     requires = { "nvim-lua/plenary.nvim" },
