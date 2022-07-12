@@ -84,13 +84,17 @@ packer.startup(function(use)
   use({ 'kristijanhusak/defx-icons' })
   -- Easy Align
 	use("junegunn/vim-easy-align") -- no lua alternative, https://github.com/Vonr/align.nvim not working for me
-  -- Git Thingsuse { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
-  use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+  -- Git Things
+  use({
+    "tpope/vim-fugitive",
+    config = get_config("fugitive"),
+  })
   use({
     "lewis6991/gitsigns.nvim",
     requires = { "nvim-lua/plenary.nvim" },
     config = get_config("gitsigns"),
   })
+  --use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
   -- Grammarous
 	use({ "rhysd/vim-grammarous", cmd = "GrammarousCheck" })
   -- Illuminate
