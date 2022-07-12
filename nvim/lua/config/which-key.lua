@@ -151,10 +151,12 @@ wk.register({
 	},
 	g = {
 		name = "Git",
-		g = { "<cmd>Telescope git_status<cr>", "Open changed file" },
 		l = { "<cmd>Telescope git_commits<cr>", "Log" },
 		n = { "<cmd>Neogit<cr>", "Open Neogit" },
 		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+		g = { "<cmd>G<cr>", "Git Status" },
+		p = { "<cmd>Git push<cr>", "Git Push" },
+		s = { "<cmd>Telescope git_status<cr>", "See all changed files" },
 		--c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
 		--C = { "<cmd>Telescope git_bcommits<cr>", "Checkout commit(current file)", },
 		--u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk", },
