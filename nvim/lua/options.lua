@@ -39,6 +39,8 @@ o.splitright     = true -- Force all vertical splits to go to the right of curre
 o.tabstop        = 2 -- How many columns a tab counts for
 o.termguicolors  = true -- Set term gui colors
 o.title          = true -- Show filename in titlebar of window
+o.undofile       = true -- Enable persistent undo
+
 o.wildmenu       = true -- Enhanced command-line completion
 o.wildmode       = "longest:full" -- Complete till longest common string + 'wildmenu' if it is enabled.
 o.wildignorecase = true -- When set case is ignored when completing file names and directories
