@@ -40,7 +40,8 @@ telescope.setup({
 		-- find_command = { "fd", "--hidden", "--type", "file", "--follow", "--strip-cwd-prefix" },
 	},
 	defaults = {
-		file_ignore_patterns = {"~/.pyenv/*", "~/Applications/*", "~/Library/*", ".vscode", "node_modules", "%.jpg", "%.png" },
+    --file_ignore_patterns = {"!{.pyenv,.local,.idea,.vscode,tmp,~/Library,/Users/sduran/Library,.vim,.git,node_modules,vendor}/*"},
+		--file_ignore_patterns = {"~/.pyenv/*", "~/Applications/*", "~/Library/*", "~/.vscode", "node_modules", "%.jpg", "%.png", "~/.vim" },
 		-- used for grep_string and live_grep
 		vimgrep_arguments = {
 			"rg",
