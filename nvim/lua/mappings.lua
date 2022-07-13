@@ -33,6 +33,7 @@ map("n", "<Leader>cp", ":let @+=expand('%:p')<CR>", default_options)
 ---- Remove  carraige return (^M) symbols
 map("n", "<Leader>cr", "%s/\\r//g<CR>", default_options)
 
+map("n", "<C-p>", ":FloatermNew --disposable --opener=edit fzf<CR>", default_options)
 -- Buffers
 -- map("n", "<PageUp>", ":bprevious<CR>", default_options)
 -- map("n", "<PageDown>", ":bnext<CR>", default_options)

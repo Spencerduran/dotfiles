@@ -100,7 +100,9 @@ packer.startup(function(use)
   -- Illuminate
 	use({ "RRethy/vim-illuminate" })
   -- Terminal tools
+  use { "junegunn/fzf" }
 	use({ "voldikss/vim-floaterm"})
+	use({ "voldikss/fzf-floaterm"})
   -- Lightspeed
 	use({ "ggandor/lightspeed.nvim" })
   -- LSP
