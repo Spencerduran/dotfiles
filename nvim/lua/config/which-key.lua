@@ -173,7 +173,7 @@ wk.register({
 		l = { "<cmd>source ~/.config/nvim/snippets/*<cr>", "Reload snippets" },
 		p = { "<cmd>PackerSync<cr>", "PackerSync" },
 		s = { "<cmd>SymbolsOutline<cr>", "Toggle SymbolsOutline" },
-		t = { "<cmd>FloatermNew", "New Floaterm" },
+		t = { "<cmd>FloatermNew<cr>", "New Floaterm" },
 		--t = { "<cmd>FloatermNew --autoclose=2<cr>", "New Floaterm" },
 		--z = { "<cmd>ZenMode<cr>", "Toggle ZenMode" },
 	},
@@ -183,6 +183,10 @@ wk.register({
 		k = { "<cmd>cprevious<cr>", "Previous Quickfix Item" },
 		q = { "<cmd>lua require('functions').toggle_qf()<cr>", "Toggle quickfix list" },
 		t = { "<cmd>TodoQuickFix<cr>", "Show TODOs" },
+	},
+	r = {
+		name = "Ranger",
+		r = { "<cmd>FloatermNew --disposable --opener=edit ranger<cr>", "Ranger" },
 	},
 	s = {
 		name = "Search",

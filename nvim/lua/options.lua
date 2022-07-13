@@ -26,7 +26,7 @@ o.mouse          = n -- Set mouse mode for terminal window resizing
 o.swapfile       = false -- Disable .swp files
 o.relativenumber = settings.relative_number	-- Set relative line numbers
 o.scrolloff      = 8 -- Minimum number of screen lines to keep above and below the cursor.
-o.shell          = fish -- Set shell
+--o.shell          =  -- Set shell
 o.shiftwidth     = 2 -- The number of spaces inserted for each indentation
 o.shortmess      = o.shortmess + "T" -- Prevent "pattern not found" messages
 o.showmode       = false -- Hide statusline info
@@ -40,7 +40,6 @@ o.tabstop        = 2 -- How many columns a tab counts for
 o.termguicolors  = true -- Set term gui colors
 o.title          = true -- Show filename in titlebar of window
 o.undofile       = true -- Enable persistent undo
-
 o.wildmenu       = true -- Enhanced command-line completion
 o.wildmode       = "longest:full" -- Complete till longest common string + 'wildmenu' if it is enabled.
 o.wildignorecase = true -- When set case is ignored when completing file names and directories
