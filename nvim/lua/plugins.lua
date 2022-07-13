@@ -170,21 +170,16 @@ packer.startup(function(use)
 		config = function()
 			require("fidget").setup({})
 		end,
-  }) 
+  })
   -- Window
 	use({
 		"https://gitlab.com/yorickpeterse/nvim-window.git",
 		config = get_config("nvim-window"),
 	})
+  -- Undo Tree
+  use({ "mbbill/undotree" })
   -- Vimwiki
   use({ "vimwiki/vimwiki", config = get_config("vimwiki") })
   -- Which-Key
   use({ "folke/which-key.nvim", config = get_config("which-key") })
-  -- Telegraph
-	--use({
-	--	"waylonwalker/Telegraph.nvim",
-	--	config = function()
-	--		require("telegraph").setup({})
-	--	end,
-	--})
 end)
