@@ -108,19 +108,14 @@ wk.register({
   },
 	b = {
 		name = "Buffers",
-		b = {
-			"<cmd>Telescope buffers<cr>",
-			"Find buffer",
-		},
-		a = {
-			"<cmd>BufferLineCloseLeft<cr><cmd>BufferLineCloseRight<cr>",
-			"Close all but the current buffer",
-		},
+		b = { "<cmd>Telescope buffers<cr>", "Find buffer", },
+    a = { "<cmd>BufferLineCloseLeft<cr><cmd>BufferLineCloseRight<cr>", "Close all but the current buffer", },
 		d = { "<cmd>Bdelete<CR>", "Close buffer" },
 		f = { "<cmd>BufferLinePick<cr>", "Pick buffer" },
 		l = { "<cmd>BufferLineCloseLeft<cr>", "Close all buffers to the left" },
 		p = { "<cmd>BufferLineCyclePrev<cr>", "Move buffer prev" },
 		n = { "<cmd>BufferLineCycleNext<cr>", "Move buffer next" },
+		s = { "<cmd>call GoScratch() <cr>", "  Scratch buffer"},
 		r = {
 			"<cmd>BufferLineCloseRight<cr>",
 			"Close all BufferLines to the right",
@@ -180,7 +175,7 @@ wk.register({
 		s = { "<cmd>SymbolsOutline<cr>", "Toggle SymbolsOutline" },
 		t = { "<cmd>FloatermNew", "New Floaterm" },
 		--t = { "<cmd>FloatermNew --autoclose=2<cr>", "New Floaterm" },
-		z = { "<cmd>ZenMode<cr>", "Toggle ZenMode" },
+		--z = { "<cmd>ZenMode<cr>", "Toggle ZenMode" },
 	},
 	q = {
 		name = "Quickfix",
