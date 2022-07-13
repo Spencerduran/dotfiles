@@ -73,23 +73,23 @@ hyper.bindKey('s', function()
   end
 end)
 -- Show/hide pycharm
-hyper.bindKey('p', function()
-  local postman = hs.application.find('pycharm')
-  if postman:isFrontmost() then
-    postman:hide()
-  else
-    hs.application.launchOrFocus('/Applications/pycharm.app')
-  end
-end)
--- Show/hide postman
---hyper.bindKey('p', function()
---  local postman = hs.application.find('postman')
+--hyper.bindKey('y', function()
+--  local postman = hs.application.find('pycharm')
 --  if postman:isFrontmost() then
 --    postman:hide()
 --  else
---    hs.application.launchOrFocus('/Applications/postman.app')
+--    hs.application.launchOrFocus('/Applications/pycharm.app')
 --  end
 --end)
+-- Show/hide postman
+hyper.bindKey('p', function()
+  local postman = hs.application.find('postman')
+  if postman:isFrontmost() then
+    postman:hide()
+  else
+    hs.application.launchOrFocus('/Applications/postman.app')
+  end
+end)
 -- Show/hide spotify
 hyper.bindKey('q', function()
   local spotify = hs.application.find('spotify')
