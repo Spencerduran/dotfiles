@@ -1,11 +1,11 @@
 require('rose-pine').setup({
 	--- @usage 'main' | 'moon'
 	dark_variant = 'moon',
-	bold_vert_split = false,
-	dim_nc_background = false,
-	disable_background = false,
+	bold_vert_split = true,
+  dim_nc_background = false,
+	disable_background = true,
 	disable_float_background = true,
-	disable_italics = false,
+	--disable_italics = false,
 
 	--- @usage string hex value or named color from rosepinetheme.com/palette
 	groups = {
@@ -34,9 +34,9 @@ require('rose-pine').setup({
 	},
 
 	-- Change specific vim highlight groups
-	highlight_groups = {
-		ColorColumn = { bg = 'pine' }
-	}
+--	highlight_groups = {
+--		ColorColumn = { bg = 'pine' }
+--	}
 })
 
 -- set colorscheme after options

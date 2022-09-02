@@ -1,3 +1,4 @@
+#pyenv init - | source
 status --is-interactive; and source (pyenv init -|psub)
 set -gx EDITOR nvim
 #set -g -x NVM_NODEJS_ORG_MIRROR http:/nodejs.org/dist
