@@ -18,6 +18,14 @@ screenPositions.quarterleft        = {
   x = 0, y = 0,
   w = QUARTER_GRID_SIZE, h = GRID_SIZE
 }
+screenPositions.topLeftQuarter     = {
+  x = 0, y = 0,
+  w = QUARTER_GRID_SIZE, h = HALF_GRID_SIZE
+}
+screenPositions.bottomLeftQuarter     = {
+  x = 0, y = HALF_GRID_SIZE,
+  w = QUARTER_GRID_SIZE, h = HALF_GRID_SIZE
+}
 screenPositions.midleft        = {
   x = QUARTER_GRID_SIZE, y = 0,
   w = QUARTER_GRID_SIZE, h = GRID_SIZE
@@ -39,6 +47,14 @@ screenPositions.midmid        = {
 screenPositions.thirdleft        = {
   x = 0, y = 0,
   w = THIRD_GRID_SIZE, h = GRID_SIZE
+}
+screenPositions.topLeftthird     = {
+  x = 0, y = 0,
+  w = THIRD_GRID_SIZE, h = HALF_GRID_SIZE
+}
+screenPositions.bottomLeftthird     = {
+  x = 0, y = HALF_GRID_SIZE,
+  w = THIRD_GRID_SIZE, h = HALF_GRID_SIZE
 }
 screenPositions.mid        = {
   x = THIRD_GRID_SIZE, y = 0,
@@ -72,14 +88,6 @@ screenPositions.bottom      = {
 screenPositions.topLeft     = {
   x = 0, y = 0,
   w = HALF_GRID_SIZE, h = HALF_GRID_SIZE
-}
-screenPositions.topLeftthird     = {
-  x = 0, y = 0,
-  w = THIRD_GRID_SIZE, h = HALF_GRID_SIZE
-}
-screenPositions.bottomLeftthird     = {
-  x = 0, y = HALF_GRID_SIZE,
-  w = THIRD_GRID_SIZE, h = HALF_GRID_SIZE
 }
 screenPositions.topRight    = {
   x = HALF_GRID_SIZE, y = 0,
