@@ -4,7 +4,7 @@ local fn = vim.fn
 local M = {}
 
 vim.api.nvim_exec([[
-source ~/repos/spence/dotfiles/nvim/lua/config/copy_things.vim 
+source ~/dotfiles/nvim/lua/config/copy_things.vim 
 ]], false)
 
 ---- Sample user command example ----
