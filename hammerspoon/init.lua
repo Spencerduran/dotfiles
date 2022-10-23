@@ -18,6 +18,16 @@ hyper.bindShiftKey('r', hs.reload)
 --  end
 --end
 
+arrangeDesktop = hs.loadSpoon('ArrangeDesktop')
+arrangeDesktop.logger.setLogLevel('info')
+menubar = hs.menubar.new()
+if menubar then
+    menubar:setIcon(hs.image.imageFromName("NSHandCursor"))
+    local menuItems = {}
+    menuItems = arrangeDesktop:addMenuItems(menuItems)
+    menubar:setMenu(menuItems)
+end
+
 -- Show/hide alacritty
 hyper.bindKey('a', function()
   local alacritty = hs.application.find('alacritty')
