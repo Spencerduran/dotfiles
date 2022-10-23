@@ -18,7 +18,7 @@ SETUVAR Z_EXCLUDE:\x5e/Users/sduran\x24
 SETUVAR __fish_init_2_39_8:\x1d
 SETUVAR __fish_init_2_3_0:\x1d
 SETUVAR __fish_init_3_x:\x1d
-SETUVAR __fish_initialized:3100
+SETUVAR __fish_initialized:3400
 SETUVAR fish_color_autosuggestion:BD93F9
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:F8F8F2
@@ -48,5 +48,6 @@ SETUVAR fish_pager_color_completion:normal
 SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
-SETUVAR fish_user_paths:/Users/sduran/\x2epyenv/shims/ranger\x1e/Users/sduran/\x2ecargo/bin\x1e/Users/sduran/\x2erustup/bin\x1e/Users/SDuran/repos/spence/dotfiles/tmux/bin/tmux_spotify_info
+SETUVAR fish_pager_color_selected_background:\x2dr
+SETUVAR fish_user_paths:/opt/homebrew/bin/\x1e/Users/sduran/\x2epyenv/shims/ranger\x1e/Users/sduran/\x2ecargo/bin\x1e/Users/sduran/\x2erustup/bin\x1e/Users/SDuran/repos/spence/dotfiles/tmux/bin/tmux_spotify_info
 SETUVAR x:NODE_PATH\x3d/usr/local/lib/node_modules/
