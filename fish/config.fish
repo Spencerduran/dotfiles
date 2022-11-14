@@ -8,9 +8,5 @@ set -gx EDITOR nvim
 
 #set -gx FZF_DEFAULT_COMMAND 'rg --files --ignore-case --hidden -g "!{.pyenv,.local,.idea,.vscode,tmp,Library,.vim,.git,node_modules,vendor}/*"'
 set -gx FZF_DEFAULT_COMMAND 'rg --files --ignore-case --hidden -g "!{.pyenv,.local,.idea,.vscode,tmp,~/Library,/Users/sduran/Library,.vim,.git,node_modules,vendor}/*"'
-#set -U -x AWS_CA_BUNDLE '/usr/local/share/ca-certificates/Quicken_Loans_Root_CA.crt'
-set -U -x AWS_SDK_LOAD_CONFIG
-set -U -x AWS_CA_BUNDLE '~/.ssh/qlca.pem'
-set -U -x AWS_SHARED_CREDENTIALS_FILE '/Users/sduran/Downloads/credentials'
 
 
