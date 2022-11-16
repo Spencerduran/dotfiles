@@ -1,22 +1,4 @@
-local hyper = require('hyper')
---enable spotlight for app searching
---hs.application.enableSpotlightForNameSearches(true)
--- Load and install the Hyper key extension. Binding to F18
-hyper.install('F15')
--- Quick Reloading of Hammerspoon
-hyper.bindShiftKey('r', hs.reload)
 
--- Show/hide alacritty with 2x ctrl press
---ctrlDoublePress = require('ctrlDoublePress')
---ctrlDoublePress.timeFrame = 2
---ctrlDoublePress.action = function()
---  local alacritty = hs.application.find('alacritty')
---  if alacritty:isFrontmost() then
---    alacritty:hide()
---  else
---    hs.application.launchOrFocus('/Applications/Alacritty.app')
---  end
---end
 
 arrangeDesktop = hs.loadSpoon('ArrangeDesktop')
 arrangeDesktop.logger.setLogLevel('info')
@@ -28,17 +10,64 @@ if menubar then
     menubar:setMenu(menuItems)
 end
 
--- Show/hide alacritty
-hyper.bindKey('a', function()
+
+hyper = hs.hotkey.modal.new({}, 'F17')
+
+-- Enter Hyper Mode when F18 (Hyper/Capslock) is pressed
+function enterHyperMode()
+  hyper.triggered = false
+  hyper:enter()
+end
+
+-- Leave Hyper Mode when F18 (Hyper/Capslock) is pressed,
+-- send ESCAPE if no other keys are pressed.
+function exitHyperMode()
+  hyper:exit()
+  if not hyper.triggered then
+    hs.eventtap.keyStroke({}, 'ESCAPE')
+  end
+end
+
+-- Bind the Hyper key
+f18 = hs.hotkey.bind({}, 'F18', enterHyperMode, exitHyperMode)
+
+
+-----------------------
+-- Quick Reloading of Hammerspoon --
+-----------------------
+hyper:bind({'shift'}, 'r', hs.reload)
+
+
+-----------------------
+--   APP SWITCHER    --
+-----------------------
+--enable spotlight for app searching
+--hs.application.enableSpotlightForNameSearches(true)
+
+---- Show/hide alacritty
+-- Show/hide alacritty with 2x ctrl press
+ctrlDoublePress = require('ctrlDoublePress')
+ctrlDoublePress.timeFrame = 2
+ctrlDoublePress.action = function()
   local alacritty = hs.application.find('alacritty')
   if alacritty:isFrontmost() then
     alacritty:hide()
   else
     hs.application.launchOrFocus('/Applications/Alacritty.app')
   end
+end
+hyper:bind({}, 'a', function()
+  local alacritty = hs.application.find('alacritty')
+  if alacritty:isFrontmost() then
+    alacritty:hide()
+    hyper.triggered = true
+  else
+    hs.application.launchOrFocus('/Applications/Alacritty.app')
+    hyper.triggered = true
+  end
 end)
 -- Show/hide chrome
-hyper.bindKey('c', function()
+hyper:bind({}, 'c', function()
   local chrome = hs.application.find('google chrome')
   if chrome:isFrontmost() then
     chrome:hide()
@@ -47,7 +76,7 @@ hyper.bindKey('c', function()
   end
 end)
 -- Show/hide Discord
-hyper.bindKey('d', function()
+hyper:bind({}, 'd', function()
   local discord = hs.application.find('discord')
   if discord:isFrontmost() then
     discord:hide()
@@ -56,16 +85,25 @@ hyper.bindKey('d', function()
   end
 end)
 -- Show/hide Excel
-hyper.bindKey('e', function()
-  local outlook = hs.application.find('excel')
-  if outlook:isFrontmost() then
-    outlook:hide()
+hyper:bind({}, 'e', function()
+  local excel = hs.application.find('excel')
+  if excel:isFrontmost() then
+    excel:hide()
   else
     hs.application.launchOrFocus('/Applications/Microsoft Excel.app')
   end
 end)
+-- Show/hide Kindle
+hyper:bind({}, 'r', function()
+  local excel = hs.application.find('kindle')
+  if excel:isFrontmost() then
+    excel:hide()
+  else
+    hs.application.launchOrFocus('/Applications/Kindle.app')
+  end
+end)
 -- Show/hide outlook
-hyper.bindKey('o', function()
+hyper:bind({}, 'o', function()
   local outlook = hs.application.find('outlook')
   if outlook:isFrontmost() then
     outlook:hide()
@@ -74,7 +112,7 @@ hyper.bindKey('o', function()
   end
 end)
 -- Show/hide slack
-hyper.bindKey('s', function()
+hyper:bind({}, 's', function()
   local slack = hs.application.find('slack')
   if slack:isFrontmost() then
     slack:hide()
@@ -83,7 +121,7 @@ hyper.bindKey('s', function()
   end
 end)
 -- Show/hide pycharm
---hyper.bindKey('y', function()
+--hyper:bind({}, 'y', function()
 --  local postman = hs.application.find('pycharm')
 --  if postman:isFrontmost() then
 --    postman:hide()
@@ -92,7 +130,7 @@ end)
 --  end
 --end)
 -- Show/hide postman
-hyper.bindKey('p', function()
+hyper:bind({}, 'p', function()
   local postman = hs.application.find('postman')
   if postman:isFrontmost() then
     postman:hide()
@@ -101,7 +139,7 @@ hyper.bindKey('p', function()
   end
 end)
 -- Show/hide spotify
-hyper.bindKey('q', function()
+hyper:bind({}, 'q', function()
   local spotify = hs.application.find('spotify')
   if spotify:isFrontmost() then
     spotify:hide()
@@ -110,7 +148,7 @@ hyper.bindKey('q', function()
   end
 end)
 -- Show/hide firefox
-hyper.bindKey('x', function()
+hyper:bind({}, 'x', function()
   local firefox = hs.application.find('firefox')
   if firefox:isFrontmost() then
     firefox:hide()
@@ -119,7 +157,7 @@ hyper.bindKey('x', function()
   end
 end)
 -- Show/hide zoom
-hyper.bindKey('z', function()
+hyper:bind({}, 'z', function()
   local zoom = hs.application.find('zoom')
   if zoom:isFrontmost() then
     zoom:hide()
@@ -129,7 +167,7 @@ hyper.bindKey('z', function()
 end)
 
 -- Show/hide teams
-hyper.bindKey('t', function()
+hyper:bind({}, 't', function()
   local microsoft_teams= hs.application.find('teams')
   if microsoft_teams:isFrontmost() then
     microsoft_teams:hide()
@@ -138,7 +176,7 @@ hyper.bindKey('t', function()
   end
 end)
 -- Show/hide Visual Studio Code
-hyper.bindKey('v', function()
+hyper:bind({}, 'v', function()
   local visual_studio_code= hs.application.find('code')
   if visual_studio_code:isFrontmost() then
     visual_studio_code:hide()
@@ -147,86 +185,88 @@ hyper.bindKey('v', function()
   end
 end)
 
+-----------------------
+-- Window Management --
+-----------------------
 local wm = require('window-management')
--- Window Management
---
-hyper.bindShiftKey('f', function()
-  hs.window.focusedWindow():setSize(3600,1920)
-end)
-
-hyper.bindKey('f', function()
-  wm.windowMaximize(0)
-end)
-
----------------- MOVEMENT
-hyper.bindShiftKey('h', function()
+------------------ MOVEMENT
+hyper:bind({'shift'}, 'h', function()
   hs.window.focusedWindow():moveOneScreenWest()
 end)
-hyper.bindShiftKey('l', function()
+hyper:bind({'shift'}, 'l', function()
   hs.window.focusedWindow():moveOneScreenEast()
 end)
----------------- HALFS
-hyper.bindKey('0', function()
+
+------------------ FULLSCREEN
+hyper:bind({}, 'f', function()
+  wm.windowMaximize(0)
+end)
+hyper:bind({}, "return", function()
+  wm.windowMaximize(0)
+  hyper.triggered = true
+end)
+hyper:bind({}, '0', function()
   wm.moveWindowToPosition(wm.screenPositions.midmid)
 end)
-hyper.bindKey('h', function()
+
+------------------ HALVES
+hyper:bind({}, 'h', function()
   wm.moveWindowToPosition(wm.screenPositions.left)
 end)
-hyper.bindKey('j', function()
+hyper:bind({}, 'j', function()
   wm.moveWindowToPosition(wm.screenPositions.bottom)
 end)
-hyper.bindKey('k', function()
+hyper:bind({}, 'k', function()
   wm.moveWindowToPosition(wm.screenPositions.top)
 end)
-hyper.bindKey('l', function()
+hyper:bind({}, 'l', function()
   wm.moveWindowToPosition(wm.screenPositions.right)
 end)
----------------- THIRDS
-hyper.bindKey('1', function()
+------------------ THIRDS
+hyper:bind({}, '1', function()
   wm.moveWindowToPosition(wm.screenPositions.thirdleft)
 end)
-hyper.bindKey('2', function()
+hyper:bind({}, '2', function()
   wm.moveWindowToPosition(wm.screenPositions.mid)
 end)
-hyper.bindKey('3', function()
+hyper:bind({}, '3', function()
   wm.moveWindowToPosition(wm.screenPositions.thirdright)
 end)
-hyper.bindKey('4', function()
+hyper:bind({}, '4', function()
   wm.moveWindowToPosition(wm.screenPositions.topLeftthird)
 end)
-hyper.bindKey('5', function()
+hyper:bind({}, '5', function()
   wm.moveWindowToPosition(wm.screenPositions.bottomLeftthird)
 end)
----------------- QUARTERS
-hyper.bindShiftKey('1', function()
+------------------ QUARTERS
+hyper:bind({'shift'}, '1', function()
   wm.moveWindowToPosition(wm.screenPositions.quarterleft)
 end)
-hyper.bindShiftKey('2', function()
+hyper:bind({'shift'}, '2', function()
   wm.moveWindowToPosition(wm.screenPositions.midleft)
 end)
-hyper.bindShiftKey('3', function()
+hyper:bind({'shift'}, '3', function()
   wm.moveWindowToPosition(wm.screenPositions.midright)
 end)
-hyper.bindShiftKey('4', function()
+hyper:bind({'shift'}, '4', function()
   wm.moveWindowToPosition(wm.screenPositions.quarterright)
 end)
-hyper.bindShiftKey('5', function()
+hyper:bind({'shift'}, '5', function()
   wm.moveWindowToPosition(wm.screenPositions.topLeftQuarter)
 end)
-hyper.bindShiftKey('6', function()
+hyper:bind({'shift'}, '6', function()
   wm.moveWindowToPosition(wm.screenPositions.bottomLeftQuarter)
 end)
----------------- CORNERS
-hyper.bindKey('6', function()
+------------------ CORNERS
+hyper:bind({}, '6', function()
   wm.moveWindowToPosition(wm.screenPositions.topLeft)
 end)
-hyper.bindKey('7', function()
+hyper:bind({}, '7', function()
   wm.moveWindowToPosition(wm.screenPositions.topRight)
 end)
-hyper.bindKey('8', function()
+hyper:bind({}, '8', function()
   wm.moveWindowToPosition(wm.screenPositions.bottomLeft)
 end)
-hyper.bindKey('9', function()
+hyper:bind({}, '9', function()
   wm.moveWindowToPosition(wm.screenPositions.bottomRight)
 end)
-
