@@ -23,6 +23,8 @@ packer.init({
 packer.startup(function(use)
   -- Packer self init
   use ({ 'wbthomason/packer.nvim' })
+  --use ({ 'nanotee/sqls.nvim' })
+  use 'nanotee/sqls.nvim'
   -- Alpha-NVIM
 	use({
 		"goolord/alpha-nvim",
