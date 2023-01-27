@@ -111,13 +111,13 @@ hyper:bind({}, 'o', function()
     hs.application.launchOrFocus('/Applications/Microsoft Outlook.app')
   end
 end)
--- Show/hide slack
-hyper:bind({}, 's', function()
-  local slack = hs.application.find('slack')
-  if slack:isFrontmost() then
-    slack:hide()
+-- Show/hide postman
+hyper:bind({}, 'p', function()
+  local postman = hs.application.find('postman')
+  if postman:isFrontmost() then
+    postman:hide()
   else
-    hs.application.launchOrFocus('/Applications/Slack.app')
+    hs.application.launchOrFocus('/Applications/postman.app')
   end
 end)
 -- Show/hide pycharm
@@ -129,15 +129,6 @@ end)
 --    hs.application.launchOrFocus('/Applications/pycharm.app')
 --  end
 --end)
--- Show/hide postman
-hyper:bind({}, 'p', function()
-  local postman = hs.application.find('postman')
-  if postman:isFrontmost() then
-    postman:hide()
-  else
-    hs.application.launchOrFocus('/Applications/postman.app')
-  end
-end)
 -- Show/hide spotify
 hyper:bind({}, 'q', function()
   local spotify = hs.application.find('spotify')
@@ -145,6 +136,42 @@ hyper:bind({}, 'q', function()
     spotify:hide()
   else
     hs.application.launchOrFocus('/Applications/Spotify.app')
+  end
+end)
+-- Show/hide teams
+hyper:bind({}, 't', function()
+  local microsoft_teams= hs.application.find('teams')
+  if microsoft_teams:isFrontmost() then
+    microsoft_teams:hide()
+  else
+    hs.application.launchOrFocus('/Applications/Microsoft Teams.app')
+  end
+end)
+-- Show/hide Tradingview
+hyper:bind({'shift'}, 't', function()
+  local slack = hs.application.find('tradingview')
+  if slack:isFrontmost() then
+    slack:hide()
+  else
+    hs.application.launchOrFocus('/Applications/TradingView.app')
+  end
+end)
+-- Show/hide Visual Studio Code
+hyper:bind({}, 'v', function()
+  local visual_studio_code= hs.application.find('code')
+  if visual_studio_code:isFrontmost() then
+    visual_studio_code:hide()
+  else
+    hs.application.launchOrFocus('/Applications/visual studio code.app')
+  end
+end)
+-- Show/hide teams
+hyper:bind({}, 'w', function()
+  local microsoft_teams= hs.application.find('word')
+  if microsoft_teams:isFrontmost() then
+    microsoft_teams:hide()
+  else
+    hs.application.launchOrFocus('/Applications/Microsoft Word.app')
   end
 end)
 -- Show/hide firefox
@@ -163,25 +190,6 @@ hyper:bind({}, 'z', function()
     zoom:hide()
   else
     hs.application.launchOrFocus('/Applications/zoom.us.app')
-  end
-end)
-
--- Show/hide teams
-hyper:bind({}, 't', function()
-  local microsoft_teams= hs.application.find('teams')
-  if microsoft_teams:isFrontmost() then
-    microsoft_teams:hide()
-  else
-    hs.application.launchOrFocus('/Applications/Microsoft Teams.app')
-  end
-end)
--- Show/hide Visual Studio Code
-hyper:bind({}, 'v', function()
-  local visual_studio_code= hs.application.find('code')
-  if visual_studio_code:isFrontmost() then
-    visual_studio_code:hide()
-  else
-    hs.application.launchOrFocus('/Applications/visual studio code.app')
   end
 end)
 
