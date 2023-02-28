@@ -138,6 +138,15 @@ hyper:bind({}, 'q', function()
     hs.application.launchOrFocus('/Applications/Spotify.app')
   end
 end)
+-- Show/hide Tradingview
+hyper:bind({}, 's', function()
+  local slack = hs.application.find('slack')
+  if slack:isFrontmost() then
+    slack:hide()
+  else
+    hs.application.launchOrFocus('/Applications/Slack.app')
+  end
+end)
 -- Show/hide teams
 hyper:bind({}, 't', function()
   local microsoft_teams= hs.application.find('teams')
