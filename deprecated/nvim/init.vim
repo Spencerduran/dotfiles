@@ -48,6 +48,8 @@ filetype plugin on
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 au BufNewFile,BufRead *.json,*.txt setlocal colorcolumn=
 let g:python3_host_prog = '/Users/SDuran/.pyenv/shims/python'
+let g:node_host_prog = '/opt/homebrew/bin//node'
+let g:npm_host_prog = '/opt/homebrew/bin//npm'
 "---------------------------------VimPlug--------------------------------------
 call plug#begin()
 "------------- Custom Plugins ------------------
