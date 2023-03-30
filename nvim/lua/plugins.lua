@@ -39,33 +39,33 @@ packer.startup(function(use)
 		config = get_config("bufferline"),
 	})
 	use("famiu/bufdelete.nvim")
-  -- Completion
-  use({
-      "hrsh7th/nvim-cmp",
-      requires = {
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-cmdline",
-        "f3fora/cmp-spell",
-        "hrsh7th/cmp-calc",
-        "hrsh7th/cmp-nvim-lsp-signature-help",
-        --"lukas-reineke/cmp-rg",
-        -- Not working:
-        --      Error executing vim.schedule lua callback: Vim:E903: Process failed to start: no such file or directory: "-c"
-        --stack traceback:
-        --        [C]: in function 'jobstart'
-        --        ...e/nvim/site/pack/packer/start/cmp-rg/lua/cmp-rg/init.lua:103: in function ''
-        --        vim/_editor.lua: in function <vim/_editor.lua:0>
-      },
-      config = get_config("cmp"),
-    })
-    use({ "rafamadriz/friendly-snippets" })
-    use({
-      "L3MON4D3/LuaSnip",
-      requires = "saadparwaiz1/cmp_luasnip",
-      config = get_config("luasnip"),
-    })
+  ---- Completion
+  --use({
+  --    "hrsh7th/nvim-cmp",
+  --    requires = {
+  --      "hrsh7th/cmp-nvim-lsp",
+  --      "hrsh7th/cmp-buffer",
+  --      "hrsh7th/cmp-path",
+  --      "hrsh7th/cmp-cmdline",
+  --      "f3fora/cmp-spell",
+  --      "hrsh7th/cmp-calc",
+  --      "hrsh7th/cmp-nvim-lsp-signature-help",
+  --      --"lukas-reineke/cmp-rg",
+  --      -- Not working:
+  --      --      Error executing vim.schedule lua callback: Vim:E903: Process failed to start: no such file or directory: "-c"
+  --      --stack traceback:
+  --      --        [C]: in function 'jobstart'
+  --      --        ...e/nvim/site/pack/packer/start/cmp-rg/lua/cmp-rg/init.lua:103: in function ''
+  --      --        vim/_editor.lua: in function <vim/_editor.lua:0>
+  --    },
+  --    config = get_config("cmp"),
+  --  })
+  --  use({ "rafamadriz/friendly-snippets" })
+  --  use({
+  --    "L3MON4D3/LuaSnip",
+  --    requires = "saadparwaiz1/cmp_luasnip",
+  --    config = get_config("luasnip"),
+  --  })
   -- Colorschemes
 	if settings.theme == "tokyo" then
 		use({ "folke/tokyonight.nvim", config = get_config("tokyo") })
@@ -107,10 +107,37 @@ packer.startup(function(use)
 	use({ "voldikss/fzf-floaterm"})
   -- Lightspeed
 	use({ "ggandor/lightspeed.nvim" })
-  -- LSP
-  use({ "Djancyp/cheat-sheet" })
-  use({ "neovim/nvim-lspconfig", config = get_config("lsp") })
-  use({ "onsails/lspkind-nvim", requires = { "famiu/bufdelete.nvim" } })
+  ---- LSP
+  use ({
+    'VonHeikemen/lsp-zero.nvim',
+    config = get_config("lsp"),
+    branch = 'v1.x',
+    requires = {
+      -- LSP Support
+      {'neovim/nvim-lspconfig'},             -- Required
+      {'williamboman/mason.nvim'},           -- Optional
+      {'williamboman/mason-lspconfig.nvim'}, -- Optional
+  
+      -- Autocompletion
+      {'hrsh7th/nvim-cmp'},         -- Required
+      {'hrsh7th/cmp-nvim-lsp'},     -- Required
+      {'hrsh7th/cmp-buffer'},       -- Optional
+      {'hrsh7th/cmp-path'},         -- Optional
+      {'saadparwaiz1/cmp_luasnip'}, -- Optional
+      {'hrsh7th/cmp-nvim-lua'},     -- Optional
+  
+      -- Snippets
+      {'L3MON4D3/LuaSnip'},             -- Required
+      {'rafamadriz/friendly-snippets'}, -- Optional
+
+      -- Formatting
+      {'mhartington/formatter.nvim', config = get_config('formatting')},
+    }
+  })
+  use({ "williamboman/mason.nvim", config = get_config("mason") })
+  --use({ "Djancyp/cheat-sheet" })
+  --use({ "neovim/nvim-lspconfig", config = get_config("lsp") })
+  --use({ "onsails/lspkind-nvim", requires = { "famiu/bufdelete.nvim" } })
   -- LuaLine
   use ({
         'nvim-lualine/lualine.nvim',
