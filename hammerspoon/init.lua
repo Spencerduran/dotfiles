@@ -102,6 +102,15 @@ hyper:bind({}, 'r', function()
     hs.application.launchOrFocus('/Applications/Kindle.app')
   end
 end)
+-- Show/hide Messages
+hyper:bind({}, 'm', function()
+  local excel = hs.application.find('Messages')
+  if excel:isFrontmost() then
+    excel:hide()
+  else
+    hs.application.launchOrFocus('/Applications/Messages.app')
+  end
+end)
 -- Show/hide outlook
 hyper:bind({}, 'o', function()
   local outlook = hs.application.find('outlook')
@@ -113,11 +122,11 @@ hyper:bind({}, 'o', function()
 end)
 -- Show/hide postman
 hyper:bind({}, 'p', function()
-  local postman = hs.application.find('postman')
+  local postman = hs.application.find('parallels')
   if postman:isFrontmost() then
     postman:hide()
   else
-    hs.application.launchOrFocus('/Applications/postman.app')
+    hs.application.launchOrFocus('/Applications/Parallels Desktop.app')
   end
 end)
 -- Show/hide pycharm
