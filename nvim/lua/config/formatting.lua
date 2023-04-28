@@ -14,6 +14,9 @@ require("formatter").setup {
     python = {
       require("formatter.filetypes.python").autopep8,
     },
+    python = {
+      require("formatter.filetypes.python").autopep8,
+    },
     -- Formatter configurations for filetype "lua" go here
     -- and will be executed in order
     ["*"] = {

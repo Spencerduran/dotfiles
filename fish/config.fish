@@ -10,3 +10,6 @@ set -gx EDITOR nvim
 set -gx FZF_DEFAULT_COMMAND 'rg --files --ignore-case --hidden -g "!{.pyenv,.local,.idea,.vscode,tmp,~/Library,/Users/sduran/Library,.vim,.git,node_modules,vendor}/*"'
 
 
+
+# Created by `pipx` on 2023-04-21 13:24:15
+set PATH $PATH /Users/spencerduran/.local/bin

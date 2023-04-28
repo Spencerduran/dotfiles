@@ -33,6 +33,8 @@ vsc.lazy_load()
 -- load lua snippets
 lua.load({ paths = os.getenv("HOME") .. "/.config/nvim/snippets/" })
 
+-- require("luasnip/loaders/from_vscode").load({ paths = { "~/.config/nvim/snippets/" } }) -- Load snippets from my-snippets folder
+
 -- expansion key
 -- this will expand the current item or jump to the next item within the snippet.
 vim.keymap.set({ "i", "s" }, "<c-j>", function()
@@ -55,3 +57,5 @@ vim.keymap.set("i", "<c-h>", function()
 		ls.change_choice(1)
 	end
 end)
+
+
