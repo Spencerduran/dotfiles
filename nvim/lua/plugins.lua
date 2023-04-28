@@ -77,7 +77,7 @@ packer.startup(function(use)
 		use({ "catppuccin/nvim", as = "catppuccin", config = get_config("catppuccin") })
 	end
   -- Comment Boxes
-  use("LudoPinelli/comment-box.nvim")
+  use({"LudoPinelli/comment-box.nvim"})
   -- Conflict Marker
 	use({ "rhysd/conflict-marker.vim" })
   -- Defx
@@ -107,6 +107,26 @@ packer.startup(function(use)
 	use({ "voldikss/fzf-floaterm"})
   -- Lightspeed
 	use({ "ggandor/lightspeed.nvim" })
+--  use {"akinsho/toggleterm.nvim", tag = '*', config = function()
+--    require("toggleterm").setup()
+--  end}
+--  use({ "lmburns/lf.nvim",
+--          config = function()
+--            -- This feature will not work if the plugin is lazy-loaded
+--            vim.g.lf_netrw = 1
+--            require("lf").setup(
+--                {
+--                    escape_quit = false,
+--                    border = "rounded",
+--                    --highlights = {FloatBorder = {guifg = require("kimbox.palette").colors.magenta}}
+--                }
+--            )
+--  
+--            vim.keymap.set("n", "<C-o>", ":Lf<CR>")
+--          end,
+--          requires = {"plenary.nvim", "toggleterm.nvim"}
+--      }
+--  )
   ---- LSP
   use ({
     'VonHeikemen/lsp-zero.nvim',
@@ -127,7 +147,7 @@ packer.startup(function(use)
       {'hrsh7th/cmp-nvim-lua'},     -- Optional
   
       -- Snippets
-      {'L3MON4D3/LuaSnip'},             -- Required
+      {'L3MON4D3/LuaSnip', config = get_config("luasnip")},             -- Required
       {'rafamadriz/friendly-snippets'}, -- Optional
 
       -- Formatting
