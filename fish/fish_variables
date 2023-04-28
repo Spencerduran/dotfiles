@@ -9,9 +9,9 @@ SETUVAR FZF_TMUX_HEIGHT:40\x25
 SETUVAR --export --path NODE_PATH:/usr/local/lib/node_modules
 SETUVAR ZO_CMD:zo
 SETUVAR Z_CMD:z
-SETUVAR Z_DATA:/Users/sduran/\x2elocal/share/z/data
-SETUVAR Z_DATA_DIR:/Users/sduran/\x2elocal/share/z
-SETUVAR Z_EXCLUDE:\x5e/Users/sduran\x24
+SETUVAR Z_DATA:/Users/spencerduran/\x2elocal/share/z/data
+SETUVAR Z_DATA_DIR:/Users/spencerduran/\x2elocal/share/z
+SETUVAR Z_EXCLUDE:\x5e/Users/spencerduran\x24
 SETUVAR __fish_init_2_39_8:\x1d
 SETUVAR __fish_init_2_3_0:\x1d
 SETUVAR __fish_init_3_x:\x1d
