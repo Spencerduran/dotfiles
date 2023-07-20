@@ -94,7 +94,7 @@ hyper:bind({}, 'e', function()
   end
 end)
 -- Show/hide Kindle
-hyper:bind({}, 'r', function()
+hyper:bind({}, 'k', function()
   local excel = hs.application.find('kindle')
   if excel:isFrontmost() then
     excel:hide()
@@ -145,6 +145,15 @@ hyper:bind({}, 'q', function()
     spotify:hide()
   else
     hs.application.launchOrFocus('/Applications/Spotify.app')
+  end
+end)
+-- Show/hide Acrobat Reader
+hyper:bind({}, 'r', function()
+  local slack = hs.application.find('reader')
+  if slack:isFrontmost() then
+    slack:hide()
+  else
+    hs.application.launchOrFocus('/Applications/Adobe Acrobat Reader.app')
   end
 end)
 -- Show/hide Tradingview
@@ -242,9 +251,9 @@ end)
 hyper:bind({}, 'j', function()
   wm.moveWindowToPosition(wm.screenPositions.bottom)
 end)
-hyper:bind({}, 'k', function()
-  wm.moveWindowToPosition(wm.screenPositions.top)
-end)
+--hyper:bind({}, 'k', function()
+--  wm.moveWindowToPosition(wm.screenPositions.top)
+--end)
 hyper:bind({}, 'l', function()
   wm.moveWindowToPosition(wm.screenPositions.right)
 end)
@@ -294,5 +303,11 @@ hyper:bind({}, '8', function()
   wm.moveWindowToPosition(wm.screenPositions.bottomLeft)
 end)
 hyper:bind({}, '9', function()
-  wm.moveWindowToPosition(wm.screenPositions.bottomRight)
+    local win = hs.window.focusedWindow()
+    if win then
+        local frame = win:frame()
+        frame.w = 1920
+        frame.h = 1080
+        win:setFrame(frame)
+    end
 end)

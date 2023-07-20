@@ -1,0 +1,37 @@
+function Develop-Status {
+    # initialize a list to hold branches that are behind
+    $behind_branches = @()
+
+    # fetch latest from origin
+    git fetch origin
+
+    # check if "develop" branch exists
+    if (!(git show-ref --quiet --verify refs/heads/develop)) {
+        Write-Host "The 'develop' branch doesn't exist locally. Please create it first."
+        return
+    }
+
+    # loop over each local branch
+    foreach ($branch in (git branch | ForEach-Object { $_.Trim().Replace('*', '') })) {
+        # ignore develop and main branch
+        if ($branch -ne "develop" -and $branch -ne "main") {
+            Write-Host "Checking branch $branch"
+            
+            # compare the branch to develop
+            $comparison = git rev-list --count develop..$branch 2>$null
+
+            # if the branch is behind, add it to the list
+            if ($comparison -gt 0) {
+                $behind_branches += $branch
+            }
+        }
+    }
+
+    # print out branches that are behind develop
+    if ($behind_branches.Count -gt 0) {
+        Write-Host "`nThe following branches are behind 'develop':"
+        $behind_branches | ForEach-Object { Write-Host $_ }
+    } else {
+        Write-Host "No branches are behind 'develop'."
+    }
+}
