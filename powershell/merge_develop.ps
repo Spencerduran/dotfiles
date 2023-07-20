@@ -1,0 +1,78 @@
+function Merge-Develop {
+    # initialize a list to hold branches that had merge conflicts and uncommitted changes
+    $conflictBranches = @()
+    $uncommittedBranches = @()
+
+    # fetch latest from origin
+    git fetch origin
+
+    # check if "develop" branch exists
+    if (-not (git show-ref --quiet --verify refs/heads/develop)) {
+        Write-Host "The 'develop' branch doesn't exist locally. Please create it first."
+        return
+    }
+
+    # checkout and pull latest changes to develop branch
+    git checkout develop
+    git pull
+
+    # loop over each local branch
+    foreach ($branch in (git branch | % { $_.trim().replace('*', '').trim() })) {
+        # ignore develop and main branch
+        if ($branch -ne "develop" -and $branch -ne "main") {
+            Write-Host "Checking branch $branch"
+
+            # compare the branch to develop
+            $comparison = git rev-list --count develop..$branch 2>$null
+
+            # if the branch is behind, attempt a merge
+            if ($comparison -gt 0) {
+                git checkout $branch
+
+                # check if there are uncommitted changes
+                if ((git status --porcelain | Measure-Object -Line).Lines -gt 0) {
+                    # if there are uncommitted changes, add the branch to the list and continue
+                    $uncommittedBranches += $branch
+                    Write-Host "Uncommitted changes in branch '$branch', skipping merge."
+                    continue
+                }
+
+                # try to merge develop into the branch
+                if (-not (git merge develop)) {
+                    # if the merge fails (due to conflicts), abort the merge and add the branch to the list
+                    git merge --abort
+                    $conflictBranches += $branch
+                    Write-Host "Merge conflict in branch '$branch', aborting merge."
+                }
+            }
+        }
+    }
+
+    # print out branches that had merge conflicts
+    if ($conflictBranches.Count -gt 0) {
+        Write-Host "`nThe following branches had merge conflicts with 'develop':"
+        foreach ($branch in $conflictBranches) {
+            Write-Host $branch
+        }
+    } else {
+        Write-Host "No merge conflicts with 'develop'."
+    }
+
+    # print out branches that had uncommitted changes
+    if ($uncommittedBranches.Count -gt 0) {
+        Write-Host "`nThe following branches have uncommitted changes:"
+        foreach ($branch in $uncommittedBranches) {
+            Write-Host $branch
+        }
+    } else {
+        Write-Host "No uncommitted changes found."
+    }
+
+    # exit the script if any uncommitted changes were found
+    if ($uncommittedBranches.Count -gt 0) {
+        return
+    }
+
+    # Switch back to develop branch
+    git checkout develop
+}
