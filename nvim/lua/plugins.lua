@@ -73,6 +73,8 @@ packer.startup(function(use)
     use({ 'rose-pine/neovim', as = 'rose-pine', tag = 'v1.*', config = get_config("rosepine") })
 	elseif settings.theme == "catppuccino" then
 		use({ "catppuccin/nvim", as = "catppuccin", config = get_config("catppuccin") })
+	elseif settings.theme == "dracula" then
+		use({ "Mofiqul/dracula.nvim", as = "dracula", config = get_config("dracula") })
 	else
 		use({ "catppuccin/nvim", as = "catppuccin", config = get_config("catppuccin") })
 	end
@@ -135,7 +137,7 @@ packer.startup(function(use)
     requires = {
       -- LSP Support
       {'neovim/nvim-lspconfig'},             -- Required
-      {'williamboman/mason.nvim'},           -- Optional
+      {'williamboman/mason.nvim', config = get_config('formatting')},           -- Optional
       {'williamboman/mason-lspconfig.nvim'}, -- Optional
   
       -- Autocompletion
@@ -151,10 +153,10 @@ packer.startup(function(use)
       {'rafamadriz/friendly-snippets'}, -- Optional
 
       -- Formatting
-      {'mhartington/formatter.nvim', config = get_config('formatting')},
+      {'mhartington/formatter.nvim', config = get_config('formatting') },
     }
   })
-  use({ "williamboman/mason.nvim", config = get_config("mason") })
+  --use({ "williamboman/mason.nvim", config = get_config("mason") })
   --use({ "Djancyp/cheat-sheet" })
   --use({ "neovim/nvim-lspconfig", config = get_config("lsp") })
   --use({ "onsails/lspkind-nvim", requires = { "famiu/bufdelete.nvim" } })
@@ -175,7 +177,7 @@ packer.startup(function(use)
   use({ "ironhouzi/starlite-nvim"})
   -- Telescope
 	use({
-		"nvim-telescope/telescope.nvim",
+		"nvim-telescope/telescope.nvim", tag = '0.1.2',
 		requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
 		config = get_config("telescope"),
 	})
@@ -204,15 +206,10 @@ packer.startup(function(use)
 		config = get_config("todo"),
 	})
   -- Tree
-	use({ "kyazdani42/nvim-tree.lua", config = get_config("nvim-tree")  })
+	--use({ "kyazdani42/nvim-tree.lua", config = get_config("nvim-tree")  })
   -- Twilight
 	use({ "folke/twilight.nvim", config = get_config("twilight") })
-	use({
-		"j-hui/fidget.nvim",
-		config = function()
-			require("fidget").setup({})
-		end,
-  })
+	use({ "j-hui/fidget.nvim",   tag = 'legacy', config = function() require("fidget").setup({}) end, })
   -- Window
 	use({
 		"https://gitlab.com/yorickpeterse/nvim-window.git",
