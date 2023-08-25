@@ -8,7 +8,7 @@
 #   If the branch name is not empty, it performs a git push command to delete the branch from the origin repository using git push origin --delete $branch.
 #   Ends the loop using end.
 
-git branch -r --merged origin/develop | grep -v 'origin/develop$' | sed 's/origin\///' | while read -l branch
+git branch -r --merged origin/develop | egrep -v "(^\*|main|master|develop)" | sed 's/origin\///' | while read -l branch
     set branch (string trim -- $branch)
     if test -n "$branch"
         git push origin --delete $branch

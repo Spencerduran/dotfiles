@@ -78,7 +78,7 @@ local default_options = { silent = true }
 
 -- register non leader based mappings
 wk.register({
-	ga = { "<Plug>(EasyAlign)", "Align", mode = "x" },
+	--ga = { "<Plug>(EasyAlign)", "Align", mode = "x" },
 	sa = "Add surrounding",
 	sd = "Delete surrounding",
 	sh = "Highlight surrounding",
@@ -86,8 +86,9 @@ wk.register({
 	sr = "Replace surrounding",
 	sF = "Find left surrounding",
 	sf = "Replace right surrounding",
-	ss = { "<Plug>Lightspeed_s", "Search 2-character forward" },
-	-- SS = {"<Plug>Lightspeed_S", "Search 2-character backward"}
+  -- These are taken care of as default maps within the plugin:
+	--ss = { "<Plug>Lightspeed_s", "Search 2-character forward" },
+	--SS = {"<Plug>Lightspeed_S", "Search 2-character backward"}
 	st = { "<cmd>lua require('tsht').nodes()<cr>", "TS hint textobject" },
 })
 
