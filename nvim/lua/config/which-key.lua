@@ -152,7 +152,7 @@ wk.register({
 		["2"] = { "<cmd>Gvdiff<cr>", "2 way diffsplit" },
 		g = { "<cmd>G<cr>", "Git Status" },
 		l = { "<cmd>Telescope git_commits<cr>", "Log" },
-		p = { "<cmd>Gpush<cr>", "Git Push" },
+		p = { "<cmd>Git push<cr>", "Git Push" },
 		s = { "<cmd>Telescope git_status<cr>", "See all changed files" },
 		--c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
 		--C = { "<cmd>Telescope git_bcommits<cr>", "Checkout commit(current file)", },
