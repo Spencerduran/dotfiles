@@ -1,0 +1,200 @@
+.
+├── Cover.png
+├── README.md
+├── alacritty
+│   └── alacritty.yml
+├── bash
+├── deprecated
+│   └── nvim
+│       ├── autoload
+│       │   └── plug.vim
+│       ├── coc-settings.json
+│       ├── init.vim
+│       ├── mini.vim
+│       ├── plugin
+│       │   ├── CopyMatches.vim
+│       │   ├── Rename.vim
+│       │   └── calendar-vim
+│       │       ├── Makefile
+│       │       ├── README.md
+│       │       ├── autoload
+│       │       │   └── calendar.vim
+│       │       ├── calendar.vim.vimup
+│       │       ├── doc
+│       │       │   └── calendar.txt
+│       │       └── plugin
+│       │           └── calendar.vim
+│       └── snips
+│           ├── all.lua
+│           ├── python.lua
+│           └── wiki.lua
+├── fish
+│   ├── completions
+│   │   ├── fisher.fish
+│   │   └── pyenv.fish
+│   ├── conf.d
+│   │   ├── dracula.fish
+│   │   ├── fzf.fish
+│   │   ├── pyenv.fish
+│   │   └── z.fish
+│   ├── config.fish
+│   ├── fish_variables
+│   ├── fishfile
+│   └── functions
+│       ├── __bass.py
+│       ├── __fzf_cd.fish
+│       ├── __fzf_complete.fish
+│       ├── __fzf_complete_preview.fish
+│       ├── __fzf_find_file.fish
+│       ├── __fzf_get_dir.fish
+│       ├── __fzf_open.fish
+│       ├── __fzf_parse_commandline.fish
+│       ├── __fzf_reverse_isearch.fish
+│       ├── __fzfcmd.fish
+│       ├── __z.fish
+│       ├── __z_add.fish
+│       ├── __z_clean.fish
+│       ├── __z_complete.fish
+│       ├── availability.fish
+│       ├── backup.fish
+│       ├── bass.fish
+│       ├── com.fish
+│       ├── cpwd.fish
+│       ├── csv_column_numbers.fish
+│       ├── develop_status.fish
+│       ├── dip.fish
+│       ├── docs.fish
+│       ├── droplet.fish
+│       ├── eftp.fish
+│       ├── ff.fish
+│       ├── findmerged.fish
+│       ├── fish_prompt.fish
+│       ├── fish_user_key_bindings.fish
+│       ├── fisher.fish
+│       ├── format-json.fish
+│       ├── gitclean.fish
+│       ├── gitcleanmerged.fish
+│       ├── gitcleanremote.fish
+│       ├── gitmerged.fish
+│       ├── gs.fish
+│       ├── ihr.fish
+│       ├── ingest.fish
+│       ├── jbox.fish
+│       ├── lla.fish
+│       ├── local_remotes.fish
+│       ├── ls.fish
+│       ├── merge_dates.fish
+│       ├── merge_develop.fish
+│       ├── my_branches.fish
+│       ├── nvm.fish
+│       ├── parse.fish
+│       ├── parse_csv.fish
+│       ├── pullmeta.fish
+│       ├── push.fish
+│       ├── pyenv.fish
+│       ├── ranger.fish
+│       ├── repos.fish
+│       ├── rot13.fish
+│       ├── search.fish
+│       ├── setenv.fish
+│       ├── sort-json.fish
+│       ├── tables.fish
+│       ├── tool.fish
+│       ├── tower.fish
+│       ├── tsv_column_numbers.fish
+│       ├── venv.fish
+│       └── vf.fish
+├── hammerspoon
+│   ├── ctrlDoublePress.lua
+│   ├── hyper.lua
+│   ├── init.lua
+│   └── window-management.lua
+├── iterm2
+│   ├── com.googlecode.iterm2.plist
+│   └── hotkey_window.json
+├── nvim
+│   ├── after
+│   │   └── ftplugin
+│   │       └── json.lua
+│   ├── init.lua
+│   ├── lua
+│   │   ├── autocmd.lua
+│   │   ├── config
+│   │   │   ├── alpha-nvim.lua
+│   │   │   ├── asdf.lua
+│   │   │   ├── bufferline.lua
+│   │   │   ├── catppuccin.lua
+│   │   │   ├── cmp.lua
+│   │   │   ├── copy_things.vim
+│   │   │   ├── dracula.lua
+│   │   │   ├── formatting.lua
+│   │   │   ├── fugitive.lua
+│   │   │   ├── gitsigns.lua
+│   │   │   ├── lf.lua
+│   │   │   ├── lsp.lua
+│   │   │   ├── lualine.lua
+│   │   │   ├── luasnip.lua
+│   │   │   ├── mason.lua
+│   │   │   ├── moonlight.lua
+│   │   │   ├── neoroot.lua
+│   │   │   ├── neuron.lua
+│   │   │   ├── nightfox.lua
+│   │   │   ├── nightmare.lua
+│   │   │   ├── notify.lua
+│   │   │   ├── nvim-autopairs.lua
+│   │   │   ├── nvim-tree.lua
+│   │   │   ├── nvim-window.lua
+│   │   │   ├── project.lua
+│   │   │   ├── rooter.lua
+│   │   │   ├── rosepine.lua
+│   │   │   ├── specs.lua
+│   │   │   ├── sqls.lua
+│   │   │   ├── telescope.lua
+│   │   │   ├── tmux.lua
+│   │   │   ├── todo.lua
+│   │   │   ├── tokyo.lua
+│   │   │   ├── treesitter.lua
+│   │   │   ├── twilight.lua
+│   │   │   ├── vimwiki.lua
+│   │   │   ├── which-key.lua
+│   │   │   └── zephyr.lua
+│   │   ├── functions.lua
+│   │   ├── mappings.lua
+│   │   ├── options.lua
+│   │   ├── plugins.lua
+│   │   ├── user-conf.lua
+│   │   └── ~
+│   ├── plugin
+│   │   └── packer_compiled.lua
+│   ├── snippets
+│   │   ├── all.lua
+│   │   ├── python.lua
+│   │   └── sql.lua
+│   └── spell
+│       ├── en.utf-8.add
+│       └── en.utf-8.add.spl
+├── pbcopy
+├── powershell
+│   ├── develop_status.ps
+│   └── merge_develop.ps
+├── ranger
+│   ├── plugins
+│   │   ├── __init__.py
+│   │   ├── __init__.pyo
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-310.opt-1.pyc
+│   │   │   └── __init__.cpython-36.opt-1.pyc
+│   │   └── ranger_devicons
+│   ├── rc.conf
+│   └── rifle.conf
+├── tig
+├── tmux
+│   └── bin
+│       ├── tmux_spotify_info
+│       └── tmux_statusline
+├── vim
+├── vscode
+│   └── settings.json
+└── zsh
+
+38 directories, 160 files
