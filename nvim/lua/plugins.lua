@@ -82,10 +82,6 @@ packer.startup(function(use)
   use({"LudoPinelli/comment-box.nvim"})
   -- Conflict Marker
 	use({ "rhysd/conflict-marker.vim" })
-  -- Defx
-  use({ 'Shougo/defx.nvim' })
-  use({ 'kristijanhusak/defx-git' })
-  use({ 'kristijanhusak/defx-icons' })
   -- Easy Align
 	use("junegunn/vim-easy-align") -- no lua alternative, https://github.com/Vonr/align.nvim not working for me
   -- Git Things
@@ -98,7 +94,6 @@ packer.startup(function(use)
     requires = { "nvim-lua/plenary.nvim" },
     config = get_config("gitsigns"),
   })
-  --use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
   -- Grammarous
 	use({ "rhysd/vim-grammarous", cmd = "GrammarousCheck" })
   -- Illuminate
