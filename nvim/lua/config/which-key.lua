@@ -132,8 +132,8 @@ wk.register({
 	},
 	c = {
 		name = "Copy [lines, matches]",
-		l = { "<cmd>CopyLines! -<CR>", "Copy lines with match" },
-		m = { "<cmd>CopyMatches! -<CR>", "Copy matches" },
+		l = { "<cmd>CopyLines -<CR>", "Copy lines with match" },
+		m = { "<cmd>CopyMatches -<CR>", "Copy matches" },
 	},
 	f = {
 		name = "Files",
@@ -147,10 +147,11 @@ wk.register({
 	},
 	g = {
 		name = "Git",
-		l = { "<cmd>Telescope git_commits<cr>", "Log" },
-		n = { "<cmd>Neogit<cr>", "Open Neogit" },
 		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+		["3"] = { "<cmd>Gdiffsplit!<cr>", "3 way diffsplit" },
+		["2"] = { "<cmd>Gvdiff<cr>", "2 way diffsplit" },
 		g = { "<cmd>G<cr>", "Git Status" },
+		l = { "<cmd>Telescope git_commits<cr>", "Log" },
 		p = { "<cmd>Git push<cr>", "Git Push" },
 		s = { "<cmd>Telescope git_status<cr>", "See all changed files" },
 		--c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
