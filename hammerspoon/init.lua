@@ -171,7 +171,7 @@ hyper:bind({}, 't', function()
   if microsoft_teams:isFrontmost() then
     microsoft_teams:hide()
   else
-    hs.application.launchOrFocus('/Applications/Microsoft Teams.app')
+    hs.application.launchOrFocus('/Applications/Microsoft Teams classic.app')
   end
 end)
 -- Show/hide Tradingview
