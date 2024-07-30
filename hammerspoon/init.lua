@@ -66,6 +66,15 @@ hyper:bind({}, 'a', function()
     hyper.triggered = true
   end
 end)
+-- Show/hide Brave
+hyper:bind({}, 'b', function()
+  local chrome = hs.application.find('brave')
+  if chrome:isFrontmost() then
+    chrome:hide()
+  else
+    hs.application.launchOrFocus('/Applications/Brave Browser.app/')
+  end
+end)
 -- Show/hide chrome
 hyper:bind({}, 'c', function()
   local chrome = hs.application.find('google chrome')
@@ -171,7 +180,7 @@ hyper:bind({}, 't', function()
   if microsoft_teams:isFrontmost() then
     microsoft_teams:hide()
   else
-    hs.application.launchOrFocus('/Applications/Microsoft Teams classic.app')
+    hs.application.launchOrFocus('/Applications/Microsoft Teams.app')
   end
 end)
 -- Show/hide Tradingview

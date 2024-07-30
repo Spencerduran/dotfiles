@@ -13,3 +13,9 @@ set -gx FZF_DEFAULT_COMMAND 'rg --files --ignore-case --hidden -g "!{.pyenv,.loc
 
 # Created by `pipx` on 2023-04-21 13:24:15
 set PATH $PATH /Users/spencerduran/.local/bin
+
+fish_add_path /Users/spencerduran/.spicetify
+
+source /opt/homebrew/Cellar/chruby-fish/1.0.0/share/fish/vendor_functions.d/chruby.fish
+source /opt/homebrew/Cellar/chruby-fish/1.0.0/share/fish/vendor_conf.d/chruby_auto.fish
+chruby ruby-3.1.3

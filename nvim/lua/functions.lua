@@ -32,9 +32,7 @@ function M.Wp()
   vim.b.expandtab = false
   vim.wo.wrap = true
   vim.wo.linebreak = true
-  -- spelling and thesaurus
   vim.wo.spell = true
-  --set thesaurus+=/home/test/.vim/thesaurus/mthesaur.txt
   --set complete+=s
 end
 
