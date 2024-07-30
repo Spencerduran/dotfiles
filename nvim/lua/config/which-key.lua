@@ -23,7 +23,6 @@ require("which-key").setup({
 	},
 	-- add operators that will trigger motion and text object completion
 	-- to enable all native operators, set the preset / operators plugin above
-	operators = { gc = "Comments" },
 	key_labels = {
 		-- override the label used to display some keys. It doesn't effect WK in any other way.
 		-- For example:
@@ -89,7 +88,6 @@ wk.register({
   -- These are taken care of as default maps within the plugin:
 	--ss = { "<Plug>Lightspeed_s", "Search 2-character forward" },
 	--SS = {"<Plug>Lightspeed_S", "Search 2-character backward"}
-	st = { "<cmd>lua require('tsht').nodes()<cr>", "TS hint textobject" },
 })
 
 -- Register all leader based mappings
@@ -186,7 +184,7 @@ wk.register({
 		j = { "<cmd>cnext<cr>", "Next Quickfix Item" },
 		k = { "<cmd>cprevious<cr>", "Previous Quickfix Item" },
 		q = { "<cmd>lua require('functions').toggle_qf()<cr>", "Toggle quickfix list" },
-		t = { "<cmd>TodoQuickFix<cr>", "Show TODOs" },
+		t = { "<cmd>TodoTelescope<cr>", "Show TODOs" },
 	},
 	r = {
 		name = "Ranger",
@@ -198,6 +196,7 @@ wk.register({
 		H = { "<cmd>Telescope heading<cr>", "Find Header" },
 		M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
 		R = { "<cmd>Telescope registers<cr>", "Registers" },
+		T = { "<cmd>Telescope live_grep<cr>", "Text" },
 		t = { "<cmd>Telescope live_grep<cr>", "Text" },
 		--s = { "<cmd>Telescope grep_string<cr>", "Text under cursor" },
 		s = { "<cmd>Alpha<cr>", "Alpha" },
