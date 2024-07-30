@@ -117,9 +117,9 @@ font:
     style: Oblique
 
   size: 14
-import:
+#import:
   # uncomment the flavour you want below:
-  - ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
+  #  - ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
 #  - ~/.config/alacritty/catppuccin/catppuccin-macchiato.yml
 #  - ~/.config/alacritty/catppuccin/catppuccin-frappe.yml
 #  - ~/.config/alacritty/catppuccin/catppuccin-latte.yml
@@ -234,6 +234,7 @@ import:
 ##    magenta: '#ff92df'
 ##    cyan: '#a4ffff'
 ##    white: '#ffffff'
+## Rose pine
 ##colors:
 ##  primary:
 ##    background: "0x191724"
@@ -275,49 +276,75 @@ import:
 ##    end:
 ##      foreground: "#6e6a86"
 ##      background: "#1f1d2e"
-## rose pine moon
-## colors:
-##   primary:
-##     background: "0x232136"
-##     foreground: "0xe0def4"
-##   cursor:
-##     text: "0xe0def4"
-##     cursor: "0x56526e"
-##   vi_mode_cursor:
-##     text: "0xe0def4"
-##     cursor: "0x56526e"
-##   line_indicator:
-##     foreground: None
-##     background: None
-##   selection:
-##     text: "0xe0def4"
-##     background: "0x44415a"
-##   normal:
-##     black: "0x393552"
-##     red: "0xeb6f92"
-##     green: "0x3e8fb0"
-##     yellow: "0xf6c177"
-##     blue: "0x9ccfd8"
-##     magenta: "0xc4a7e7"
-##     cyan: "0xea9a97"
-##     white: "0xe0def4"
-##   bright:
-##     black: "0x6e6a86"
-##     red: "0xeb6f92"
-##     green: "0x3e8fb0"
-##     yellow: "0xf6c177"
-##     blue: "0x9ccfd8"
-##     magenta: "0xc4a7e7"
-##     cyan: "0xea9a97"
-##     white: "0xe0def4"
-##   hints:
-##     start:
-##       foreground: "#908caa"
-##       background: "#2a273f"
-##     end:
-##       foreground: "#6e6a86"
-##       background: "#2a273f"
-## 
+##rose pine moon
+
+colors:
+  primary:
+    background: "#262335"
+    foreground: "#ffffff"
+  cursor:
+    text: "#03edf9"
+    cursor: "#ffffff"
+  normal:
+    black: "0x26233a"
+    red: "#fe4450"
+    green: "#72f1b8"
+    yellow: "#f3e70f"
+    blue: "0x9ccfd8"
+    magenta: "#ff7edb"
+    cyan: "#03edf9"
+    white: "0xe0def4"
+  bright:
+    black: "0x6e6a86"
+    red: "#fe4450"
+    green: "#72f1b8"
+    yellow: "#fede5d"
+    blue: "#03edf9"
+    magenta: "#ff7edb"
+    cyan: "#03edf9"
+    white: "0xe0def4"
+#colors:
+#  primary:
+#    background: "0x232136"
+#    foreground: "0xe0def4"
+#  cursor:
+#    text: "0xe0def4"
+#    cursor: "0x56526e"
+#  vi_mode_cursor:
+#    text: "0xe0def4"
+#    cursor: "0x56526e"
+#  line_indicator:
+#    foreground: None
+#    background: None
+#  selection:
+#    text: "0xe0def4"
+#    background: "0x44415a"
+#  normal:
+#    black: "0x393552"
+#    red: "0xeb6f92"
+#    green: "0x3e8fb0"
+#    yellow: "0xf6c177"
+#    blue: "0x9ccfd8"
+#    magenta: "0xc4a7e7"
+#    cyan: "0xea9a97"
+#    white: "0xe0def4"
+#  bright:
+#    black: "0x6e6a86"
+#    red: "0xeb6f92"
+#    green: "0x3e8fb0"
+#    yellow: "0xf6c177"
+#    blue: "0x9ccfd8"
+#    magenta: "0xc4a7e7"
+#    cyan: "0xea9a97"
+#    white: "0xe0def4"
+#  hints:
+#    start:
+#      foreground: "#908caa"
+#      background: "#2a273f"
+#    end:
+#      foreground: "#6e6a86"
+#      background: "#2a273f"
+#
 #color_schemes:
 ## Catpuccino
 #  latte: &latte

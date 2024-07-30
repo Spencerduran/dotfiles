@@ -2,7 +2,7 @@ local telescope = require("telescope")
 local actions = require("telescope.actions")
 local action_layout = require("telescope.actions.layout")
 local fb_actions = require("telescope").extensions.file_browser.actions
-
+require('telescope').load_extension 'remote-sshfs'
 telescope.setup({
 	extensions = {
 		fzf = {
@@ -34,7 +34,7 @@ telescope.setup({
 			hidden = true,
 		},
 		buffers = {
-			ignore_current_buffer = true,
+			ignore_current_buffer = false,
 			sort_lastused = true,
 		},
 		-- find_command = { "fd", "--hidden", "--type", "file", "--follow", "--strip-cwd-prefix" },

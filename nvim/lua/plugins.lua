@@ -39,6 +39,8 @@ packer.startup(function(use)
 		config = get_config("bufferline"),
 	})
 	use("famiu/bufdelete.nvim")
+
+  use { 'nosduco/remote-sshfs.nvim', config = get_config("remotessh"), requires = { {'nvim-telescope/telescope.nvim'} } }
   ---- Completion
   --use({
   --    "hrsh7th/nvim-cmp",
@@ -69,8 +71,10 @@ packer.startup(function(use)
   -- Colorschemes
 	if settings.theme == "tokyo" then
 		use({ "folke/tokyonight.nvim", config = get_config("tokyo") })
+	elseif settings.theme == "synthwave" then
+		use({ 'maxmx03/fluoromachine.nvim', as = 'synthwave', config = get_config('synthwave') })
 	elseif settings.theme == "rosepine" then
-    use({ 'rose-pine/neovim', as = 'rose-pine', tag = 'v1.*', config = get_config("rosepine") })
+        use({ 'rose-pine/neovim', as = 'rose-pine', tag = 'v1.*', config = get_config("rosepine") })
 	elseif settings.theme == "catppuccino" then
 		use({ "catppuccin/nvim", as = "catppuccin", config = get_config("catppuccin") })
 	elseif settings.theme == "dracula" then
@@ -165,7 +169,7 @@ packer.startup(function(use)
   -- Notify
   use({ "rcarriga/nvim-notify", config = get_config("notify") })
   -- Specs
-	use({ "edluffy/specs.nvim", config = get_config("specs") })
+	--use({ "edluffy/specs.nvim", config = get_config("specs") })
   -- Startup Time
 	use({ "tweekmonster/startuptime.vim" })
   -- Starlite
