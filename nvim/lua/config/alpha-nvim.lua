@@ -107,10 +107,6 @@ dashboard.section.header.val = {
 --"                  @                                                        /@@                      ",
 --"                                         几 乇 ㄖ ᐯ 丨 爪                                           ",
                                                                                                                                                       
-"                                                                                                                               ",   
-"                                                                                                                               ",   
-"                                                                                                                               ",   
-"                                                                                                                               ",   
 "@@@@@@@@@@&   @@@@@@@@@@@@@@@@@@@@@@                   *@@@@@@@@@@@@@@     *@@@@@@@@@@@@@@@@@@@        @@@@@@@@@@@@@@@@@@@@@@@@",
 "@@@@@@@@@@@.    @@@@@@@@@@@@@@@@@@@@&                  @@@@@@@@@@@@@@     @@@@@@@@@@@@@@@@@@@       @@@@@@@@@@@@@@@@@@@@@@@@@@@",
 "@@@@@@@@@@@@      /@@@@@@@@@@@@@@@@@                  ,@@@@@@@@@@@@@@    @@@@@@@@@@@@@@@@@@       @@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
@@ -325,7 +321,7 @@ local buttons = {
   val = {
     { type = "padding", val = 1 },
 		dashboard.button("s", "                scratch buffer", ":call GoScratch()<CR>"),
-		dashboard.button("e", "☆                new file", ":ene <CR>"),
+		dashboard.button("e", "                new file", ":ene <CR>"),
 		dashboard.button("r", "                recent files", ":Telescope oldfiles <CR>"),
 		dashboard.button("f", "                find file", ":Telescope find_files <CR>"),
 		dashboard.button("F", "                ripgrep", ":Telescope live_grep <CR>"),
