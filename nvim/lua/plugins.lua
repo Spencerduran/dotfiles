@@ -176,7 +176,7 @@ packer.startup(function(use)
   use({ "ironhouzi/starlite-nvim"})
   -- Telescope
 	use({
-		"nvim-telescope/telescope.nvim", tag = '0.1.2',
+		"nvim-telescope/telescope.nvim",
 		requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
 		config = get_config("telescope"),
 	})
@@ -208,16 +208,12 @@ packer.startup(function(use)
 	--use({ "kyazdani42/nvim-tree.lua", config = get_config("nvim-tree")  })
   -- Twilight
 	use({ "folke/twilight.nvim", config = get_config("twilight") })
-	use({ "j-hui/fidget.nvim",   tag = 'legacy', config = function() require("fidget").setup({}) end, })
-  -- Window
-	use({
-		"https://gitlab.com/yorickpeterse/nvim-window.git",
-		config = get_config("nvim-window"),
-	})
+	use({ "j-hui/fidget.nvim", config = function() require("fidget").setup({}) end, })
+	--use({ "j-hui/fidget.nvim",   tag = 'legacy', config = function() require("fidget").setup({}) end, })
   -- Undo Tree
   use({ "mbbill/undotree" })
   -- Vimwiki
   use({ "vimwiki/vimwiki", config = get_config("vimwiki") })
   -- Which-Key
-  use({ "folke/which-key.nvim", config = get_config("which-key") })
+  use({ "folke/which-key.nvim", tag = 'v3.10.0', config = get_config("which-key") })
 end)

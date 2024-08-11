@@ -1,0 +1,121 @@
+  BufNew(285)
+  BufNew(286)
+  BufNew(287)
+  BufNew(288)
+  BufNew(289)
+  BufNew(290)
+  BufEnter(289)
+    new Mode(n:289)
+  ModeChanged(n:i)
+    new Mode(i:289)
+    Unsafe(pending "<80>")
+    suspend: Mode(i:289)
+  Trigger(add) Mode(n:289) ' ` " g' g` z= <Plug> g z ] [ <Space> <C-W>
+  Trigger(add) Mode(n:11) ' ` " g' g` z= <Plug> g z ] [ <Space> <C-W>
+  BufNew(291)
+  on_key: <CR>
+  BufNew(292)
+  on_key: c
+  BufNew(293)
+  on_key: o
+  on_key: n
+  on_key: <CR>
+  on_key: w
+  BufNew(294)
+  on_key: k
+  on_key: <CR>
+BufNew(68)
+BufNew(69)
+BufNew(70)
+BufNew(71)
+BufNew(72)
+BufNew(73)
+BufEnter(72)
+  new Mode(n:72)
+ModeChanged(n:i)
+  new Mode(i:72)
+  Unsafe(pending "<80>")
+  suspend: Mode(i:72)
+Trigger(add) Mode(n:65) ` ' " g` g' z= g <Space> [ <Plug> z ] <C-W>
+Trigger(add) Mode(n:72) ` ' " g` g' z= g <Space> [ <Plug> z ] <C-W>
+BufNew(74)
+on_key: k
+BufNew(75)
+on_key: k
+BufNew(76)
+BufEnter(76)
+  new Mode(i:76)
+Trigger(add) Mode(i:76) <C-R>
+on_key: <BS>
+on_key: <BS>
+on_key: <BS>
+on_key: <BS>
+on_key: w
+BufNew(77)
+on_key: i
+BufNew(78)
+on_key: n
+on_key: d
+on_key: <CR>
+BufNew(81)
+BufNew(82)
+BufNew(83)
+BufNew(84)
+BufNew(85)
+BufNew(86)
+BufEnter(85)
+  new Mode(n:85)
+ModeChanged(n:i)
+  new Mode(i:85)
+  Unsafe(pending "<80>")
+  suspend: Mode(i:85)
+Trigger(add) Mode(n:65) ` ' " g` g' z= g <Space> [ <Plug> z ] <C-W>
+Trigger(add) Mode(n:85) ` ' " g` g' z= g <Space> [ <Plug> z ] <C-W>
+BufNew(87)
+on_key: w
+BufNew(88)
+on_key: i
+BufNew(89)
+on_key: n
+on_key: d
+on_key: <C-X>
+BufNew(90)
+ModeChanged(i:c)
+  new Mode(c:85)
+  Safe(true)
+Trigger(add) Mode(c:85) <C-R>
+on_key: y
+on_key: <CR>
+ModeChanged(c:i)
+  Unsafe(command-mode)
+  suspend: Mode(i:85)
+BufNew(91)
+BufNew(15)
+BufNew(16)
+BufNew(17)
+BufNew(18)
+BufNew(19)
+BufNew(20)
+BufEnter(19)
+  new Mode(n:19)
+ModeChanged(n:i)
+  new Mode(i:19)
+  Unsafe(pending "<80>")
+  suspend: Mode(i:19)
+Trigger(add) Mode(n:19) ` ' g` g' z= <Plug> g <Space> ] [ <C-W> z
+Trigger(add) Mode(n:7) ` ' g` g' z= <Plug> g <Space> ] [ <C-W> z
+BufNew(21)
+on_key: <CR>
+BufNew(22)
+on_key: m
+BufNew(23)
+on_key: a
+on_key: p
+on_key: p
+on_key: <Down>
+on_key: <Down>
+on_key: <Down>
+on_key: <Down>
+on_key: <Up>
+on_key: <Up>
+on_key: <CR>

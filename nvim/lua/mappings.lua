@@ -17,7 +17,7 @@ vim.g.maplocalleader = " "
 --   command_mode = "c",
 
 
------------- Normal ------------
+---------- Normal ------------
 -- Toggle whitespace characters
 map("n", "<F1>", "set list!<CR>", default_options)
 
@@ -58,20 +58,16 @@ map("n", "<Right>", ":vertical resize +2<CR>", default_options)
 map("n", "<S-l>", ":bnext<CR>", default_options)
 map("n", "<S-h>", ":bprevious<CR>", default_options)
 
--- Move text up and down
-map("n", "<A-j>", "<Esc>:m .+1<CR>==gi", default_options)
-map("n", "<A-k>", "<Esc>:m .-2<CR>==gi", default_options)
 
 
 ------------ Insert ------------
--- Press jk fast to enter
+-- Press jk fast to enter normal
 map("i", "jk", "<ESC>", default_options)
 
 -- move to a closing element in insert mode
 map("i", "<C-l>", function()
 	return require("functions").escapePair()
 end, default_options)
-
 
 ------------ Visual ------------
 -- Indent selected
@@ -81,30 +77,30 @@ map("v", ">", ">gv", default_options)
 -- Paste over currently selected text without yanking it
 map("v", "p", '"_dP', default_options)
 
--- Move text up and down
-map("v", "<A-j>", ":m .+1<CR>==", default_options)
-map("v", "<A-k>", ":m .-2<CR>==", default_options)
-map("v", "p", '"_dP', default_options)
+---- Move text up and down
+--map("v", "<A-j>", ":m .+1<CR>==", default_options)
+--map("v", "<A-k>", ":m .-2<CR>==", default_options)
+--map("v", "p", '"_dP', default_options)
 
 
------------- Visual Block ------------
--- Move text up and down
-map("x", "J", ":move '>+1<CR>gv-gv", default_options)
-map("x", "K", ":move '<-2<CR>gv-gv", default_options)
-map("x", "<A-j>", ":move '>+1<CR>gv-gv", default_options)
-map("x", "<A-k>", ":move '<-2<CR>gv-gv", default_options)
-
-
------------- Starlite ------------
-map("n", "*", function()
-	return require("starlite").star()
-end, default_options)
-map("n", "g*", function()
-	return require("starlite").g_star()
-end, default_options)
-map("n", "#", function()
-	return require("starlite").hash()
-end, default_options)
-map("n", "g#", function()
-	return require("starlite").g_hash()
-end, default_options)
+-------------- Visual Block ------------
+---- Move text up and down
+--map("x", "J", ":move '>+1<CR>gv-gv", default_options)
+--map("x", "K", ":move '<-2<CR>gv-gv", default_options)
+--map("x", "<A-j>", ":move '>+1<CR>gv-gv", default_options)
+--map("x", "<A-k>", ":move '<-2<CR>gv-gv", default_options)
+--
+--
+-------------- Starlite ------------
+--map("n", "*", function()
+--	return require("starlite").star()
+--end, default_options)
+--map("n", "g*", function()
+--	return require("starlite").g_star()
+--end, default_options)
+--map("n", "#", function()
+--	return require("starlite").hash()
+--end, default_options)
+--map("n", "g#", function()
+--	return require("starlite").g_hash()
+--end, default_options)

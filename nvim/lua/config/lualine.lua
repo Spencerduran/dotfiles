@@ -12,7 +12,7 @@ end
 
 require("lualine").setup({
 	options = {
-		--theme = "catppuccin",
+		theme = "fluoromachine",
 		--theme = "rose-pine",
 		--theme = "dracula",
     component_separators = { left = '', right = ''},
