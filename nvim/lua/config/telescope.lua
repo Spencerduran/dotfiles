@@ -7,13 +7,11 @@ telescope.setup({
 	extensions = {
 		fzf = {
 			fuzzy = true, -- false will only do exact matching
-			override_generic_sorter = true, -- override the generic sorter
-			override_file_sorter = true, -- override the file sorter
 			case_mode = "smart_case", -- or "ignore_case" or "respect_case" or "smart_case"
 		},
-		["ui-select"] = {
-			require("telescope.themes").get_dropdown({}),
-		},
+--		["ui-select"] = {
+--			require("telescope.themes").get_dropdown({}),
+--		},
 		file_browser = {
 			mappings = {
 				i = {
@@ -79,38 +77,38 @@ telescope.setup({
 				["<c-h>"] = actions.which_key,
 			},
 		},
-		prompt_prefix = "> ",
-		selection_caret = " ",
-		entry_prefix = "  ",
-		multi_icon = "<>",
-		initial_mode = "insert",
-		scroll_strategy = "cycle",
-		selection_strategy = "reset",
-		sorting_strategy = "descending",
-		layout_strategy = "horizontal",
-		layout_config = {
-			width = 0.95,
-			height = 0.85,
-			-- preview_cutoff = 120,
-			prompt_position = "bottom",
-			horizontal = {
-				preview_width = function(_, cols, _)
-					if cols > 200 then
-						return math.floor(cols * 0.4)
-					else
-						return math.floor(cols * 0.6)
-					end
-				end,
-			},
-			vertical = { width = 0.9, height = 0.95, preview_height = 0.5 },
-			flex = { horizontal = { preview_width = 0.9 } },
-		},
-		winblend = 0,
-		border = {},
-		borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-		color_devicons = true,
-		use_less = true,
-		set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
+		--prompt_prefix = "> ",
+		--selection_caret = " ",
+		--entry_prefix = "  ",
+		--multi_icon = "<>",
+		--initial_mode = "insert",
+		--scroll_strategy = "cycle",
+		--selection_strategy = "reset",
+		--sorting_strategy = "descending",
+		--layout_strategy = "horizontal",
+		--layout_config = {
+		--	width = 0.95,
+		--	height = 0.85,
+		--	-- preview_cutoff = 120,
+			--prompt_position = "top",
+		--	horizontal = {
+		--		preview_width = function(_, cols, _)
+		--			if cols > 200 then
+		--				return math.floor(cols * 0.4)
+		--			else
+		--				return math.floor(cols * 0.6)
+		--			end
+		--		end,
+		--	},
+		--	vertical = { width = 0.9, height = 0.95, preview_height = 0.5 },
+		--	flex = { horizontal = { preview_width = 0.9 } },
+		--},
+		--winblend = 0,
+		--border = {},
+		--borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+		--color_devicons = true,
+		--use_less = true,
+		--set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
 	},
 })
 
