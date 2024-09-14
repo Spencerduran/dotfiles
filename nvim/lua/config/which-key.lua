@@ -72,7 +72,7 @@ wk.add({
       {"<leader>wt", "<c-w>t", desc = "Move to new tab" },
       {"<leader>w=", "<c-w>=", desc = "Equally size" },
       {"<leader>wv", "<cmd>:vsplit<cr>", desc = "Verstical Split" },
-      {"<leader>ww", "<cmd>:VimwikiIndex<cr>|cd /Users/SDuran/OneDrive - Knex/Documents/Documents/vimwiki/", desc = "Open Vimwiki Index"},
+      {"<leader>ww", "<cmd>:VimwikiIndex<cr>|cd /Users/spencer/repos/VimWiki/", desc = "Open Vimwiki Index"},
 
   { "<leader>x", group = "Spelling" },
       { "<leader>xn" , "]s", desc = "Next" },

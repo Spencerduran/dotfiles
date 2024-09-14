@@ -10,9 +10,9 @@ SETUVAR --export --path NODE_PATH:/usr/local/lib/node_modules
 SETUVAR --export --path PATH:/Users/spencerduran/\x2erbenv/shims\x1e/Users/spencerduran/\x2epyenv/shims\x1e/Users/spencerduran/\x2espicetify\x1e/opt/homebrew/bin/go\x1e/opt/homebrew/bin//go\x1e/opt/homebrew/bin/\x1e/Users/sduran/\x2epyenv/shims/ranger\x1e/Users/sduran/\x2ecargo/bin\x1e/Users/sduran/\x2erustup/bin\x1e/Users/SDuran/repos/spence/dotfiles/tmux/bin/tmux_spotify_info\x1e/usr/local/bin\x1e/System/Cryptexes/App/usr/bin\x1e/usr/bin\x1e/bin\x1e/usr/sbin\x1e/sbin\x1e/var/run/com\x2eapple\x2esecurity\x2ecryptexd/codex\x2esystem/bootstrap/usr/local/bin\x1e/var/run/com\x2eapple\x2esecurity\x2ecryptexd/codex\x2esystem/bootstrap/usr/bin\x1e/var/run/com\x2eapple\x2esecurity\x2ecryptexd/codex\x2esystem/bootstrap/usr/appleinternal/bin\x1e/Users/spencerduran/\x2elocal/bin\x1e/Users/spencerduran/\x2elocal/bin
 SETUVAR ZO_CMD:zo
 SETUVAR Z_CMD:z
-SETUVAR Z_DATA:/Users/spencerduran/\x2elocal/share/z/data
-SETUVAR Z_DATA_DIR:/Users/spencerduran/\x2elocal/share/z
-SETUVAR Z_EXCLUDE:\x5e/Users/spencerduran\x24
+SETUVAR Z_DATA:/Users/spencer/\x2elocal/share/z/data
+SETUVAR Z_DATA_DIR:/Users/spencer/\x2elocal/share/z
+SETUVAR Z_EXCLUDE:\x5e/Users/spencer\x24
 SETUVAR __fish_init_2_39_8:\x1d
 SETUVAR __fish_init_2_3_0:\x1d
 SETUVAR __fish_init_3_x:\x1d
@@ -48,5 +48,5 @@ SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_pager_color_selected_background:\x2dr
-SETUVAR fish_user_paths:/Users/spencerduran/\x2espicetify\x1e/opt/homebrew/bin/go\x1e/opt/homebrew/bin//go\x1e/opt/homebrew/bin/\x1e/Users/sduran/\x2epyenv/shims/ranger\x1e/Users/sduran/\x2ecargo/bin\x1e/Users/sduran/\x2erustup/bin\x1e/Users/SDuran/repos/spence/dotfiles/tmux/bin/tmux_spotify_info
+SETUVAR fish_user_paths:/opt/homebrew/bin\x1e/Users/spencerduran/\x2espicetify\x1e/opt/homebrew/bin/go\x1e/opt/homebrew/bin//go\x1e/opt/homebrew/bin/\x1e/Users/sduran/\x2epyenv/shims/ranger\x1e/Users/sduran/\x2ecargo/bin\x1e/Users/sduran/\x2erustup/bin\x1e/Users/SDuran/repos/spence/dotfiles/tmux/bin/tmux_spotify_info
 SETUVAR x:NODE_PATH\x3d/usr/local/lib/node_modules/
