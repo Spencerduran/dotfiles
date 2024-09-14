@@ -3,9 +3,9 @@ local fn = vim.fn
 
 local M = {}
 
-vim.api.nvim_exec([[
-source ~/dotfiles/nvim/lua/config/copy_things.vim 
-]], false)
+--vim.api.nvim_exec([[
+--source ~/dotfiles/nvim/lua/config/copy_things.vim 
+--]], false)
 
 ---- Sample user command example ----
 ---- :h nvim_create_user_command ----

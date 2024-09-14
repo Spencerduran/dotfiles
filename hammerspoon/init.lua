@@ -1,14 +1,14 @@
 
 
-arrangeDesktop = hs.loadSpoon('ArrangeDesktop')
-arrangeDesktop.logger.setLogLevel('info')
-menubar = hs.menubar.new()
-if menubar then
-    menubar:setIcon(hs.image.imageFromName("NSHandCursor"))
-    local menuItems = {}
-    menuItems = arrangeDesktop:addMenuItems(menuItems)
-    menubar:setMenu(menuItems)
-end
+--arrangeDesktop = hs.loadSpoon('ArrangeDesktop')
+--arrangeDesktop.logger.setLogLevel('info')
+--menubar = hs.menubar.new()
+--if menubar then
+--    menubar:setIcon(hs.image.imageFromName("NSHandCursor"))
+--    local menuItems = {}
+--    menuItems = arrangeDesktop:addMenuItems(menuItems)
+--    menubar:setMenu(menuItems)
+--end
 
 
 hyper = hs.hotkey.modal.new({}, 'F17')
@@ -153,7 +153,7 @@ hyper:bind({}, 'q', function()
   if spotify:isFrontmost() then
     spotify:hide()
   else
-    hs.application.launchOrFocus('/Applications/Spotify.app')
+    hs.application.launchOrFocus('/Users/spencer/Applications/Spotify.app')
   end
 end)
 -- Show/hide Acrobat Reader
