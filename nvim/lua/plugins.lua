@@ -69,6 +69,7 @@ packer.startup(function(use)
   --    config = get_config("luasnip"),
   --  })
   -- Colorschemes
+
 	if settings.theme == "tokyo" then
 		use({ "folke/tokyonight.nvim", config = get_config("tokyo") })
 	elseif settings.theme == "synthwave" then

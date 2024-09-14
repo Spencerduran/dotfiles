@@ -1,5 +1,15 @@
 status --is-interactive; and source (pyenv init -|psub)
 set -gx EDITOR nvim
+
+
+# Get the Homebrew prefix
+set brew_prefix (brew --prefix)
+
+# Add Homebrew's bin directory to the PATH
+fish_add_path $brew_prefix/bin
+
+# Ensure the updated PATH is available to tmux
+set -x TMUX_PATH $PATH
 #set -g -x NVM_NODEJS_ORG_MIRROR http:/nodejs.org/dist
 #set -g -x NODEJS_ORG_MIRROR http://nodejs.org/dist
 
@@ -16,6 +26,3 @@ set PATH $PATH /Users/spencerduran/.local/bin
 
 fish_add_path /Users/spencerduran/.spicetify
 
-source /opt/homebrew/Cellar/chruby-fish/1.0.0/share/fish/vendor_functions.d/chruby.fish
-source /opt/homebrew/Cellar/chruby-fish/1.0.0/share/fish/vendor_conf.d/chruby_auto.fish
-chruby ruby-3.1.3

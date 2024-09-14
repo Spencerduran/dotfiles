@@ -29,9 +29,10 @@ vim.api.nvim_create_autocmd('User', {
 })
 
 -- Enter word process mode when entering .txt and .wiki files
+
+--map j gj
+--map k gk
 api.nvim_command([[
-map j gj
-map k gk
 autocmd BufEnter *.wiki :set wrap linebreak nolist spell noexpandtab formatoptions=1
 augroup END 
 ]])
