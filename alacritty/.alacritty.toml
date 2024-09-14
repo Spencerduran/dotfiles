@@ -1,0 +1,227 @@
+# Environment variablesalaala
+[env]
+TERM = "xterm-256color"
+
+# General settings
+#opacity = 1.0
+
+# Font configuration
+[font]
+size = 18
+
+[font.normal]
+family = "Iosevka Nerd Font"
+style = "Regular"
+
+[font.bold]
+family = "Iosevka Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "Iosevka Nerd Font"
+style = "Italic"
+
+[font.bold_italic]
+family = "Iosevka Nerd Font"
+style = "Bold Italic"
+
+#[colors.primary]
+#foreground = "#e0def4"
+#background = "#232136"
+#dim_foreground = "#908caa"
+#bright_foreground = "#e0def4"
+#
+#[colors.cursor]
+#text = "#e0def4"
+#cursor = "#56526e"
+#
+#[colors.vi_mode_cursor]
+#text = "#e0def4"
+#cursor = "#56526e"
+#
+#[colors.search.matches]
+#foreground = "#908caa"
+#background = "#393552"
+#
+#[colors.search.focused_match]
+#foreground = "#232136"
+#background = "#ea9a97"
+#
+#[colors.hints.start]
+#foreground = "#908caa"
+#background = "#2a273f"
+#
+#[colors.hints.end]
+#foreground = "#6e6a86"
+#background = "#2a273f"
+#
+#[colors.line_indicator]
+#foreground = "None"
+#background = "None"
+#
+#[colors.footer_bar]
+#foreground = "#e0def4"
+#background = "#2a273f"
+#
+#[colors.selection]
+#text = "#e0def4"
+#background = "#44415a"
+#
+#[colors.normal]
+#black = "#393552"
+#red = "#eb6f92"
+#green = "#3e8fb0"
+#yellow = "#f6c177"
+#blue = "#9ccfd8"
+#magenta = "#c4a7e7"
+#cyan = "#ea9a97"
+#white = "#e0def4"
+#
+#[colors.bright]
+#black = "#6e6a86"
+#red = "#eb6f92"
+#green = "#3e8fb0"
+#yellow = "#f6c177"
+#blue = "#9ccfd8"
+#magenta = "#c4a7e7"
+#cyan = "#ea9a97"
+#white = "#e0def4"
+#
+#[colors.dim]
+#black = "#6e6a86"
+#red = "#eb6f92"
+#green = "#3e8fb0"
+#yellow = "#f6c177"
+#blue = "#9ccfd8"
+#magenta = "#c4a7e7"
+#cyan = "#ea9a97"
+#white = "#e0def4"
+
+[colors.primary]
+foreground = "#e0def4"
+background = "#191724"
+dim_foreground = "#908caa"
+bright_foreground = "#e0def4"
+
+[colors.cursor]
+text = "#e0def4"
+cursor = "#524f67"
+
+[colors.vi_mode_cursor]
+text = "#e0def4"
+cursor = "#524f67"
+
+[colors.search.matches]
+foreground = "#908caa"
+background = "#26233a"
+
+[colors.search.focused_match]
+foreground = "#191724"
+background = "#ebbcba"
+
+[colors.hints.start]
+foreground = "#908caa"
+background = "#1f1d2e"
+
+[colors.hints.end]
+foreground = "#6e6a86"
+background = "#1f1d2e"
+
+[colors.line_indicator]
+foreground = "None"
+background = "None"
+
+[colors.footer_bar]
+foreground = "#e0def4"
+background = "#1f1d2e"
+
+[colors.selection]
+text = "#e0def4"
+background = "#403d52"
+
+[colors.normal]
+black = "#26233a"
+red = "#eb6f92"
+green = "#31748f"
+yellow = "#f6c177"
+blue = "#9ccfd8"
+magenta = "#c4a7e7"
+cyan = "#ebbcba"
+white = "#e0def4"
+
+[colors.bright]
+black = "#6e6a86"
+red = "#eb6f92"
+green = "#31748f"
+yellow = "#f6c177"
+blue = "#9ccfd8"
+magenta = "#c4a7e7"
+cyan = "#ebbcba"
+white = "#e0def4"
+
+[colors.dim]
+black = "#6e6a86"
+red = "#eb6f92"
+green = "#31748f"
+yellow = "#f6c177"
+blue = "#9ccfd8"
+magenta = "#c4a7e7"
+cyan = "#ebbcba"
+white = "#e0def4"
+## Fluoromachine
+# Color configuration
+#[colors.primary]
+#background = "#230735"
+#foreground = "#F8F8F8"
+#
+#[colors.normal]
+#black = "#241B2F"
+#red = "#FE4450"
+#green = "#72F1B8"
+#yellow = "#FFCC00"
+#blue = "#61E2FF"
+#magenta = "#FF7EDB"
+#cyan = "#61E2FF"
+#white = "#F8F8F8"
+#
+#[colors.bright]
+#black = "#495495"
+#red = "#FE4450"
+#green = "#72F1B8"
+#yellow = "#FFCC00"
+#blue = "#61E2FF"
+#magenta = "#AF6DF9"
+#cyan = "#61E2FF"
+#white = "#F8F8F8"
+#
+#[colors.cursor]
+#text = "#282A36"
+#cursor = "#F8F8F8"
+#
+#[colors.selection]
+#text = "#F8F8F8"
+#background = "#463465"
+#
+#[colors.search.matches]
+#foreground = "#262335"
+#background = "#FFCC00"
+#
+#[colors.search.focused_match]
+#foreground = "#262335"
+#background = "#72F1B8"
+#
+#[colors.hints.start]
+#foreground = "#262335"
+#background = "#FFCC00"
+#
+#[colors.hints.end]
+#foreground = "#262335"
+#background = "#FF8B39"
+#
+#[colors.line_indicator]
+#foreground = "None"
+#background = "#463465"
+#
+#[colors.vi_mode_cursor]
+#text = "#282A36"
+#cursor = "#F8F8F8"
