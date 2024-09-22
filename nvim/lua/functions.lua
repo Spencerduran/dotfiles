@@ -3,10 +3,15 @@ local fn = vim.fn
 
 local M = {}
 
---vim.api.nvim_exec([[
---source ~/dotfiles/nvim/lua/config/copy_things.vim 
---]], false)
-
+-- Word Processor mode
+function M.Wp()
+  vim.b.formatoptions = 1
+  vim.b.expandtab = false
+  vim.wo.wrap = true
+  vim.wo.linebreak = true
+  vim.wo.spell = true
+  --set complete+=s
+end
 ---- Sample user command example ----
 ---- :h nvim_create_user_command ----
 vim.api.nvim_create_user_command('SayHello', 'echo "Hello world!"', {})
@@ -24,7 +29,41 @@ end
 -- :H opens help in current window
 --vim.api.nvim_create_user_command('H', '', {})
 --vim.fn['command! -nargs=1 -complete=help H :enew | :set buftype=help | :h arrgs']({...})
+function M.yank_matching_lines()
+  local search_pattern = vim.fn.getreg('/')
+  
+  if search_pattern == '' then
+    print("No current search pattern")
+    return
+  end
 
+  local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+  local matching_lines = {}
+
+  for _, line in ipairs(lines) do
+    if string.find(line, search_pattern) then
+      table.insert(matching_lines, line)
+    end
+  end
+
+  if #matching_lines == 0 then
+    print("No lines matched the current search pattern")
+    return
+  end
+
+  local yanked_text = table.concat(matching_lines, "\n")
+  
+  -- Use a different function to set register content
+  vim.fn.setreg('"', yanked_text, 'l')
+
+  print(string.format("Yanked %d matching lines", #matching_lines))
+  
+  -- Return the yanked text for potential further use
+  print("Search pattern: " .. vim.fn.string(search_pattern))
+  print("First matched line: " .. (matching_lines[1] or "None"))
+  print("Yanked text: " .. vim.fn.string(yanked_text))
+  return yanked_text
+end
 
 -- Word Processor mode
 function M.Wp()

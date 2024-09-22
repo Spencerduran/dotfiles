@@ -77,6 +77,7 @@ map("v", ">", ">gv", default_options)
 -- Paste over currently selected text without yanking it
 map("v", "p", '"_dP', default_options)
 
+vim.api.nvim_set_keymap('n', '<leader>vy', ':lua require("functions").ViewYankedLines()<CR>', {noremap = true, silent = true})
 ---- Move text up and down
 --map("v", "<A-j>", ":m .+1<CR>==", default_options)
 --map("v", "<A-k>", ":m .-2<CR>==", default_options)
