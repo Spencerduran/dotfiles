@@ -44,6 +44,7 @@ wk.add({
 
   { "<leader>m", group = "Misc" },
 	  { "<leader>mt", "<cmd>FloatermNew<cr>", desc = "New Floaterm" },
+	  { "<leader>ml", ":s/^\\s*\\zs/\\=line('.') - line(\"'<\") + 1 . '. '<CR>", desc = "Numbered List", mode = "v" },
 
   { "<leader>q", group = "Quickfix" },
       { "<leader>qj" , "<cmd>cnext<cr>", desc = "Next Quickfix Item" },
