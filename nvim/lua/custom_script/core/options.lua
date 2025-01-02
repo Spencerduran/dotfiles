@@ -1,10 +1,10 @@
-local settings = require("user-conf")
---local utils = require("functions")
-local o = vim.opt -- For :setglobal
-local wo = vim.wo -- For :setlocal
-local fn = vim.fn	-- To call autoload functions - ie: vim.fn['some#function']({...})
+vim.cmd("let g:netrw_liststyle = 3")
 
-o.background = dark
+local o  = vim.opt
+local fn = vim.fn
+local wo = vim.wo
+
+o.background     = dark
 o.backspace      = "indent,eol,start" -- Allow backspace over everything in insert mode
 o.clipboard      = "unnamed" -- Allows neovim to access the system clipboard
 o.cmdheight      = 1 -- Space for displaying messages/commands
@@ -20,15 +20,16 @@ o.ignorecase     = true -- Ignore case in search patterns
 o.incsearch      = true -- Incremental search
 o.lazyredraw     = true -- Do not redraw screen while running macros
 o.listchars      = "tab:..,trail:_,extends:>,precedes:<,nbsp:~,eol:$,space:_" -- Define whitespace characters
-o.mouse          = n -- Set mouse mode for terminal window resizing
+o.mouse          = "n" -- Set mouse mode for terminal window resizing
 o.number         = true -- Set line number
-o.relativenumber = settings.relative_number	-- Set relative line numbers
+o.relativenumber = true
 o.scrolloff      = 8 -- Minimum number of screen lines to keep above and below the cursor.
 o.shiftwidth     = 2 -- The number of spaces inserted for each indentation
 o.shortmess      = o.shortmess + "T" -- Prevent "pattern not found" messages
 o.showmode       = false -- Hide statusline info
 o.showtabline    = 2 -- Always show tabs
 o.sidescrolloff  = 5 -- The minimal number of columns to scroll horizontally
+o.signcolumn     = "yes"
 o.smartcase      = true -- Smart case
 o.smartindent    = true -- Make indenting smart again
 o.splitbelow     = true -- Force all horizontal splits to go below current window
@@ -41,24 +42,5 @@ o.undofile       = true -- Enable persistent undo
 o.wildignorecase = true -- When set case is ignored when completing file names and directories
 o.wildmenu       = true -- Enhanced command-line completion
 o.wildmode       = "longest:full" -- Complete till longest common string + 'wildmenu' if it is enabled.
-wo.cursorline     = true -- Highlight the current line
-o.wildignore = [[
-.git,.hg,.svn
-*.aux,*.out,*.toc
-*.o,*.obj,*.exe,*.dll,*.manifest,*.rbc,*.class
-*.ai,*.bmp,*.gif,*.ico,*.jpg,*.jpeg,*.png,*.psd,*.webp
-*.avi,*.divx,*.mp4,*.webm,*.mov,*.m2ts,*.mkv,*.vob,*.mpg,*.mpeg
-*.mp3,*.oga,*.ogg,*.wav,*.flac
-*.eot,*.otf,*.ttf,*.woff
-*.doc,*.pdf,*.cbr,*.cbz
-*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz,*.kgb
-*.swp,.lock,.DS_Store,._*
-*/tmp/*,*.so,*.swp,*.zip,**/node_modules/**,**/target/**,**.terraform/**"
-]]
-if settings.global_statusline then
-	o.laststatus = 3 -- always and ONLY the last window
-else
-	o.laststatus = 2 -- always
-end
--- o.foldexpr = "nvim_treesitter#foldexpr()"
--- o.foldmethod = "expr"
+o.wrap           = false
+wo.cursorline    = true -- Highlight the current line
