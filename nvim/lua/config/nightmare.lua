@@ -1,1 +1,0 @@
-require'nightmare'.apply()
