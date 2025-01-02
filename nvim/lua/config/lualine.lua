@@ -12,8 +12,8 @@ end
 
 require("lualine").setup({
 	options = {
-		theme = "rose-pine",
-		--theme = "dracula",
+		--theme = "rose-pine",
+		theme = "dracula",
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
 		icons_enabled = true,

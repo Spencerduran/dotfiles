@@ -72,6 +72,8 @@ packer.startup(function(use)
 
 	if settings.theme == "tokyo" then
 		use({ "folke/tokyonight.nvim", config = get_config("tokyo") })
+	elseif settings.theme == "everforest" then
+		use({ 'neanias/everforest-nvim', as = 'everforest', config = get_config('everforest') })
 	elseif settings.theme == "synthwave" then
 		use({ 'maxmx03/fluoromachine.nvim', as = 'synthwave', config = get_config('synthwave') })
 	elseif settings.theme == "rosepine" then

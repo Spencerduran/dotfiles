@@ -4,7 +4,8 @@ local M = {}
 M.global_statusline = true
 -- Theme
 --M.theme = "synthwave"
-M.theme = "rosepine"
+M.theme = "everforest"
+--M.theme = "dracula"
 -- Set numbered lines
 M.number = true
 -- Set relative numbered lines
