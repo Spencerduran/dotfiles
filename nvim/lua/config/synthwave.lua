@@ -6,7 +6,8 @@ require "fluoromachine".setup
     --theme = "delta",
 
     overrides = overrides,
-    transparent = "full",
+    transparent = "false",
+    --transparent = "full",
     --colors = function(_, d)
     --    return 
     --    {
