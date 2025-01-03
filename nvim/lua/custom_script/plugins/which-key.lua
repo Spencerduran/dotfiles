@@ -45,15 +45,11 @@ return {
 			{ "<leader>g", group = "Git" },
 			{ "<leader>g3", "<cmd>Gvdiffsplit!<cr>", desc = "3 way diffsplit" },
 			{ "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Checkout branch" },
-			{ "<leader>gg", "<cmd>G<cr>", desc = "Git Status" },
 			{ "<leader>gl", "<cmd>Telescope git_commits<cr>", desc = "Log" },
-			{ "<leader>gm", "<cmd>Git merge develop<cr>", desc = "Git Pull" },
-			{ "<leader>gp", "<cmd>Git push<cr>", desc = "Git Push" },
 			{ "<leader>gs", "<cmd>Telescope git_status<cr>", desc = "See all changed files" },
-			{ "<leader>gu", "<cmd>Git pull<cr>", desc = "Git Pull" },
 
 			{ "<leader>m", group = "Misc" },
-			{ "<leader>mt", "<cmd>ToggleTerm<cr>", desc = "Floater" },
+			{ "<leader>mt", "<cmd>FloatermNew<cr>", desc = "New Floaterm" },
 			{
 				"<leader>ml",
 				":s/^\\s*\\zs/\\=line('.') - line(\"'<\") + 1 . '. '<CR>",
@@ -68,7 +64,7 @@ return {
 			{ "<leader>qt", "<cmd>TodoTelescope<cr>", desc = "Show TODOs" },
 
 			{ "<leader>r", group = "Ranger" },
-			{ "<leader>rr", '<cmd>TermExec cmd="Ranger"', desc = "Ranger" },
+			{ "<leader>rr", "<cmd>FloatermNew --disposable --opener=edit ranger<cr>", desc = "Ranger" },
 
 			{ "<leader>s", group = "Search" },
 			{ "<leader>sP", "<cmd>Telescope builtin<cr>", desc = "Builtin pickers" },
