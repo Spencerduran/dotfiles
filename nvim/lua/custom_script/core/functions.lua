@@ -28,44 +28,9 @@ vim.api.nvim_create_user_command("CopySearch", function(args)
 end, { range = true, register = true })
 
 local function go_scratch()
-	local done = false
-	for i = 1, vim.fn.winnr("$") do
-		vim.cmd(i .. "wincmd w")
-		if vim.bo.buftype == "nofile" then
-			done = true
-			break
-		end
-	end
-	if not done then
-		vim.cmd("new")
-		vim.bo.buftype = "nofile"
-		vim.bo.bufhidden = "hide"
-		vim.bo.swapfile = false
-	end
+	vim.cmd("call GoScratch()")
 end
 
---[[ Copy Matches Functions
-Creates two commands for copying search matches or whole lines containing matches.
-
-Usage:
-/pattern     - First search for your pattern
-:CopyMatches - Copy matches to clipboard
-:CopyLines   - Copy whole lines containing matches to clipboard
-
-Options:
-:CopyMatches a  - Copy matches to register a
-:CopyMatches -  - Show matches in scratch buffer
-:CopyMatches!   - Include line numbers
-:1,10CopyMatches - Only copy matches from lines 1-10
-
-Examples:
-/TODO        - Search for TODO
-:CopyMatches - Copy all TODOs to clipboard
-:CopyLines   - Copy all lines containing TODO
-:CopyMatches! - Copy TODOs with line numbers
-:CopyMatches - - Show TODOs in new scratch buffer
-:CopyMatches a - Copy TODOs to register a
---]]
 local function copy_matches(opts, whole_lines)
 	local pattern = vim.fn.getreg("/")
 	local matches = {}
@@ -84,18 +49,30 @@ local function copy_matches(opts, whole_lines)
 					table.insert(matches, line)
 				end
 			else
-				-- For CopyMatches, add just the matches
-				local line_matches = {}
-				for match in line:gmatch(vim.fn.escape(pattern, "()[].+*?^$")) do
-					if match ~= "" then
+				-- For CopyMatches, use Vim's matchlist() to get all matches
+				local start_pos = 0
+				while true do
+					local match_pos = vim.fn.match(line, pattern, start_pos)
+					if match_pos == -1 then
+						break
+					end
+
+					local match_end = vim.fn.matchend(line, pattern, start_pos)
+					local match_str = line:sub(match_pos + 1, match_end)
+
+					if match_str ~= "" then
 						if opts.bang then
-							table.insert(line_matches, string.format("%3d  %s", opts.line1 + i - 1, match))
+							table.insert(matches, string.format("%3d  %s", opts.line1 + i - 1, match_str))
 						else
-							table.insert(line_matches, match)
+							table.insert(matches, match_str)
 						end
 					end
+
+					start_pos = match_end
+					if start_pos == -1 or start_pos >= #line then
+						break
+					end
 				end
-				vim.list_extend(matches, line_matches)
 			end
 		end
 	end
@@ -112,13 +89,12 @@ local function copy_matches(opts, whole_lines)
 	if reg == "-" then
 		-- Output to scratch buffer
 		go_scratch()
-		vim.cmd("normal! G0m'")
-		vim.api.nvim_put(matches, "l", true, true)
-		vim.cmd("''+1normal! zz")
+		vim.api.nvim_put(matches, "l", false, true)
 	else
 		-- Copy to register
 		vim.fn.setreg(reg, table.concat(matches, "\n") .. "\n")
 	end
+
 	print("Copied " .. #matches .. " matches")
 end
 
