@@ -3,6 +3,15 @@ local api = vim.api
 --local funx = require("functions")
 
 --------------------------------------------------
+-- Enable highlight for .wiki files
+--------------------------------------------------
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+	pattern = { "*.wiki" },
+	callback = function()
+		vim.cmd("TSBufEnable highlight")
+	end,
+})
+--------------------------------------------------
 -- Don't auto comment new line
 --------------------------------------------------
 api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
