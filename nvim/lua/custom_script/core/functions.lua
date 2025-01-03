@@ -1,36 +1,49 @@
 local M = {}
 
+--------------------------------------------------
 -- Create scratch buffer
+--------------------------------------------------
 vim.cmd([[
 function! GoScratch()
   ene
   setlocal buftype=nofile bufhidden=hide noswapfile
 endfunction
 ]])
-
+--------------------------------------------------
 -- Word Processor mode
+--------------------------------------------------
 function M.Wp()
 	vim.b.formatoptions = 1
 	vim.b.expandtab = false
 	vim.wo.wrap = true
 	vim.wo.linebreak = true
 	vim.wo.spell = true
-	--set complete+=s
+	vim.keymap.set({ "n", "v" }, "j", "gj", { silent = true })
+	vim.keymap.set({ "n", "v" }, "k", "gk", { silent = true })
 end
 
-vim.api.nvim_create_user_command("CopySearch", function(args)
-	vim.fn.setreg(args.reg, "")
-	vim.api.nvim_cmd({
-		cmd = "substitute",
-		args = { string.format([[//\=setreg('%s', submatch(0), 'al')/n]], args.reg) },
-		range = { args.line1, args.line2 },
-	}, {})
-end, { range = true, register = true })
-
-local function go_scratch()
-	vim.cmd("call GoScratch()")
-end
-
+--------------------------------------------------
+--- Copy Matches
+--------------------------------------------------
+-- Creates two commands for copying search matches or whole lines containing matches.
+-- Usage:
+-- /pattern     - First search for your pattern
+-- :CopyMatches - Copy matches to clipboard
+-- :CopyLines   - Copy whole lines containing matches to clipboard
+-- Options:
+-- :CopyMatches a  - Copy matches to register a
+-- :CopyMatches -  - Show matches in scratch buffer
+-- :CopyMatches!   - Include line numbers
+-- :1,10CopyMatches - Only copy matches from lines 1-10
+--
+-- Examples:
+-- /TODO        - Search for TODO
+-- :CopyMatches - Copy all TODOs to clipboard
+-- :CopyLines   - Copy all lines containing TODO
+-- :CopyMatches! - Copy TODOs with line numbers
+-- :CopyMatches - - Show TODOs in new scratch buffer
+-- :CopyMatches a - Copy TODOs to register a
+--------------------------------------------------
 local function copy_matches(opts, whole_lines)
 	local pattern = vim.fn.getreg("/")
 	local matches = {}
@@ -117,4 +130,60 @@ end, {
 	desc = "Copy lines containing matches to register or scratch buffer",
 })
 
+local function test_notifications()
+	-- Basic notifications for each level
+	vim.notify("This is an ERROR message", "ERROR")
+	vim.defer_fn(function()
+		vim.notify("This is a WARN message", "WARN")
+	end, 1000)
+	vim.defer_fn(function()
+		vim.notify("This is an INFO message", "INFO")
+	end, 2000)
+	vim.defer_fn(function()
+		vim.notify("This is a DEBUG message", "DEBUG")
+	end, 3000)
+	vim.defer_fn(function()
+		vim.notify("This is a TRACE message", "TRACE")
+	end, 4000)
+
+	-- Test with different options
+	vim.defer_fn(function()
+		vim.notify("Custom timeout message", "INFO", {
+			timeout = 2000,
+			title = "Custom Title",
+		})
+	end, 5000)
+
+	-- Test multi-line message
+	vim.defer_fn(function()
+		vim.notify(
+			[[
+            Multi-line notification
+            with several
+            lines of text
+        ]],
+			"INFO"
+		)
+	end, 6000)
+
+	-- Test replace/update notification
+	local notify = require("notify")
+	vim.defer_fn(function()
+		local notification = notify("Starting long process...", "INFO", {
+			title = "Process Status",
+			timeout = false, -- won't auto-dismiss
+		})
+
+		-- Update the notification after 2 seconds
+		vim.defer_fn(function()
+			notify("Process completed!", "SUCCESS", {
+				replace = notification,
+				title = "Process Status",
+			})
+		end, 2000)
+	end, 7000)
+end
+
+-- Create a user command for easy testing
+vim.api.nvim_create_user_command("TestNotify", test_notifications, {})
 return M
