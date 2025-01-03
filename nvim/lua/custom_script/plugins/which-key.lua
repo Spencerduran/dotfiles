@@ -53,7 +53,7 @@ return {
 			{ "<leader>gu", "<cmd>Git pull<cr>", desc = "Git Pull" },
 
 			{ "<leader>m", group = "Misc" },
-			{ "<leader>mt", "<cmd>FloatermNew<cr>", desc = "New Floaterm" },
+			{ "<leader>mt", "<cmd>ToggleTerm<cr>", desc = "Floater" },
 			{
 				"<leader>ml",
 				":s/^\\s*\\zs/\\=line('.') - line(\"'<\") + 1 . '. '<CR>",
@@ -68,7 +68,7 @@ return {
 			{ "<leader>qt", "<cmd>TodoTelescope<cr>", desc = "Show TODOs" },
 
 			{ "<leader>r", group = "Ranger" },
-			{ "<leader>rr", "<cmd>FloatermNew --disposable --opener=edit ranger<cr>", desc = "Ranger" },
+			{ "<leader>rr", '<cmd>TermExec cmd="Ranger"', desc = "Ranger" },
 
 			{ "<leader>s", group = "Search" },
 			{ "<leader>sP", "<cmd>Telescope builtin<cr>", desc = "Builtin pickers" },
@@ -85,7 +85,6 @@ return {
 			{ "<leader>w=", "<c-w>=", desc = "Equally size" },
 			{ "<leader>wp", "<cmd>lua require('functions').Wp()<cr>", desc = "Word Processor Mode" },
 			{ "<leader>wq", "<cmd>:q<cr>", desc = "Close" },
-			{ "<leader>ws", "<cmd>:split<cr>", desc = "Horizontal Split" },
 			{ "<leader>wt", "<c-w>t", desc = "Move to new tab" },
 			{ "<leader>wv", "<cmd>:vsplit<cr>", desc = "Vertical Split" },
 			{ "<leader>ww", "<cmd>:VimwikiIndex<cr>|cd /Users/spencer/repos/VimWiki/", desc = "Open Vimwiki Index" },
