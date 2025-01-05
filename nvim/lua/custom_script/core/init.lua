@@ -1,0 +1,5 @@
+require("custom_script.core.globals")
+require("custom_script.core.options")
+require("custom_script.core.keymaps")
+require("custom_script.core.autocmds")
+require("custom_script.core.functions")
