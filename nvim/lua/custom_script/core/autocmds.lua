@@ -12,6 +12,15 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 	end,
 })
 --------------------------------------------------
+-- Make help files open in a vertical split
+--------------------------------------------------
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "help",
+	callback = function()
+		vim.cmd("wincmd L")
+	end,
+})
+--------------------------------------------------
 -- Don't auto comment new line
 --------------------------------------------------
 api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
