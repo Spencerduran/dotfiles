@@ -1,12 +1,12 @@
 local user_preferences = {
 
-	name = "kanagawa",
-	style = "dragon", -- wave/lotus/dragon
-	transparent = false,
-
-	--name = "everforest",
-	--style = "medium", --soft/medium/hard
+	--name = "kanagawa",
+	--style = "dragon", -- wave/lotus/dragon
 	--transparent = false,
+
+	name = "everforest",
+	style = "medium", --soft/medium/hard
+	transparent = false,
 
 	--name = "catppuccin",
 	--style = "mocha", --latte/frappe/macchiato/mocha
