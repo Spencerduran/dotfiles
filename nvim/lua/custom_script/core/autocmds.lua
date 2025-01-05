@@ -3,6 +3,18 @@ local api = vim.api
 --local funx = require("functions")
 
 --------------------------------------------------
+-- Exit nvim when tree is last buffer
+--------------------------------------------------
+vim.api.nvim_create_autocmd("BufEnter", {
+	group = vim.api.nvim_create_augroup("NvimTreeClose", { clear = true }),
+	callback = function()
+		local layout = vim.api.nvim_call_function("winlayout", {})
+		if layout[1] == "leaf" and vim.bo.filetype == "NvimTree" and layout[2] == vim.api.nvim_get_current_win() then
+			vim.cmd("confirm quit")
+		end
+	end,
+})
+--------------------------------------------------
 -- Enable highlight for .wiki files
 --------------------------------------------------
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
