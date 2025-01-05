@@ -38,6 +38,7 @@ return {
 					"javascript",
 					"json",
 					"lua",
+					"norg",
 					"markdown",
 					"markdown_inline",
 					"query",
