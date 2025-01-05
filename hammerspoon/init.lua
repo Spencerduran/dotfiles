@@ -323,19 +323,32 @@ hyper:bind({}, "9", function()
 end)
 
 -------------------------------------------
--- Chrome Window Highlight --
+-- Window Highlight for Chrome Only --
+-- Creates a colored border around Chrome when focused
 -------------------------------------------
+-- Configuration
+local config = {
+	strokeColor = { red = 124, blue = 255, green = 0, alpha = 1 },
+	strokeWidth = 4,
+}
+
+-- Initialize border canvas
+local border = nil
+
 local function drawBorder()
 	local win = hs.window.focusedWindow()
 	if win and win:application():name() == "Google Chrome" then
+		-- Create border canvas if it doesn't exist
 		if not border then
 			border = hs.canvas.new(win:frame())
 		end
+		-- Update border frame to match window
 		border:frame(win:frame())
+		-- Set border properties
 		border[1] = {
 			type = "rectangle",
-			strokeColor = { red = 1, blue = 1, green = 0, alpha = 0.8 },
-			strokeWidth = 4,
+			strokeColor = config.strokeColor,
+			strokeWidth = config.strokeWidth,
 			action = "stroke",
 		}
 		border:show()
@@ -344,7 +357,18 @@ local function drawBorder()
 	end
 end
 
-windowFilter = hs.window.filter.new(false)
-windowFilter:setAppFilter("Google Chrome", { allowRoles = "AXStandardWindow" })
+-- Set up window filter specifically for Chrome
+local windowFilter = hs.window.filter.new("Google Chrome")
+windowFilter:setDefaultFilter({ allowRoles = "AXStandardWindow" })
+
+-- Subscribe to window events
 windowFilter:subscribe(hs.window.filter.windowFocused, drawBorder)
 windowFilter:subscribe(hs.window.filter.windowMoved, drawBorder)
+windowFilter:subscribe(hs.window.filter.windowUnfocused, function()
+	if border then
+		border:hide()
+	end
+end)
+
+-- Optional: Add this line if you want the border to update when Chrome windows are resized
+windowFilter:subscribe(hs.window.filter.windowsChanged, drawBorder)
