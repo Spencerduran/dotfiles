@@ -61,15 +61,16 @@ hyper:bind({}, "a", function()
 		hyper.triggered = true
 	end
 end)
--- Show/hide Brave
+-- Show/hide Obsidian
 hyper:bind({}, "b", function()
-	local chrome = hs.application.find("brave")
+	local chrome = hs.application.find("obsidian")
 	if chrome:isFrontmost() then
 		chrome:hide()
 	else
-		hs.application.launchOrFocus("/Applications/Brave Browser.app/")
+		hs.application.launchOrFocus("/Applications/Obsidian.app/")
 	end
 end)
+
 -- Show/hide chrome
 hyper:bind({}, "c", function()
 	local chrome = hs.application.find("google chrome")
