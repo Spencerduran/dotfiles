@@ -116,13 +116,22 @@ hyper:bind({}, "m", function()
 		hs.application.launchOrFocus("/Applications/Messages.app")
 	end
 end)
--- Show/hide outlook
-hyper:bind({}, "o", function()
+-- Show/hide Outlook
+hyper:bind({ "shift" }, "o", function()
 	local outlook = hs.application.find("outlook")
 	if outlook:isFrontmost() then
 		outlook:hide()
 	else
 		hs.application.launchOrFocus("/Applications/Microsoft Outlook.app")
+	end
+end)
+-- Show/hide Obsidian
+hyper:bind({}, "o", function()
+	local obsidian = hs.application.find("obsidian")
+	if obsidian:isFrontmost() then
+		obsidian:hide()
+	else
+		hs.application.launchOrFocus("/Applications/Obsidian.app/Contents/MacOS/Obsidian")
 	end
 end)
 -- Show/hide postman
@@ -149,7 +158,7 @@ hyper:bind({}, "q", function()
 	if spotify:isFrontmost() then
 		spotify:hide()
 	else
-		hs.application.launchOrFocus("/Users/spencer/Applications/Spotify.app")
+		hs.application.launchOrFocus("/Applications/Spotify.app/Contents/MacOS/Spotify")
 	end
 end)
 -- Show/hide Acrobat Reader
