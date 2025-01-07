@@ -61,6 +61,16 @@ hyper:bind({}, "a", function()
 		hyper.triggered = true
 	end
 end)
+
+-- Show/hide Claude
+hyper:bind({ "shift" }, "o", function()
+	local claude = hs.application.find("claude")
+	if claude:isFrontmost() then
+		claude:hide()
+	else
+		hs.application.launchOrFocus("/Applications/Claude.app/Contents/MacOS/Claude")
+	end
+end)
 -- Show/hide Obsidian
 hyper:bind({}, "b", function()
 	local chrome = hs.application.find("obsidian")
