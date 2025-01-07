@@ -41,6 +41,34 @@ return {
 		--		},
 		--	},
 		--},
+		ui = {
+			enable = true,
+			update_debounce = 200,
+			checkboxes = {
+				-- Remove the checkbox prefix before displaying
+				[" "] = { char = "☐", hl_group = "ObsidianTodo" },
+				["x"] = { char = "☑", hl_group = "ObsidianDone" },
+				[">"] = { char = "", hl_group = "ObsidianRightArrow" },
+				["~"] = { char = "☒", hl_group = "ObsidianTilde" },
+			},
+			bullets = { char = "-  ", hl_group = "ObsidianBullet", padding = " " },
+			external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
+			reference_text = { hl_group = "ObsidianRefText" },
+			highlight_text = { hl_group = "ObsidianHighlightText" },
+			tags = { hl_group = "ObsidianTag" },
+			hl_groups = {
+				-- Highlight groups for different elements
+				ObsidianTodo = { bold = true, fg = "#f78c6c" },
+				ObsidianDone = { bold = true, fg = "#89ddff" },
+				ObsidianRightArrow = { bold = true, fg = "#f78c6c" },
+				ObsidianTilde = { bold = true, fg = "#ff5370" },
+				ObsidianBullet = { bold = false, fg = "#89ddff" },
+				ObsidianRefText = { underline = true, fg = "#c792ea" },
+				ObsidianExtLinkIcon = { fg = "#c792ea" },
+				ObsidianTag = { italic = true, fg = "#89ddff" },
+				ObsidianHighlightText = { bg = "#75662e" },
+			},
+		},
 		workspaces = {
 			{
 				name = "second_brain",
@@ -76,6 +104,5 @@ return {
 			nvim_cmp = true,
 			min_chars = 2,
 		},
-		detect_cwd = false,
 	},
 }
