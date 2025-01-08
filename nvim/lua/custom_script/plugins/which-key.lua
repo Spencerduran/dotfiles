@@ -83,8 +83,8 @@ return {
 			{ "<leader>wq", "<cmd>:q<cr>", desc = "Close" },
 			{ "<leader>wt", "<c-w>t", desc = "Move to new tab" },
 			{ "<leader>wv", "<cmd>:vsplit<cr>", desc = "Vertical Split" },
-			{ "<leader>ww", "<cmd>:VimwikiIndex<cr>|cd /Users/spencer/repos/VimWiki/", desc = "Open Vimwiki Index" },
-
+			--{ "<leader>ww", "<cmd>:ObsidianQuickSwitch<cr>|cd /Users/spencer/repos/VimWiki/", desc = "Open Vimwiki Index" },
+			{ "<leader>ww", "<cmd>:ObsidianQuickSwitch<cr>", desc = "Open Vimwiki Index" },
 			{ "<leader>x", group = "Spelling" },
 			{ "<leader>xa", "zg", desc = "Add word" },
 			{ "<leader>xf", "1z=", desc = "Use 1. correction" },

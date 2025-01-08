@@ -15,10 +15,33 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	end,
 })
 --------------------------------------------------
+-- Word processor mode for Obsidian files
+--------------------------------------------------
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+	pattern = { "*.md" }, -- Match markdown files
+	callback = function()
+		-- Check if this is an Obsidian buffer (you might want to check path contains your vault)
+		local file_path = vim.fn.expand("%:p")
+		if string.find(file_path, "Obsidian") then -- Adjust this to match your vault path
+			-- Set your preferences
+			vim.b.formatoptions = 1
+			vim.b.expandtab = false
+			vim.wo.wrap = true
+			vim.wo.linebreak = true
+			vim.wo.spell = true
+
+			-- Set up your keymaps
+			vim.keymap.set({ "n", "v" }, "j", "gj", { buffer = true, silent = true })
+			vim.keymap.set({ "n", "v" }, "k", "gk", { buffer = true, silent = true })
+		end
+	end,
+	desc = "Set up Obsidian markdown preferences",
+})
+--------------------------------------------------
 -- Enable highlight for .wiki files
 --------------------------------------------------
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-	pattern = { "*.wiki" },
+	pattern = { "*.md" },
 	callback = function()
 		vim.cmd("TSBufEnable highlight")
 	end,

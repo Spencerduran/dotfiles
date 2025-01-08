@@ -53,8 +53,7 @@ return {
 		end
 
 		-- Initial header load
-		--local header = load_random_header()
-		local header = require("custom_script.plugins.header_img.blue_eyed") -- Your header file
+		local header = load_random_header()
 		if header then
 			dashboard.section.header.val = header.val
 			dashboard.section.header.opts = header.opts
@@ -64,17 +63,16 @@ return {
 			type = "group",
 			val = {
 				{ type = "padding", val = 1 },
-				dashboard.button("n", "󱓧               Open daily-notes", ":ObsidianToday<CR>"),
+				dashboard.button("r", "               recent files", ":Telescope oldfiles <CR>"),
 				dashboard.button("s", "               scratch buffer", ":call GoScratch()<CR>"),
 				dashboard.button("e", "               new file", ":ene <CR>"),
-				dashboard.button("r", "               recent files", ":Telescope oldfiles <CR>"),
-				dashboard.button("f", "               find file", ":Telescope find_files <CR>"),
-				dashboard.button("F", "               ripgrep", ":Telescope live_grep <CR>"),
 				dashboard.button("p", "               search projects", ":Telescope projects<CR>"),
 				dashboard.button("b", "               file browser", ":Telescope file_browser <CR>"),
-				dashboard.button("u", "󰧇               update plugins", ":Lazy sync<CR>"), -- Changed from PackerSync
+				dashboard.button("n", "󱓧               Open daily-notes", ":ObsidianToday<CR>"),
+				dashboard.button("f", "               find file", ":Telescope find_files <CR>"),
+				dashboard.button("F", "               ripgrep", ":Telescope live_grep <CR>"),
 				dashboard.button("c", "               configuration", ":e ~/.config/nvim/ <CR>"),
-				dashboard.button("h", "               change header", change_header), -- Added header change button
+				--dashboard.button("h", "                change header", change_header), -- Added header change button
 				dashboard.button("q", "󰩈               quit", ":qa<CR>"),
 			},
 			position = "center",
