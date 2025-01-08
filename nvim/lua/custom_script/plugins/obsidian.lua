@@ -5,9 +5,9 @@ return {
 	ft = "markdown",
 	event = {
 		-- Load when opening a file in your vault directory
-		"BufReadPre ~/Documents/second_brain/**.md",
+		"BufReadPre ~/vaults/second_brain/**.md",
 		-- Load for new files in your vault directory
-		"BufNewFile ~/Documents/second_brain/**.md",
+		"BufNewFile ~/vaults/second_brain/**.md",
 		-- If you still want it for other markdown files:
 		"FileType markdown",
 	},
@@ -19,28 +19,6 @@ return {
 	},
 	opts = {
 
-		--workspaces = {
-		--	{
-		--		name = "second_brain",
-		--		path = "~/Documents/second_brain",
-		--	},
-		--	{
-		--		name = "no-vault",
-		--		path = function()
-		--			return assert(vim.fs.dirname(vim.api.nvim_buf_get_name(0)))
-		--			-- alternatively use the CWD:
-		--			-- return assert(vim.fn.getcwd())
-		--		end,
-		--		overrides = {
-		--			notes_subdir = vim.NIL, -- have to use 'vim.NIL' instead of 'nil'
-		--			new_notes_location = "current_dir",
-		--			templates = {
-		--				folder = vim.NIL,
-		--			},
-		--			disable_frontmatter = true,
-		--		},
-		--	},
-		--},
 		ui = {
 			enable = true,
 			update_debounce = 200,
@@ -72,15 +50,21 @@ return {
 		workspaces = {
 			{
 				name = "second_brain",
-				path = "~/Documents/second_brain",
+				path = "~/vaults/second_brain",
+				notes_subdir = "000 Inbox",
+				new_notes_location = "notes_subdir",
 			},
 			{
 				name = "no-vault",
 				path = function()
 					local current_file = vim.api.nvim_buf_get_name(0)
-					-- Only use no-vault if we're not in the second_brain directory
+					if current_file == "" then
+						return nil
+					end
+					-- Only use no-vault if not in an obsidian vault directory
 					if not string.match(current_file, "second_brain") then
-						return assert(vim.fs.dirname(current_file))
+						local dir = vim.fs.dirname(current_file)
+						return dir and dir or nil
 					end
 					return nil
 				end,
@@ -94,7 +78,10 @@ return {
 				},
 			},
 		},
-		notes_subdir = "000 Inbox",
+		-- Note titles as titles instead of unique IDs
+		note_id_func = function(title)
+			return title
+		end,
 		templates = {
 			subdir = "300 Resources/Templates",
 			date_format = "%Y-%m-%d",
