@@ -39,16 +39,20 @@ hyper:bind({ "shift" }, "r", hs.reload)
 --enable spotlight for app searching
 --hs.application.enableSpotlightForNameSearches(true)
 
----- Show/hide alacritty
--- Show/hide alacritty with 2x ctrl press
+-- Show/hide Claude with 2x ctrl press
 ctrlDoublePress = require("ctrlDoublePress")
 ctrlDoublePress.timeFrame = 2
 ctrlDoublePress.action = function()
-	local alacritty = hs.application.find("alacritty")
-	if alacritty:isFrontmost() then
-		alacritty:hide()
+	local claude = hs.application.find("Claude")
+
+	if claude then
+		if claude:isFrontmost() then
+			claude:hide()
+		else
+			claude:activate()
+		end
 	else
-		hs.application.launchOrFocus("/Applications/Alacritty.app")
+		hs.application.launchOrFocus("/Applications/Claude.app")
 	end
 end
 hyper:bind({}, "a", function()
@@ -63,12 +67,12 @@ hyper:bind({}, "a", function()
 end)
 
 -- Show/hide Claude
-hyper:bind({ "shift" }, "o", function()
+hyper:bind({ "shift" }, "h", function()
 	local claude = hs.application.find("claude")
 	if claude:isFrontmost() then
 		claude:hide()
 	else
-		hs.application.launchOrFocus("/Applications/Claude.app/Contents/MacOS/Claude")
+		hs.application.launchOrFocus("/Applications/Claude.app")
 	end
 end)
 -- Show/hide Obsidian
