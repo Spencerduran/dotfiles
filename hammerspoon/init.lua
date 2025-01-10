@@ -37,7 +37,7 @@ hyper:bind({ "shift" }, "r", hs.reload)
 --   APP SWITCHER    --
 -----------------------
 --enable spotlight for app searching
---hs.application.enableSpotlightForNameSearches(true)
+hs.application.enableSpotlightForNameSearches(true)
 
 -- Show/hide Claude with 2x ctrl press
 ctrlDoublePress = require("ctrlDoublePress")
@@ -66,15 +66,6 @@ hyper:bind({}, "a", function()
 	end
 end)
 
--- Show/hide Claude
-hyper:bind({ "shift" }, "h", function()
-	local claude = hs.application.find("claude")
-	if claude:isFrontmost() then
-		claude:hide()
-	else
-		hs.application.launchOrFocus("/Applications/Claude.app")
-	end
-end)
 -- Show/hide Obsidian
 hyper:bind({}, "b", function()
 	local chrome = hs.application.find("obsidian")
@@ -169,10 +160,14 @@ end)
 -- Show/hide spotify
 hyper:bind({}, "q", function()
 	local spotify = hs.application.find("spotify")
-	if spotify:isFrontmost() then
-		spotify:hide()
+	if spotify then
+		if spotify:isFrontmost() then
+			spotify:hide()
+		else
+			spotify:activate()
+		end
 	else
-		hs.application.launchOrFocus("/Applications/Spotify.app/Contents/MacOS/Spotify")
+		hs.application.launchOrFocus("Spotify")
 	end
 end)
 -- Show/hide Acrobat Reader
