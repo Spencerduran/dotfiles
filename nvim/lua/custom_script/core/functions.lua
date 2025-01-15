@@ -10,6 +10,27 @@ function! GoScratch()
 endfunction
 ]])
 --------------------------------------------------
+-- Rename current buffer / file in place
+--------------------------------------------------
+vim.api.nvim_create_user_command("Rename", function()
+	local current_name = vim.fn.expand("%")
+	local new_name = vim.fn.input("New name: ", current_name)
+
+	if new_name ~= "" and new_name ~= current_name then
+		vim.cmd("write")
+
+		local success, error_msg = os.rename(current_name, new_name)
+
+		if success then
+			vim.cmd("edit " .. new_name)
+			vim.cmd("bdelete " .. current_name)
+			print("Buffer renamed to " .. new_name)
+		else
+			print("Error renaming buffer: " .. error_msg)
+		end
+	end
+end, {})
+--------------------------------------------------
 -- Word Processor mode
 --------------------------------------------------
 function M.Wp()
