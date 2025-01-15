@@ -63,8 +63,8 @@ return {
 			type = "group",
 			val = {
 				{ type = "padding", val = 1 },
-				dashboard.button("r", "               recent files", ":Telescope oldfiles <CR>"),
 				dashboard.button("s", "               scratch buffer", ":call GoScratch()<CR>"),
+				dashboard.button("r", "               recent files", ":Telescope oldfiles <CR>"),
 				dashboard.button("e", "               new file", ":ene <CR>"),
 				dashboard.button("p", "               search projects", ":Telescope projects<CR>"),
 				dashboard.button("b", "               file browser", ":Telescope file_browser <CR>"),
