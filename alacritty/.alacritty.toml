@@ -7,7 +7,7 @@ TERM = "xterm-256color"
 
 # Font configuration
 [font]
-size = 18
+size = 16
 
 [font.normal]
 #family = "Iosevka Nerd Font"
