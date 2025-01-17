@@ -60,7 +60,6 @@ return {
 			{ "<leader>q", group = "Quickfix" },
 			{ "<leader>qj", "<cmd>cnext<cr>", desc = "Next Quickfix Item" },
 			{ "<leader>qk", "<cmd>cprevious<cr>", desc = "Previous Quickfix Item" },
-			{ "<leader>qq", "<cmd>lua require('functions').toggle_qf()<cr>", desc = "Toggle quickfix list" },
 			{ "<leader>qt", "<cmd>TodoTelescope<cr>", desc = "Show TODOs" },
 
 			{ "<leader>r", group = "Ranger" },
@@ -79,7 +78,7 @@ return {
 
 			{ "<leader>w", group = "Window" },
 			{ "<leader>w=", "<c-w>=", desc = "Equally size" },
-			{ "<leader>wp", "<cmd>lua require('functions').Wp()<cr>", desc = "Word Processor Mode" },
+			{ "<leader>wp", "<cmd>lua require('custom_script.core.functions').Wp()<cr>", desc = "Word Processor Mode" },
 			{ "<leader>wq", "<cmd>:q<cr>", desc = "Close" },
 			{ "<leader>wt", "<c-w>t", desc = "Move to new tab" },
 			{ "<leader>wv", "<cmd>:vsplit<cr>", desc = "Vertical Split" },
