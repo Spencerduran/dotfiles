@@ -1,2 +1,1 @@
-![Screenshot](Cover2.png)
-![Screenshot](Cover.png)
+![Screenshot](nvim.png)
