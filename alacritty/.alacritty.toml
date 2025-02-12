@@ -7,7 +7,7 @@ TERM = "xterm-256color"
 draw_bold_text_with_bright_colors = 'true'
 # Font configuration
 [font]
-size = 14
+size = 18
 
 [font.normal]
 #family = "Iosevka Nerd Font"
