@@ -8,6 +8,9 @@ map({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 --------------------------------------------------
 ---------- Normal ------------
 --------------------------------------------------
+-- Toggle obsidian checkbox
+map("n", "<C-Space>", ":ObsidianToggleCheckbox<CR>", default_options)
+
 -- Toggle whitespace characters
 map("n", "<F1>", "set list!<CR>", default_options)
 
@@ -39,14 +42,6 @@ map("n", "<Right>", ":vertical resize +2<CR>", default_options)
 map("n", "<S-l>", ":bnext<CR>", default_options)
 map("n", "<S-h>", ":bprevious<CR>", default_options)
 
--- Neorg keybindings
-map("n", "<leader>ow", ":Neorg workspace work<CR>", { desc = "Switch to work workspace" })
-map("n", "<leader>op", ":Neorg workspace personal<CR>", { desc = "Switch to personal workspace" })
-map("n", "<leader>og", ":Neorg workspace governance<CR>", { desc = "Switch to governance workspace" })
-map("n", "<leader>od", ":Neorg journal today<CR>", { desc = "Open today's journal" })
-map("n", "<leader>of", ":Telescope neorg find_norg_files<CR>", { desc = "Find Neorg files" })
-map("n", "<leader>ol", ":Telescope neorg insert_link<CR>", { desc = "Insert Neorg link" })
-map("n", "<leader>ot", ":Neorg todo toggle<CR>", { desc = "Toggle todo state" })
 --------------------------------------------------
 ------------ Insert ------------
 --------------------------------------------------
