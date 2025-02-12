@@ -4,7 +4,7 @@ TERM = "xterm-256color"
 
 # General settings
 #opacity = 1.0
-
+draw_bold_text_with_bright_colors = 'true'
 # Font configuration
 [font]
 size = 14
