@@ -1,16 +1,8 @@
 return {
 	"epwalsh/obsidian.nvim",
 	version = "*",
-	lazy = false,
+	lazy = true,
 	ft = "markdown",
-	event = {
-		-- Load when opening a file in your vault directory
-		"BufReadPre ~/vaults/second_brain/**.md",
-		-- Load for new files in your vault directory
-		"BufNewFile ~/vaults/second_brain/**.md",
-		-- If you still want it for other markdown files:
-		"FileType markdown",
-	},
 	dependencies = {
 		-- Required.
 		"nvim-lua/plenary.nvim",
@@ -53,29 +45,6 @@ return {
 				path = "~/vaults/second_brain",
 				notes_subdir = "000 Inbox",
 				new_notes_location = "notes_subdir",
-			},
-			{
-				name = "no-vault",
-				path = function()
-					local current_file = vim.api.nvim_buf_get_name(0)
-					if current_file == "" then
-						return nil
-					end
-					-- Only use no-vault if not in an obsidian vault directory
-					if not string.match(current_file, "second_brain") then
-						local dir = vim.fs.dirname(current_file)
-						return dir and dir or nil
-					end
-					return nil
-				end,
-				overrides = {
-					notes_subdir = vim.NIL,
-					new_notes_location = "current_dir",
-					templates = {
-						folder = vim.NIL,
-					},
-					disable_frontmatter = true,
-				},
 			},
 		},
 		-- Note titles as titles instead of unique IDs
