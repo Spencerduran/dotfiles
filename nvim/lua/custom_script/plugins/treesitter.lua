@@ -19,7 +19,7 @@ return {
 				},
 				highlight = {
 					enable = true,
-					additional_vim_regex_highlighting = { "markdown", "vimwiki" }, -- Enable both
+					additional_vim_regex_highlighting = false,
 				},
 				-- enable indentation
 				indent = { enable = true },
@@ -61,6 +61,6 @@ return {
 				},
 			},
 		})
-		vim.treesitter.language.register("markdown", "vimwiki")
+		vim.treesitter.language.register("markdown")
 	end,
 }
