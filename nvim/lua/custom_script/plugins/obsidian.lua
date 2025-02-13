@@ -12,7 +12,7 @@ return {
 	opts = {
 
 		ui = {
-			enable = true,
+			enable = false,
 			update_debounce = 200,
 			checkboxes = {
 				-- Remove the checkbox prefix before displaying
