@@ -1,60 +1,118 @@
-# Environment variablesalaala
+#################################
+#        ENV VARIABLES          #
+#################################
 [env]
 TERM = "xterm-256color"
-
-# General settings
-#opacity = 1.0
 draw_bold_text_with_bright_colors = 'true'
-# Font configuration
+
+#################################
+#       WINDOW SETTINGS         #
+#################################
+[window]
+opacity = 1.0
+# opacity = 0.8  # Uncomment for transparency
+decorations = "none" # Removes window decorations
+# Window dimensions and padding
+dimensions = { columns = 0, lines = 0 }
+padding = { x = 0, y = 0 }
+position = { x = 0, y = 0 }
+dynamic_padding = true
+dynamic_title = true
+
+#################################
+#       FONT SETTINGS           #
+#################################
 [font]
 size = 18
 
+# Normal font face
 [font.normal]
-#family = "Iosevka Nerd Font"
+# family = "Iosevka Nerd Font"  # Alternative font
 family = "VictorMono Nerd Font"
 style = "Regular"
 
+# Bold font face
 [font.bold]
-#family = "Iosevka Nerd Font"
+# family = "Iosevka Nerd Font"
 family = "VictorMono Nerd Font"
 style = "Bold"
 
+# Italic font face
 [font.italic]
-#family = "Iosevka Nerd Font"
+# family = "Iosevka Nerd Font"
 family = "VictorMono Nerd Font"
 style = "Italic"
 
+# Bold italic font face
 [font.bold_italic]
-#family = "Iosevka Nerd Font"
+# family = "Iosevka Nerd Font"
 family = "VictorMono Nerd Font"
 style = "Bold Italic"
 
-
-# Colors (Everforest Dark)
-
+#################################
+#      TOKYO NIGHT COLORS       #
+#################################
 # Default colors
 [colors.primary]
-background = '#2d353b'
-foreground = '#d3c6aa'
+background = '#1a1b26' # Dark background
+foreground = '#c0caf5' # Light text
 
 # Normal colors
 [colors.normal]
-black = '#475258'
-red = '#e67e80'
-green = '#a7c080'
-yellow = '#dbbc7f'
-blue = '#7fbbb3'
-magenta = '#d699b6'
-cyan = '#83c092'
-white = '#d3c6aa'
+black = '#15161e'
+red = '#f7768e'
+green = '#9ece6a'
+yellow = '#e0af68'
+blue = '#7aa2f7'
+magenta = '#bb9af7'
+cyan = '#7dcfff'
+white = '#a9b1d6'
 
 # Bright colors
 [colors.bright]
-black = '#475258'
-red = '#e67e80'
-green = '#a7c080'
-yellow = '#dbbc7f'
-blue = '#7fbbb3'
-magenta = '#d699b6'
-cyan = '#83c092'
-white = '#d3c6aa'
+black = '#414868'
+red = '#f7768e'
+green = '#9ece6a'
+yellow = '#e0af68'
+blue = '#7aa2f7'
+magenta = '#bb9af7'
+cyan = '#7dcfff'
+white = '#c0caf5'
+
+# Indexed colors
+[[colors.indexed_colors]]
+index = 16
+color = '#ff9e64' # Orange
+
+[[colors.indexed_colors]]
+index = 17
+color = '#db4b4b' # Deep red
+##############################
+#(Everforest Dark)
+#
+## Default colors
+#[colors.primary]
+#background = '#2d353b'
+#foreground = '#d3c6aa'
+#
+## Normal colors
+#[colors.normal]
+#black = '#475258'
+#red = '#e67e80'
+#green = '#a7c080'
+#yellow = '#dbbc7f'
+#blue = '#7fbbb3'
+#magenta = '#d699b6'
+#cyan = '#83c092'
+#white = '#d3c6aa'
+#
+## Bright colors
+#[colors.bright]
+#black = '#475258'
+#red = '#e67e80'
+#green = '#a7c080'
+#yellow = '#dbbc7f'
+#blue = '#7fbbb3'
+#magenta = '#d699b6'
+#cyan = '#83c092'
+#white = '#d3c6aa'
