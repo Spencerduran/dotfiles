@@ -4,17 +4,17 @@ local user_preferences = {
 	--style = "dragon", -- wave/lotus/dragon
 	--transparent = false,
 
-	name = "everforest",
-	style = "medium", --soft/medium/hard
-	transparent = false,
+	--name = "everforest",
+	--style = "medium", --soft/medium/hard
+	--transparent = false,
 
 	--name = "catppuccin",
 	--style = "mocha", --latte/frappe/macchiato/mocha
 	--transparent = false,
 
-	--name = "tokyonight",
-	--style = "night", --night/storm/day/moon
-	--transparent = true,
+	name = "tokyonight",
+	style = "night", --night/storm/day/moon
+	transparent = false,
 
 	--name = "rose-pine",
 	--style = "main", -- main/moon/dawn
