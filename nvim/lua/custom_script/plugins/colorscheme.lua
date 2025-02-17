@@ -13,8 +13,9 @@ local user_preferences = {
 	--transparent = false,
 
 	name = "tokyonight",
-	style = "night", --night/storm/day/moon
-	transparent = false,
+	style = "storm", --night/storm/day/moon
+	--style = "night", --night/storm/day/moon
+	transparent = true,
 
 	--name = "rose-pine",
 	--style = "main", -- main/moon/dawn

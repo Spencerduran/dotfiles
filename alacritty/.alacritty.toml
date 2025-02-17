@@ -9,8 +9,8 @@ draw_bold_text_with_bright_colors = 'true'
 #       WINDOW SETTINGS         #
 #################################
 [window]
-opacity = 1.0
-# opacity = 0.8  # Uncomment for transparency
+########opacity = 1
+ opacity = 0.90  # Uncomment for transparency
 decorations = "none" # Removes window decorations
 # Window dimensions and padding
 dimensions = { columns = 0, lines = 0 }
@@ -49,17 +49,55 @@ style = "Italic"
 family = "VictorMono Nerd Font"
 style = "Bold Italic"
 
+##################################
+##      TOKYO NIGHT COLORS       #
+##################################
+## Default colors
+#[colors.primary]
+#background = '#1a1b26' # Dark background
+#foreground = '#c0caf5' # Light text
+#
+## Normal colors
+#[colors.normal]
+#black = '#15161e'
+#red = '#f7768e'
+#green = '#9ece6a'
+#yellow = '#e0af68'
+#blue = '#7aa2f7'
+#magenta = '#bb9af7'
+#cyan = '#7dcfff'
+#white = '#a9b1d6'
+#
+## Bright colors
+#[colors.bright]
+#black = '#414868'
+#red = '#f7768e'
+#green = '#9ece6a'
+#yellow = '#e0af68'
+#blue = '#7aa2f7'
+#magenta = '#bb9af7'
+#cyan = '#7dcfff'
+#white = '#c0caf5'
+#
+## Indexed colors
+#[[colors.indexed_colors]]
+#index = 16
+#color = '#ff9e64' # Orange
+#
+#[[colors.indexed_colors]]
+#index = 17
+#color = '#db4b4b' # Deep red
 #################################
-#      TOKYO NIGHT COLORS       #
+#    TOKYO NIGHT STORM COLORS   #
 #################################
 # Default colors
 [colors.primary]
-background = '#1a1b26' # Dark background
+background = '#24283b' # Storm background
 foreground = '#c0caf5' # Light text
 
 # Normal colors
 [colors.normal]
-black = '#15161e'
+black = '#1d202f'
 red = '#f7768e'
 green = '#9ece6a'
 yellow = '#e0af68'
