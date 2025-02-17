@@ -75,6 +75,71 @@ hyper:bind({}, "b", function()
 		hs.application.launchOrFocus("/Applications/Obsidian.app/")
 	end
 end)
+hyper:bind({}, "p", function()
+	local alacritty = hs.application.find("alacritty")
+	local obsidian = hs.application.find("obsidian")
+
+	-- Function to get main window of an application
+	local function getMainWindow(app)
+		if app then
+			return app:mainWindow()
+		end
+		return nil
+	end
+
+	-- If Alacritty is frontmost, switch to Obsidian
+	if alacritty and alacritty:isFrontmost() then
+		local currentFrame = getMainWindow(alacritty):frame()
+		alacritty:hide()
+		hs.application.launchOrFocus("/Applications/Obsidian.app/")
+		-- Short delay to ensure window is available
+		hs.timer.doAfter(0.1, function()
+			local obsidianWindow = getMainWindow(obsidian)
+			if obsidianWindow then
+				obsidianWindow:setFrame(currentFrame)
+			end
+		end)
+
+	-- If Obsidian is frontmost, switch to Alacritty
+	elseif obsidian and obsidian:isFrontmost() then
+		local currentFrame = getMainWindow(obsidian):frame()
+		obsidian:hide()
+		hs.application.launchOrFocus("/Applications/Alacritty.app")
+		-- Short delay to ensure window is available
+		hs.timer.doAfter(0.1, function()
+			local alacrittyWindow = getMainWindow(alacritty)
+			if alacrittyWindow then
+				alacrittyWindow:setFrame(currentFrame)
+			end
+		end)
+
+	-- If neither is frontmost, show Alacritty
+	else
+		hs.application.launchOrFocus("/Applications/Alacritty.app")
+	end
+
+	hyper.triggered = true
+end)
+
+--hyper:bind({}, "p", function()
+--	local alacritty = hs.application.find("alacritty")
+--	local obsidian = hs.application.find("obsidian")
+--
+--	-- If Alacritty is frontmost, hide it and show Obsidian
+--	if alacritty and alacritty:isFrontmost() then
+--		alacritty:hide()
+--		hs.application.launchOrFocus("/Applications/Obsidian.app/")
+--	-- If Obsidian is frontmost, hide it and show Alacritty
+--	elseif obsidian and obsidian:isFrontmost() then
+--		obsidian:hide()
+--		hs.application.launchOrFocus("/Applications/Alacritty.app")
+--	-- If neither is frontmost, show Alacritty
+--	else
+--		hs.application.launchOrFocus("/Applications/Alacritty.app")
+--	end
+--
+--	hyper.triggered = true
+--end)
 
 -- Show/hide chrome
 hyper:bind({}, "c", function()
@@ -137,15 +202,6 @@ hyper:bind({}, "o", function()
 		obsidian:hide()
 	else
 		hs.application.launchOrFocus("/Applications/Obsidian.app/Contents/MacOS/Obsidian")
-	end
-end)
--- Show/hide postman
-hyper:bind({}, "p", function()
-	local postman = hs.application.find("parallels")
-	if postman:isFrontmost() then
-		postman:hide()
-	else
-		hs.application.launchOrFocus("/Applications/Parallels Desktop.app")
 	end
 end)
 -- Show/hide pycharm
