@@ -55,6 +55,42 @@ ctrlDoublePress.action = function()
 		hs.application.launchOrFocus("/Applications/Claude.app")
 	end
 end
+
+hyper:bind({}, "k", function()
+	local claude = hs.application.find("Claude")
+
+	-- Function to get main window of an application
+	local function getMainWindow(app)
+		if app then
+			return app:mainWindow()
+		end
+		return nil
+	end
+
+	if claude then
+		if claude:isFrontmost() then
+			claude:hide()
+		else
+			-- Store current frontmost window's frame before switching
+			local currentApp = hs.application.frontmostApplication()
+			local currentFrame = getMainWindow(currentApp):frame()
+
+			claude:activate()
+
+			-- Apply the frame to Claude's window
+			hs.timer.doAfter(0.1, function()
+				local claudeWindow = getMainWindow(claude)
+				if claudeWindow then
+					claudeWindow:setFrame(currentFrame)
+				end
+			end)
+		end
+	else
+		hs.application.launchOrFocus("/Applications/Claude.app")
+	end
+
+	hyper.triggered = true
+end)
 hyper:bind({}, "a", function()
 	local alacritty = hs.application.find("alacritty")
 	if alacritty:isFrontmost() then
@@ -75,6 +111,77 @@ hyper:bind({}, "b", function()
 		hs.application.launchOrFocus("/Applications/Obsidian.app/")
 	end
 end)
+--hyper:bind({}, "p", function()
+--	local alacritty = hs.application.find("alacritty")
+--	local obsidian = hs.application.find("obsidian")
+--
+--	-- Function to get main window of an application
+--	local function getMainWindow(app)
+--		if app then
+--			return app:mainWindow()
+--		end
+--		return nil
+--	end
+--
+--	-- Function to hide overlapping windows
+--	local function hideOverlappingWindows(frontWindow)
+--		local allWindows = hs.window.orderedWindows()
+--		for i = 2, #allWindows do
+--			local window = allWindows[i]
+--			if window and window:isVisible() then
+--				local frontFrame = frontWindow:frame()
+--				local backFrame = window:frame()
+--
+--				-- Check for overlap
+--				local overlap = not (
+--					backFrame.x >= frontFrame.x + frontFrame.w
+--					or backFrame.x + backFrame.w <= frontFrame.x
+--					or backFrame.y >= frontFrame.y + frontFrame.h
+--					or backFrame.y + backFrame.h <= frontFrame.y
+--				)
+--
+--				if overlap then
+--					window:application():hide()
+--				end
+--			end
+--		end
+--	end
+--
+--	-- If Alacritty is frontmost, switch to Obsidian
+--	if alacritty and alacritty:isFrontmost() then
+--		local currentFrame = getMainWindow(alacritty):frame()
+--		alacritty:hide()
+--		hs.application.launchOrFocus("/Applications/Obsidian.app/")
+--		-- Short delay to ensure window is available
+--		hs.timer.doAfter(0.1, function()
+--			local obsidianWindow = getMainWindow(obsidian)
+--			if obsidianWindow then
+--				obsidianWindow:setFrame(currentFrame)
+--				hideOverlappingWindows(obsidianWindow)
+--			end
+--		end)
+--
+--	-- If Obsidian is frontmost, switch to Alacritty
+--	elseif obsidian and obsidian:isFrontmost() then
+--		local currentFrame = getMainWindow(obsidian):frame()
+--		obsidian:hide()
+--		hs.application.launchOrFocus("/Applications/Alacritty.app")
+--		-- Short delay to ensure window is available
+--		hs.timer.doAfter(0.1, function()
+--			local alacrittyWindow = getMainWindow(alacritty)
+--			if alacrittyWindow then
+--				alacrittyWindow:setFrame(currentFrame)
+--				hideOverlappingWindows(alacrittyWindow)
+--			end
+--		end)
+--
+--	-- If neither is frontmost, show Alacritty
+--	else
+--		hs.application.launchOrFocus("/Applications/Alacritty.app")
+--	end
+--
+--	hyper.triggered = true
+--end)
 hyper:bind({}, "p", function()
 	local alacritty = hs.application.find("alacritty")
 	local obsidian = hs.application.find("obsidian")
@@ -87,40 +194,167 @@ hyper:bind({}, "p", function()
 		return nil
 	end
 
+	-- Function to hide overlapping windows
+	local function hideOverlappingWindows(frontWindow)
+		local allWindows = hs.window.orderedWindows()
+		for i = 2, #allWindows do
+			local window = allWindows[i]
+			if window and window:isVisible() then
+				local frontFrame = frontWindow:frame()
+				local backFrame = window:frame()
+
+				-- Check for overlap
+				local overlap = not (
+					backFrame.x >= frontFrame.x + frontFrame.w
+					or backFrame.x + backFrame.w <= frontFrame.x
+					or backFrame.y >= frontFrame.y + frontFrame.h
+					or backFrame.y + backFrame.h <= frontFrame.y
+				)
+
+				if overlap then
+					window:application():hide()
+				end
+			end
+		end
+	end
+
+	-- Function to focus app and manage windows
+	local function focusAndManageWindows(app, appPath)
+		-- If app exists but isn't frontmost
+		if app then
+			if app:isFrontmost() then
+				app:hide()
+			else
+				-- Get current frontmost window's frame
+				local currentApp = hs.application.frontmostApplication()
+				local currentWindow = getMainWindow(currentApp)
+				local currentFrame = currentWindow and currentWindow:frame()
+
+				-- Focus the app
+				hs.application.launchOrFocus(appPath)
+
+				-- After short delay to ensure window is available
+				hs.timer.doAfter(0.1, function()
+					local appWindow = getMainWindow(app)
+					if appWindow then
+						-- If we have a frame from previous window, use it
+						if currentFrame then
+							appWindow:setFrame(currentFrame)
+						end
+						hideOverlappingWindows(appWindow)
+					end
+				end)
+			end
+		else
+			-- If app doesn't exist, launch it
+			hs.application.launchOrFocus(appPath)
+		end
+	end
+
 	-- If Alacritty is frontmost, switch to Obsidian
 	if alacritty and alacritty:isFrontmost() then
-		local currentFrame = getMainWindow(alacritty):frame()
-		alacritty:hide()
-		hs.application.launchOrFocus("/Applications/Obsidian.app/")
+		focusAndManageWindows(obsidian, "/Applications/Obsidian.app/")
+	-- Otherwise focus Alacritty
+	else
+		focusAndManageWindows(alacritty, "/Applications/Alacritty.app")
+	end
+
+	hyper.triggered = true
+end)
+--hyper:bind({}, "p", function()
+--	local alacritty = hs.application.find("alacritty")
+--	local obsidian = hs.application.find("obsidian")
+--
+--	-- Function to get main window of an application
+--	local function getMainWindow(app)
+--		if app then
+--			return app:mainWindow()
+--		end
+--		return nil
+--	end
+--
+--	-- If Alacritty is frontmost, switch to Obsidian
+--	if alacritty and alacritty:isFrontmost() then
+--		local currentFrame = getMainWindow(alacritty):frame()
+--		alacritty:hide()
+--		hs.application.launchOrFocus("/Applications/Obsidian.app/")
+--		-- Short delay to ensure window is available
+--		hs.timer.doAfter(0.1, function()
+--			local obsidianWindow = getMainWindow(obsidian)
+--			if obsidianWindow then
+--				obsidianWindow:setFrame(currentFrame)
+--			end
+--		end)
+--
+--	-- If Obsidian is frontmost, switch to Alacritty
+--	elseif obsidian and obsidian:isFrontmost() then
+--		local currentFrame = getMainWindow(obsidian):frame()
+--		obsidian:hide()
+--		hs.application.launchOrFocus("/Applications/Alacritty.app")
+--		-- Short delay to ensure window is available
+--		hs.timer.doAfter(0.1, function()
+--			local alacrittyWindow = getMainWindow(alacritty)
+--			if alacrittyWindow then
+--				alacrittyWindow:setFrame(currentFrame)
+--			end
+--		end)
+--
+--	-- If neither is frontmost, show Alacritty
+--	else
+--		hs.application.launchOrFocus("/Applications/Alacritty.app")
+--	end
+--
+--	hyper.triggered = true
+--end)
+
+-- Cycle order: Alacritty -> Obsidian -> Chrome -> Alacritty
+hyper:bind({}, "j", function()
+	local alacritty = hs.application.find("alacritty")
+	local obsidian = hs.application.find("obsidian")
+	local chrome = hs.application.find("google chrome")
+
+	-- Function to get main window of an application
+	local function getMainWindow(app)
+		if app then
+			return app:mainWindow()
+		end
+		return nil
+	end
+
+	-- Function to switch to next app with same frame
+	local function switchToApp(fromApp, toAppPath)
+		local currentFrame = getMainWindow(fromApp):frame()
+		fromApp:hide()
+		hs.application.launchOrFocus(toAppPath)
 		-- Short delay to ensure window is available
 		hs.timer.doAfter(0.1, function()
-			local obsidianWindow = getMainWindow(obsidian)
-			if obsidianWindow then
-				obsidianWindow:setFrame(currentFrame)
+			local toApp = hs.application.find(string.match(toAppPath, "/Applications/(.+).app"))
+			local toWindow = getMainWindow(toApp)
+			if toWindow then
+				toWindow:setFrame(currentFrame)
 			end
 		end)
+	end
 
-	-- If Obsidian is frontmost, switch to Alacritty
+	-- If Alacritty is frontmost, switch to Obsidian
+	if alacritty and alacritty:isFrontmost() then
+		switchToApp(alacritty, "/Applications/Obsidian.app/")
+
+	-- If Obsidian is frontmost, switch to Chrome
 	elseif obsidian and obsidian:isFrontmost() then
-		local currentFrame = getMainWindow(obsidian):frame()
-		obsidian:hide()
-		hs.application.launchOrFocus("/Applications/Alacritty.app")
-		-- Short delay to ensure window is available
-		hs.timer.doAfter(0.1, function()
-			local alacrittyWindow = getMainWindow(alacritty)
-			if alacrittyWindow then
-				alacrittyWindow:setFrame(currentFrame)
-			end
-		end)
+		switchToApp(obsidian, "/Applications/Google Chrome.app")
 
-	-- If neither is frontmost, show Alacritty
+	-- If Chrome is frontmost, switch to Alacritty
+	elseif chrome and chrome:isFrontmost() then
+		switchToApp(chrome, "/Applications/Alacritty.app")
+
+	-- If none are frontmost, show Alacritty
 	else
 		hs.application.launchOrFocus("/Applications/Alacritty.app")
 	end
 
 	hyper.triggered = true
 end)
-
 --hyper:bind({}, "p", function()
 --	local alacritty = hs.application.find("alacritty")
 --	local obsidian = hs.application.find("obsidian")
@@ -169,14 +403,14 @@ hyper:bind({}, "e", function()
 	end
 end)
 -- Show/hide Kindle
-hyper:bind({}, "k", function()
-	local excel = hs.application.find("kindle")
-	if excel:isFrontmost() then
-		excel:hide()
-	else
-		hs.application.launchOrFocus("/Applications/Kindle.app")
-	end
-end)
+--hyper:bind({}, "k", function()
+--	local excel = hs.application.find("kindle")
+--	if excel:isFrontmost() then
+--		excel:hide()
+--	else
+--		hs.application.launchOrFocus("/Applications/Kindle.app")
+--	end
+--end)
 -- Show/hide Messages
 hyper:bind({}, "m", function()
 	local excel = hs.application.find("Messages")
@@ -327,9 +561,10 @@ end)
 hyper:bind({}, "h", function()
 	wm.moveWindowToPosition(wm.screenPositions.left)
 end)
-hyper:bind({}, "j", function()
-	wm.moveWindowToPosition(wm.screenPositions.bottom)
-end)
+--hyper:bind({}, "j", function()
+--	wm.moveWindowToPosition(wm.screenPositions.bottom)
+--end)
+
 --hyper:bind({}, 'k', function()
 --  wm.moveWindowToPosition(wm.screenPositions.top)
 --end)

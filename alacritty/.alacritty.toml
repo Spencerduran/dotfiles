@@ -23,7 +23,7 @@ dynamic_title = true
 #       FONT SETTINGS           #
 #################################
 [font]
-size = 18
+size = 14
 
 # Normal font face
 [font.normal]
