@@ -90,11 +90,7 @@ return {
 			{ "<leader>ost", ":ObsidianSearch<cr>", desc = "RipGrep Vault" },
 
 			--Quick Capture
-			{
-				"<leader>ww",
-				":e /Users/spencerduran/vaults/second_brain/000 Inbox/Quick Capture.md<CR>",
-				desc = "Open QuickCapture",
-			},
+			{ "<leader>ww", ":ObsidianNewFromTemplate<cr>", desc = "Open QuickCapture" },
 
 			--Defined in keymaps.lua (C-SPACE)
 			--{ "<leader>od", ":ObsidianToggleCheckbox<cr>", desc = "Toggle Checkbox" },
@@ -115,7 +111,6 @@ return {
 			--------------------------------------------------
 			{ "<leader>sP", "<cmd>Telescope builtin<cr>", desc = "Builtin pickers" },
 			{ "<leader>sS", "<cmd>Telescope symbols<cr>", desc = "Search symbols" },
-			{ "<leader>sT", "<cmd>Telescope live_grep<cr>", desc = "Text" },
 			{ "<leader>sc", "<cmd>Telescope commands<cr>", desc = "Commands" },
 			{ "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Find Help" },
 			{ "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
