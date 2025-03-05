@@ -7,19 +7,18 @@ return {
 		},
 		config = function()
 			require("render-markdown").setup({
-				-- Default configuration
 				heading = {
 					enabled = true,
 					sign = true,
 					position = "overlay",
 					icons = { "① ", "② ", "③ ", "④ ", "⑤ ", "⑥ " },
 					signs = { "󰫎 " },
-					width = "block",
+					width = "full",
 					left_margin = 0,
 					left_pad = 0,
 					right_pad = 0,
-					min_width = 50,
-					border = false,
+					min_width = 70,
+					border = true,
 					border_virtual = false,
 					border_prefix = true,
 					above = "▄",
