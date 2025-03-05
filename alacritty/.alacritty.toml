@@ -10,7 +10,7 @@ draw_bold_text_with_bright_colors = 'true'
 #################################
 [window]
 ########opacity = 1
- opacity = 0.90  # Uncomment for transparency
+opacity = 0.90       # Uncomment for transparency
 decorations = "none" # Removes window decorations
 # Window dimensions and padding
 dimensions = { columns = 0, lines = 0 }
@@ -87,44 +87,99 @@ style = "Bold Italic"
 #[[colors.indexed_colors]]
 #index = 17
 #color = '#db4b4b' # Deep red
+##################################
+##    TOKYO NIGHT STORM COLORS   #
+##################################
+## Default colors
+#[colors.primary]
+#background = '#24283b' # Storm background
+#foreground = '#c0caf5' # Light text
+#
+## Normal colors
+#[colors.normal]
+#black = '#1d202f'
+#red = '#f7768e'
+#green = '#9ece6a'
+#yellow = '#e0af68'
+#blue = '#7aa2f7'
+#magenta = '#bb9af7'
+#cyan = '#7dcfff'
+#white = '#a9b1d6'
+#
+## Bright colors
+#[colors.bright]
+#black = '#414868'
+#red = '#f7768e'
+#green = '#9ece6a'
+#yellow = '#e0af68'
+#blue = '#7aa2f7'
+#magenta = '#bb9af7'
+#cyan = '#7dcfff'
+#white = '#c0caf5'
+#
+## Indexed colors
+#[[colors.indexed_colors]]
+#index = 16
+#color = '#ff9e64' # Orange
+#
+#[[colors.indexed_colors]]
+#index = 17
+#color = '#db4b4b' # Deep red
 #################################
-#    TOKYO NIGHT STORM COLORS   #
+#  MODIFIED TOKYO NIGHT COLORS  #
 #################################
 # Default colors
 [colors.primary]
-background = '#24283b' # Storm background
-foreground = '#c0caf5' # Light text
+background = '#011628' # Modified background
+foreground = '#CBE0F0' # Modified light text
 
 # Normal colors
 [colors.normal]
-black = '#1d202f'
-red = '#f7768e'
-green = '#9ece6a'
-yellow = '#e0af68'
-blue = '#7aa2f7'
-magenta = '#bb9af7'
-cyan = '#7dcfff'
-white = '#a9b1d6'
+black = '#011423'   # Modified from bg_dark
+red = '#f7768e'     # Kept original
+green = '#9ece6a'   # Kept original
+yellow = '#e0af68'  # Kept original
+blue = '#7aa2f7'    # Kept original
+magenta = '#bb9af7' # Kept original
+cyan = '#7dcfff'    # Kept original
+white = '#B4D0E9'   # Modified from fg_dark
 
 # Bright colors
 [colors.bright]
-black = '#414868'
-red = '#f7768e'
-green = '#9ece6a'
-yellow = '#e0af68'
-blue = '#7aa2f7'
-magenta = '#bb9af7'
-cyan = '#7dcfff'
-white = '#c0caf5'
+black = '#627E97'   # Modified from fg_gutter
+red = '#f7768e'     # Kept original
+green = '#9ece6a'   # Kept original
+yellow = '#e0af68'  # Kept original
+blue = '#7aa2f7'    # Kept original
+magenta = '#bb9af7' # Kept original
+cyan = '#7dcfff'    # Kept original
+white = '#CBE0F0'   # Modified from fg
 
 # Indexed colors
 [[colors.indexed_colors]]
 index = 16
-color = '#ff9e64' # Orange
+color = '#ff9e64' # Kept original orange
 
 [[colors.indexed_colors]]
 index = 17
-color = '#db4b4b' # Deep red
+color = '#db4b4b' # Kept original deep red
+
+# Additional colors from your Neovim theme
+[[colors.indexed_colors]]
+index = 18
+color = '#143652' # bg_highlight
+
+[[colors.indexed_colors]]
+index = 19
+color = '#0A64AC' # bg_search
+
+[[colors.indexed_colors]]
+index = 20
+color = '#275378' # bg_visual
+
+[[colors.indexed_colors]]
+index = 21
+color = '#547998' # border
 ##############################
 #(Everforest Dark)
 #
