@@ -119,6 +119,16 @@ return {
 			{ "<leader>st", "<cmd>Telescope live_grep<cr>", desc = "Text" },
 
 			--------------------------------------------------
+			{ "<leader>t", group = "Text" },
+			--------------------------------------------------
+			--{ "<leader>tb", 'c**<c-r>"**<esc>', desc = "Bold text", mode = { "v" } },
+			--{ "<leader>th", 'c==<c-r>"==<esc>', desc = "Highlight text", mode = { "v" } },
+			--{ "<leader>tb", 's**<c-r>"**<esc>', desc = "Bold text", mode = { "v" } },
+			--{ "<leader>th", 's==<c-r>"==<esc>', desc = "Highlight text", mode = { "v" } },
+			{ "<leader>tb", ":s/\\%V\\(.*\\)\\%V/\\*\\*\\1\\*\\*/g<CR>", desc = "Bold text", mode = { "v" } },
+			{ "<leader>th", ":s/\\%V\\(.*\\)\\%V/==\\1==/g<CR>", desc = "Highlight text", mode = { "v" } },
+
+			--------------------------------------------------
 			{ "<leader>w", group = "Window" },
 			--------------------------------------------------
 			{ "<leader>w=", "<c-w>=", desc = "Equally size" },
@@ -126,7 +136,10 @@ return {
 			{ "<leader>wq", "<cmd>:q<cr>", desc = "Close" },
 			{ "<leader>wt", "<c-w>t", desc = "Move to new tab" },
 			{ "<leader>wv", "<cmd>:vsplit<cr>", desc = "Vertical Split" },
+
+			--------------------------------------------------
 			{ "<leader>x", group = "Spelling" },
+			--------------------------------------------------
 			{ "<leader>xa", "zg", desc = "Add word" },
 			{ "<leader>xf", "1z=", desc = "Use 1. correction" },
 			{ "<leader>xl", "<cmd>Telescope spell_suggest<cr>", desc = "List corrections" },
