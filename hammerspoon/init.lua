@@ -56,41 +56,52 @@ ctrlDoublePress.action = function()
 	end
 end
 
+--hyper:bind({}, "k", function()
+--	local claude = hs.application.find("Claude")
+--
+--	-- Function to get main window of an application
+--	local function getMainWindow(app)
+--		if app then
+--			return app:mainWindow()
+--		end
+--		return nil
+--	end
+--
+--	if claude then
+--		if claude:isFrontmost() then
+--			claude:hide()
+--		else
+--			-- Store current frontmost window's frame before switching
+--			local currentApp = hs.application.frontmostApplication()
+--			local currentFrame = getMainWindow(currentApp):frame()
+--
+--			claude:activate()
+--
+--			-- Apply the frame to Claude's window
+--			hs.timer.doAfter(0.1, function()
+--				local claudeWindow = getMainWindow(claude)
+--				if claudeWindow then
+--					claudeWindow:setFrame(currentFrame)
+--				end
+--			end)
+--		end
+--	else
+--		hs.application.launchOrFocus("/Applications/Claude.app")
+--	end
+--
+--	hyper.triggered = true
+--end)
 hyper:bind({}, "k", function()
 	local claude = hs.application.find("Claude")
-
-	-- Function to get main window of an application
-	local function getMainWindow(app)
-		if app then
-			return app:mainWindow()
-		end
-		return nil
-	end
-
-	if claude then
-		if claude:isFrontmost() then
-			claude:hide()
-		else
-			-- Store current frontmost window's frame before switching
-			local currentApp = hs.application.frontmostApplication()
-			local currentFrame = getMainWindow(currentApp):frame()
-
-			claude:activate()
-
-			-- Apply the frame to Claude's window
-			hs.timer.doAfter(0.1, function()
-				local claudeWindow = getMainWindow(claude)
-				if claudeWindow then
-					claudeWindow:setFrame(currentFrame)
-				end
-			end)
-		end
+	if claude:isFrontmost() then
+		claude:hide()
+		hyper.triggered = true
 	else
 		hs.application.launchOrFocus("/Applications/Claude.app")
+		hyper.triggered = true
 	end
-
-	hyper.triggered = true
 end)
+
 hyper:bind({}, "a", function()
 	local alacritty = hs.application.find("alacritty")
 	if alacritty:isFrontmost() then

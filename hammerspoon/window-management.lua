@@ -78,6 +78,18 @@ screenPositions.thirdleft = {
 	w = THIRD_GRID_SIZE,
 	h = GRID_SIZE,
 }
+screenPositions.mid = {
+	x = THIRD_GRID_SIZE,
+	y = 0,
+	w = THIRD_GRID_SIZE,
+	h = GRID_SIZE,
+}
+screenPositions.thirdright = {
+	x = THIRD_GRID_SIZE + THIRD_GRID_SIZE,
+	y = 0,
+	w = THIRD_GRID_SIZE,
+	h = GRID_SIZE,
+}
 screenPositions.topLeftthird = {
 	x = 0,
 	y = 0,
@@ -89,18 +101,6 @@ screenPositions.bottomLeftthird = {
 	y = HALF_GRID_SIZE,
 	w = THIRD_GRID_SIZE,
 	h = HALF_GRID_SIZE,
-}
-screenPositions.mid = {
-	x = THIRD_GRID_SIZE,
-	y = 0,
-	w = SILLY_GRID_SIZE * 5,
-	h = GRID_SIZE,
-}
-screenPositions.thirdright = {
-	x = THIRD_GRID_SIZE + THIRD_GRID_SIZE,
-	y = 0,
-	w = THIRD_GRID_SIZE,
-	h = GRID_SIZE,
 }
 -- Half Windows
 screenPositions.left = {
