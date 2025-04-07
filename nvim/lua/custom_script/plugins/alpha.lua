@@ -197,7 +197,7 @@ return {
 			type = "group",
 			val = {
 				{ type = "padding", val = 1 },
-				dashboard.button("n", "󱓧               Open daily-notes", ":ObsidianToday<CR>"),
+				--dashboard.button("n", "󱓧               Open daily-notes", ":ObsidianToday<CR>"),
 				dashboard.button("s", "               scratch buffer", ":call GoScratch()<CR>"),
 				dashboard.button("e", "               new file", ":ene <CR>"),
 				dashboard.button("r", "               recent files", ":Telescope oldfiles <CR>"),
