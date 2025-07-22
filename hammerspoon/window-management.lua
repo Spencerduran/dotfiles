@@ -5,15 +5,13 @@ local GRID_SIZE = 4
 local HALF_GRID_SIZE = GRID_SIZE / 2
 local THIRD_GRID_SIZE = GRID_SIZE / 3
 local QUARTER_GRID_SIZE = GRID_SIZE / 4
-local SILLY_GRID_SIZE = GRID_SIZE / 12
+local SILLY_GRID_SIZE = (GRID_SIZE - QUARTER_GRID_SIZE) / 2 -- Half of what's left after quarter
 local QUARTER_THIRD_GRID_SIZE = GRID_SIZE / 4 + QUARTER_GRID_SIZE
-
 -- Set the grid size and add a few pixels of margin
 -- Also, don't animate window changes.
 hs.grid.setGrid(GRID_SIZE .. "x" .. GRID_SIZE)
 hs.grid.setMargins({ 5, 5 })
 hs.window.animationDuration = 0
-
 local screenPositions = {}
 -- Quarter Windows
 screenPositions.quarterleft = {
@@ -52,6 +50,18 @@ screenPositions.midleft = {
 	w = QUARTER_GRID_SIZE,
 	h = GRID_SIZE,
 }
+screenPositions.fullLeft = {
+	x = 0,
+	y = 0,
+	w = QUARTER_GRID_SIZE + QUARTER_GRID_SIZE + QUARTER_GRID_SIZE,
+	h = GRID_SIZE,
+}
+screenPositions.fullRight = {
+	x = QUARTER_GRID_SIZE,
+	y = 0,
+	w = QUARTER_GRID_SIZE + QUARTER_GRID_SIZE + QUARTER_GRID_SIZE,
+	h = GRID_SIZE,
+}
 screenPositions.midright = {
 	x = QUARTER_GRID_SIZE + QUARTER_GRID_SIZE,
 	y = 0,
@@ -65,12 +75,23 @@ screenPositions.quarterright = {
 	h = GRID_SIZE,
 }
 screenPositions.midmid = {
-	x = QUARTER_GRID_SIZE,
+	x = QUARTER_GRID_SIZE, -- Start right after quarterleft
 	y = 0,
-	w = QUARTER_GRID_SIZE + QUARTER_GRID_SIZE,
+	w = HALF_GRID_SIZE,
 	h = GRID_SIZE,
 }
-
+screenPositions.midtop = {
+	x = QUARTER_GRID_SIZE, -- Start right after quarterleft
+	y = 0,
+	w = HALF_GRID_SIZE,
+	h = HALF_GRID_SIZE,
+}
+screenPositions.midbottom = {
+	x = QUARTER_GRID_SIZE, -- Start right after quarterleft
+	y = HALF_GRID_SIZE,
+	w = HALF_GRID_SIZE,
+	h = HALF_GRID_SIZE,
+}
 -- Third Windows
 screenPositions.thirdleft = {
 	x = 0,
@@ -85,9 +106,9 @@ screenPositions.mid = {
 	h = GRID_SIZE,
 }
 screenPositions.thirdright = {
-	x = THIRD_GRID_SIZE + THIRD_GRID_SIZE,
+	x = QUARTER_GRID_SIZE + SILLY_GRID_SIZE, -- Start after quarterleft and midmid
 	y = 0,
-	w = THIRD_GRID_SIZE,
+	w = SILLY_GRID_SIZE, -- Same width as midmid (other half of remaining space)
 	h = GRID_SIZE,
 }
 screenPositions.topLeftthird = {
@@ -158,7 +179,6 @@ screenPositions.bottomRight = {
 	h = HALF_GRID_SIZE,
 }
 This.screenPositions = screenPositions
-
 -- This function will move either the specified or the focuesd
 -- window to the requested screen position
 function This.moveWindowToPosition(cell, window)
