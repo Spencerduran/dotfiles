@@ -56,52 +56,6 @@ ctrlDoublePress.action = function()
 	end
 end
 
---hyper:bind({}, "k", function()
---	local claude = hs.application.find("Claude")
---
---	-- Function to get main window of an application
---	local function getMainWindow(app)
---		if app then
---			return app:mainWindow()
---		end
---		return nil
---	end
---
---	if claude then
---		if claude:isFrontmost() then
---			claude:hide()
---		else
---			-- Store current frontmost window's frame before switching
---			local currentApp = hs.application.frontmostApplication()
---			local currentFrame = getMainWindow(currentApp):frame()
---
---			claude:activate()
---
---			-- Apply the frame to Claude's window
---			hs.timer.doAfter(0.1, function()
---				local claudeWindow = getMainWindow(claude)
---				if claudeWindow then
---					claudeWindow:setFrame(currentFrame)
---				end
---			end)
---		end
---	else
---		hs.application.launchOrFocus("/Applications/Claude.app")
---	end
---
---	hyper.triggered = true
---end)
-hyper:bind({}, "k", function()
-	local claude = hs.application.find("Claude")
-	if claude:isFrontmost() then
-		claude:hide()
-		hyper.triggered = true
-	else
-		hs.application.launchOrFocus("/Applications/Claude.app")
-		hyper.triggered = true
-	end
-end)
-
 hyper:bind({}, "a", function()
 	local alacritty = hs.application.find("alacritty")
 	if alacritty:isFrontmost() then
@@ -428,7 +382,7 @@ hyper:bind({}, "m", function()
 	if excel:isFrontmost() then
 		excel:hide()
 	else
-		hs.application.launchOrFocus("/Applications/Messages.app")
+		hs.application.launchOrFocus("/Users/spencerduran/Applications/")
 	end
 end)
 -- Show/hide Outlook
@@ -560,6 +514,9 @@ end)
 hyper:bind({}, "f", function()
 	wm.windowMaximize(0)
 end)
+hyper:bind({ "shift" }, "f", function()
+	wm.moveWindowToPosition(wm.screenPositions.fullLeft)
+end)
 hyper:bind({}, "return", function()
 	wm.windowMaximize(0)
 	hyper.triggered = true
@@ -567,82 +524,89 @@ end)
 hyper:bind({}, "0", function()
 	wm.moveWindowToPosition(wm.screenPositions.midmid)
 end)
+hyper:bind({ "shift" }, "0", function()
+	wm.moveWindowToPosition(wm.screenPositions.bottom)
+end)
+hyper:bind({ "shift" }, "0", function()
+	wm.moveWindowToPosition(wm.screenPositions.fullRight)
+end)
 
 ------------------ HALVES
 hyper:bind({}, "h", function()
 	wm.moveWindowToPosition(wm.screenPositions.left)
 end)
---hyper:bind({}, "j", function()
---	wm.moveWindowToPosition(wm.screenPositions.bottom)
---end)
-
---hyper:bind({}, 'k', function()
---  wm.moveWindowToPosition(wm.screenPositions.top)
---end)
+hyper:bind({}, "j", function()
+	wm.moveWindowToPosition(wm.screenPositions.midbottom)
+end)
+hyper:bind({ "shift" }, "j", function()
+	wm.moveWindowToPosition(wm.screenPositions.bottom)
+end)
+hyper:bind({ "shift" }, "k", function()
+	wm.moveWindowToPosition(wm.screenPositions.top)
+end)
+hyper:bind({}, "k", function()
+	wm.moveWindowToPosition(wm.screenPositions.midtop)
+end)
 hyper:bind({}, "l", function()
 	wm.moveWindowToPosition(wm.screenPositions.right)
 end)
------------------- THIRDS
-hyper:bind({}, "1", function()
-	wm.moveWindowToPosition(wm.screenPositions.thirdleft)
-end)
-hyper:bind({}, "2", function()
-	wm.moveWindowToPosition(wm.screenPositions.mid)
-end)
-hyper:bind({}, "3", function()
-	wm.moveWindowToPosition(wm.screenPositions.thirdright)
-end)
-hyper:bind({}, "4", function()
-	wm.moveWindowToPosition(wm.screenPositions.topLeftthird)
-end)
-hyper:bind({}, "5", function()
-	wm.moveWindowToPosition(wm.screenPositions.bottomLeftthird)
-end)
------------------- QUARTERS
-hyper:bind({ "shift" }, "1", function()
-	wm.moveWindowToPosition(wm.screenPositions.quarterleft)
-end)
-hyper:bind({ "shift" }, "2", function()
-	wm.moveWindowToPosition(wm.screenPositions.midleft)
-end)
-hyper:bind({ "shift" }, "3", function()
-	wm.moveWindowToPosition(wm.screenPositions.midright)
-end)
-hyper:bind({ "shift" }, "4", function()
-	wm.moveWindowToPosition(wm.screenPositions.quarterright)
-end)
-hyper:bind({ "shift" }, "5", function()
-	wm.moveWindowToPosition(wm.screenPositions.topLeftQuarter)
-end)
-hyper:bind({ "shift" }, "6", function()
-	wm.moveWindowToPosition(wm.screenPositions.bottomLeftQuarter)
-end)
-hyper:bind({ "shift" }, "7", function()
-	wm.moveWindowToPosition(wm.screenPositions.topRightQuarter)
-end)
-hyper:bind({ "shift" }, "8", function()
-	wm.moveWindowToPosition(wm.screenPositions.bottomRightQuarter)
-end)
 ------------------ CORNERS
-hyper:bind({}, "6", function()
+hyper:bind({}, "1", function()
 	wm.moveWindowToPosition(wm.screenPositions.topLeft)
 end)
-hyper:bind({}, "7", function()
+hyper:bind({}, "2", function()
 	wm.moveWindowToPosition(wm.screenPositions.topRight)
 end)
-hyper:bind({}, "8", function()
+hyper:bind({}, "3", function()
 	wm.moveWindowToPosition(wm.screenPositions.bottomLeft)
 end)
-hyper:bind({}, "9", function()
-	local win = hs.window.focusedWindow()
-	if win then
-		local frame = win:frame()
-		frame.w = 1920
-		frame.h = 1080
-		win:setFrame(frame)
-	end
+hyper:bind({}, "4", function()
+	wm.moveWindowToPosition(wm.screenPositions.bottomRight)
 end)
+hyper:bind({}, "5", function()
+	wm.moveWindowToPosition(wm.screenPositions.quarterleft)
+end)
+hyper:bind({}, "6", function()
+	wm.moveWindowToPosition(wm.screenPositions.quarterright)
+end)
+hyper:bind({ "shift" }, "1", function()
+	wm.moveWindowToPosition(wm.screenPositions.topLeftQuarter)
+end)
+hyper:bind({ "shift" }, "2", function()
+	wm.moveWindowToPosition(wm.screenPositions.bottomLeftQuarter)
+end)
+hyper:bind({ "shift" }, "3", function()
+	wm.moveWindowToPosition(wm.screenPositions.topRightQuarter)
+end)
+hyper:bind({ "shift" }, "4", function()
+	wm.moveWindowToPosition(wm.screenPositions.bottomRightQuarter)
+end)
+--hyper:bind({}, "9", function()
+--	local win = hs.window.focusedWindow()
+--	if win then
+--		local frame = win:frame()
+--		frame.w = 1920
+--		frame.h = 1080
+--		win:setFrame(frame)
+--	end
+--end)
 
+------------------ THIRDS
+--hyper:bind({}, "1", function()
+--	wm.moveWindowToPosition(wm.screenPositions.thirdleft)
+--end)
+--hyper:bind({}, "2", function()
+--	wm.moveWindowToPosition(wm.screenPositions.mid)
+--end)
+--hyper:bind({}, "3", function()
+--	wm.moveWindowToPosition(wm.screenPositions.thirdright)
+--end)
+--hyper:bind({}, "4", function()
+--	wm.moveWindowToPosition(wm.screenPositions.topLeftthird)
+--end)
+--hyper:bind({}, "5", function()
+--	wm.moveWindowToPosition(wm.screenPositions.bottomLeftthird)
+--end)
 -------------------------------------------
 -- Window Highlight for Chrome Only --
 -- Creates a colored border around Chrome when focused

@@ -1,1 +1,7 @@
-@import url("https://comfy-themes.github.io/Spicetify/Comfy/app.css");
+/*@import url("https://comfy-themes.github.io/Spicetify/Comfy/app.css");*/
+.main-trackList-rowSectionStart .main-trackList-rowTitle.main-trackList-active,
+.main-trackList-rowSectionStart
+  .main-trackList-rowSubtitle.main-trackList-active {
+  color: #00ff00 !important; /* Bright cyan blue from Tokyo Night */
+  font-weight: bold;
+}
