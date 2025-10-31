@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(nvim:*)",
+      "Read(//Users/spencerduran/vaults/second_brain/300 Resources/Technical Documentation/**)",
+      "Read(//Users/spencerduran/dotfiles/hammerspoon/**)",
+      "Read(//Users/spencerduran/vaults/second_brain/**)",
+      "Bash(npm uninstall:*)",
+      "Bash(npm i:*)",
+      "Read(//Users/spencerduran/Library/Mobile Documents/com~apple~CloudDocs/**)"
+    ],
+    "deny": []
+  }
+}

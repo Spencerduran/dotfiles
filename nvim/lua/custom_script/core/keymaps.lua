@@ -48,10 +48,10 @@ map("n", "<S-h>", ":bprevious<CR>", default_options)
 -- Press jk fast to enter normal
 map("i", "jk", "<ESC>", default_options)
 
--- move to a closing element in insert mode
-map("i", "<C-l>", function()
-	return require("functions").escapePair()
-end, default_options)
+-- Removed: escapePair function doesn't exist in functions.lua
+-- map("i", "<C-l>", function()
+-- 	return require("functions").escapePair()
+-- end, default_options)
 --------------------------------------------------
 ------------ Visual ------------
 --------------------------------------------------
