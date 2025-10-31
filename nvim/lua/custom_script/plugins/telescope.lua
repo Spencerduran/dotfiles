@@ -52,6 +52,8 @@ return {
 						case_mode = "smart_case",
 					},
 					file_browser = {
+						hidden = true, -- Show hidden files by default
+						respect_gitignore = false, -- Show gitignored files
 						mappings = {
 							i = {
 								["<c-n>"] = fb_actions.create,

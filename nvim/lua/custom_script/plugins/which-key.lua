@@ -73,6 +73,12 @@ return {
 			--Follow Links
 			{ "<leader>og", ":ObsidianFollowLink<cr>", desc = "Follow Link" },
 			{ "<leader>ov", ":ObsidianFollowLink vsplit<cr>", desc = "Follow Link V-split" },
+
+			--Open in Obsidian App
+			{ "<leader>oo", ":ObsidianOpen<cr>", desc = "Open in Obsidian App" },
+
+			--Daily Notes
+			{ "<leader>ot", ":ObsidianToday<cr>", desc = "Today's Note" },
 			--Create Links
 			{ "<leader>ole", ":ObsidianLink<cr>", desc = "Link to existing", mode = { "n", "v" } },
 			{ "<leader>oln", ":ObsidianLinkNew<cr>", desc = "Link To New Note", mode = { "n", "v" } },

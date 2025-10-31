@@ -18,20 +18,28 @@ return {
 				html = { "prettier" },
 				json = { "prettier" },
 				yaml = { "prettier" },
-				--markdown = { "prettier" },
+				markdown = { "prettier" },
 				graphql = { "prettier" },
 				-- Python
 				python = { "isort", "black" },
 				-- Lua
 				lua = { "stylua" },
-				-- SQL - with no arguments
-				sql = { "sql_formatter" },
+				-- SQL - using sqlfmt for compact formatting 
+				sql = { "sqlfmt" },
 				-- Shell
 				sh = { "shfmt" },
 			},
+			-- Custom formatter configurations
+			formatters = {
+				sqlfmt = {
+					command = vim.fn.expand("~/.local/share/nvim/mason/packages/sqlfmt/venv/bin/sqlfmt"),
+					args = { "--line-length", "200", "-" },
+					stdin = true,
+				},
+			},
 			-- Set up format-on-save
 			format_on_save = {
-				timeout_ms = 500,
+				timeout_ms = 3000,
 				lsp_fallback = true,
 			},
 		})
@@ -40,7 +48,7 @@ return {
 			require("conform").format({
 				lsp_fallback = true,
 				async = false,
-				timeout_ms = 500,
+				timeout_ms = 3000,
 			})
 		end, { desc = "Format file or range (in visual mode)" })
 	end,
