@@ -8,6 +8,9 @@
 --    menubar:setMenu(menuItems)
 --end
 
+-- Disable window animations for instant window switching
+hs.window.animationDuration = 0
+
 hyper = hs.hotkey.modal.new({}, "F17")
 
 -- Enter Hyper Mode when F18 (Hyper/Capslock) is pressed
@@ -272,54 +275,8 @@ end)
 --	hyper.triggered = true
 --end)
 
--- Cycle order: Alacritty -> Obsidian -> Chrome -> Alacritty
-hyper:bind({}, "j", function()
-	local alacritty = hs.application.find("alacritty")
-	local obsidian = hs.application.find("obsidian")
-	local chrome = hs.application.find("google chrome")
-
-	-- Function to get main window of an application
-	local function getMainWindow(app)
-		if app then
-			return app:mainWindow()
-		end
-		return nil
-	end
-
-	-- Function to switch to next app with same frame
-	local function switchToApp(fromApp, toAppPath)
-		local currentFrame = getMainWindow(fromApp):frame()
-		fromApp:hide()
-		hs.application.launchOrFocus(toAppPath)
-		-- Short delay to ensure window is available
-		hs.timer.doAfter(0.1, function()
-			local toApp = hs.application.find(string.match(toAppPath, "/Applications/(.+).app"))
-			local toWindow = getMainWindow(toApp)
-			if toWindow then
-				toWindow:setFrame(currentFrame)
-			end
-		end)
-	end
-
-	-- If Alacritty is frontmost, switch to Obsidian
-	if alacritty and alacritty:isFrontmost() then
-		switchToApp(alacritty, "/Applications/Obsidian.app/")
-
-	-- If Obsidian is frontmost, switch to Chrome
-	elseif obsidian and obsidian:isFrontmost() then
-		switchToApp(obsidian, "/Applications/Google Chrome.app")
-
-	-- If Chrome is frontmost, switch to Alacritty
-	elseif chrome and chrome:isFrontmost() then
-		switchToApp(chrome, "/Applications/Alacritty.app")
-
-	-- If none are frontmost, show Alacritty
-	else
-		hs.application.launchOrFocus("/Applications/Alacritty.app")
-	end
-
-	hyper.triggered = true
-end)
+-- Removed: Cycle order app switching - conflicted with window management Hyper+J
+-- If you want app cycling back, bind it to a different key
 --hyper:bind({}, "p", function()
 --	local alacritty = hs.application.find("alacritty")
 --	local obsidian = hs.application.find("obsidian")
@@ -340,14 +297,80 @@ end)
 --	hyper.triggered = true
 --end)
 
--- Show/hide chrome
-hyper:bind({}, "c", function()
-	local chrome = hs.application.find("google chrome")
-	if chrome:isFrontmost() then
-		chrome:hide()
+-- Chrome window management for work and personal profiles
+-- Debug function to show all Chrome window titles
+local function debugChromeWindows()
+	local chrome = hs.application.find("Google Chrome")
+	if chrome then
+		local windows = chrome:allWindows()
+		local titles = "Chrome Windows:\n"
+		for i, window in ipairs(windows) do
+			titles = titles .. i .. ": " .. (window:title() or "no title") .. "\n"
+		end
+		hs.alert.show(titles, 5)
 	else
-		hs.application.launchOrFocus("/Applications/google chrome.app")
+		hs.alert.show("Chrome not running")
 	end
+end
+
+-- Function to find Chrome window by profile indicator
+-- Chrome profiles show up as "- ProfileName" at the end of the window title
+local function findChromeWindowByProfile(profilePattern)
+	local chrome = hs.application.find("Google Chrome")
+	if chrome then
+		local windows = chrome:allWindows()
+		for _, window in ipairs(windows) do
+			local title = window:title()
+			-- Chrome profile appears at the end: "Page Title - ProfileName"
+			if title and string.find(string.lower(title), string.lower(profilePattern)) then
+				return window
+			end
+		end
+	end
+	return nil
+end
+
+-- Debug: Show all Chrome window titles (Hyper + Shift + D)
+hyper:bind({ "shift" }, "d", function()
+	debugChromeWindows()
+	hyper.triggered = true
+end)
+
+-- Show/hide personal Chrome (any window WITHOUT "work" in title)
+hyper:bind({}, "c", function()
+	local chrome = hs.application.find("Google Chrome")
+	if not chrome then
+		hs.application.launchOrFocus("/Applications/Google Chrome.app")
+		hyper.triggered = true
+		return
+	end
+
+	-- Find personal window - any window that doesn't contain "work"
+	local personalWindow = nil
+	local windows = chrome:allWindows()
+
+	for _, window in ipairs(windows) do
+		local title = string.lower(window:title() or "")
+		-- Find any window that doesn't have "work" in the title
+		if not string.find(title, "work") then
+			personalWindow = window
+			break
+		end
+	end
+
+	if personalWindow then
+		-- If personal window is already focused, minimize just that window
+		if personalWindow == hs.window.focusedWindow() then
+			personalWindow:minimize()
+		else
+			-- Just focus the personal window (don't hide others)
+			personalWindow:focus()
+		end
+	else
+		-- No personal window found
+		hs.alert.show("No personal Chrome window found", 1)
+	end
+	hyper.triggered = true
 end)
 -- Show/hide Discord
 hyper:bind({}, "d", function()
@@ -470,11 +493,47 @@ hyper:bind({}, "v", function()
 		hs.application.launchOrFocus("/Applications/visual studio code.app")
 	end
 end)
--- Show/hide teams
+-- Show/hide work Chrome (any window with "work" in title)
 hyper:bind({}, "w", function()
-	local microsoft_teams = hs.application.find("word")
-	if microsoft_teams:isFrontmost() then
-		microsoft_teams:hide()
+	local chrome = hs.application.find("Google Chrome")
+	if not chrome then
+		hs.application.launchOrFocus("/Applications/Google Chrome.app")
+		hyper.triggered = true
+		return
+	end
+
+	-- Find work window - any window with "work" (case insensitive)
+	local workWindow = nil
+	local windows = chrome:allWindows()
+
+	for _, window in ipairs(windows) do
+		local title = string.lower(window:title() or "")
+		if string.find(title, "work") then
+			workWindow = window
+			break
+		end
+	end
+
+	if workWindow then
+		-- If work window is already focused, minimize just that window
+		if workWindow == hs.window.focusedWindow() then
+			workWindow:minimize()
+		else
+			-- Just focus the work window (don't hide others)
+			workWindow:focus()
+		end
+	else
+		-- No work window found
+		hs.alert.show("No work Chrome window found", 1)
+	end
+	hyper.triggered = true
+end)
+
+-- Show/hide Microsoft Word
+hyper:bind({ "shift" }, "w", function()
+	local microsoft_word = hs.application.find("word")
+	if microsoft_word:isFrontmost() then
+		microsoft_word:hide()
 	else
 		hs.application.launchOrFocus("/Applications/Microsoft Word.app")
 	end
@@ -524,12 +583,7 @@ end)
 hyper:bind({}, "0", function()
 	wm.moveWindowToPosition(wm.screenPositions.midmid)
 end)
-hyper:bind({ "shift" }, "0", function()
-	wm.moveWindowToPosition(wm.screenPositions.bottom)
-end)
-hyper:bind({ "shift" }, "0", function()
-	wm.moveWindowToPosition(wm.screenPositions.fullRight)
-end)
+-- Removed duplicate Shift+0 bindings (both bottom and fullRight were redundant)
 
 ------------------ HALVES
 hyper:bind({}, "h", function()
@@ -569,14 +623,20 @@ end)
 hyper:bind({}, "6", function()
 	wm.moveWindowToPosition(wm.screenPositions.quarterright)
 end)
+hyper:bind({}, "7", function()
+	wm.moveWindowToPosition(wm.screenPositions.midleft)
+end)
+hyper:bind({}, "8", function()
+	wm.moveWindowToPosition(wm.screenPositions.midright)
+end)
 hyper:bind({ "shift" }, "1", function()
 	wm.moveWindowToPosition(wm.screenPositions.topLeftQuarter)
 end)
 hyper:bind({ "shift" }, "2", function()
-	wm.moveWindowToPosition(wm.screenPositions.bottomLeftQuarter)
+	wm.moveWindowToPosition(wm.screenPositions.topRightQuarter)
 end)
 hyper:bind({ "shift" }, "3", function()
-	wm.moveWindowToPosition(wm.screenPositions.topRightQuarter)
+	wm.moveWindowToPosition(wm.screenPositions.bottomLeftQuarter)
 end)
 hyper:bind({ "shift" }, "4", function()
 	wm.moveWindowToPosition(wm.screenPositions.bottomRightQuarter)

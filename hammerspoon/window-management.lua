@@ -106,9 +106,9 @@ screenPositions.mid = {
 	h = GRID_SIZE,
 }
 screenPositions.thirdright = {
-	x = QUARTER_GRID_SIZE + SILLY_GRID_SIZE, -- Start after quarterleft and midmid
+	x = THIRD_GRID_SIZE + THIRD_GRID_SIZE, -- Start after quarterleft and midmid
 	y = 0,
-	w = SILLY_GRID_SIZE, -- Same width as midmid (other half of remaining space)
+	w = THIRD_GRID_SIZE, -- Same width as midmid (other half of remaining space)
 	h = GRID_SIZE,
 }
 screenPositions.topLeftthird = {

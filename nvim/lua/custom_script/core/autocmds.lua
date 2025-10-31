@@ -3,6 +3,42 @@ local api = vim.api
 --local funx = require("functions")
 
 --------------------------------------------------
+-- Custom fold function for dataview blocks
+--------------------------------------------------
+function _G.DataviewFold()
+	local line = vim.fn.getline(vim.v.lnum)
+
+	-- Start fold on ```dataview
+	if line:match("^%s*```dataview") then
+		return ">1"
+	end
+
+	-- End fold on closing ``` (when previous non-empty line started the dataview block)
+	if line:match("^%s*```%s*$") then
+		-- Look backward to find if we're closing a dataview block
+		local prev_line_num = vim.v.lnum - 1
+		while prev_line_num > 0 do
+			local prev_line = vim.fn.getline(prev_line_num)
+			if prev_line:match("^%s*```dataview") then
+				return "<1"
+			elseif prev_line:match("^%s*```") then
+				-- Hit another code block marker, not a dataview block
+				break
+			elseif prev_line:match("%S") then
+				-- Hit content line, continue searching
+				prev_line_num = prev_line_num - 1
+			else
+				-- Empty line, continue
+				prev_line_num = prev_line_num - 1
+			end
+		end
+	end
+
+	-- No fold
+	return "="
+end
+
+--------------------------------------------------
 -- Exit nvim when tree is last buffer
 --------------------------------------------------
 vim.api.nvim_create_autocmd("BufEnter", {
@@ -45,6 +81,18 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 	callback = function()
 		vim.cmd("TSBufEnable highlight")
 	end,
+})
+--------------------------------------------------
+-- Markdown folding for dataview blocks
+--------------------------------------------------
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "markdown",
+	callback = function()
+		vim.opt_local.foldmethod = "expr"
+		vim.opt_local.foldexpr = "v:lua.DataviewFold()"
+		vim.opt_local.foldlevel = 0 -- Start with dataview blocks folded
+	end,
+	desc = "Enable folding for dataview code blocks in markdown",
 })
 --------------------------------------------------
 -- Make help files open in a vertical split
