@@ -297,80 +297,126 @@ end)
 --	hyper.triggered = true
 --end)
 
--- Chrome window management for work and personal profiles
--- Debug function to show all Chrome window titles
+-- Chrome profile window management
+-- Uses `open -a` with --profile-directory to raise the correct profile window.
+-- Tracks window IDs after first activation for instant switching and toggle.
+local chromeProfiles = {
+	personal = "Default",
+	work = "Profile 5",
+}
+local chromeProfileWindows = {} -- profileKey -> window ID
+local lastChromeProfile = nil
+
+local function openChromeProfile(profileDir)
+	hs.execute('open -a "Google Chrome" --args --profile-directory="' .. profileDir .. '"')
+end
+
+local function activateChromeProfile(profileDir, profileKey)
+	local chrome = hs.application.find("Google Chrome")
+
+	-- Chrome not running: launch with profile, auto-track after startup
+	if not chrome then
+		openChromeProfile(profileDir)
+		hs.timer.doAfter(2, function()
+			local c = hs.application.find("Google Chrome")
+			if c then
+				local win = c:focusedWindow()
+				if win and win:subrole() == "AXStandardWindow" then
+					chromeProfileWindows[profileKey] = win:id()
+				end
+			end
+		end)
+		lastChromeProfile = profileKey
+		hyper.triggered = true
+		return
+	end
+
+	-- Clean up stale tracked windows
+	for key, id in pairs(chromeProfileWindows) do
+		if not hs.window.get(id) then
+			chromeProfileWindows[key] = nil
+		end
+	end
+
+	-- If we have a valid tracked window, focus/toggle it
+	local storedId = chromeProfileWindows[profileKey]
+	if storedId then
+		local win = hs.window.get(storedId)
+		if win then
+			if win == hs.window.focusedWindow() then
+				win:minimize()
+			else
+				win:focus()
+			end
+			lastChromeProfile = profileKey
+			hyper.triggered = true
+			return
+		end
+	end
+
+	-- No tracked window: use open -a to raise profile window, then track it
+	openChromeProfile(profileDir)
+	hs.timer.doAfter(0.5, function()
+		local c = hs.application.find("Google Chrome")
+		if c then
+			local win = c:focusedWindow()
+			if win and win:subrole() == "AXStandardWindow" then
+				-- Don't overwrite another profile's tracked window
+				local alreadyTracked = false
+				for key, id in pairs(chromeProfileWindows) do
+					if key ~= profileKey and id == win:id() then
+						alreadyTracked = true
+						break
+					end
+				end
+				if not alreadyTracked then
+					chromeProfileWindows[profileKey] = win:id()
+				end
+			end
+		end
+	end)
+	lastChromeProfile = profileKey
+	hyper.triggered = true
+end
+
+-- Debug: show Chrome windows with tracking info (Hyper + Shift + D)
 local function debugChromeWindows()
 	local chrome = hs.application.find("Google Chrome")
 	if chrome then
 		local windows = chrome:allWindows()
-		local titles = "Chrome Windows:\n"
+		local info = "Chrome Windows:\n"
 		for i, window in ipairs(windows) do
-			titles = titles .. i .. ": " .. (window:title() or "no title") .. "\n"
+			local title = window:title() or "no title"
+			local subrole = window:subrole() or "?"
+			local tag = subrole == "AXStandardWindow" and "[REAL]" or "[companion]"
+			local tracked = ""
+			for key, id in pairs(chromeProfileWindows) do
+				if id == window:id() then
+					tracked = " (" .. key .. ")"
+					break
+				end
+			end
+			info = info .. i .. ": " .. tag .. tracked .. " " .. title .. "\n"
 		end
-		hs.alert.show(titles, 5)
+		hs.alert.show(info, 5)
 	else
 		hs.alert.show("Chrome not running")
 	end
 end
 
--- Function to find Chrome window by profile indicator
--- Chrome profiles show up as "- ProfileName" at the end of the window title
-local function findChromeWindowByProfile(profilePattern)
-	local chrome = hs.application.find("Google Chrome")
-	if chrome then
-		local windows = chrome:allWindows()
-		for _, window in ipairs(windows) do
-			local title = window:title()
-			-- Chrome profile appears at the end: "Page Title - ProfileName"
-			if title and string.find(string.lower(title), string.lower(profilePattern)) then
-				return window
-			end
-		end
-	end
-	return nil
-end
-
--- Debug: Show all Chrome window titles (Hyper + Shift + D)
 hyper:bind({ "shift" }, "d", function()
 	debugChromeWindows()
 	hyper.triggered = true
 end)
 
--- Show/hide personal Chrome (any window WITHOUT "work" in title)
+-- Show/hide work Chrome
 hyper:bind({}, "c", function()
-	local chrome = hs.application.find("Google Chrome")
-	if not chrome then
-		hs.application.launchOrFocus("/Applications/Google Chrome.app")
-		hyper.triggered = true
-		return
-	end
+	activateChromeProfile(chromeProfiles.personal, "personal")
+end)
 
-	-- Find personal window - any window that doesn't contain "work"
-	local personalWindow = nil
-	local windows = chrome:allWindows()
-
-	for _, window in ipairs(windows) do
-		local title = string.lower(window:title() or "")
-		-- Find any window that doesn't have "work" in the title
-		if not string.find(title, "work") then
-			personalWindow = window
-			break
-		end
-	end
-
-	if personalWindow then
-		-- If personal window is already focused, minimize just that window
-		if personalWindow == hs.window.focusedWindow() then
-			personalWindow:minimize()
-		else
-			-- Just focus the personal window (don't hide others)
-			personalWindow:focus()
-		end
-	else
-		-- No personal window found
-		hs.alert.show("No personal Chrome window found", 1)
-	end
-	hyper.triggered = true
+-- Show/hide personal Chrome
+hyper:bind({}, "w", function()
+	activateChromeProfile(chromeProfiles.work, "work")
 end)
 -- Show/hide Discord
 hyper:bind({}, "d", function()
@@ -493,42 +539,6 @@ hyper:bind({}, "v", function()
 		hs.application.launchOrFocus("/Applications/visual studio code.app")
 	end
 end)
--- Show/hide work Chrome (any window with "work" in title)
-hyper:bind({}, "w", function()
-	local chrome = hs.application.find("Google Chrome")
-	if not chrome then
-		hs.application.launchOrFocus("/Applications/Google Chrome.app")
-		hyper.triggered = true
-		return
-	end
-
-	-- Find work window - any window with "work" (case insensitive)
-	local workWindow = nil
-	local windows = chrome:allWindows()
-
-	for _, window in ipairs(windows) do
-		local title = string.lower(window:title() or "")
-		if string.find(title, "work") then
-			workWindow = window
-			break
-		end
-	end
-
-	if workWindow then
-		-- If work window is already focused, minimize just that window
-		if workWindow == hs.window.focusedWindow() then
-			workWindow:minimize()
-		else
-			-- Just focus the work window (don't hide others)
-			workWindow:focus()
-		end
-	else
-		-- No work window found
-		hs.alert.show("No work Chrome window found", 1)
-	end
-	hyper.triggered = true
-end)
-
 -- Show/hide Microsoft Word
 hyper:bind({ "shift" }, "w", function()
 	local microsoft_word = hs.application.find("word")
@@ -574,7 +584,7 @@ hyper:bind({}, "f", function()
 	wm.windowMaximize(0)
 end)
 hyper:bind({ "shift" }, "f", function()
-	wm.moveWindowToPosition(wm.screenPositions.fullLeft)
+	wm.moveWindowToPosition(wm.screenPositions.fullRight)
 end)
 hyper:bind({}, "return", function()
 	wm.windowMaximize(0)
@@ -606,16 +616,16 @@ hyper:bind({}, "l", function()
 end)
 ------------------ CORNERS
 hyper:bind({}, "1", function()
-	wm.moveWindowToPosition(wm.screenPositions.topLeft)
+	wm.moveWindowToPosition(wm.screenPositions.thirdleft)
 end)
 hyper:bind({}, "2", function()
-	wm.moveWindowToPosition(wm.screenPositions.topRight)
+	wm.moveWindowToPosition(wm.screenPositions.mid)
 end)
 hyper:bind({}, "3", function()
-	wm.moveWindowToPosition(wm.screenPositions.bottomLeft)
+	wm.moveWindowToPosition(wm.screenPositions.thirdright)
 end)
 hyper:bind({}, "4", function()
-	wm.moveWindowToPosition(wm.screenPositions.bottomRight)
+	wm.moveWindowToPosition(wm.screenPositions.bottomRightthird)
 end)
 hyper:bind({}, "5", function()
 	wm.moveWindowToPosition(wm.screenPositions.quarterleft)
@@ -630,16 +640,16 @@ hyper:bind({}, "8", function()
 	wm.moveWindowToPosition(wm.screenPositions.midright)
 end)
 hyper:bind({ "shift" }, "1", function()
-	wm.moveWindowToPosition(wm.screenPositions.topLeftQuarter)
+	wm.moveWindowToPosition(wm.screenPositions.topLeft)
 end)
 hyper:bind({ "shift" }, "2", function()
-	wm.moveWindowToPosition(wm.screenPositions.topRightQuarter)
+	wm.moveWindowToPosition(wm.screenPositions.topRight)
 end)
 hyper:bind({ "shift" }, "3", function()
-	wm.moveWindowToPosition(wm.screenPositions.bottomLeftQuarter)
+	wm.moveWindowToPosition(wm.screenPositions.bottomLeft)
 end)
 hyper:bind({ "shift" }, "4", function()
-	wm.moveWindowToPosition(wm.screenPositions.bottomRightQuarter)
+	wm.moveWindowToPosition(wm.screenPositions.bottomRight)
 end)
 --hyper:bind({}, "9", function()
 --	local win = hs.window.focusedWindow()
