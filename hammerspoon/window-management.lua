@@ -10,7 +10,7 @@ local QUARTER_THIRD_GRID_SIZE = GRID_SIZE / 4 + QUARTER_GRID_SIZE
 -- Set the grid size and add a few pixels of margin
 -- Also, don't animate window changes.
 hs.grid.setGrid(GRID_SIZE .. "x" .. GRID_SIZE)
-hs.grid.setMargins({ 5, 5 })
+hs.grid.setMargins({ 1, 1 })
 hs.window.animationDuration = 0
 local screenPositions = {}
 -- Quarter Windows
@@ -32,10 +32,22 @@ screenPositions.bottomLeftQuarter = {
 	w = QUARTER_GRID_SIZE,
 	h = HALF_GRID_SIZE,
 }
+screenPositions.bottomRightthird = {
+	x = THIRD_GRID_SIZE + THIRD_GRID_SIZE,
+	y = HALF_GRID_SIZE,
+	w = THIRD_GRID_SIZE,
+	h = HALF_GRID_SIZE,
+}
 screenPositions.bottomRightQuarter = {
 	x = QUARTER_GRID_SIZE + QUARTER_GRID_SIZE + QUARTER_GRID_SIZE,
 	y = HALF_GRID_SIZE,
 	w = QUARTER_GRID_SIZE,
+	h = HALF_GRID_SIZE,
+}
+screenPositions.topRightthird = {
+	x = THIRD_GRID_SIZE + THIRD_GRID_SIZE,
+	y = 0,
+	w = THIRD_GRID_SIZE,
 	h = HALF_GRID_SIZE,
 }
 screenPositions.topRightQuarter = {
@@ -69,27 +81,27 @@ screenPositions.midright = {
 	h = GRID_SIZE,
 }
 screenPositions.quarterright = {
-	x = QUARTER_GRID_SIZE + QUARTER_GRID_SIZE + QUARTER_GRID_SIZE,
+	x = THIRD_GRID_SIZE + THIRD_GRID_SIZE,
 	y = 0,
-	w = QUARTER_GRID_SIZE,
+	w = THIRD_GRID_SIZE,
 	h = GRID_SIZE,
 }
 screenPositions.midmid = {
 	x = QUARTER_GRID_SIZE, -- Start right after quarterleft
 	y = 0,
-	w = HALF_GRID_SIZE,
+	w = THIRD_GRID_SIZE + (THIRD_GRID_SIZE / 4),
 	h = GRID_SIZE,
 }
 screenPositions.midtop = {
 	x = QUARTER_GRID_SIZE, -- Start right after quarterleft
 	y = 0,
-	w = HALF_GRID_SIZE,
+	w = THIRD_GRID_SIZE + (THIRD_GRID_SIZE / 4),
 	h = HALF_GRID_SIZE,
 }
 screenPositions.midbottom = {
 	x = QUARTER_GRID_SIZE, -- Start right after quarterleft
 	y = HALF_GRID_SIZE,
-	w = HALF_GRID_SIZE,
+	w = THIRD_GRID_SIZE + (THIRD_GRID_SIZE / 4),
 	h = HALF_GRID_SIZE,
 }
 -- Third Windows
@@ -143,15 +155,15 @@ screenPositions.right = {
 	h = GRID_SIZE,
 }
 screenPositions.top = {
-	x = 0,
+	x = QUARTER_GRID_SIZE,
 	y = 0,
-	w = GRID_SIZE,
+	w = QUARTER_GRID_SIZE * 3,
 	h = HALF_GRID_SIZE,
 }
 screenPositions.bottom = {
-	x = 0,
+	x = QUARTER_GRID_SIZE,
 	y = HALF_GRID_SIZE,
-	w = GRID_SIZE,
+	w = QUARTER_GRID_SIZE * 3,
 	h = HALF_GRID_SIZE,
 }
 screenPositions.topLeft = {
