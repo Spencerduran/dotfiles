@@ -1,9 +1,7 @@
 {
   "permissions": {
-    "allow": [
-      "WebFetch(domain:gist.github.com)"
-    ],
+    "allow": ["WebFetch(domain:gist.github.com)"],
     "deny": [],
-    "defaultMode": "acceptEdits"
+    "defaultMode": "bypassPermissions"
   }
 }

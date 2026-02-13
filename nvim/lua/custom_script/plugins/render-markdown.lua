@@ -7,8 +7,8 @@ return {
 		heading = {
 			-- Turn on / off heading icon & background
 			enabled = true,
-			-- Replaces '#+' of headings
-			icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
+			-- Keep original # symbols
+			icons = { "# ", "## ", "### ", "#### ", "##### ", "###### " },
 			-- Background highlight to use for headings
 			backgrounds = {
 				"RenderMarkdownH1Bg",

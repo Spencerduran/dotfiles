@@ -26,3 +26,6 @@ set -gx FZF_DEFAULT_COMMAND 'rg --files --ignore-case --hidden -g "!{.pyenv,.loc
 set PATH $PATH /Users/spencerduran/.local/bin
 
 fish_add_path /Users/spencerduran/.spicetify
+
+# Initialize zoxide
+zoxide init fish | source

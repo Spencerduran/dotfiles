@@ -1,7 +1,7 @@
 env:
   TERM: xterm-256color
 alt_send_esc: false
-opacity: 1.0
+opacity: 0.1
 # Font
 font:
   normal:
@@ -25,66 +25,66 @@ font:
 colors:
   # Default colors
   primary:
-    background: '#230735'
-    foreground: '#F8F8F8'
+    background: "#230735"
+    foreground: "#F8F8F8"
 
   # Normal colors
   normal:
-    black:   '#241B2F'  # Using bgdark for black
-    red:     '#FE4450'
-    green:   '#72F1B8'
-    yellow:  '#FFCC00'
-    blue:    '#61E2FF'  # Using cyan for blue
-    magenta: '#FF7EDB'  # Using pink for magenta
-    cyan:    '#61E2FF'
-    white:   '#F8F8F8'  # Using fg for white
+    black: "#241B2F" # Using bgdark for black
+    red: "#FE4450"
+    green: "#72F1B8"
+    yellow: "#FFCC00"
+    blue: "#61E2FF" # Using cyan for blue
+    magenta: "#FF7EDB" # Using pink for magenta
+    cyan: "#61E2FF"
+    white: "#F8F8F8" # Using fg for white
 
   # Bright colors
   bright:
-    black:   '#495495'  # Using comment for bright black
-    red:     '#FE4450'
-    green:   '#72F1B8'
-    yellow:  '#FFCC00'
-    blue:    '#61E2FF'
-    magenta: '#AF6DF9'  # Using purple for bright magenta
-    cyan:    '#61E2FF'
-    white:   '#F8F8F8'
+    black: "#495495" # Using comment for bright black
+    red: "#FE4450"
+    green: "#72F1B8"
+    yellow: "#FFCC00"
+    blue: "#61E2FF"
+    magenta: "#AF6DF9" # Using purple for bright magenta
+    cyan: "#61E2FF"
+    white: "#F8F8F8"
 
   # Cursor colors
   cursor:
-    text:  '#282A36'   # cursor_fg
-    cursor: '#F8F8F8'  # cursor_bg
+    text: "#282A36" # cursor_fg
+    cursor: "#F8F8F8" # cursor_bg
 
   # Selection colors
   selection:
-    text: '#F8F8F8'        # Inverting selection colors
-    background: '#463465'  # selection
+    text: "#F8F8F8" # Inverting selection colors
+    background: "#463465" # selection
 
   # Additional colors (if your Alacritty version supports it)
   search:
     matches:
-      foreground: '#262335'
-      background: '#FFCC00'  # Using yellow for search matches
+      foreground: "#262335"
+      background: "#FFCC00" # Using yellow for search matches
     focused_match:
-      foreground: '#262335'
-      background: '#72F1B8'  # Using green for focused match
+      foreground: "#262335"
+      background: "#72F1B8" # Using green for focused match
 
   hints:
     start:
-      foreground: '#262335'
-      background: '#FFCC00'  # Using yellow for hints
+      foreground: "#262335"
+      background: "#FFCC00" # Using yellow for hints
     end:
-      foreground: '#262335'
-      background: '#FF8B39'  # Using orange for end of hints
+      foreground: "#262335"
+      background: "#FF8B39" # Using orange for end of hints
 
   line_indicator:
     foreground: None
-    background: '#463465'  # Using currentline color
+    background: "#463465" # Using currentline color
 
   # Vi mode cursor colors
   vi_mode_cursor:
-    text: '#282A36'
-    cursor: '#F8F8F8'
+    text: "#282A36"
+    cursor: "#F8F8F8"
 # Colors (Custom Theme)
 #colors:
 #  # Default colors
