@@ -1,13 +1,3 @@
---arrangeDesktop = hs.loadSpoon('ArrangeDesktop')
---arrangeDesktop.logger.setLogLevel('info')
---menubar = hs.menubar.new()
---if menubar then
---    menubar:setIcon(hs.image.imageFromName("NSHandCursor"))
---    local menuItems = {}
---    menuItems = arrangeDesktop:addMenuItems(menuItems)
---    menubar:setMenu(menuItems)
---end
-
 -- Disable window animations for instant window switching
 hs.window.animationDuration = 0
 
@@ -59,102 +49,97 @@ ctrlDoublePress.action = function()
 	end
 end
 
-hyper:bind({}, "a", function()
-	local alacritty = hs.application.find("alacritty")
-	if alacritty:isFrontmost() then
-		alacritty:hide()
-		hyper.triggered = true
+-- Generic app toggle: find, focus/hide, or launch
+local function toggleApp(appName, appPath)
+	local app = hs.application.find(appName)
+	if app then
+		if app:isFrontmost() then
+			app:hide()
+		else
+			app:activate()
+		end
 	else
-		hs.application.launchOrFocus("/Applications/Alacritty.app")
-		hyper.triggered = true
+		hs.application.launchOrFocus(appPath)
 	end
+	hyper.triggered = true
+end
+
+-- Table-driven app switcher bindings
+local appBindings = {
+	{ key = "a", name = "alacritty", path = "/Applications/Alacritty.app" },
+	{ key = "d", name = "discord", path = "/Applications/discord.app" },
+	{ key = "e", name = "excel", path = "/Applications/Microsoft Excel.app" },
+	{ key = "m", name = "Messages", path = "/System/Applications/Messages.app" },
+	{ key = "o", name = "obsidian", path = "/Applications/Obsidian.app" },
+	{ key = "q", name = "spotify", path = "/Applications/Spotify.app" },
+	{ key = "r", name = "reader", path = "/Applications/Adobe Acrobat Reader.app" },
+	{ key = "s", name = "slack", path = "/Applications/Slack.app" },
+	{ key = "t", name = "teams", path = "/Applications/Microsoft Teams.app" },
+	{ key = "v", name = "code", path = "/Applications/Visual Studio Code.app" },
+	{ key = "x", name = "firefox", path = "/Applications/firefox.app" },
+	-- Shift bindings
+	{ mods = { "shift" }, key = "o", name = "outlook", path = "/Applications/Microsoft Outlook.app" },
+	{ mods = { "shift" }, key = "t", name = "tradingview", path = "/Applications/TradingView.app" },
+	{ mods = { "shift" }, key = "w", name = "word", path = "/Applications/Microsoft Word.app" },
+}
+
+for _, b in ipairs(appBindings) do
+	hyper:bind(b.mods or {}, b.key, function()
+		toggleApp(b.name, b.path)
+	end)
+end
+
+-- Show/hide Zoom — prefers meeting window over home window
+hyper:bind({}, "z", function()
+	local zoom = hs.application.find("zoom")
+	if not zoom then
+		hs.application.launchOrFocus("/Applications/zoom.us.app")
+		hyper.triggered = true
+		return
+	end
+
+	-- Categorize Zoom windows
+	local meetingWindow = nil
+	local homeWindow = nil
+
+	for _, win in ipairs(zoom:allWindows()) do
+		if win:subrole() == "AXStandardWindow" then
+			local title = win:title() or ""
+			if title == "Zoom Workplace" or title == "Zoom" then
+				homeWindow = win
+			else
+				meetingWindow = win
+			end
+		end
+	end
+
+	if zoom:isFrontmost() then
+		local focused = hs.window.focusedWindow()
+		if meetingWindow and focused and focused:id() ~= meetingWindow:id() then
+			-- On home window but meeting exists — switch to meeting
+			meetingWindow:focus()
+		else
+			zoom:hide()
+		end
+	else
+		-- Prefer meeting window over home
+		if meetingWindow then
+			meetingWindow:focus()
+		elseif homeWindow then
+			homeWindow:focus()
+		else
+			zoom:activate()
+		end
+	end
+
+	hyper.triggered = true
 end)
 
--- Show/hide Obsidian
-hyper:bind({}, "b", function()
-	local chrome = hs.application.find("obsidian")
-	if chrome:isFrontmost() then
-		chrome:hide()
-	else
-		hs.application.launchOrFocus("/Applications/Obsidian.app/")
-	end
-end)
---hyper:bind({}, "p", function()
---	local alacritty = hs.application.find("alacritty")
---	local obsidian = hs.application.find("obsidian")
---
---	-- Function to get main window of an application
---	local function getMainWindow(app)
---		if app then
---			return app:mainWindow()
---		end
---		return nil
---	end
---
---	-- Function to hide overlapping windows
---	local function hideOverlappingWindows(frontWindow)
---		local allWindows = hs.window.orderedWindows()
---		for i = 2, #allWindows do
---			local window = allWindows[i]
---			if window and window:isVisible() then
---				local frontFrame = frontWindow:frame()
---				local backFrame = window:frame()
---
---				-- Check for overlap
---				local overlap = not (
---					backFrame.x >= frontFrame.x + frontFrame.w
---					or backFrame.x + backFrame.w <= frontFrame.x
---					or backFrame.y >= frontFrame.y + frontFrame.h
---					or backFrame.y + backFrame.h <= frontFrame.y
---				)
---
---				if overlap then
---					window:application():hide()
---				end
---			end
---		end
---	end
---
---	-- If Alacritty is frontmost, switch to Obsidian
---	if alacritty and alacritty:isFrontmost() then
---		local currentFrame = getMainWindow(alacritty):frame()
---		alacritty:hide()
---		hs.application.launchOrFocus("/Applications/Obsidian.app/")
---		-- Short delay to ensure window is available
---		hs.timer.doAfter(0.1, function()
---			local obsidianWindow = getMainWindow(obsidian)
---			if obsidianWindow then
---				obsidianWindow:setFrame(currentFrame)
---				hideOverlappingWindows(obsidianWindow)
---			end
---		end)
---
---	-- If Obsidian is frontmost, switch to Alacritty
---	elseif obsidian and obsidian:isFrontmost() then
---		local currentFrame = getMainWindow(obsidian):frame()
---		obsidian:hide()
---		hs.application.launchOrFocus("/Applications/Alacritty.app")
---		-- Short delay to ensure window is available
---		hs.timer.doAfter(0.1, function()
---			local alacrittyWindow = getMainWindow(alacritty)
---			if alacrittyWindow then
---				alacrittyWindow:setFrame(currentFrame)
---				hideOverlappingWindows(alacrittyWindow)
---			end
---		end)
---
---	-- If neither is frontmost, show Alacritty
---	else
---		hs.application.launchOrFocus("/Applications/Alacritty.app")
---	end
---
---	hyper.triggered = true
---end)
+-- Alacritty/Obsidian swap (Hyper + P)
 hyper:bind({}, "p", function()
 	local alacritty = hs.application.find("alacritty")
 	local obsidian = hs.application.find("obsidian")
 
-	-- Function to get main window of an application
 	local function getMainWindow(app)
 		if app then
 			return app:mainWindow()
@@ -162,7 +147,6 @@ hyper:bind({}, "p", function()
 		return nil
 	end
 
-	-- Function to hide overlapping windows
 	local function hideOverlappingWindows(frontWindow)
 		local allWindows = hs.window.orderedWindows()
 		for i = 2, #allWindows do
@@ -171,7 +155,6 @@ hyper:bind({}, "p", function()
 				local frontFrame = frontWindow:frame()
 				local backFrame = window:frame()
 
-				-- Check for overlap
 				local overlap = not (
 					backFrame.x >= frontFrame.x + frontFrame.w
 					or backFrame.x + backFrame.w <= frontFrame.x
@@ -186,26 +169,20 @@ hyper:bind({}, "p", function()
 		end
 	end
 
-	-- Function to focus app and manage windows
 	local function focusAndManageWindows(app, appPath)
-		-- If app exists but isn't frontmost
 		if app then
 			if app:isFrontmost() then
 				app:hide()
 			else
-				-- Get current frontmost window's frame
 				local currentApp = hs.application.frontmostApplication()
 				local currentWindow = getMainWindow(currentApp)
 				local currentFrame = currentWindow and currentWindow:frame()
 
-				-- Focus the app
 				hs.application.launchOrFocus(appPath)
 
-				-- After short delay to ensure window is available
 				hs.timer.doAfter(0.1, function()
 					local appWindow = getMainWindow(app)
 					if appWindow then
-						-- If we have a frame from previous window, use it
 						if currentFrame then
 							appWindow:setFrame(currentFrame)
 						end
@@ -214,358 +191,145 @@ hyper:bind({}, "p", function()
 				end)
 			end
 		else
-			-- If app doesn't exist, launch it
 			hs.application.launchOrFocus(appPath)
 		end
 	end
 
-	-- If Alacritty is frontmost, switch to Obsidian
 	if alacritty and alacritty:isFrontmost() then
 		focusAndManageWindows(obsidian, "/Applications/Obsidian.app/")
-	-- Otherwise focus Alacritty
 	else
 		focusAndManageWindows(alacritty, "/Applications/Alacritty.app")
 	end
 
 	hyper.triggered = true
 end)
---hyper:bind({}, "p", function()
---	local alacritty = hs.application.find("alacritty")
---	local obsidian = hs.application.find("obsidian")
---
---	-- Function to get main window of an application
---	local function getMainWindow(app)
---		if app then
---			return app:mainWindow()
---		end
---		return nil
---	end
---
---	-- If Alacritty is frontmost, switch to Obsidian
---	if alacritty and alacritty:isFrontmost() then
---		local currentFrame = getMainWindow(alacritty):frame()
---		alacritty:hide()
---		hs.application.launchOrFocus("/Applications/Obsidian.app/")
---		-- Short delay to ensure window is available
---		hs.timer.doAfter(0.1, function()
---			local obsidianWindow = getMainWindow(obsidian)
---			if obsidianWindow then
---				obsidianWindow:setFrame(currentFrame)
---			end
---		end)
---
---	-- If Obsidian is frontmost, switch to Alacritty
---	elseif obsidian and obsidian:isFrontmost() then
---		local currentFrame = getMainWindow(obsidian):frame()
---		obsidian:hide()
---		hs.application.launchOrFocus("/Applications/Alacritty.app")
---		-- Short delay to ensure window is available
---		hs.timer.doAfter(0.1, function()
---			local alacrittyWindow = getMainWindow(alacritty)
---			if alacrittyWindow then
---				alacrittyWindow:setFrame(currentFrame)
---			end
---		end)
---
---	-- If neither is frontmost, show Alacritty
---	else
---		hs.application.launchOrFocus("/Applications/Alacritty.app")
---	end
---
---	hyper.triggered = true
---end)
 
--- Removed: Cycle order app switching - conflicted with window management Hyper+J
--- If you want app cycling back, bind it to a different key
---hyper:bind({}, "p", function()
---	local alacritty = hs.application.find("alacritty")
---	local obsidian = hs.application.find("obsidian")
---
---	-- If Alacritty is frontmost, hide it and show Obsidian
---	if alacritty and alacritty:isFrontmost() then
---		alacritty:hide()
---		hs.application.launchOrFocus("/Applications/Obsidian.app/")
---	-- If Obsidian is frontmost, hide it and show Alacritty
---	elseif obsidian and obsidian:isFrontmost() then
---		obsidian:hide()
---		hs.application.launchOrFocus("/Applications/Alacritty.app")
---	-- If neither is frontmost, show Alacritty
---	else
---		hs.application.launchOrFocus("/Applications/Alacritty.app")
---	end
---
---	hyper.triggered = true
---end)
-
--- Chrome profile window management
--- Uses `open -a` with --profile-directory to raise the correct profile window.
--- Tracks window IDs after first activation for instant switching and toggle.
+-- Chrome profile window management (stateless, title-based matching)
 local chromeProfiles = {
-	personal = "Default",
-	work = "Profile 5",
+	{ key = "c", name = "Spencer", dir = "Default" },
+	{ key = "w", name = "Spencer (Work)", dir = "Profile 5" },
 }
-local chromeProfileWindows = {} -- profileKey -> window ID
-local lastChromeProfile = nil
 
-local function openChromeProfile(profileDir)
-	hs.execute('open -a "Google Chrome" --args --profile-directory="' .. profileDir .. '"')
-end
-
-local function activateChromeProfile(profileDir, profileKey)
+local function switchChromeProfile(profileName, profileDir, minimizeOthers)
 	local chrome = hs.application.find("Google Chrome")
 
-	-- Chrome not running: launch with profile, auto-track after startup
+	-- Chrome not running — launch with profile
 	if not chrome then
-		openChromeProfile(profileDir)
-		hs.timer.doAfter(2, function()
-			local c = hs.application.find("Google Chrome")
-			if c then
-				local win = c:focusedWindow()
-				if win and win:subrole() == "AXStandardWindow" then
-					chromeProfileWindows[profileKey] = win:id()
+		hs.execute('open -a "Google Chrome" --args --profile-directory="' .. profileDir .. '"')
+		return
+	end
+
+	-- Collect windows whose title ends with " - profileName" (standard windows only)
+	local pattern = " %- " .. profileName:gsub("([%(%)%.%%%+%-%*%?%[%]%^%$])", "%%%1") .. "$"
+	local matches = {}
+	for _, win in ipairs(chrome:allWindows()) do
+		if win:subrole() == "AXStandardWindow" and (win:title() or ""):match(pattern) then
+			matches[#matches + 1] = win
+		end
+	end
+
+	-- Sort by window ID for consistent cycling order
+	table.sort(matches, function(a, b)
+		return a:id() < b:id()
+	end)
+
+	-- No matching windows — launch with profile directory
+	if #matches == 0 then
+		hs.execute('open -a "Google Chrome" --args --profile-directory="' .. profileDir .. '"')
+		return
+	end
+
+	local focused = hs.window.focusedWindow()
+	local didHide = false
+
+	if chrome:isFrontmost() then
+		-- Check if focused window belongs to this profile
+		local focusedIdx = nil
+		for i, win in ipairs(matches) do
+			if focused and win:id() == focused:id() then
+				focusedIdx = i
+				break
+			end
+		end
+
+		if focusedIdx then
+			if #matches == 1 then
+				chrome:hide()
+				didHide = true
+			else
+				-- Cycle to next window in this profile
+				local nextIdx = (focusedIdx % #matches) + 1
+				matches[nextIdx]:focus()
+			end
+		else
+			-- Focused window is a different profile — switch to this one
+			matches[1]:focus()
+		end
+	else
+		-- Chrome not frontmost — focus first matching window
+		matches[1]:focus()
+	end
+
+	-- Minimize other profiles' windows
+	if minimizeOthers and not didHide then
+		for _, win in ipairs(chrome:allWindows()) do
+			if win:subrole() == "AXStandardWindow" then
+				local isMatch = false
+				for _, m in ipairs(matches) do
+					if m:id() == win:id() then
+						isMatch = true
+						break
+					end
+				end
+				if not isMatch then
+					win:minimize()
 				end
 			end
-		end)
-		lastChromeProfile = profileKey
+		end
+	end
+end
+
+-- Debug: show Chrome windows with profile info from titles (Hyper + Shift + D)
+hyper:bind({ "shift" }, "d", function()
+	local chrome = hs.application.find("Google Chrome")
+	if not chrome then
+		hs.alert.show("Chrome not running")
 		hyper.triggered = true
 		return
 	end
 
-	-- Clean up stale tracked windows
-	for key, id in pairs(chromeProfileWindows) do
-		if not hs.window.get(id) then
-			chromeProfileWindows[key] = nil
-		end
-	end
-
-	-- If we have a valid tracked window, focus/toggle it
-	local storedId = chromeProfileWindows[profileKey]
-	if storedId then
-		local win = hs.window.get(storedId)
-		if win then
-			if win == hs.window.focusedWindow() then
-				win:minimize()
-			else
-				win:focus()
-			end
-			lastChromeProfile = profileKey
-			hyper.triggered = true
-			return
-		end
-	end
-
-	-- No tracked window: use open -a to raise profile window, then track it
-	openChromeProfile(profileDir)
-	hs.timer.doAfter(0.5, function()
-		local c = hs.application.find("Google Chrome")
-		if c then
-			local win = c:focusedWindow()
-			if win and win:subrole() == "AXStandardWindow" then
-				-- Don't overwrite another profile's tracked window
-				local alreadyTracked = false
-				for key, id in pairs(chromeProfileWindows) do
-					if key ~= profileKey and id == win:id() then
-						alreadyTracked = true
-						break
-					end
-				end
-				if not alreadyTracked then
-					chromeProfileWindows[profileKey] = win:id()
-				end
+	local info = "Chrome Windows:\n"
+	for i, window in ipairs(chrome:allWindows()) do
+		local title = window:title() or "no title"
+		local subrole = window:subrole() or "?"
+		local tag = subrole == "AXStandardWindow" and "[REAL]" or "[companion]"
+		local profile = ""
+		for _, p in ipairs(chromeProfiles) do
+			local pat = " %- " .. p.name:gsub("([%(%)%.%%%+%-%*%?%[%]%^%$])", "%%%1") .. "$"
+			if title:match(pat) then
+				profile = " [" .. p.name .. "]"
+				break
 			end
 		end
+		info = info .. i .. ": " .. tag .. profile .. " " .. title .. "\n"
+	end
+	hs.alert.show(info, 5)
+	hyper.triggered = true
+end)
+
+-- Bind hotkeys from profiles table
+for _, profile in ipairs(chromeProfiles) do
+	-- Hyper + key: focus profile, leave other windows alone
+	hyper:bind({}, profile.key, function()
+		switchChromeProfile(profile.name, profile.dir, false)
+		hyper.triggered = true
 	end)
-	lastChromeProfile = profileKey
-	hyper.triggered = true
+	-- Hyper + Shift + key: focus profile, minimize other profiles' windows
+	hyper:bind({ "shift" }, profile.key, function()
+		switchChromeProfile(profile.name, profile.dir, true)
+		hyper.triggered = true
+	end)
 end
-
--- Debug: show Chrome windows with tracking info (Hyper + Shift + D)
-local function debugChromeWindows()
-	local chrome = hs.application.find("Google Chrome")
-	if chrome then
-		local windows = chrome:allWindows()
-		local info = "Chrome Windows:\n"
-		for i, window in ipairs(windows) do
-			local title = window:title() or "no title"
-			local subrole = window:subrole() or "?"
-			local tag = subrole == "AXStandardWindow" and "[REAL]" or "[companion]"
-			local tracked = ""
-			for key, id in pairs(chromeProfileWindows) do
-				if id == window:id() then
-					tracked = " (" .. key .. ")"
-					break
-				end
-			end
-			info = info .. i .. ": " .. tag .. tracked .. " " .. title .. "\n"
-		end
-		hs.alert.show(info, 5)
-	else
-		hs.alert.show("Chrome not running")
-	end
-end
-
-hyper:bind({ "shift" }, "d", function()
-	debugChromeWindows()
-	hyper.triggered = true
-end)
-
--- Show/hide work Chrome
-hyper:bind({}, "c", function()
-	activateChromeProfile(chromeProfiles.personal, "personal")
-end)
-
--- Show/hide personal Chrome
-hyper:bind({}, "w", function()
-	activateChromeProfile(chromeProfiles.work, "work")
-end)
--- Show/hide Discord
-hyper:bind({}, "d", function()
-	local discord = hs.application.find("discord")
-	if discord:isFrontmost() then
-		discord:hide()
-	else
-		hs.application.launchOrFocus("/Applications/discord.app")
-	end
-end)
--- Show/hide Excel
-hyper:bind({}, "e", function()
-	local excel = hs.application.find("excel")
-	if excel:isFrontmost() then
-		excel:hide()
-	else
-		hs.application.launchOrFocus("/Applications/Microsoft Excel.app")
-	end
-end)
--- Show/hide Kindle
---hyper:bind({}, "k", function()
---	local excel = hs.application.find("kindle")
---	if excel:isFrontmost() then
---		excel:hide()
---	else
---		hs.application.launchOrFocus("/Applications/Kindle.app")
---	end
---end)
--- Show/hide Messages
-hyper:bind({}, "m", function()
-	local excel = hs.application.find("Messages")
-	if excel:isFrontmost() then
-		excel:hide()
-	else
-		hs.application.launchOrFocus("/Users/spencerduran/Applications/")
-	end
-end)
--- Show/hide Outlook
-hyper:bind({ "shift" }, "o", function()
-	local outlook = hs.application.find("outlook")
-	if outlook:isFrontmost() then
-		outlook:hide()
-	else
-		hs.application.launchOrFocus("/Applications/Microsoft Outlook.app")
-	end
-end)
--- Show/hide Obsidian
-hyper:bind({}, "o", function()
-	local obsidian = hs.application.find("obsidian")
-	if obsidian:isFrontmost() then
-		obsidian:hide()
-	else
-		hs.application.launchOrFocus("/Applications/Obsidian.app/Contents/MacOS/Obsidian")
-	end
-end)
--- Show/hide pycharm
---hyper:bind({}, 'y', function()
---  local postman = hs.application.find('pycharm')
---  if postman:isFrontmost() then
---    postman:hide()
---  else
---    hs.application.launchOrFocus('/Applications/pycharm.app')
---  end
---end)
--- Show/hide spotify
-hyper:bind({}, "q", function()
-	local spotify = hs.application.find("spotify")
-	if spotify then
-		if spotify:isFrontmost() then
-			spotify:hide()
-		else
-			spotify:activate()
-		end
-	else
-		hs.application.launchOrFocus("Spotify")
-	end
-end)
--- Show/hide Acrobat Reader
-hyper:bind({}, "r", function()
-	local slack = hs.application.find("reader")
-	if slack:isFrontmost() then
-		slack:hide()
-	else
-		hs.application.launchOrFocus("/Applications/Adobe Acrobat Reader.app")
-	end
-end)
--- Show/hide Tradingview
-hyper:bind({}, "s", function()
-	local slack = hs.application.find("slack")
-	if slack:isFrontmost() then
-		slack:hide()
-	else
-		hs.application.launchOrFocus("/Applications/Slack.app")
-	end
-end)
--- Show/hide teams
-hyper:bind({}, "t", function()
-	local microsoft_teams = hs.application.find("teams")
-	if microsoft_teams:isFrontmost() then
-		microsoft_teams:hide()
-	else
-		hs.application.launchOrFocus("/Applications/Microsoft Teams.app")
-	end
-end)
--- Show/hide Tradingview
-hyper:bind({ "shift" }, "t", function()
-	local slack = hs.application.find("tradingview")
-	if slack:isFrontmost() then
-		slack:hide()
-	else
-		hs.application.launchOrFocus("/Applications/TradingView.app")
-	end
-end)
--- Show/hide Visual Studio Code
-hyper:bind({}, "v", function()
-	local visual_studio_code = hs.application.find("code")
-	if visual_studio_code:isFrontmost() then
-		visual_studio_code:hide()
-	else
-		hs.application.launchOrFocus("/Applications/visual studio code.app")
-	end
-end)
--- Show/hide Microsoft Word
-hyper:bind({ "shift" }, "w", function()
-	local microsoft_word = hs.application.find("word")
-	if microsoft_word:isFrontmost() then
-		microsoft_word:hide()
-	else
-		hs.application.launchOrFocus("/Applications/Microsoft Word.app")
-	end
-end)
--- Show/hide firefox
-hyper:bind({}, "x", function()
-	local firefox = hs.application.find("firefox")
-	if firefox:isFrontmost() then
-		firefox:hide()
-	else
-		hs.application.launchOrFocus("/Applications/firefox.app")
-	end
-end)
--- Show/hide zoom
-hyper:bind({}, "z", function()
-	local zoom = hs.application.find("zoom")
-	if zoom:isFrontmost() then
-		zoom:hide()
-	else
-		hs.application.launchOrFocus("/Applications/zoom.us.app")
-	end
-end)
 
 -----------------------
 -- Window Management --
@@ -573,18 +337,15 @@ end)
 local wm = require("window-management")
 ------------------ MOVEMENT
 hyper:bind({ "shift" }, "h", function()
-	hs.window.focusedWindow():moveOneScreenWest()
+	wm.moveWindowToPosition(wm.screenPositions.fullLeft)
 end)
 hyper:bind({ "shift" }, "l", function()
-	hs.window.focusedWindow():moveOneScreenEast()
+	wm.moveWindowToPosition(wm.screenPositions.fullRight)
 end)
 
 ------------------ FULLSCREEN
 hyper:bind({}, "f", function()
 	wm.windowMaximize(0)
-end)
-hyper:bind({ "shift" }, "f", function()
-	wm.moveWindowToPosition(wm.screenPositions.fullRight)
 end)
 hyper:bind({}, "return", function()
 	wm.windowMaximize(0)
@@ -593,7 +354,6 @@ end)
 hyper:bind({}, "0", function()
 	wm.moveWindowToPosition(wm.screenPositions.midmid)
 end)
--- Removed duplicate Shift+0 bindings (both bottom and fullRight were redundant)
 
 ------------------ HALVES
 hyper:bind({}, "h", function()
@@ -614,7 +374,7 @@ end)
 hyper:bind({}, "l", function()
 	wm.moveWindowToPosition(wm.screenPositions.right)
 end)
------------------- CORNERS
+------------------ GRID POSITIONS
 hyper:bind({}, "1", function()
 	wm.moveWindowToPosition(wm.screenPositions.thirdleft)
 end)
@@ -651,55 +411,25 @@ end)
 hyper:bind({ "shift" }, "4", function()
 	wm.moveWindowToPosition(wm.screenPositions.bottomRight)
 end)
---hyper:bind({}, "9", function()
---	local win = hs.window.focusedWindow()
---	if win then
---		local frame = win:frame()
---		frame.w = 1920
---		frame.h = 1080
---		win:setFrame(frame)
---	end
---end)
 
------------------- THIRDS
---hyper:bind({}, "1", function()
---	wm.moveWindowToPosition(wm.screenPositions.thirdleft)
---end)
---hyper:bind({}, "2", function()
---	wm.moveWindowToPosition(wm.screenPositions.mid)
---end)
---hyper:bind({}, "3", function()
---	wm.moveWindowToPosition(wm.screenPositions.thirdright)
---end)
---hyper:bind({}, "4", function()
---	wm.moveWindowToPosition(wm.screenPositions.topLeftthird)
---end)
---hyper:bind({}, "5", function()
---	wm.moveWindowToPosition(wm.screenPositions.bottomLeftthird)
---end)
 -------------------------------------------
 -- Window Highlight for Chrome Only --
 -- Creates a colored border around Chrome when focused
 -------------------------------------------
--- Configuration
 local config = {
-	strokeColor = { red = 124, blue = 255, green = 0, alpha = 1 },
+	strokeColor = { red = 124 / 255, blue = 255 / 255, green = 0, alpha = 1 },
 	strokeWidth = 4,
 }
 
--- Initialize border canvas
 local border = nil
 
 local function drawBorder()
 	local win = hs.window.focusedWindow()
 	if win and win:application():name() == "Google Chrome" then
-		-- Create border canvas if it doesn't exist
 		if not border then
 			border = hs.canvas.new(win:frame())
 		end
-		-- Update border frame to match window
 		border:frame(win:frame())
-		-- Set border properties
 		border[1] = {
 			type = "rectangle",
 			strokeColor = config.strokeColor,
@@ -724,6 +454,4 @@ windowFilter:subscribe(hs.window.filter.windowUnfocused, function()
 		border:hide()
 	end
 end)
-
--- Optional: Add this line if you want the border to update when Chrome windows are resized
 windowFilter:subscribe(hs.window.filter.windowsChanged, drawBorder)
