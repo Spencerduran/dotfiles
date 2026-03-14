@@ -11,7 +11,6 @@ local QUARTER_THIRD_GRID_SIZE = GRID_SIZE / 4 + QUARTER_GRID_SIZE
 -- Also, don't animate window changes.
 hs.grid.setGrid(GRID_SIZE .. "x" .. GRID_SIZE)
 hs.grid.setMargins({ 1, 1 })
-hs.window.animationDuration = 0
 local screenPositions = {}
 -- Quarter Windows
 screenPositions.quarterleft = {
@@ -65,13 +64,13 @@ screenPositions.midleft = {
 screenPositions.fullLeft = {
 	x = 0,
 	y = 0,
-	w = QUARTER_GRID_SIZE + QUARTER_GRID_SIZE + QUARTER_GRID_SIZE,
+	w = GRID_SIZE - THIRD_GRID_SIZE,
 	h = GRID_SIZE,
 }
 screenPositions.fullRight = {
-	x = QUARTER_GRID_SIZE,
+	x = THIRD_GRID_SIZE,
 	y = 0,
-	w = QUARTER_GRID_SIZE + QUARTER_GRID_SIZE + QUARTER_GRID_SIZE,
+	w = GRID_SIZE - THIRD_GRID_SIZE,
 	h = GRID_SIZE,
 }
 screenPositions.midright = {
