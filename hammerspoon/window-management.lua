@@ -212,4 +212,20 @@ function This.windowMaximize(factor, window)
 		window:maximize()
 	end
 end
+function This.moveWindowToScreen(direction, window)
+	if window == nil then
+		window = hs.window.focusedWindow()
+	end
+	if window then
+		local targetScreen
+		if direction == "left" then
+			targetScreen = window:screen():toWest()
+		elseif direction == "right" then
+			targetScreen = window:screen():toEast()
+		end
+		if targetScreen then
+			window:moveToScreen(targetScreen, false, true)
+		end
+	end
+end
 return This

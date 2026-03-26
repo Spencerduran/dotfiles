@@ -31,5 +31,5 @@ fish_add_path /Users/spencerduran/.spicetify
 # Claude memory vault
 set -gx VAULT_DIR ~/vaults/claude_memory
 
-# Initialize zoxide
-zoxide init fish | source
+# Claude sessions alias
+alias cs="python3 ~/.claude/plugins/marketplaces/personal-os-skills/skills/sync-claude-sessions/scripts/claude-sessions"

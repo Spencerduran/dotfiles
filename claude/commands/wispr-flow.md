@@ -1,0 +1,1 @@
+Analyze Wispr Flow voice dictation data. Get stats, search dictation history, export data, or view visualizations. Use when you want to see dictation analytics, word counts, or search what you've dictated.

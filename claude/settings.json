@@ -1,0 +1,191 @@
+{
+  "env": {
+    "CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING": "1",
+    "MAX_THINKING_TOKENS": "31999"
+  },
+  "permissions": {
+    "defaultMode": "bypassPermissions"
+  },
+  "model": "sonnet",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "nohup afplay -v 0.2 ~/.claude/sounds/good-to-go-sir.wav >/dev/null 2>&1 &"
+          }
+        ]
+      },
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "curl -sf --max-time 2 http://localhost:8181/health >/dev/null 2>&1 || qmd mcp --http --daemon; qmd update --quiet"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$HOME/.claude/hooks/gsd-check-update.js\""
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sounds=(~/.claude/sounds/orders-received.wav ~/.claude/sounds/affirmative.wav ~/.claude/sounds/right-away-sir.wav ~/.claude/sounds/read-you.wav ~/.claude/sounds/cant-believe.wav ~/.claude/sounds/this-too.wav); nohup afplay -v 0.2 \"${sounds[$RANDOM % ${#sounds[@]}]}\" >/dev/null 2>&1 &"
+          }
+        ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/plugins/marketplaces/personal-os-skills/skills/sync-claude-sessions/scripts/claude-sessions sync",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sounds=(~/.claude/sounds/jobs-finished.wav ~/.claude/sounds/orders-captain.wav ~/.claude/sounds/reporting-for-duty.wav); nohup afplay -v 0.2 \"${sounds[$RANDOM % ${#sounds[@]}]}\" >/dev/null 2>&1 &"
+          }
+        ]
+      },
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "VAULT_DIR=$HOME/vaults/claude_memory python3 ~/.claude/plugins/marketplaces/personal-os-skills/skills/sync-claude-sessions/scripts/claude-sessions sync",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/index-sessions.sh >> ~/.claude/hooks/index-sessions.log 2>&1",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/index-sessions.sh >> ~/.claude/hooks/index-sessions.log 2>&1",
+            "timeout": 30,
+            "async": true
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.local/bin/dcg"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/spencer/.claude/hooks/gsd-prompt-guard.js\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$HOME/.claude/hooks/gsd-context-monitor.js\"",
+            "timeout": 10
+          }
+        ],
+        "matcher": "Bash|Edit|Write|MultiEdit|Agent|Task"
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "node \"$HOME/.claude/hooks/gsd-statusline.js\""
+  },
+  "enabledPlugins": {
+    "pyright-lsp@claude-plugins-official": true,
+    "lua-lsp@claude-plugins-official": true,
+    "csharp-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "qmd@qmd": false,
+    "tasknotes-skill@personal-os-skills": true,
+    "wispr-flow-skill@personal-os-skills": false,
+    "recall-skill@personal-os-skills": true,
+    "sync-claude-sessions-skill@personal-os-skills": true,
+    "superpowers@claude-plugins-official": true,
+    "obsidian@obsidian-skills": true,
+    "claude-mem@thedotmack": true,
+    "rust-analyzer-lsp@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "qmd": {
+      "source": {
+        "source": "github",
+        "repo": "tobi/qmd"
+      }
+    },
+    "personal-os-skills": {
+      "source": {
+        "source": "github",
+        "repo": "spencerduran/personal-os-skills"
+      }
+    },
+    "superpowers-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers-marketplace"
+      }
+    },
+    "obsidian-skills": {
+      "source": {
+        "source": "github",
+        "repo": "kepano/obsidian-skills"
+      }
+    },
+    "thedotmack": {
+      "source": {
+        "source": "github",
+        "repo": "thedotmack/claude-mem"
+      }
+    }
+  },
+  "alwaysThinkingEnabled": true,
+  "skipDangerousModePermissionPrompt": true
+}
