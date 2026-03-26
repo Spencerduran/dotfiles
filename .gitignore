@@ -1,4 +1,5 @@
 .DS_Store
+fish/fish_variables
 ./fish/jbox.fish
 ./fish/eftp.fish
 ./fish/com.fish

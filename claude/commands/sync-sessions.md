@@ -1,0 +1,1 @@
+Sync Claude Code sessions to Obsidian markdown. Export sessions, resume previous sessions, add notes to sessions, or close sessions. Use when you want to log or manage your Claude Code conversation history.

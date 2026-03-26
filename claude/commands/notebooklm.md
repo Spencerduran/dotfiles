@@ -1,0 +1,1 @@
+Import NotebookLM notebooks into Obsidian as linked knowledge graphs. Sources become wikilink-able files, Q&A answers get citations resolved to [[wikilinks]] with passage-level deep links. Use to turn NotebookLM research into vault knowledge.

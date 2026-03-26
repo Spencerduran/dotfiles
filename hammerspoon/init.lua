@@ -68,6 +68,7 @@ end
 local appBindings = {
 	{ key = "a", name = "alacritty", path = "/Applications/Alacritty.app" },
 	{ key = "d", name = "discord", path = "/Applications/discord.app" },
+	{ key = "i", name = "cmux", path = "/Applications/cmux.app" },
 	{ key = "e", name = "excel", path = "/Applications/Microsoft Excel.app" },
 	{ key = "m", name = "Messages", path = "/System/Applications/Messages.app" },
 	{ key = "o", name = "obsidian", path = "/Applications/Obsidian.app" },
@@ -337,9 +338,12 @@ end
 local wm = require("window-management")
 ------------------ MOVEMENT
 hyper:bind({ "shift" }, "h", function()
-	wm.moveWindowToPosition(wm.screenPositions.fullLeft)
+	wm.moveWindowToScreen("left")
 end)
 hyper:bind({ "shift" }, "l", function()
+	wm.moveWindowToScreen("right")
+end)
+hyper:bind({ "shift" }, "f", function()
 	wm.moveWindowToPosition(wm.screenPositions.fullRight)
 end)
 

@@ -13,7 +13,18 @@ function fish_prompt
         end
 
         function _is_git_dirty
-            echo (git status -s --ignore-submodules=dirty 2>/dev/null)
+            if command -q timeout
+                set -l result (command timeout 2 git status -s --ignore-submodules=dirty 2>/dev/null)
+            else if command -q gtimeout
+                set -l result (command gtimeout 2 git status -s --ignore-submodules=dirty 2>/dev/null)
+            else
+                set -l result (command git status -s --ignore-submodules=dirty 2>/dev/null)
+            end
+            if test $status -eq 124
+                echo TIMEOUT
+            else
+                echo $result
+            end
         end
 
         function _is_git_repo
@@ -77,7 +88,10 @@ function fish_prompt
         set -l repo_branch $red(_repo_branch_name $repo_type)
         set repo_info "$blue $repo_type:($repo_branch$blue)"
 
-        if [ (_is_repo_dirty $repo_type) ]
+        set -l dirty_result (_is_repo_dirty $repo_type)
+        if test "$dirty_result" = TIMEOUT
+            set repo_info "$repo_info$yellow ⏱ git slow"
+        else if test -n "$dirty_result"
             set -l dirty "$yellow ✗"
             set repo_info "$repo_info$dirty"
         end

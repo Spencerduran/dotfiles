@@ -46,6 +46,25 @@ return {
 			{ "<leader>fp", "<cmd>Telescope projects<cr>", desc = "Projects" },
 			{ "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Open Recent File" },
 			{ "<leader>fs", "<cmd>w<cr>", desc = "Save Buffer" },
+		{
+			"<leader>fD",
+			function()
+				local file = vim.fn.expand("%:p")
+				local dir = vim.fn.expand("%:p:h")
+				local bufnr = vim.api.nvim_get_current_buf()
+				local bufcount = #vim.fn.getbufinfo({ buflisted = 1 })
+				if bufcount <= 1 then
+					vim.cmd("Alpha")
+					vim.fn.delete(file)
+					vim.api.nvim_buf_delete(bufnr, { force = true })
+				else
+					vim.fn.delete(file)
+					vim.cmd("Bdelete")
+				end
+				require("nvim-tree.api").tree.open({ path = dir })
+			end,
+			desc = "Delete file and close buffer",
+		},
 			{ "<leader>ft", "<cmd>NvimTreeToggle<cr>", desc = "Toggle Tree" },
 
 			--------------------------------------------------
