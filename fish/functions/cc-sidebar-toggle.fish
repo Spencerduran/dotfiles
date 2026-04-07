@@ -1,0 +1,1 @@
+/Users/spencerduran/repos/dotfiles/fish/functions/cc-sidebar-toggle.fish
