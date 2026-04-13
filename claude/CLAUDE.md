@@ -174,6 +174,8 @@ The `cocoindex-code` MCP server provides semantic code search via a `search` too
 
 ## Writing Standards (stop-slop)
 
+**Before writing any prose — notes, annotations, docs, runbooks, messages — invoke the `stop-slop` skill via the Skill tool.** Do not rely on the rules below from memory. Invoke the skill, then write.
+
 When writing any prose — notes, annotations, docs, messages — apply these rules. Full skill at `~/.claude/skills/stop-slop/SKILL.md`.
 
 **Core rules:**
