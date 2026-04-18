@@ -206,12 +206,13 @@ hyper:bind({}, "p", function()
 end)
 
 -- Chrome profile window management (stateless, title-based matching)
+-- names: all possible profile display names across machines
 local chromeProfiles = {
-	{ key = "c", name = "Spencer", dir = "Default" },
-	{ key = "w", name = "Spencer (Work)", dir = "Profile 5" },
+	{ key = "c", names = { "Spencer" }, dir = "Default" },
+	{ key = "w", names = { "Spencer (Work)", "Spencer (Person 2)" }, dir = "Profile 5" },
 }
 
-local function switchChromeProfile(profileName, profileDir, minimizeOthers)
+local function switchChromeProfile(profileNames, profileDir, minimizeOthers)
 	local chrome = hs.application.find("Google Chrome")
 
 	-- Chrome not running — launch with profile
@@ -220,11 +221,18 @@ local function switchChromeProfile(profileName, profileDir, minimizeOthers)
 		return
 	end
 
-	-- Collect windows whose title ends with " - profileName" (standard windows only)
-	local pattern = " %- " .. profileName:gsub("([%(%)%.%%%+%-%*%?%[%]%^%$])", "%%%1") .. "$"
+	-- Collect windows matching any of the profile names
+	local function matchesProfile(title)
+		for _, name in ipairs(profileNames) do
+			local pattern = " %- " .. name:gsub("([%(%)%.%%%+%-%*%?%[%]%^%$])", "%%%1") .. "$"
+			if title:match(pattern) then return true end
+		end
+		return false
+	end
+
 	local matches = {}
 	for _, win in ipairs(chrome:allWindows()) do
-		if win:subrole() == "AXStandardWindow" and (win:title() or ""):match(pattern) then
+		if win:subrole() == "AXStandardWindow" and matchesProfile(win:title() or "") then
 			matches[#matches + 1] = win
 		end
 	end
@@ -306,11 +314,14 @@ hyper:bind({ "shift" }, "d", function()
 		local tag = subrole == "AXStandardWindow" and "[REAL]" or "[companion]"
 		local profile = ""
 		for _, p in ipairs(chromeProfiles) do
-			local pat = " %- " .. p.name:gsub("([%(%)%.%%%+%-%*%?%[%]%^%$])", "%%%1") .. "$"
-			if title:match(pat) then
-				profile = " [" .. p.name .. "]"
-				break
+			for _, name in ipairs(p.names) do
+				local pat = " %- " .. name:gsub("([%(%)%.%%%+%-%*%?%[%]%^%$])", "%%%1") .. "$"
+				if title:match(pat) then
+					profile = " [" .. name .. "]"
+					break
+				end
 			end
+			if profile ~= "" then break end
 		end
 		info = info .. i .. ": " .. tag .. profile .. " " .. title .. "\n"
 	end
@@ -320,14 +331,14 @@ end)
 
 -- Bind hotkeys from profiles table
 for _, profile in ipairs(chromeProfiles) do
-	-- Hyper + key: focus profile, leave other windows alone
+	-- Hyper + key: focus profile, minimize other profiles' windows
 	hyper:bind({}, profile.key, function()
-		switchChromeProfile(profile.name, profile.dir, false)
+		switchChromeProfile(profile.names, profile.dir, true)
 		hyper.triggered = true
 	end)
-	-- Hyper + Shift + key: focus profile, minimize other profiles' windows
+	-- Hyper + Shift + key: focus profile, leave other windows alone
 	hyper:bind({ "shift" }, profile.key, function()
-		switchChromeProfile(profile.name, profile.dir, true)
+		switchChromeProfile(profile.names, profile.dir, false)
 		hyper.triggered = true
 	end)
 end
@@ -348,7 +359,7 @@ end
 ------------------ MOVEMENT
 wmBind({ "shift" }, "h", function() wm.moveWindowToScreen("left") end)
 wmBind({ "shift" }, "l", function() wm.moveWindowToScreen("right") end)
-wmBind({ "shift" }, "f", function() wm.moveWindowToPosition(wm.screenPositions.fullRight) end)
+wmBind({ "shift" }, "f", function() wm.moveWindowToPosition(wm.screenPositions.centeredLarge) end)
 
 ------------------ FULLSCREEN
 wmBind({}, "f",      function() wm.windowMaximize(0) end)
@@ -382,7 +393,7 @@ wmBind({ "shift" }, "4", function() wm.moveWindowToPosition(wm.screenPositions.b
 -- Creates a colored border around Chrome when focused
 -------------------------------------------
 local config = {
-	strokeColor = { red = 124 / 255, blue = 255 / 255, green = 0, alpha = 1 },
+	strokeColor = { red = 80 / 255, green = 250 / 255, blue = 123 / 255, alpha = 1 }, -- Dracula #50fa7b
 	strokeWidth = 4,
 }
 

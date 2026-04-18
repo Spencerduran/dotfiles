@@ -73,6 +73,12 @@ screenPositions.fullRight = {
 	w = GRID_SIZE - THIRD_GRID_SIZE,
 	h = GRID_SIZE,
 }
+screenPositions.centeredLarge = {
+	x = QUARTER_GRID_SIZE,
+	y = 0,
+	w = HALF_GRID_SIZE,
+	h = GRID_SIZE,
+}
 screenPositions.midright = {
 	x = QUARTER_GRID_SIZE + QUARTER_GRID_SIZE,
 	y = 0,
@@ -80,9 +86,9 @@ screenPositions.midright = {
 	h = GRID_SIZE,
 }
 screenPositions.quarterright = {
-	x = THIRD_GRID_SIZE + THIRD_GRID_SIZE,
+	x = GRID_SIZE - QUARTER_GRID_SIZE,
 	y = 0,
-	w = THIRD_GRID_SIZE,
+	w = QUARTER_GRID_SIZE,
 	h = GRID_SIZE,
 }
 screenPositions.midmid = {

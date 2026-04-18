@@ -41,9 +41,9 @@ return {
 		},
 		workspaces = {
 			{
-				name = "second_brain",
-				path = "~/vaults/second_brain",
-				notes_subdir = "000 Inbox",
+				name = "mind_forge",
+				path = "~/vaults/mind_forge",
+				notes_subdir = "00 - Inbox",
 				new_notes_location = "notes_subdir",
 			},
 		},
@@ -52,15 +52,9 @@ return {
 			return title
 		end,
 		templates = {
-			subdir = "300 Resources/Templates",
+			subdir = "/Users/spencer/vaults/mind_forge/04 - System/Templates/",
 			date_format = "%Y-%m-%d",
 			time_format = "%H:%M",
-		},
-		daily_notes = {
-			folder = "400 Daily Notes",
-			date_format = "%Y-%m-%d",
-			alias_format = "%B %-d, %Y",
-			template = "Daily Note Template.md",
 		},
 		completion = {
 			nvim_cmp = true,

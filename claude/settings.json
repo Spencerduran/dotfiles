@@ -22,7 +22,15 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"/Users/spencerduran/.claude/hooks/gsd-check-update.js\""
+            "command": "node \"/Users/spencer/.claude/hooks/gsd-check-update.js\""
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"/Users/spencer/.claude/hooks/gsd-session-state.sh\""
           }
         ]
       }
@@ -83,6 +91,46 @@
             "command": "bash ~/.claude/hooks/stop-slop-reminder.sh"
           }
         ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/spencer/.claude/hooks/gsd-prompt-guard.js\"",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/spencer/.claude/hooks/gsd-read-guard.js\"",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/spencer/.claude/hooks/gsd-workflow-guard.js\"",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"/Users/spencer/.claude/hooks/gsd-validate-commit.sh\"",
+            "timeout": 5
+          }
+        ]
       }
     ],
     "PostToolUse": [
@@ -90,7 +138,19 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"/Users/spencerduran/.claude/hooks/gsd-context-monitor.js\""
+            "command": "node \"/Users/spencer/.claude/hooks/gsd-context-monitor.js\"",
+            "timeout": 10
+          }
+        ],
+        "matcher": "Bash|Edit|Write|MultiEdit|Agent|Task"
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"/Users/spencer/.claude/hooks/gsd-phase-boundary.sh\"",
+            "timeout": 5
           }
         ]
       }
@@ -98,7 +158,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "node \"/Users/spencerduran/.claude/hooks/gsd-statusline.js\""
+    "command": "node \"/Users/spencer/.claude/hooks/gsd-statusline.js\""
   },
   "enabledPlugins": {
     "pyright-lsp@claude-plugins-official": true,
@@ -115,7 +175,9 @@
     "claude-mem@thedotmack": true,
     "atlassian@claude-plugins-official": true,
     "rust-analyzer-lsp@claude-plugins-official": true,
-    "sound-fx@claude-sound-fx": true
+    "sound-fx@claude-sound-fx": true,
+    "chrome-devtools-mcp@claude-plugins-official": true,
+    "arscontexta@agenticnotetaking": true
   },
   "extraKnownMarketplaces": {
     "qmd": {
@@ -153,8 +215,24 @@
         "source": "github",
         "repo": "6m1w/claude-sound-fx"
       }
+    },
+    "agenticnotetaking": {
+      "source": {
+        "source": "github",
+        "repo": "agenticnotetaking/arscontexta"
+      }
     }
   },
+  "mcpServers": {
+    "snowflake-mlg": {
+      "url": "https://mfqonva-gja08302.snowflakecomputing.com/api/v2/databases/MLG_SNOWFLAKE/schemas/UTILITY/mcp-servers/CLAUDE_MCP_V2",
+      "oauth": {
+        "clientId": "***REMOVED***",
+        "clientSecret": "***REMOVED***"
+      }
+    }
+  },
+  "theme": "dark-ansi",
   "alwaysThinkingEnabled": true,
   "skipDangerousModePermissionPrompt": true
 }

@@ -87,13 +87,99 @@ style = "Bold Italic"
 #[[colors.indexed_colors]]
 #index = 17
 #color = '#db4b4b' # Deep red
+##############################
+# DRACULA
+##############################
+[colors.primary]
+#background = '#111111'
+background = '#011628' # Modified tokyonight deep blue
+foreground = '#f8f8f2'
+
+[colors.normal]
+black   = '#21222c'
+red     = '#ff5555'
+green   = '#50fa7b'
+yellow  = '#f1fa8c'
+blue    = '#bd93f9'
+magenta = '#ff79c6'
+cyan    = '#8be9fd'
+white   = '#f8f8f2'
+
+[colors.bright]
+black   = '#6272a4'
+red     = '#ff6e6e'
+green   = '#69ff94'
+yellow  = '#ffffa5'
+blue    = '#d6acff'
+magenta = '#ff92df'
+cyan    = '#a4ffff'
+white   = '#ffffff'
+
+##############################
+# CATPPUCCIN MOCHA
+##############################
+#[colors.primary]
+#background = '#011628'
+#foreground = '#cdd6f4'
+#
+#[colors.normal]
+#black   = '#45475a'
+#red     = '#f38ba8'
+#green   = '#a6e3a1'
+#yellow  = '#f9e2af'
+#blue    = '#89b4fa'
+#magenta = '#f5c2e7'
+#cyan    = '#94e2d5'
+#white   = '#bac2de'
+#
+#[colors.bright]
+#black   = '#585b70'
+#red     = '#f38ba8'
+#green   = '#a6e3a1'
+#yellow  = '#f9e2af'
+#blue    = '#89b4fa'
+#magenta = '#f5c2e7'
+#cyan    = '#94e2d5'
+#white   = '#a6adc8'
+
+##############################
+# SYNTHWAVE
+##############################
+#[colors.primary]
+##background = '#0d0d0d'
+##foreground = '#ede0ff'
+#background = '#011628' # Modified background
+#foreground = '#CBE0F0' # Modified light text
+#
+#[colors.normal]
+#black   = '#0d0d0d'
+#red     = '#ff2d78'
+#green   = '#72ff72'
+#yellow  = '#ffd319'
+#blue    = '#4cc9f0'
+#magenta = '#b44fff'
+#cyan    = '#0ff0fc'
+#white   = '#ede0ff'
+#
+#[colors.bright]
+#black   = '#3a2d5c'
+#red     = '#ff6b9d'
+#green   = '#a0ffb0'
+#yellow  = '#ffe566'
+#blue    = '#74d7ff'
+#magenta = '#dd88ff'
+#cyan    = '#66ffff'
+#white   = '#f8f0ff'
+
 ##################################
 ##    TOKYO NIGHT STORM COLORS   #
 ##################################
 ## Default colors
 #[colors.primary]
-#background = '#24283b' # Storm background
-#foreground = '#c0caf5' # Light text
+##background = '#2d353b'
+##foreground = '#d3c6aa'
+#background = '#011628' # Modified background
+#foreground = '#CBE0F0' # Modified light text
 #
 ## Normal colors
 #[colors.normal]
@@ -128,59 +214,59 @@ style = "Bold Italic"
 #################################
 #  MODIFIED TOKYO NIGHT COLORS  #
 #################################
-# Default colors
-[colors.primary]
-background = '#011628' # Modified background
-foreground = '#CBE0F0' # Modified light text
-
-# Normal colors
-[colors.normal]
-black = '#011423'   # Modified from bg_dark
-red = '#f7768e'     # Kept original
-green = '#9ece6a'   # Kept original
-yellow = '#e0af68'  # Kept original
-blue = '#7aa2f7'    # Kept original
-magenta = '#bb9af7' # Kept original
-cyan = '#7dcfff'    # Kept original
-white = '#B4D0E9'   # Modified from fg_dark
-
-# Bright colors
-[colors.bright]
-black = '#627E97'   # Modified from fg_gutter
-red = '#f7768e'     # Kept original
-green = '#9ece6a'   # Kept original
-yellow = '#e0af68'  # Kept original
-blue = '#7aa2f7'    # Kept original
-magenta = '#bb9af7' # Kept original
-cyan = '#7dcfff'    # Kept original
-white = '#CBE0F0'   # Modified from fg
-
-# Indexed colors
-[[colors.indexed_colors]]
-index = 16
-color = '#ff9e64' # Kept original orange
-
-[[colors.indexed_colors]]
-index = 17
-color = '#db4b4b' # Kept original deep red
-
-# Additional colors from your Neovim theme
-[[colors.indexed_colors]]
-index = 18
-color = '#143652' # bg_highlight
-
-[[colors.indexed_colors]]
-index = 19
-color = '#0A64AC' # bg_search
-
-[[colors.indexed_colors]]
-index = 20
-color = '#275378' # bg_visual
-
-[[colors.indexed_colors]]
-index = 21
-color = '#547998' # border
-##############################
+### Default colors
+##[colors.primary]
+##background = '#011628' # Modified background
+##foreground = '#CBE0F0' # Modified light text
+##
+### Normal colors
+##[colors.normal]
+##black = '#011423'   # Modified from bg_dark
+##red = '#f7768e'     # Kept original
+##green = '#9ece6a'   # Kept original
+##yellow = '#e0af68'  # Kept original
+##blue = '#7aa2f7'    # Kept original
+##magenta = '#bb9af7' # Kept original
+##cyan = '#7dcfff'    # Kept original
+##white = '#B4D0E9'   # Modified from fg_dark
+##
+### Bright colors
+##[colors.bright]
+##black = '#627E97'   # Modified from fg_gutter
+##red = '#f7768e'     # Kept original
+##green = '#9ece6a'   # Kept original
+##yellow = '#e0af68'  # Kept original
+##blue = '#7aa2f7'    # Kept original
+##magenta = '#bb9af7' # Kept original
+##cyan = '#7dcfff'    # Kept original
+##white = '#CBE0F0'   # Modified from fg
+##
+### Indexed colors
+##[[colors.indexed_colors]]
+##index = 16
+##color = '#ff9e64' # Kept original orange
+##
+##[[colors.indexed_colors]]
+##index = 17
+##color = '#db4b4b' # Kept original deep red
+##
+### Additional colors from your Neovim theme
+##[[colors.indexed_colors]]
+##index = 18
+##color = '#143652' # bg_highlight
+##
+##[[colors.indexed_colors]]
+##index = 19
+##color = '#0A64AC' # bg_search
+##
+##[[colors.indexed_colors]]
+##index = 20
+##color = '#275378' # bg_visual
+##
+##[[colors.indexed_colors]]
+##index = 21
+##color = '#547998' # border
+################################
 #(Everforest Dark)
 #
 ## Default colors
