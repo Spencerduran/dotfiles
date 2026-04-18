@@ -16,7 +16,7 @@ function cc-sidebar-ensure
 
     if test -z "$sidebar_pane"
         # -f spans full window height regardless of pane layout
-        set new_pane (tmux split-window -h -f -l 50 -d -P -F '#{pane_id}' '~/.cargo/bin/recon --sidebar' 2>/dev/null)
+        set new_pane (tmux split-window -h -f -l 25 -d -P -F '#{pane_id}' '~/.cargo/bin/recon --sidebar' 2>/dev/null)
         if test -n "$new_pane"
             tmux select-pane -t "$new_pane" -T "cc-sidebar"
         end

@@ -10,11 +10,11 @@ local user_preferences = {
 
 	--name = "catppuccin",
 	--style = "mocha", --latte/frappe/macchiato/mocha
-	--transparent = false,
+	--transparent = true,
 
 	name = "tokyonight",
-	style = "storm", --night/storm/day/moon
-	--style = "night", --night/storm/day/moon
+	--style = "storm", --night/storm/day/moon
+	style = "night", --night/storm/day/moon
 	transparent = true,
 
 	--name = "rose-pine",
@@ -60,15 +60,15 @@ return {
 					transparent = transparent,
 				})
 			elseif theme == "tokyonight" then
-				local bg = "#011628"
-				local bg_dark = "#011423"
-				local bg_highlight = "#143652"
-				local bg_search = "#0A64AC"
-				local bg_visual = "#275378"
-				local fg = "#CBE0F0"
-				local fg_dark = "#B4D0E9"
-				local fg_gutter = "#627E97"
-				local border = "#547998"
+				local bg = "#111111"
+				local bg_dark = "#0d0d0d"
+				local bg_highlight = "#21222c"
+				local bg_search = "#bd93f9"
+				local bg_visual = "#44475a"
+				local fg = "#f8f8f2"
+				local fg_dark = "#e0e0e0"
+				local fg_gutter = "#6272a4"
+				local border = "#bd93f9"
 
 				require("tokyonight").setup({
 					style = style,
@@ -93,6 +93,14 @@ return {
 						colors.fg_float = fg
 						colors.fg_gutter = fg_gutter
 						colors.fg_sidebar = fg_dark
+						colors.blue = "#bd93f9"
+						colors.cyan = "#8be9fd"
+						colors.magenta = "#ff79c6"
+						colors.purple = "#bd93f9"
+						colors.yellow = "#f1fa8c"
+						colors.green = "#50fa7b"
+						colors.orange = "#ffb86c"
+						colors.red = "#ff5555"
 					end,
 				})
 			elseif theme == "catppuccin" then

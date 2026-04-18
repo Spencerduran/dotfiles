@@ -172,6 +172,16 @@ The `cocoindex-code` MCP server provides semantic code search via a `search` too
 - You need precise text matching (regex, literal strings)
 - You're doing go-to-definition or find-references on a known symbol
 
+## Lightpanda (Headless Browser)
+
+The `lightpanda` MCP server is a lightweight headless browser for fetching JavaScript-rendered pages. Use it instead of WebFetch when the target is a JS-heavy site that WebFetch/defuddle can't extract content from.
+
+**Always use lightpanda for:**
+- Twitter / X (x.com, twitter.com) — tweets, threads, profiles
+- Any page that returns empty or broken content via WebFetch
+
+**Tools:** `mcp__lightpanda__goto` to navigate, `mcp__lightpanda__markdown` to extract readable content.
+
 ## Writing Standards (stop-slop)
 
 **Before writing any prose — notes, annotations, docs, runbooks, messages — invoke the `stop-slop` skill via the Skill tool.** Do not rely on the rules below from memory. Invoke the skill, then write.
