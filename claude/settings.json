@@ -223,15 +223,6 @@
       }
     }
   },
-  "mcpServers": {
-    "snowflake-mlg": {
-      "url": "https://mfqonva-gja08302.snowflakecomputing.com/api/v2/databases/MLG_SNOWFLAKE/schemas/UTILITY/mcp-servers/CLAUDE_MCP_V2",
-      "oauth": {
-        "clientId": "***REMOVED***",
-        "clientSecret": "***REMOVED***"
-      }
-    }
-  },
   "theme": "dark-ansi",
   "alwaysThinkingEnabled": true,
   "skipDangerousModePermissionPrompt": true
