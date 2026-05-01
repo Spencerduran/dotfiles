@@ -1,0 +1,45 @@
+# Font
+font-family = VictorMono Nerd Font
+font-style = Bold
+font-style-bold = Bold
+font-style-italic = Italic
+font-style-bold-italic = Bold Italic
+font-size = 16
+
+# Background transparency — only affects background fill, text stays fully opaque
+# Was 0.1 in Alacritty (nearly invisible); raise toward 1.0 for less transparency
+background-opacity = 0.1
+background-opacity-cells = true
+macos-titlebar-style = transparent
+
+# Colors — Synthwave84 theme
+background = 230735
+foreground = F8F8F8
+
+# Cursor
+cursor-color = F8F8F8
+cursor-text = 282A36
+
+# Selection
+selection-background = 463465
+selection-foreground = F8F8F8
+
+# Normal colors (0-7)
+palette = 0=#241B2F
+palette = 1=#FE4450
+palette = 2=#72F1B8
+palette = 3=#FFCC00
+palette = 4=#61E2FF
+palette = 5=#FF7EDB
+palette = 6=#61E2FF
+palette = 7=#F8F8F8
+
+# Bright colors (8-15)
+palette = 8=#495495
+palette = 9=#FE4450
+palette = 10=#72F1B8
+palette = 11=#FFCC00
+palette = 12=#61E2FF
+palette = 13=#AF6DF9
+palette = 14=#61E2FF
+palette = 15=#F8F8F8

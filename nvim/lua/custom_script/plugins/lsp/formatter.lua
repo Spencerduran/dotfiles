@@ -17,8 +17,6 @@ return {
 				css = { "prettier" },
 				html = { "prettier" },
 				json = { "prettier" },
-				yaml = { "prettier" },
-				markdown = { "prettier" },
 				graphql = { "prettier" },
 				-- Python
 				python = { "isort", "black" },
