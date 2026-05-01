@@ -66,7 +66,7 @@ end
 
 -- Table-driven app switcher bindings
 local appBindings = {
-	{ key = "a", name = "alacritty", path = "/Applications/Alacritty.app" },
+	{ key = "a", name = "ghostty", path = "/Applications/Ghostty.app" },
 	{ key = "d", name = "discord", path = "/Applications/discord.app" },
 	{ key = "i", name = "cmux", path = "/Applications/cmux.app" },
 	{ key = "e", name = "excel", path = "/Applications/Microsoft Excel.app" },
@@ -89,6 +89,23 @@ for _, b in ipairs(appBindings) do
 		toggleApp(b.name, b.path)
 	end)
 end
+
+-- Ghostty solo: focus Ghostty and hide all other regular apps (Hyper + Shift + A)
+hyper:bind({ "shift" }, "a", function()
+	local ghostty = hs.application.find("ghostty")
+	if not ghostty then
+		hs.application.launchOrFocus("/Applications/Ghostty.app")
+		hyper.triggered = true
+		return
+	end
+	for _, app in ipairs(hs.application.runningApplications()) do
+		if app:name() ~= "Ghostty" and app:kind() == 1 then
+			app:hide()
+		end
+	end
+	ghostty:activate()
+	hyper.triggered = true
+end)
 
 -- Show/hide Zoom — prefers meeting window over home window
 hyper:bind({}, "z", function()
@@ -136,9 +153,9 @@ hyper:bind({}, "z", function()
 	hyper.triggered = true
 end)
 
--- Alacritty/Obsidian swap (Hyper + P)
+-- Ghostty/Obsidian swap (Hyper + P)
 hyper:bind({}, "p", function()
-	local alacritty = hs.application.find("alacritty")
+	local ghostty = hs.application.find("ghostty")
 	local obsidian = hs.application.find("obsidian")
 
 	local function getMainWindow(app)
@@ -196,10 +213,10 @@ hyper:bind({}, "p", function()
 		end
 	end
 
-	if alacritty and alacritty:isFrontmost() then
+	if ghostty and ghostty:isFrontmost() then
 		focusAndManageWindows(obsidian, "/Applications/Obsidian.app/")
 	else
-		focusAndManageWindows(alacritty, "/Applications/Alacritty.app")
+		focusAndManageWindows(ghostty, "/Applications/Ghostty.app")
 	end
 
 	hyper.triggered = true

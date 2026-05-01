@@ -51,8 +51,9 @@ return {
 		note_id_func = function(title)
 			return title
 		end,
+		disable_frontmatter = true,
 		templates = {
-			subdir = "/Users/spencer/vaults/mind_forge/04 - System/Templates/",
+			subdir = "~/vaults/mind_forge/04 - System/Templates/",
 			date_format = "%Y-%m-%d",
 			time_format = "%H:%M",
 		},
