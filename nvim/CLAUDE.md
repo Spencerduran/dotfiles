@@ -113,9 +113,10 @@ Documentation is maintained in `nvim/docs/`:
 
 ## Recent Changes
 
-- 2025-08-11: Initialized project documentation structure
-- Added comprehensive README and quick-reference guide
-- Set up task tracking system for improvements
+- 2025-08-11: Initialized project documentation structure, README, quick-reference guide, task tracking system
+- 2026-05-08: Added `lua/custom_script/tasks.lua`, a Telescope picker for TaskNotes (`04 - System/TaskNotes/Tasks/`). Sorts by priority descending. `<leader>ta` opens the picker, `<leader>tt` opens live grep in that folder.
+- 2026-05-08: Updated markdown autocmd in `core/autocmds.lua` to call `Wp()` for all `.md` files. Previously only fired for paths containing "Obsidian".
+- 2026-05-08: Patched `project.nvim` deprecation (`buf_get_clients` to `get_clients`). Patch lives in the lazy cache. See `docs/tasks/backlog/evaluate-project-nvim-replacement.md` for the replacement plan.
 
 ---
 

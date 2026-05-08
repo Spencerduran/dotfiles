@@ -348,14 +348,14 @@ end)
 
 -- Bind hotkeys from profiles table
 for _, profile in ipairs(chromeProfiles) do
-	-- Hyper + key: focus profile, minimize other profiles' windows
+	-- Hyper + key: focus profile, leave other windows alone
 	hyper:bind({}, profile.key, function()
-		switchChromeProfile(profile.names, profile.dir, true)
+		switchChromeProfile(profile.names, profile.dir, false)
 		hyper.triggered = true
 	end)
-	-- Hyper + Shift + key: focus profile, leave other windows alone
+	-- Hyper + Shift + key: focus profile, minimize other profiles' windows
 	hyper:bind({ "shift" }, profile.key, function()
-		switchChromeProfile(profile.names, profile.dir, false)
+		switchChromeProfile(profile.names, profile.dir, true)
 		hyper.triggered = true
 	end)
 end

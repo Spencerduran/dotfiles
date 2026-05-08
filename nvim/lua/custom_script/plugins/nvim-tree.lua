@@ -30,7 +30,7 @@ return {
 		nvimtree.setup({
 			on_attach = my_on_attach, -- Add this line
 			view = {
-				width = 35,
+				width = 30,
 				relativenumber = true,
 			},
 			renderer = {
@@ -63,6 +63,13 @@ return {
 			git = {
 				ignore = false,
 			},
+		})
+
+		-- open on startup, find and highlight current file without stealing focus
+		vim.api.nvim_create_autocmd("VimEnter", {
+			callback = function()
+				require("nvim-tree.api").tree.toggle({ focus = false, find_file = true })
+			end,
 		})
 
 		-- set keymaps

@@ -11,7 +11,7 @@ return {
 					color = "error",
 					alt = { "FIXME", "BUG", "FIXIT", "ISSUE" },
 				},
-				TODO = { icon = "✅", color = "info", alt = "TO-DO" },
+				TODO = { icon = "✅", color = "info", alt = { "TO-DO" } },
 				HACK = { icon = "🪓", color = "warning" },
 				WARN = { icon = "🚨", color = "warning", alt = { "WARNING", "XXX" } },
 				PERF = { icon = "💫", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
