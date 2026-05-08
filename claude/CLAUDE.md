@@ -112,7 +112,7 @@ Tags: #anti-woke #demographic-replacement
 - Match existing conventions in the target folder
 
 ## Dotfiles
-- Repo: `~/Documents/dotfiles`
+- Repo: `~/repos/dotfiles`
 - Manages: fish, neovim, hammerspoon, alacritty, tmux
 - Fish functions go in `fish/functions/` as individual `.fish` files
 - Commit messages: keep simple (e.g., "dotfilescommit")

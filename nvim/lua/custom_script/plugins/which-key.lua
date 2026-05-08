@@ -144,8 +144,18 @@ return {
 			{ "<leader>st", "<cmd>Telescope live_grep<cr>", desc = "Text" },
 
 			--------------------------------------------------
-			{ "<leader>t", group = "Text" },
+			{ "<leader>t", group = "Tasks / Text" },
 			--------------------------------------------------
+			{ "<leader>ta", function()
+				require("custom_script.tasks").picker()
+			end, desc = "Active Tasks (picker)" },
+			{ "<leader>tt", function()
+				require("telescope.builtin").live_grep({
+					prompt_title = "Tasks",
+					cwd = vim.fn.expand("~/vaults/mind_forge/04 - System/TaskNotes/Tasks"),
+					default_text = "status: ",
+				})
+			end, desc = "Grep Tasks" },
 			--{ "<leader>tb", 'c**<c-r>"**<esc>', desc = "Bold text", mode = { "v" } },
 			--{ "<leader>th", 'c==<c-r>"==<esc>', desc = "Highlight text", mode = { "v" } },
 			--{ "<leader>tb", 's**<c-r>"**<esc>', desc = "Bold text", mode = { "v" } },
