@@ -8,7 +8,7 @@
 - OS: macOS
 
 ## Obsidian Vault (Second Brain)
-An Obsidian MCP server is connected to the vault at `~/vaults/second_brain`. Use MCP tools (read-note, create-note, edit-note, search-vault, etc.) to interact with notes, tasks, reference docs, and knowledge base content — regardless of the current working directory.
+An Obsidian MCP server is connected to the vault at `~/vaults/mind_forge`. Use MCP tools (read-note, create-note, edit-note, search-vault, etc.) to interact with notes, tasks, reference docs, and knowledge base content — regardless of the current working directory.
 
 ### Vault Structure (PARA-like)
 - `000 Inbox/` — capture & triage; `Unfiled/` for quick captures needing processing
@@ -199,3 +199,7 @@ When writing any prose — notes, annotations, docs, messages — apply these ru
 8. Cut quotables — if it sounds like a pull-quote, rewrite it
 
 **Quick checks before delivering prose:** adverbs? passive voice? inanimate subject doing a human verb? Wh- sentence opener? throat-clearing setup? three consecutive same-length sentences? paragraph ending with a punchy one-liner? em dash?
+
+## Browser Harness
+
+@~/Developer/browser-harness/SKILL.md
