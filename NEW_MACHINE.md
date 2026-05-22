@@ -67,6 +67,8 @@ chsh -s /opt/homebrew/bin/fish
 
 ```bash
 # Home directory
+ln -sf ~/repos/dotfiles/git/.gitconfig ~/.gitconfig
+ln -sf ~/repos/dotfiles/git/.gitconfig-mlg ~/.gitconfig-mlg
 ln -sf ~/repos/dotfiles/alacritty/.alacritty.toml ~/.alacritty.toml
 ln -sf ~/repos/dotfiles/tmux/.tmux.conf ~/.tmux.conf
 
