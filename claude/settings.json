@@ -1,10 +1,10 @@
 {
   "env": {
-    "CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING": "1",
-    "MAX_THINKING_TOKENS": "31999"
+    "ENABLE_PROMPT_CACHING_1H": "1",
+    "CLAUDE_CODE_NO_FLICKER": "1"
   },
   "permissions": {
-    "defaultMode": "bypassPermissions"
+    "defaultMode": "auto"
   },
   "model": "sonnet",
   "hooks": {
@@ -15,14 +15,16 @@
           {
             "type": "command",
             "command": "curl -sf --max-time 2 http://localhost:8181/health >/dev/null 2>&1 || qmd mcp --http --daemon; qmd update --quiet"
-          }
-        ]
-      },
-      {
-        "hooks": [
+          },
           {
             "type": "command",
-            "command": "node ~/.claude/hooks/gsd-check-update.js"
+            "command": "if git rev-parse --git-dir >/dev/null 2>&1 && gitnexus status 2>/dev/null | grep -q 'not indexed'; then echo 'GitNexus: repo not indexed — run gitnexus analyze to enable code graph features'; fi",
+            "statusMessage": "Checking GitNexus index..."
+          },
+          {
+            "type": "command",
+            "command": "if git rev-parse --git-dir >/dev/null 2>&1 && ! [ -f \"$(git rev-parse --show-toplevel)/.understand-anything/knowledge-graph.json\" ]; then echo 'Understand-Anything: not analyzed — run /understand to build knowledge graph'; fi",
+            "statusMessage": "Checking Understand-Anything index..."
           }
         ]
       }
@@ -80,33 +82,31 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash ~/.claude/hooks/stop-slop-reminder.sh"
+            "command": "bash ~/.claude/hooks/stop-slop-reminder.sh",
+            "statusMessage": "Checking prose quality..."
+          }
+        ]
+      },
+      {
+        "matcher": "Grep|Glob|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/spencerduran/.claude/hooks/gitnexus/gitnexus-hook.cjs\"",
+            "timeout": 10,
+            "statusMessage": "Enriching with GitNexus graph context..."
           }
         ]
       }
     ],
-    "PostToolUse": [
-      {
-        "matcher": "Bash|Edit|Write|MultiEdit|Agent|Task",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node ~/.claude/hooks/gsd-context-monitor.js",
-            "timeout": 10
-          }
-        ]
-      }
-    ]
+    "PostToolUse": [],
+    "PostToolUseFailure": []
   },
   "statusLine": {
     "type": "command",
-    "command": "node ~/.claude/hooks/gsd-statusline.js"
+    "command": "bash -c 'cols=$(stty size </dev/tty 2>/dev/null | awk '\"'\"'{print $2}'\"'\"'); export COLUMNS=$(( ${cols:-120} > 4 ? ${cols:-120} - 4 : 1 )); plugin_dir=$(ls -d \"${CLAUDE_CONFIG_DIR:-$HOME/.claude}\"/plugins/cache/*/claude-hud/*/ 2>/dev/null | awk -F/ '\"'\"'{ print $(NF-1) \"\\t\" $(0) }'\"'\"' | grep -E '\"'\"'^[0-9]+\\.[0-9]+\\.[0-9]+[[:space:]]'\"'\"' | sort -t. -k1,1n -k2,2n -k3,3n -k4,4n | tail -1 | cut -f2-); exec \"/opt/homebrew/bin/bun\" --env-file /dev/null \"${plugin_dir}src/index.ts\"'"
   },
   "enabledPlugins": {
-    "pyright-lsp@claude-plugins-official": true,
-    "lua-lsp@claude-plugins-official": true,
-    "csharp-lsp@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true,
     "qmd@qmd": false,
     "tasknotes-skill@personal-os-skills": true,
     "wispr-flow-skill@personal-os-skills": false,
@@ -116,10 +116,10 @@
     "obsidian@obsidian-skills": true,
     "claude-mem@thedotmack": true,
     "atlassian@claude-plugins-official": true,
-    "rust-analyzer-lsp@claude-plugins-official": true,
-    "sound-fx@claude-sound-fx": true,
     "chrome-devtools-mcp@claude-plugins-official": true,
-    "arscontexta@agenticnotetaking": true
+    "arscontexta@agenticnotetaking": true,
+    "claude-hud@claude-hud": true,
+    "pyright-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "qmd": {
@@ -163,10 +163,23 @@
         "source": "github",
         "repo": "agenticnotetaking/arscontexta"
       }
+    },
+    "jarrodwatts": {
+      "source": {
+        "source": "github",
+        "repo": "jarrodwatts/claude-hud"
+      }
+    },
+    "karpathy-skills": {
+      "source": {
+        "source": "github",
+        "repo": "forrestchang/andrej-karpathy-skills"
+      }
     }
   },
   "alwaysThinkingEnabled": true,
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark-ansi",
-  "editorMode": "vim"
+  "editorMode": "vim",
+  "skipAutoPermissionPrompt": true
 }
