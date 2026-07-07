@@ -81,8 +81,6 @@ mkdir -p ~/.claude
 ln -sf ~/repos/dotfiles/claude/CLAUDE.md ~/.claude/CLAUDE.md
 ln -sf ~/repos/dotfiles/claude/commands ~/.claude/commands
 ln -sf ~/repos/dotfiles/claude/settings.json ~/.claude/settings.json
-# Compare before linking: diff ~/.claude.json ~/repos/dotfiles/claude/claude.json
-ln -sf ~/repos/dotfiles/claude/claude.json ~/.claude.json
 
 # Ghostty
 mkdir -p ~/.config/ghostty
@@ -114,7 +112,6 @@ cargo install --path .
 ```bash
 cd /tmp && git clone --depth 1 https://github.com/Ataraxy-Labs/sem sem-build
 cd sem-build/crates && cargo install --path sem-mcp
-claude mcp add -s user sem -- sem-mcp
 ```
 
 ## 8. Install lightpanda (headless browser MCP)
@@ -123,16 +120,15 @@ claude mcp add -s user sem -- sem-mcp
 mkdir -p ~/.local/bin
 curl -L -o ~/.local/bin/lightpanda https://github.com/lightpanda-io/browser/releases/download/nightly/lightpanda-aarch64-macos
 chmod a+x ~/.local/bin/lightpanda
-claude mcp add -s user lightpanda -- ~/.local/bin/lightpanda mcp
 ```
 
-## 9. Register remaining MCP servers
+## 9. Register MCP servers
 
 ```bash
-claude mcp add -s user chrome-devtools -- npx chrome-devtools-mcp@latest --autoConnect
+fish ~/repos/dotfiles/claude/mcp-servers.fish
 ```
 
-> **Note:** `~/.claude.json` is symlinked from dotfiles (step 5) and contains all user-scoped MCP server registrations. Before symlinking on a new machine, compare the existing `~/.claude.json` (if any) with `~/repos/dotfiles/claude/claude.json` — the dotfiles version is authoritative but the machine may have entries worth merging first.
+> `~/.claude.json` is NOT symlinked from dotfiles — Claude Code rewrites it constantly (feature-flag cache, telemetry, migration state), so a live symlink causes git conflicts on every machine. `claude/mcp-servers.fish` is the source of truth for local MCP server registrations instead; it's idempotent, so re-run it on any machine after adding a new server to pick up the change.
 
 ## 10. Tmux
 
