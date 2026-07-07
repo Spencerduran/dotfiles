@@ -1858,7 +1858,7 @@
     },
     "lightpanda": {
       "type": "stdio",
-      "command": "/Users/spencer/.local/bin/lightpanda",
+      "command": "lightpanda",
       "args": [
         "mcp"
       ],
