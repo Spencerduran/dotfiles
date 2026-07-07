@@ -9,6 +9,9 @@ set brew_prefix (brew --prefix)
 # Add Homebrew's bin directory to the PATH
 fish_add_path $brew_prefix/bin
 
+# cargo install puts binaries here (recon, sem-mcp, etc.)
+fish_add_path $HOME/.cargo/bin
+
 # Ensure the updated PATH is available to tmux
 set -x TMUX_PATH $PATH
 #set -g -x NVM_NODEJS_ORG_MIRROR http:/nodejs.org/dist
