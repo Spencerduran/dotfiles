@@ -23,10 +23,10 @@ set -gx FZF_DEFAULT_COMMAND 'rg --files --ignore-case --hidden -g "!{.pyenv,.loc
 
 
 # Created by `pipx` on 2023-04-21 13:24:15
-set PATH $PATH /Users/spencerduran/.local/bin
-fish_add_path /Users/spencerduran/.dotnet/tools
+set PATH $PATH $HOME/.local/bin
+fish_add_path $HOME/.dotnet/tools
 
-fish_add_path /Users/spencerduran/.spicetify
+fish_add_path $HOME/.spicetify
 
 # Claude memory vault
 set -gx VAULT_DIR ~/vaults/claude_memory
