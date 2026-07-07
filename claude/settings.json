@@ -119,7 +119,9 @@
     "chrome-devtools-mcp@claude-plugins-official": true,
     "arscontexta@agenticnotetaking": true,
     "claude-hud@claude-hud": true,
-    "pyright-lsp@claude-plugins-official": true
+    "pyright-lsp@claude-plugins-official": true,
+    "understand-anything@understand-anything": true,
+    "snowflake-cortex-code@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "qmd": {
@@ -174,6 +176,12 @@
       "source": {
         "source": "github",
         "repo": "forrestchang/andrej-karpathy-skills"
+      }
+    },
+    "understand-anything": {
+      "source": {
+        "source": "github",
+        "repo": "Lum1104/Understand-Anything"
       }
     }
   },

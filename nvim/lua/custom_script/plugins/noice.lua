@@ -17,10 +17,10 @@ return {
 				-- Message timeout configuration
 				enabled = true,
 				view = "notify",
-				view_error = { timeout = 10000 }, -- 10s for errors
-				view_warn = { timeout = 7000 }, -- 7s for warnings
-				view_history = { timeout = 5000 }, -- 5s for history
-				view_search = { timeout = 5000 }, -- 5s for search messages
+				view_error = { timeout = 4000 }, -- 4s for errors
+				view_warn = { timeout = 2500 }, -- 2.5s for warnings
+				view_history = { timeout = 2000 }, -- 2s for history
+				view_search = { timeout = 2000 }, -- 2s for search messages
 			},
 			popupmenu = {
 				enabled = true,
@@ -35,7 +35,7 @@ return {
 					enabled = true,
 					view = "notify",
 					opts = {
-						timeout = 8000, -- 8s for LSP messages
+						timeout = 2500, -- 2.5s for LSP messages
 					},
 				},
 			},
@@ -63,7 +63,7 @@ return {
 			views = {
 				notify = {
 					stages = "fade_in_slide_out",
-					timeout = 5000,
+					timeout = 2000,
 					background_colour = "#000000",
 					minimum_width = 50,
 				},
@@ -114,7 +114,7 @@ return {
 		require("notify").setup({
 			merge_duplicates = false,
 			stages = "fade_in_slide_out",
-			timeout = 5000,
+			timeout = 2000,
 			background_colour = "#000000",
 			minimum_width = 50,
 			icons = {

@@ -75,7 +75,7 @@ local appBindings = {
 	{ key = "q", name = "spotify", path = "/Applications/Spotify.app" },
 	{ key = "r", name = "reader", path = "/Applications/Adobe Acrobat Reader.app" },
 	{ key = "s", name = "slack", path = "/Applications/Slack.app" },
-	{ key = "t", name = "teams", path = "/Applications/Microsoft Teams.app" },
+	--{ key = "t", name = "teams", path = "/Applications/Microsoft Teams.app" },
 	{ key = "v", name = "code", path = "/Applications/Visual Studio Code.app" },
 	{ key = "x", name = "firefox", path = "/Applications/firefox.app" },
 	-- Shift bindings
@@ -242,7 +242,9 @@ local function switchChromeProfile(profileNames, profileDir, minimizeOthers)
 	local function matchesProfile(title)
 		for _, name in ipairs(profileNames) do
 			local pattern = " %- " .. name:gsub("([%(%)%.%%%+%-%*%?%[%]%^%$])", "%%%1") .. "$"
-			if title:match(pattern) then return true end
+			if title:match(pattern) then
+				return true
+			end
 		end
 		return false
 	end
@@ -338,7 +340,9 @@ hyper:bind({ "shift" }, "d", function()
 					break
 				end
 			end
-			if profile ~= "" then break end
+			if profile ~= "" then
+				break
+			end
 		end
 		info = info .. i .. ": " .. tag .. profile .. " " .. title .. "\n"
 	end
@@ -374,36 +378,84 @@ local function wmBind(mods, key, fn)
 end
 
 ------------------ MOVEMENT
-wmBind({ "shift" }, "h", function() wm.moveWindowToScreen("left") end)
-wmBind({ "shift" }, "l", function() wm.moveWindowToScreen("right") end)
-wmBind({ "shift" }, "f", function() wm.moveWindowToPosition(wm.screenPositions.centeredLarge) end)
+wmBind({ "shift" }, "h", function()
+	wm.moveWindowToScreen("left")
+end)
+wmBind({ "shift" }, "l", function()
+	wm.moveWindowToScreen("right")
+end)
+wmBind({ "shift" }, "f", function()
+	wm.moveWindowToPosition(wm.screenPositions.centeredLarge)
+end)
 
 ------------------ FULLSCREEN
-wmBind({}, "f",      function() wm.windowMaximize(0) end)
-wmBind({}, "return", function() wm.windowMaximize(0) end)
-wmBind({}, "0",      function() wm.moveWindowToPosition(wm.screenPositions.midmid) end)
+wmBind({}, "f", function()
+	wm.windowMaximize(0)
+end)
+wmBind({}, "return", function()
+	wm.windowMaximize(0)
+end)
+wmBind({}, "0", function()
+	wm.moveWindowToPosition(wm.screenPositions.midmid)
+end)
 
 ------------------ HALVES
-wmBind({}, "h",          function() wm.moveWindowToPosition(wm.screenPositions.left) end)
-wmBind({}, "j",          function() wm.moveWindowToPosition(wm.screenPositions.midbottom) end)
-wmBind({ "shift" }, "j", function() wm.moveWindowToPosition(wm.screenPositions.bottom) end)
-wmBind({ "shift" }, "k", function() wm.moveWindowToPosition(wm.screenPositions.top) end)
-wmBind({}, "k",          function() wm.moveWindowToPosition(wm.screenPositions.midtop) end)
-wmBind({}, "l",          function() wm.moveWindowToPosition(wm.screenPositions.right) end)
+wmBind({}, "h", function()
+	wm.moveWindowToPosition(wm.screenPositions.left)
+end)
+wmBind({}, "j", function()
+	wm.moveWindowToPosition(wm.screenPositions.midbottom)
+end)
+wmBind({ "shift" }, "j", function()
+	wm.moveWindowToPosition(wm.screenPositions.bottom)
+end)
+wmBind({ "shift" }, "k", function()
+	wm.moveWindowToPosition(wm.screenPositions.top)
+end)
+wmBind({}, "k", function()
+	wm.moveWindowToPosition(wm.screenPositions.midtop)
+end)
+wmBind({}, "l", function()
+	wm.moveWindowToPosition(wm.screenPositions.right)
+end)
 
 ------------------ GRID POSITIONS
-wmBind({}, "1",          function() wm.moveWindowToPosition(wm.screenPositions.thirdleft) end)
-wmBind({}, "2",          function() wm.moveWindowToPosition(wm.screenPositions.mid) end)
-wmBind({}, "3",          function() wm.moveWindowToPosition(wm.screenPositions.thirdright) end)
-wmBind({}, "4",          function() wm.moveWindowToPosition(wm.screenPositions.bottomRightthird) end)
-wmBind({}, "5",          function() wm.moveWindowToPosition(wm.screenPositions.quarterleft) end)
-wmBind({}, "6",          function() wm.moveWindowToPosition(wm.screenPositions.quarterright) end)
-wmBind({}, "7",          function() wm.moveWindowToPosition(wm.screenPositions.midleft) end)
-wmBind({}, "8",          function() wm.moveWindowToPosition(wm.screenPositions.midright) end)
-wmBind({ "shift" }, "1", function() wm.moveWindowToPosition(wm.screenPositions.topLeft) end)
-wmBind({ "shift" }, "2", function() wm.moveWindowToPosition(wm.screenPositions.topRight) end)
-wmBind({ "shift" }, "3", function() wm.moveWindowToPosition(wm.screenPositions.bottomLeft) end)
-wmBind({ "shift" }, "4", function() wm.moveWindowToPosition(wm.screenPositions.bottomRight) end)
+wmBind({}, "1", function()
+	wm.moveWindowToPosition(wm.screenPositions.thirdleft)
+end)
+wmBind({}, "2", function()
+	wm.moveWindowToPosition(wm.screenPositions.mid)
+end)
+wmBind({}, "3", function()
+	wm.moveWindowToPosition(wm.screenPositions.thirdright)
+end)
+wmBind({}, "4", function()
+	wm.moveWindowToPosition(wm.screenPositions.bottomRightthird)
+end)
+wmBind({}, "5", function()
+	wm.moveWindowToPosition(wm.screenPositions.quarterleft)
+end)
+wmBind({}, "6", function()
+	wm.moveWindowToPosition(wm.screenPositions.quarterright)
+end)
+wmBind({}, "7", function()
+	wm.moveWindowToPosition(wm.screenPositions.midleft)
+end)
+wmBind({}, "8", function()
+	wm.moveWindowToPosition(wm.screenPositions.midright)
+end)
+wmBind({ "shift" }, "1", function()
+	wm.moveWindowToPosition(wm.screenPositions.topLeft)
+end)
+wmBind({ "shift" }, "2", function()
+	wm.moveWindowToPosition(wm.screenPositions.topRight)
+end)
+wmBind({ "shift" }, "3", function()
+	wm.moveWindowToPosition(wm.screenPositions.bottomLeft)
+end)
+wmBind({ "shift" }, "4", function()
+	wm.moveWindowToPosition(wm.screenPositions.bottomRight)
+end)
 
 -------------------------------------------
 -- Window Highlight for Chrome Only --
