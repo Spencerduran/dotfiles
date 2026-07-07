@@ -9,7 +9,6 @@ brew "fish"
 brew "fisher"
 brew "tmux"
 brew "tpm"
-brew "alacritty" # via cask below
 
 # Core CLI tools
 brew "git"
