@@ -84,6 +84,10 @@ ln -sf ~/repos/dotfiles/claude/settings.json ~/.claude/settings.json
 # Compare before linking: diff ~/.claude.json ~/repos/dotfiles/claude/claude.json
 ln -sf ~/repos/dotfiles/claude/claude.json ~/.claude.json
 
+# Ghostty
+mkdir -p ~/.config/ghostty
+ln -sf ~/repos/dotfiles/ghostty/config ~/.config/ghostty/config
+
 # Hammerspoon
 mkdir -p ~/.hammerspoon
 ln -sf ~/repos/dotfiles/hammerspoon/init.lua ~/.hammerspoon/init.lua
