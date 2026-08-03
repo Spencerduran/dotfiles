@@ -6,7 +6,7 @@
   "permissions": {
     "defaultMode": "auto"
   },
-  "model": "sonnet",
+  "model": "opus[1m]",
   "hooks": {
     "SessionStart": [
       {
@@ -183,11 +183,18 @@
         "source": "github",
         "repo": "Lum1104/Understand-Anything"
       }
+    },
+    "loansure-skills": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/MonsterLG/skills.git"
+      }
     }
   },
   "alwaysThinkingEnabled": true,
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark-ansi",
   "editorMode": "vim",
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "agentPushNotifEnabled": true
 }
