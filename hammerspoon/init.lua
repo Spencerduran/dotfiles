@@ -398,6 +398,9 @@ end)
 wmBind({}, "0", function()
 	wm.moveWindowToPosition(wm.screenPositions.midmid)
 end)
+wmBind({ "shift" }, "0", function()
+	wm.moveWindowToPosition(wm.screenPositions.midmid)
+end)
 
 ------------------ HALVES
 wmBind({}, "h", function()
