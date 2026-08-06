@@ -86,17 +86,6 @@
             "statusMessage": "Checking prose quality..."
           }
         ]
-      },
-      {
-        "matcher": "Grep|Glob|Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \"/Users/spencerduran/.claude/hooks/gitnexus/gitnexus-hook.cjs\"",
-            "timeout": 10,
-            "statusMessage": "Enriching with GitNexus graph context..."
-          }
-        ]
       }
     ],
     "PostToolUse": [],
@@ -193,8 +182,8 @@
   },
   "alwaysThinkingEnabled": true,
   "skipDangerousModePermissionPrompt": true,
+  "skipAutoPermissionPrompt": true,
   "theme": "dark-ansi",
   "editorMode": "vim",
-  "skipAutoPermissionPrompt": true,
   "agentPushNotifEnabled": true
 }
