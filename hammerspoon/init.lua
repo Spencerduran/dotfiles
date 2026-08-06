@@ -71,7 +71,8 @@ local appBindings = {
 	{ key = "i", name = "cmux", path = "/Applications/cmux.app" },
 	{ key = "e", name = "excel", path = "/Applications/Microsoft Excel.app" },
 	{ key = "m", name = "Messages", path = "/System/Applications/Messages.app" },
-	{ key = "o", name = "obsidian", path = "/Applications/Obsidian.app" },
+	-- Obsidian handled separately below (vault-aware)
+
 	{ key = "q", name = "spotify", path = "/Applications/Spotify.app" },
 	{ key = "r", name = "reader", path = "/Applications/Adobe Acrobat Reader.app" },
 	{ key = "s", name = "slack", path = "/Applications/Slack.app" },
@@ -80,6 +81,7 @@ local appBindings = {
 	{ key = "x", name = "firefox", path = "/Applications/firefox.app" },
 	-- Shift bindings
 	{ mods = { "shift" }, key = "o", name = "outlook", path = "/Applications/Microsoft Outlook.app" },
+	{ mods = { "shift" }, key = "s", name = "safari", path = "/Applications/Safari.app" },
 	{ mods = { "shift" }, key = "t", name = "tradingview", path = "/Applications/TradingView.app" },
 	{ mods = { "shift" }, key = "w", name = "word", path = "/Applications/Microsoft Word.app" },
 }
@@ -89,6 +91,44 @@ for _, b in ipairs(appBindings) do
 		toggleApp(b.name, b.path)
 	end)
 end
+
+-- Obsidian: Hyper + O targets mind_forge vault only (claude_memory stays hidden)
+hyper:bind({}, "o", function()
+	local obsidian = hs.application.find("obsidian")
+	if not obsidian then
+		hs.execute('open "obsidian://open?vault=mind_forge"')
+		hyper.triggered = true
+		return
+	end
+
+	-- Find the mind_forge window by title
+	local mindForgeWin = nil
+	for _, win in ipairs(obsidian:allWindows()) do
+		local title = win:title() or ""
+		if title:match("mind_forge") or title:match("Mind Forge") then
+			mindForgeWin = win
+			break
+		end
+	end
+
+	if obsidian:isFrontmost() then
+		local focused = hs.window.focusedWindow()
+		if mindForgeWin and focused and focused:id() == mindForgeWin:id() then
+			obsidian:hide()
+		elseif mindForgeWin then
+			mindForgeWin:focus()
+		else
+			obsidian:hide()
+		end
+	else
+		if mindForgeWin then
+			mindForgeWin:focus()
+		else
+			hs.execute('open "obsidian://open?vault=mind_forge"')
+		end
+	end
+	hyper.triggered = true
+end)
 
 -- Ghostty solo: focus Ghostty and hide all other regular apps (Hyper + Shift + A)
 hyper:bind({ "shift" }, "a", function()
