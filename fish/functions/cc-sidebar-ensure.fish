@@ -15,8 +15,8 @@ function cc-sidebar-ensure
         | awk '$2 == "cc-sidebar" { print $1 }')
 
     if test -z "$sidebar_pane"
-        # -f spans full window height regardless of pane layout
-        set new_pane (tmux split-window -h -f -l 25 -d -P -F '#{pane_id}' '~/.cargo/bin/recon --sidebar' 2>/dev/null)
+        # -f spans full window height regardless of pane layout; -b places it on the left
+        set new_pane (tmux split-window -h -b -f -l 25 -d -P -F '#{pane_id}' '~/.cargo/bin/recon --sidebar' 2>/dev/null)
         if test -n "$new_pane"
             tmux select-pane -t "$new_pane" -T "cc-sidebar"
         end
