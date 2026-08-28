@@ -44,3 +44,6 @@ palette = 12=#61E2FF
 palette = 13=#AF6DF9
 palette = 14=#61E2FF
 palette = 15=#F8F8F8
+
+# Option key sends Alt (not composed Unicode) so tmux Alt-bindings work
+macos-option-as-alt = true
