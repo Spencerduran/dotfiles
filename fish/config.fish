@@ -12,6 +12,9 @@ fish_add_path $brew_prefix/bin
 # cargo install puts binaries here (recon, sem-mcp, etc.)
 fish_add_path $HOME/.cargo/bin
 
+# bun (claude-mem plugin hooks and other bun tools)
+fish_add_path $HOME/.bun/bin
+
 # Ensure the updated PATH is available to tmux
 set -x TMUX_PATH $PATH
 #set -g -x NVM_NODEJS_ORG_MIRROR http:/nodejs.org/dist
@@ -30,6 +33,11 @@ set PATH $PATH $HOME/.local/bin
 fish_add_path $HOME/.dotnet/tools
 
 fish_add_path $HOME/.spicetify
+
+# LS_COLORS for tree, bat, fzf file coloring, etc.
+if command -q vivid
+    set -gx LS_COLORS (vivid generate catppuccin-mocha)
+end
 
 # Claude memory vault
 set -gx VAULT_DIR ~/vaults/claude_memory

@@ -1,7 +1,7 @@
 -- Disable window animations for instant window switching
 hs.window.animationDuration = 0
 
-hyper = hs.hotkey.modal.new({}, "F17")
+local hyper = hs.hotkey.modal.new({}, "F17")
 
 -- Enter Hyper Mode when F18 (Hyper/Capslock) is pressed
 function enterHyperMode()
@@ -32,26 +32,9 @@ hyper:bind({ "shift" }, "r", hs.reload)
 --enable spotlight for app searching
 hs.application.enableSpotlightForNameSearches(true)
 
--- Show/hide Claude with 2x ctrl press
-ctrlDoublePress = require("ctrlDoublePress")
-ctrlDoublePress.timeFrame = 2
-ctrlDoublePress.action = function()
-	local claude = hs.application.find("Claude")
-
-	if claude then
-		if claude:isFrontmost() then
-			claude:hide()
-		else
-			claude:activate()
-		end
-	else
-		hs.application.launchOrFocus("/Applications/Claude.app")
-	end
-end
-
 -- Generic app toggle: find, focus/hide, or launch
-local function toggleApp(appName, appPath)
-	local app = hs.application.find(appName)
+local function toggleApp(appName, appPath, bundleID)
+	local app = bundleID and hs.application.get(appName) or hs.application.find(appName)
 	if app then
 		if app:isFrontmost() then
 			app:hide()
@@ -61,7 +44,13 @@ local function toggleApp(appName, appPath)
 	else
 		hs.application.launchOrFocus(appPath)
 	end
-	hyper.triggered = true
+end
+
+-- Show/hide Claude with 2x ctrl press
+local ctrlDoublePress = require("ctrlDoublePress")
+ctrlDoublePress.timeFrame = 2
+ctrlDoublePress.action = function()
+	toggleApp("Claude", "/Applications/Claude.app")
 end
 
 -- Table-driven app switcher bindings
@@ -70,13 +59,12 @@ local appBindings = {
 	{ key = "d", name = "discord", path = "/Applications/discord.app" },
 	{ key = "i", name = "cmux", path = "/Applications/cmux.app" },
 	{ key = "e", name = "excel", path = "/Applications/Microsoft Excel.app" },
-	{ key = "m", name = "Messages", path = "/System/Applications/Messages.app" },
+	{ key = "m", name = "com.apple.MobileSMS", path = "/System/Applications/Messages.app", bundleID = true },
 	-- Obsidian handled separately below (vault-aware)
 
 	{ key = "q", name = "spotify", path = "/Applications/Spotify.app" },
 	{ key = "r", name = "reader", path = "/Applications/Adobe Acrobat Reader.app" },
 	{ key = "s", name = "slack", path = "/Applications/Slack.app" },
-	--{ key = "t", name = "teams", path = "/Applications/Microsoft Teams.app" },
 	{ key = "v", name = "code", path = "/Applications/Visual Studio Code.app" },
 	{ key = "x", name = "firefox", path = "/Applications/firefox.app" },
 	-- Shift bindings
@@ -88,7 +76,8 @@ local appBindings = {
 
 for _, b in ipairs(appBindings) do
 	hyper:bind(b.mods or {}, b.key, function()
-		toggleApp(b.name, b.path)
+		toggleApp(b.name, b.path, b.bundleID)
+		hyper.triggered = true
 	end)
 end
 
@@ -193,65 +182,59 @@ hyper:bind({}, "z", function()
 	hyper.triggered = true
 end)
 
+-- Helpers for Ghostty/Obsidian swap
+local function hideOverlappingWindows(frontWindow)
+	local allWindows = hs.window.orderedWindows()
+	for i = 2, #allWindows do
+		local window = allWindows[i]
+		if window and window:isVisible() then
+			local frontFrame = frontWindow:frame()
+			local backFrame = window:frame()
+
+			local overlap = not (
+				backFrame.x >= frontFrame.x + frontFrame.w
+				or backFrame.x + backFrame.w <= frontFrame.x
+				or backFrame.y >= frontFrame.y + frontFrame.h
+				or backFrame.y + backFrame.h <= frontFrame.y
+			)
+
+			if overlap then
+				window:application():hide()
+			end
+		end
+	end
+end
+
+local function focusAndManageWindows(app, appPath)
+	if app then
+		if app:isFrontmost() then
+			app:hide()
+		else
+			local currentApp = hs.application.frontmostApplication()
+			local currentWindow = currentApp and currentApp:mainWindow()
+			local currentFrame = currentWindow and currentWindow:frame()
+
+			hs.application.launchOrFocus(appPath)
+
+			hs.timer.doAfter(0.1, function()
+				local appWindow = app:mainWindow()
+				if appWindow then
+					if currentFrame then
+						appWindow:setFrame(currentFrame)
+					end
+					hideOverlappingWindows(appWindow)
+				end
+			end)
+		end
+	else
+		hs.application.launchOrFocus(appPath)
+	end
+end
+
 -- Ghostty/Obsidian swap (Hyper + P)
 hyper:bind({}, "p", function()
 	local ghostty = hs.application.find("ghostty")
 	local obsidian = hs.application.find("obsidian")
-
-	local function getMainWindow(app)
-		if app then
-			return app:mainWindow()
-		end
-		return nil
-	end
-
-	local function hideOverlappingWindows(frontWindow)
-		local allWindows = hs.window.orderedWindows()
-		for i = 2, #allWindows do
-			local window = allWindows[i]
-			if window and window:isVisible() then
-				local frontFrame = frontWindow:frame()
-				local backFrame = window:frame()
-
-				local overlap = not (
-					backFrame.x >= frontFrame.x + frontFrame.w
-					or backFrame.x + backFrame.w <= frontFrame.x
-					or backFrame.y >= frontFrame.y + frontFrame.h
-					or backFrame.y + backFrame.h <= frontFrame.y
-				)
-
-				if overlap then
-					window:application():hide()
-				end
-			end
-		end
-	end
-
-	local function focusAndManageWindows(app, appPath)
-		if app then
-			if app:isFrontmost() then
-				app:hide()
-			else
-				local currentApp = hs.application.frontmostApplication()
-				local currentWindow = getMainWindow(currentApp)
-				local currentFrame = currentWindow and currentWindow:frame()
-
-				hs.application.launchOrFocus(appPath)
-
-				hs.timer.doAfter(0.1, function()
-					local appWindow = getMainWindow(app)
-					if appWindow then
-						if currentFrame then
-							appWindow:setFrame(currentFrame)
-						end
-						hideOverlappingWindows(appWindow)
-					end
-				end)
-			end
-		else
-			hs.application.launchOrFocus(appPath)
-		end
-	end
 
 	if ghostty and ghostty:isFrontmost() then
 		focusAndManageWindows(obsidian, "/Applications/Obsidian.app/")
@@ -439,7 +422,7 @@ wmBind({}, "0", function()
 	wm.moveWindowToPosition(wm.screenPositions.midmid)
 end)
 wmBind({ "shift" }, "0", function()
-	wm.moveWindowToPosition(wm.screenPositions.midmid)
+	wm.moveWindowToPosition(wm.screenPositions.midmidThird)
 end)
 
 ------------------ HALVES
@@ -488,16 +471,28 @@ wmBind({}, "8", function()
 	wm.moveWindowToPosition(wm.screenPositions.midright)
 end)
 wmBind({ "shift" }, "1", function()
-	wm.moveWindowToPosition(wm.screenPositions.topLeft)
+	wm.moveWindowToPosition(wm.screenPositions.twoThirdsLeft)
 end)
 wmBind({ "shift" }, "2", function()
 	wm.moveWindowToPosition(wm.screenPositions.topRight)
 end)
 wmBind({ "shift" }, "3", function()
-	wm.moveWindowToPosition(wm.screenPositions.bottomLeft)
+	wm.moveWindowToPosition(wm.screenPositions.twoThirdsRight)
 end)
 wmBind({ "shift" }, "4", function()
 	wm.moveWindowToPosition(wm.screenPositions.bottomRight)
+end)
+wmBind({ "shift" }, "5", function()
+	wm.moveWindowToPosition(wm.screenPositions.topLeftthird)
+end)
+wmBind({ "shift" }, "6", function()
+	wm.moveWindowToPosition(wm.screenPositions.bottomLeftthird)
+end)
+wmBind({ "shift" }, "7", function()
+	wm.moveWindowToPosition(wm.screenPositions.topRightthird)
+end)
+wmBind({ "shift" }, "8", function()
+	wm.moveWindowToPosition(wm.screenPositions.bottomRightthird)
 end)
 
 -------------------------------------------

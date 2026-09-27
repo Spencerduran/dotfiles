@@ -97,6 +97,12 @@ screenPositions.midmid = {
 	w = THIRD_GRID_SIZE + (THIRD_GRID_SIZE / 4),
 	h = GRID_SIZE,
 }
+screenPositions.midmidThird = {
+	x = THIRD_GRID_SIZE, -- Same width as midmid, but starting at one third
+	y = 0,
+	w = THIRD_GRID_SIZE + (THIRD_GRID_SIZE / 4),
+	h = GRID_SIZE,
+}
 screenPositions.midtop = {
 	x = QUARTER_GRID_SIZE, -- Start right after quarterleft
 	y = 0,
@@ -126,6 +132,18 @@ screenPositions.thirdright = {
 	x = THIRD_GRID_SIZE + THIRD_GRID_SIZE, -- Start after quarterleft and midmid
 	y = 0,
 	w = THIRD_GRID_SIZE, -- Same width as midmid (other half of remaining space)
+	h = GRID_SIZE,
+}
+screenPositions.twoThirdsLeft = {
+	x = 0,
+	y = 0,
+	w = THIRD_GRID_SIZE * 2,
+	h = GRID_SIZE,
+}
+screenPositions.twoThirdsRight = {
+	x = THIRD_GRID_SIZE,
+	y = 0,
+	w = THIRD_GRID_SIZE * 2,
 	h = GRID_SIZE,
 }
 screenPositions.topLeftthird = {
