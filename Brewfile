@@ -60,6 +60,8 @@ cask "alacritty"
 cask "claude"
 cask "claude-code"
 cask "cmux"
+cask "ghostty"
+cask "hammerspoon"
 cask "spotify"
 
 # Fonts
