@@ -44,20 +44,9 @@ This is a personal dotfiles repository containing configuration for various deve
 
 ## Common Commands
 
-### NinjaStrat Website Deployment
-```fish
-rebuild  # Builds and deploys the NinjaStrat website to GitHub Pages
-```
-This function (defined in `fish/functions/rebuild.fish`):
-1. Changes to `/Users/spencerduran/Code_Repos/ninjastrat_website`
-2. Runs `npm run build`
-3. Copies output to docs folder
-4. Commits and pushes to GitHub
-
 ### Git Workflow Functions
 - `gitclean` - Clean up git branches
 - `gitmerged` - Show merged branches
-- `gitcleanremote` - Clean remote branches
 - `merge_develop` - Merge develop branch
 - `develop_status` - Check develop branch status
 

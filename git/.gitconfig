@@ -17,5 +17,3 @@
 	helper =
 	helper = !/opt/homebrew/bin/gh auth git-credential
 
-[includeIf "gitdir:~/repos/MLG/"]
-	path = ~/.gitconfig-mlg

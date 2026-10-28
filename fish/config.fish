@@ -27,15 +27,13 @@ set -x TMUX_PATH $PATH
 #set -gx FZF_DEFAULT_OPTS '--ansi --preview-window 'right:60%' --preview 'bat --color=always --style=header,grid --line-range :300 {}'
 
 #set -gx FZF_DEFAULT_COMMAND 'rg --files --ignore-case --hidden -g "!{.pyenv,.local,.idea,.vscode,tmp,Library,.vim,.git,node_modules,vendor}/*"'
-set -gx FZF_DEFAULT_COMMAND 'rg --files --ignore-case --hidden -g "!{.pyenv,.local,.idea,.vscode,tmp,~/Library,/Users/sduran/Library,.vim,.git,node_modules,vendor}/*"'
+set -gx FZF_DEFAULT_COMMAND 'rg --files --ignore-case --hidden -g "!{.pyenv,.local,.idea,.vscode,tmp,Library,.vim,.git,node_modules,vendor}/*"'
 
 
 
 # Created by `pipx` on 2023-04-21 13:24:15
 set PATH $PATH $HOME/.local/bin
-fish_add_path $HOME/.dotnet/tools
 
-fish_add_path $HOME/.spicetify
 
 # LS_COLORS for tree, bat, fzf file coloring, etc.
 if command -q vivid
