@@ -16,7 +16,7 @@ Install Homebrew:
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-Install Rust toolchain (needed for recon, sem-mcp):
+Install Rust toolchain (needed for recon):
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -56,6 +56,20 @@ git clone git@github.com-personal_key:6m1w/claude-sound-fx.git ~/repos/claude_pl
 brew bundle install --file=~/repos/dotfiles/Brewfile
 ```
 
+Install bun (claude-hud statusline, claude-mem) and qmd (SessionStart hook, /recall):
+
+```bash
+curl -fsSL https://bun.sh/install | bash
+npm install -g @tobilu/qmd
+qmd collection add ~/vaults/claude_memory/claude-sessions-qmd --name sessions
+qmd collection add ~/vaults/claude_memory/Notes/Projects/claude-sessions-qmd --name sessions-archive
+qmd collection add ~/vaults/claude_memory/transcripts --name transcripts
+qmd collection add ~/vaults/mind_forge --name notes
+qmd embed
+```
+
+claude-mem installs its `claude-mem` launcher (`~/.local/bin`) on the first Claude Code session after the plugin is enabled. Check it with `claude-mem status`.
+
 Set fish as default shell:
 
 ```bash
@@ -89,7 +103,6 @@ ln -sf ~/repos/dotfiles/ghostty/config ~/.config/ghostty/config
 # Hammerspoon
 mkdir -p ~/.hammerspoon
 ln -sf ~/repos/dotfiles/hammerspoon/init.lua ~/.hammerspoon/init.lua
-ln -sf ~/repos/dotfiles/hammerspoon/hyper.lua ~/.hammerspoon/hyper.lua
 ln -sf ~/repos/dotfiles/hammerspoon/ctrlDoublePress.lua ~/.hammerspoon/ctrlDoublePress.lua
 ln -sf ~/repos/dotfiles/hammerspoon/window-management.lua ~/.hammerspoon/window-management.lua
 
@@ -107,22 +120,7 @@ cd ~/repos/claude_plugins/recon
 cargo install --path .
 ```
 
-## 7. Build sem-mcp
-
-```bash
-cd /tmp && git clone --depth 1 https://github.com/Ataraxy-Labs/sem sem-build
-cd sem-build/crates && cargo install --path sem-mcp
-```
-
-## 8. Install lightpanda (headless browser MCP)
-
-```bash
-mkdir -p ~/.local/bin
-curl -L -o ~/.local/bin/lightpanda https://github.com/lightpanda-io/browser/releases/download/nightly/lightpanda-aarch64-macos
-chmod a+x ~/.local/bin/lightpanda
-```
-
-## 9. Register MCP servers
+## 7. Register MCP servers
 
 ```bash
 fish ~/repos/dotfiles/claude/mcp-servers.fish
@@ -130,7 +128,7 @@ fish ~/repos/dotfiles/claude/mcp-servers.fish
 
 > `~/.claude.json` is NOT symlinked from dotfiles — Claude Code rewrites it constantly (feature-flag cache, telemetry, migration state), so a live symlink causes git conflicts on every machine. `claude/mcp-servers.fish` is the source of truth for local MCP server registrations instead; it's idempotent, so re-run it on any machine after adding a new server to pick up the change.
 
-## 10. Tmux
+## 8. Tmux
 
 Start tmux and reload config:
 
@@ -138,18 +136,16 @@ Start tmux and reload config:
 tmux source-file ~/.tmux.conf
 ```
 
-## 11. Install Claude Code
+## 9. Install Claude Code
 
 ```bash
 npm install -g @anthropic-ai/claude-code
 ```
 
-## 12. Verify
+## 10. Verify
 
 ```bash
 recon --help                        # should show --sidebar flag
-sem diff --help                     # should show entity-level diff options
-lightpanda --help 2>/dev/null       # should show browser options
 tmux list-keys | grep cc-sidebar    # should show prefix+o,s binding
 fish -c cc-sidebar-toggle           # should not error
 ```

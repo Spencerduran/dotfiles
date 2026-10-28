@@ -7,3 +7,4 @@ fish/fish_variables
 ./fish/tool.fish
 ./fish/droplet.fish
 ./fish/ihr.fish
+claude/hooks/*.log

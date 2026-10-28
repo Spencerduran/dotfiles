@@ -22,10 +22,11 @@ An Obsidian MCP server connects to `~/vaults/mind_forge`. Use MCP tools (read-no
 - Commit messages: keep simple (e.g., "dotfilescommit")
 
 ## Session Memory
-- VAULT_DIR is ~/vaults/claude_memory — dedicated vault for Claude session history
-- Full session exports: ~/vaults/claude_memory/Claude-Sessions/
-- QMD-indexed extracts: ~/vaults/claude_memory/Notes/Projects/claude-sessions-qmd/
-- QMD collections: `sessions` (session extracts), `notes` (second_brain vault)
+- VAULT_DIR is ~/vaults/local_memory — local-only vault for Claude session history and meeting transcripts
+- Full session exports: ~/vaults/local_memory/Claude-Sessions/
+- QMD-indexed extracts: ~/vaults/local_memory/claude-sessions-qmd/ (9 older extracts in claude-sessions-qmd-archive/)
+- Meeting transcripts (nightly meeting-digest): ~/vaults/local_memory/transcripts/Meetings/
+- QMD collections: `sessions` (session extracts), `sessions-archive` (older extracts), `meetings` (meeting transcripts), `transcripts` (media transcripts, local_memory/transcripts root), `notes` (mind_forge vault)
 - Use /recall for temporal queries (yesterday, last week) or topic search
 - Use /sync-claude-sessions to export, resume, annotate sessions
 - second_brain vault is read-only for Claude — search via QMD but don't write to it
@@ -68,16 +69,6 @@ The `cocoindex-code` MCP server provides semantic code search via a `search` too
 - You know the exact symbol name, string, or pattern
 - You need precise text matching (regex, literal strings)
 - You're doing go-to-definition or find-references on a known symbol
-
-## Lightpanda (Headless Browser)
-
-The `lightpanda` MCP server is a lightweight headless browser for fetching JavaScript-rendered pages. Use it instead of WebFetch when the target is a JS-heavy site that WebFetch/defuddle can't extract content from.
-
-**Always use lightpanda for:**
-- Twitter / X (x.com, twitter.com) — tweets, threads, profiles
-- Any page that returns empty or broken content via WebFetch
-
-**Tools:** `mcp__lightpanda__goto` to navigate, `mcp__lightpanda__markdown` to extract readable content.
 
 ## Writing Standards
 Invoke the `stop-slop` skill before writing any prose — notes, annotations, docs, messages.

@@ -67,11 +67,14 @@ local appBindings = {
 	{ key = "s", name = "slack", path = "/Applications/Slack.app" },
 	{ key = "v", name = "code", path = "/Applications/Visual Studio Code.app" },
 	{ key = "x", name = "firefox", path = "/Applications/firefox.app" },
+	{ key = "t", name = "com.google.Chrome.app.kjbdgfilnfhdoflbpgamdcdgpehopbep", path = os.getenv("HOME") .. "/Applications/Chrome Apps.localized/Google Calendar.app", bundleID = true }, -- Google Calendar (Chrome app)
+	{ key = "z", name = "com.google.Chrome.app.kjgfgldnnfoeklkmfkjfagphfepbbdan", path = os.getenv("HOME") .. "/Applications/Chrome Apps.localized/Google Meet.app", bundleID = true }, -- Google Meet (Chrome app)
+	{ key = "n", name = "com.google.Chrome.app.mpnpojknpmmopombnjdcgaaiekajbnjb", path = os.getenv("HOME") .. "/Applications/Chrome Apps.localized/Docs.app", bundleID = true }, -- Google Docs (Chrome app)
 	-- Shift bindings
-	{ mods = { "shift" }, key = "o", name = "outlook", path = "/Applications/Microsoft Outlook.app" },
+	{ mods = { "shift" }, key = "o", name = "com.google.Chrome.app.fmgjjmmmlfnkbppncabfkddbjimcfncm", path = os.getenv("HOME") .. "/Applications/Chrome Apps.localized/Gmail.app", bundleID = true }, -- Gmail (Chrome app)
 	{ mods = { "shift" }, key = "s", name = "safari", path = "/Applications/Safari.app" },
 	{ mods = { "shift" }, key = "t", name = "tradingview", path = "/Applications/TradingView.app" },
-	{ mods = { "shift" }, key = "w", name = "word", path = "/Applications/Microsoft Word.app" },
+	-- { mods = { "shift" }, key = "w", name = "word", path = "/Applications/Microsoft Word.app" },
 }
 
 for _, b in ipairs(appBindings) do
@@ -82,10 +85,28 @@ for _, b in ipairs(appBindings) do
 end
 
 -- Obsidian: Hyper + O targets mind_forge vault only (claude_memory stays hidden)
+local function minimizeClaudeMemory()
+	local obsidian = hs.application.find("obsidian")
+	if not obsidian then
+		return
+	end
+	for _, win in ipairs(obsidian:allWindows()) do
+		if (win:title() or ""):match("claude_memory") and not win:isMinimized() then
+			win:minimize()
+		end
+	end
+end
+
+local function openMindForge()
+	hs.execute('open "obsidian://open?vault=mind_forge"')
+	-- The URL open can bring claude_memory forward too; minimize it once windows settle
+	hs.timer.doAfter(1, minimizeClaudeMemory)
+end
+
 hyper:bind({}, "o", function()
 	local obsidian = hs.application.find("obsidian")
 	if not obsidian then
-		hs.execute('open "obsidian://open?vault=mind_forge"')
+		openMindForge()
 		hyper.triggered = true
 		return
 	end
@@ -106,14 +127,16 @@ hyper:bind({}, "o", function()
 			obsidian:hide()
 		elseif mindForgeWin then
 			mindForgeWin:focus()
+			minimizeClaudeMemory()
 		else
-			obsidian:hide()
+			openMindForge()
 		end
 	else
 		if mindForgeWin then
 			mindForgeWin:focus()
+			minimizeClaudeMemory()
 		else
-			hs.execute('open "obsidian://open?vault=mind_forge"')
+			openMindForge()
 		end
 	end
 	hyper.triggered = true
@@ -136,8 +159,8 @@ hyper:bind({ "shift" }, "a", function()
 	hyper.triggered = true
 end)
 
--- Show/hide Zoom — prefers meeting window over home window
-hyper:bind({}, "z", function()
+-- Show/hide Zoom (Hyper + Shift + Z) — prefers meeting window over home window
+hyper:bind({ "shift" }, "z", function()
 	local zoom = hs.application.find("zoom")
 	if not zoom then
 		hs.application.launchOrFocus("/Applications/zoom.us.app")

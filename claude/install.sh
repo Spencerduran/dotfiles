@@ -21,6 +21,10 @@ for file in CLAUDE.md settings.json; do
   echo "Linked $file"
 done
 
+# Symlink hook scripts (Stop/SessionEnd hooks in settings.json call these)
+ln -sfn "$DOTFILES_CLAUDE/hooks" "$CLAUDE_HOME/hooks"
+echo "Linked hooks/"
+
 # Symlink slash commands (skip dirs like gsd/)
 for file in "$DOTFILES_CLAUDE"/commands/*.md; do
   [ -f "$file" ] || continue

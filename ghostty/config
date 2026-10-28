@@ -13,37 +13,69 @@ background-opacity = 1
 background-opacity-cells = true
 macos-titlebar-style = transparent
 
-# Colors — Synthwave84 theme
-background = 230735
-foreground = F8F8F8
+# Colors — Rosé Pine (main), matches Obsidian theme
+background = 1f1d2e
+foreground = f8f8f2
 
 # Cursor
-cursor-color = F8F8F8
-cursor-text = 282A36
+cursor-color = f8f8f2
+cursor-text = 1f1d2e
 
 # Selection
-selection-background = 463465
-selection-foreground = F8F8F8
+selection-background = 403d52
+selection-foreground = f8f8f2
 
 # Normal colors (0-7)
-palette = 0=#241B2F
-palette = 1=#FE4450
-palette = 2=#72F1B8
-palette = 3=#FFCC00
-palette = 4=#66B0FF
-palette = 5=#FF7EDB
-palette = 6=#03EDF9
-palette = 7=#F8F8F8
+palette = 0=#26233a
+palette = 1=#eb6f92
+palette = 2=#31748f
+palette = 3=#f6c177
+palette = 4=#9ccfd8
+palette = 5=#c4a7e7
+palette = 6=#ebbcba
+palette = 7=#f8f8f2
 
 # Bright colors (8-15)
-palette = 8=#495495
-palette = 9=#FE6E9D
-palette = 10=#97F6D9
-palette = 11=#FFE66D
-palette = 12=#99C4FF
-palette = 13=#AF6DF9
-palette = 14=#6DFDFE
-palette = 15=#FFFFFF
+palette = 8=#6e6a86
+palette = 9=#eb6f92
+palette = 10=#31748f
+palette = 11=#f6c177
+palette = 12=#9ccfd8
+palette = 13=#c4a7e7
+palette = 14=#ebbcba
+palette = 15=#f8f8f2
+
+# Colors — Synthwave84 theme (inactive)
+#background = 230735
+#foreground = F8F8F8
+
+# Cursor
+#cursor-color = F8F8F8
+#cursor-text = 282A36
+
+# Selection
+#selection-background = 463465
+#selection-foreground = F8F8F8
+
+# Normal colors (0-7)
+#palette = 0=#241B2F
+#palette = 1=#FE4450
+#palette = 2=#72F1B8
+#palette = 3=#FFCC00
+#palette = 4=#66B0FF
+#palette = 5=#FF7EDB
+#palette = 6=#03EDF9
+#palette = 7=#F8F8F8
+
+# Bright colors (8-15)
+#palette = 8=#495495
+#palette = 9=#FE6E9D
+#palette = 10=#97F6D9
+#palette = 11=#FFE66D
+#palette = 12=#99C4FF
+#palette = 13=#AF6DF9
+#palette = 14=#6DFDFE
+#palette = 15=#FFFFFF
 
 # Option key sends Alt (not composed Unicode) so tmux Alt-bindings work
 macos-option-as-alt = true

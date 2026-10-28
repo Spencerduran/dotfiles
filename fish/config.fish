@@ -9,7 +9,10 @@ set brew_prefix (brew --prefix)
 # Add Homebrew's bin directory to the PATH
 fish_add_path $brew_prefix/bin
 
-# cargo install puts binaries here (recon, sem-mcp, etc.)
+# Unversioned python3/pip3 from brew's python@3.12 (macOS python3 is 3.9, too old for hook scripts)
+fish_add_path $brew_prefix/opt/python@3.12/libexec/bin
+
+# cargo install puts binaries here (recon, etc.)
 fish_add_path $HOME/.cargo/bin
 
 # bun (claude-mem plugin hooks and other bun tools)
@@ -40,7 +43,7 @@ if command -q vivid
 end
 
 # Claude memory vault
-set -gx VAULT_DIR ~/vaults/claude_memory
+set -gx VAULT_DIR ~/vaults/local_memory
 
 # Claude sessions alias
 alias cs="python3 ~/.claude/plugins/marketplaces/personal-os-skills/skills/sync-claude-sessions/scripts/claude-sessions"

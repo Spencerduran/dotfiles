@@ -178,15 +178,15 @@ screenPositions.right = {
 	h = GRID_SIZE,
 }
 screenPositions.top = {
-	x = QUARTER_GRID_SIZE,
+	x = 0,
 	y = 0,
-	w = QUARTER_GRID_SIZE * 3,
+	w = THIRD_GRID_SIZE * 2,
 	h = HALF_GRID_SIZE,
 }
 screenPositions.bottom = {
-	x = QUARTER_GRID_SIZE,
+	x = 0,
 	y = HALF_GRID_SIZE,
-	w = QUARTER_GRID_SIZE * 3,
+	w = THIRD_GRID_SIZE * 2,
 	h = HALF_GRID_SIZE,
 }
 screenPositions.topLeft = {

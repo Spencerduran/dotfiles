@@ -34,7 +34,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 ~/.claude/plugins/marketplaces/personal-os-skills/skills/sync-claude-sessions/scripts/claude-sessions sync",
+            "command": "VAULT_DIR=$HOME/vaults/local_memory python3 ~/.claude/plugins/marketplaces/personal-os-skills/skills/sync-claude-sessions/scripts/claude-sessions sync",
             "timeout": 10
           }
         ]
@@ -46,7 +46,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "VAULT_DIR=$HOME/vaults/claude_memory python3 ~/.claude/plugins/marketplaces/personal-os-skills/skills/sync-claude-sessions/scripts/claude-sessions sync",
+            "command": "VAULT_DIR=$HOME/vaults/local_memory python3 ~/.claude/plugins/marketplaces/personal-os-skills/skills/sync-claude-sessions/scripts/claude-sessions sync",
             "timeout": 10
           }
         ]
@@ -58,6 +58,15 @@
             "type": "command",
             "command": "bash ~/.claude/hooks/index-sessions.sh >> ~/.claude/hooks/index-sessions.log 2>&1",
             "timeout": 30
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat >/dev/null; [ -n \"$CURSOR_VERSION\" ] && exit 0; curl -sf --max-time 0.2 -X POST --unix-socket '/Users/spencer/Library/Application Support/Roam/roam-local-api-beta.sock' \"http://localhost/api/v1/activity/claude-code/stop?pid=$PPID\" >/dev/null 2>&1 || true",
+            "timeout": 3
           }
         ]
       }
@@ -87,7 +96,17 @@
         ]
       }
     ],
-    "PostToolUse": [],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat >/dev/null; [ -n \"$CURSOR_VERSION\" ] && exit 0; curl -sf --max-time 0.2 -X POST --unix-socket '/Users/spencer/Library/Application Support/Roam/roam-local-api-beta.sock' \"http://localhost/api/v1/activity/claude-code/post-tool-use?pid=$PPID\" >/dev/null 2>&1 || true",
+            "timeout": 3
+          }
+        ]
+      }
+    ],
     "PostToolUseFailure": []
   },
   "statusLine": {
@@ -103,14 +122,15 @@
     "superpowers@claude-plugins-official": false,
     "obsidian@obsidian-skills": true,
     "claude-mem@thedotmack": true,
-    "atlassian@claude-plugins-official": true,
     "chrome-devtools-mcp@claude-plugins-official": true,
     "claude-hud@claude-hud": true,
     "pyright-lsp@claude-plugins-official": true,
     "andrej-karpathy-skills@karpathy-skills": true,
     "stop-slop@loansure-skills": true,
     "handoff@loansure-skills": true,
-    "superpowers@loansure-skills": true
+    "superpowers@loansure-skills": true,
+    "notion@anthropic-plugin-directory": true,
+    "slack@anthropic-plugin-directory": true
   },
   "extraKnownMarketplaces": {
     "qmd": {

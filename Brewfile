@@ -34,6 +34,7 @@ brew "lazygit"
 brew "node"
 brew "pyenv"
 brew "python@3.12"
+brew "uv"             # uvx for claude-mem vector search
 
 # Media & docs
 brew "ffmpeg"
@@ -41,7 +42,6 @@ brew "pandoc"
 brew "poppler"
 
 # Dev tools
-brew "sem-cli"        # semantic git diffs (entity-level)
 brew "spicetify-cli"
 
 # Remote / sharing
