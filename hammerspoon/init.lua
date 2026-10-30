@@ -70,6 +70,7 @@ local appBindings = {
 	{ key = "t", name = "com.google.Chrome.app.kjbdgfilnfhdoflbpgamdcdgpehopbep", path = os.getenv("HOME") .. "/Applications/Chrome Apps.localized/Google Calendar.app", bundleID = true }, -- Google Calendar (Chrome app)
 	{ key = "z", name = "com.google.Chrome.app.kjgfgldnnfoeklkmfkjfagphfepbbdan", path = os.getenv("HOME") .. "/Applications/Chrome Apps.localized/Google Meet.app", bundleID = true }, -- Google Meet (Chrome app)
 	{ key = "n", name = "com.google.Chrome.app.mpnpojknpmmopombnjdcgaaiekajbnjb", path = os.getenv("HOME") .. "/Applications/Chrome Apps.localized/Docs.app", bundleID = true }, -- Google Docs (Chrome app)
+	{ key = "y", name = "com.google.Chrome.app.adnlfjpnmidfimlkaohpidplnoimahfh", path = os.getenv("HOME") .. "/Applications/Chrome Apps.localized/utub.app", bundleID = true }, -- YouTube (Chrome app)
 	-- Shift bindings
 	{ mods = { "shift" }, key = "o", name = "com.google.Chrome.app.fmgjjmmmlfnkbppncabfkddbjimcfncm", path = os.getenv("HOME") .. "/Applications/Chrome Apps.localized/Gmail.app", bundleID = true }, -- Gmail (Chrome app)
 	{ mods = { "shift" }, key = "s", name = "safari", path = "/Applications/Safari.app" },

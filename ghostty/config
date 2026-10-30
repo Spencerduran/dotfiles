@@ -1,16 +1,20 @@
 # Font
-font-family = VictorMono Nerd Font
-font-style = Bold
-font-style-bold = Bold
-font-style-italic = Italic
-font-style-bold-italic = Bold Italic
+#font-family = Azeret Mono
+#font-variation = wght=600
+#font-variation-bold = wght=800
+#font-variation-italic = wght=600
+#font-variation-bold-italic = wght=800
 font-size = 16
+
+# Text visibility over transparent background
+font-thicken = true
+#font-thicken-strength = 100
 
 # Background transparency — only affects background fill, text stays fully opaque
 # Was 0.1 in Alacritty (nearly invisible); raise toward 1.0 for less transparency
-background-opacity = 1
+background-opacity = .6
 #background-opacity = 1
-background-opacity-cells = true
+#background-opacity-cells = true
 macos-titlebar-style = transparent
 
 # Colors — Rosé Pine (main), matches Obsidian theme

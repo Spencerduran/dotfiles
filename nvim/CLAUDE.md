@@ -42,7 +42,7 @@ lua/custom_script/
 - Shell (shfmt, bashls)
 
 ### UI Enhancements
-- **Colorscheme**: Custom cyberpunk theme
+- **Colorscheme**: Rose Pine (main, transparent) — matches ghostty + obsidian
 - **Dashboard**: Alpha with custom ASCII art headers
 - **File Explorer**: nvim-tree
 - **Fuzzy Finder**: Telescope
@@ -117,6 +117,7 @@ Documentation is maintained in `nvim/docs/`:
 - 2026-05-08: Added `lua/custom_script/tasks.lua`, a Telescope picker for TaskNotes (`04 - System/TaskNotes/Tasks/`). Sorts by priority descending. `<leader>ta` opens the picker, `<leader>tt` opens live grep in that folder.
 - 2026-05-08: Updated markdown autocmd in `core/autocmds.lua` to call `Wp()` for all `.md` files. Previously only fired for paths containing "Obsidian".
 - 2026-05-08: Patched `project.nvim` deprecation (`buf_get_clients` to `get_clients`). Patch lives in the lazy cache. See `docs/tasks/backlog/evaluate-project-nvim-replacement.md` for the replacement plan.
+- 2026-10-29: Switched colorscheme from tokyonight (Dracula overrides) to rose-pine main with transparency. Other schemes kept as lazy alternatives.
 
 ---
 
