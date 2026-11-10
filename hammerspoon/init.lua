@@ -85,7 +85,7 @@ for _, b in ipairs(appBindings) do
 	end)
 end
 
--- Obsidian: Hyper + O targets mind_forge vault only (claude_memory stays hidden)
+-- Obsidian: Hyper + O targets deepgram vault only (claude_memory stays hidden)
 local function minimizeClaudeMemory()
 	local obsidian = hs.application.find("obsidian")
 	if not obsidian then
@@ -98,8 +98,8 @@ local function minimizeClaudeMemory()
 	end
 end
 
-local function openMindForge()
-	hs.execute('open "obsidian://open?vault=mind_forge"')
+local function openDeepgram()
+	hs.execute('open "obsidian://open?vault=deepgram"')
 	-- The URL open can bring claude_memory forward too; minimize it once windows settle
 	hs.timer.doAfter(1, minimizeClaudeMemory)
 end
@@ -107,37 +107,37 @@ end
 hyper:bind({}, "o", function()
 	local obsidian = hs.application.find("obsidian")
 	if not obsidian then
-		openMindForge()
+		openDeepgram()
 		hyper.triggered = true
 		return
 	end
 
-	-- Find the mind_forge window by title
-	local mindForgeWin = nil
+	-- Find the deepgram vault window by title
+	local deepgramWin = nil
 	for _, win in ipairs(obsidian:allWindows()) do
 		local title = win:title() or ""
-		if title:match("mind_forge") or title:match("Mind Forge") then
-			mindForgeWin = win
+		if title:match("deepgram") then
+			deepgramWin = win
 			break
 		end
 	end
 
 	if obsidian:isFrontmost() then
 		local focused = hs.window.focusedWindow()
-		if mindForgeWin and focused and focused:id() == mindForgeWin:id() then
+		if deepgramWin and focused and focused:id() == deepgramWin:id() then
 			obsidian:hide()
-		elseif mindForgeWin then
-			mindForgeWin:focus()
+		elseif deepgramWin then
+			deepgramWin:focus()
 			minimizeClaudeMemory()
 		else
-			openMindForge()
+			openDeepgram()
 		end
 	else
-		if mindForgeWin then
-			mindForgeWin:focus()
+		if deepgramWin then
+			deepgramWin:focus()
 			minimizeClaudeMemory()
 		else
-			openMindForge()
+			openDeepgram()
 		end
 	end
 	hyper.triggered = true

@@ -22,11 +22,11 @@ An Obsidian MCP server connects to `~/vaults/mind_forge`. Use MCP tools (read-no
 - Commit messages: keep simple (e.g., "dotfilescommit")
 
 ## Session Memory
-- VAULT_DIR is ~/vaults/local_memory — local-only vault for Claude session history and meeting transcripts
+- VAULT_DIR is ~/vaults/local_memory — local-only vault for Claude session history
 - Full session exports: ~/vaults/local_memory/Claude-Sessions/
 - QMD-indexed extracts: ~/vaults/local_memory/claude-sessions-qmd/ (9 older extracts in claude-sessions-qmd-archive/)
-- Meeting transcripts (nightly meeting-digest): ~/vaults/local_memory/transcripts/Meetings/
-- QMD collections: `sessions` (session extracts), `sessions-archive` (older extracts), `meetings` (meeting transcripts), `transcripts` (media transcripts, local_memory/transcripts root), `notes` (mind_forge vault)
+- Meeting transcripts (nightly meeting-digest): ~/vaults/deepgram/06 - Meetings/ (1:1 logs in `logs/`; daily recaps in the deepgram daily note `05 - Periodic/<date>.md` under `## Meetings`)
+- QMD collections: `sessions` (session extracts), `sessions-archive` (older extracts), `meetings` (meeting transcripts, deepgram/06 - Meetings), `transcripts` (media transcripts, local_memory/transcripts/Media), `notes` (mind_forge vault)
 - Use /recall for temporal queries (yesterday, last week) or topic search
 - Use /sync-claude-sessions to export, resume, annotate sessions
 - second_brain vault is read-only for Claude — search via QMD but don't write to it
